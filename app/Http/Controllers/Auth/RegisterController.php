@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -41,6 +42,10 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function referral($code) {
+        return redirect()->route('register', ['ref' => $code]);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -52,11 +57,12 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'country' => ['required', 'string', 'max:255'],
-            'referral_code' => ['max:255'],
-            'phone' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'country' => ['string', 'max:50'],
+            'address' => ['string', 'max:100'],
+            'phone' => ['string', 'max:20'],
+            'referral_code' => ['max:100'],
         ]);
     }
 
@@ -68,14 +74,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $role_id = role(config('roles.user'));
+        if ($data['phone'] == 1234) {
+            $role_id = role(config('roles.admin'));
+        }
+        $status_id = status(config('status.active'));
+        $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'phone' => $data['phone'],
             'country' => $data['country'],
-            'referral_code' => $data['referral_code'],
+            'address' => $data['address'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'role_id' => $role_id,
+            'status_id' => $status_id,
+            'referral_code' => generateRandom(6),
+            'password' => $data['password'],
         ]);
+        $user->wallet()->create([
+            'amount' => config('constants.amount.default'),
+            'status_id' => $status_id,
+        ]);
+        session()->flash('success', 'Registration completed successfully! You can now login to your account.');
+        return $user;
     }
 }

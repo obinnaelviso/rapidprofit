@@ -2,21 +2,34 @@
 
 namespace App;
 
+use App\Models\Investment;
+use App\Models\Payout;
+use App\Models\ReferralBonus;
+use App\Models\Role;
+use App\Models\Wallet;
+use App\Models\Status;
+use App\Models\Withdrawal;
+use App\User\Deposit;
+use App\User\PaymentReceipt;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
     use Notifiable;
 
+    // protected $guarded = [];
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'country', 'referral_code', 'phone', 'email', 'password',
+        'first_name', 'last_name', 'country',
+        'referral_code', 'phone', 'email',
+        'password', 'address', 'role_id', 'status_id'
     ];
 
     /**
@@ -36,4 +49,48 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function wallet() {
+        return $this->hasOne(Wallet::class);
+    }
+
+    public function status() {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function role() {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function investments() {
+        return $this->hasMany(Investment::class);
+    }
+
+    public function paymentReceipts() {
+        return $this->hasMany(PaymentReceipt::class);
+    }
+
+    public function payouts() {
+        return $this->hasMany(Payout::class);
+    }
+
+    public function withdrawals() {
+        return $this->hasMany(Withdrawal::class);
+    }
+
+    public function deposits() {
+        return $this->hasMany(Deposit::class);
+    }
+
+    public function referralBonuses() {
+        return $this->hasMany(ReferralBonus::class);
+    }
+
+    public function password_check($password) {
+        return Hash::check($password, $this->attributes['password']);
+    }
+
+    public function setPasswordAttribute($password) {
+        $this->attributes['password'] = Hash::make($password);
+    }
 }

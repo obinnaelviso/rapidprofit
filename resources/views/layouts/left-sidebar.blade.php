@@ -5,28 +5,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav flex-column">
-                    <li class="nav-item ">
-                        <a class="nav-link active" href="#">Home</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#">Cards</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#">Transactions</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#">Airtime</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#">Settings</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#">Log out</a>
-                    </li>
-                </ul>
-            </div>
+            @yield('sidebar')
         </nav>
     </div>
 </div>
