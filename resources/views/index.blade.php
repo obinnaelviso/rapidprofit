@@ -184,7 +184,7 @@
                         <h2 class="text-uppercase text-warning shadow-5">{{ config('app.name') }} ACHIEVEMENTS</h2>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-6 mb-5">
                     <div class="card text-center">
                       <div class="card-body">
                         <h1 class="fa fa-users"></h1>
@@ -195,7 +195,7 @@
                       </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-6 mb-5">
                     <div class="card text-center">
                       <div class="card-body">
                         <h1 class="fa fa-money-bill-alt text-success"></h1>
@@ -206,7 +206,7 @@
                       </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-6 mb-5">
                     <div class="card text-center">
                       <div class="card-body">
                         <h1 class="fa fa-arrow-down text-danger"></h1>
@@ -217,7 +217,7 @@
                       </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-6 mb-5">
                     <div class="card text-center">
                       <div class="card-body">
                         <h1 class="fa fa-arrow-up text-success"></h1>
@@ -282,7 +282,7 @@
                             <!-- Testimonial Content -->
                             <div class="testimonial-caption ">
                                 <div class="testimonial-top-cap">
-                                    <p>It only get's better with {{ config('app.name') }}. I keep investing and investing and investing.</p>
+                                    <p>It only get's better with {{ config('app.name') }}. I just keep investing and investing and investing, and my funds keep growing, growing and growing.</p>
                                 </div>
                                 <!-- founder -->
                                 <div class="testimonial-founder d-flex align-items-center">
@@ -299,7 +299,7 @@
                             <!-- Testimonial Content -->
                             <div class="testimonial-caption ">
                                 <div class="testimonial-top-cap">
-                                    <p>{{ config('app.name') }} is the best. I had to take the risk, I started with {{ config('app.currency') }} but now I'm already earning about {{ config('app.currency') }}500,000 monthly.</p>
+                                    <p>{{ config('app.name') }} is the best. I had to take the risk, so I started out with {{ config('app.currency') }}500 but now I'm already earning about {{ config('app.currency') }}800,000 monthly.</p>
                                 </div>
                                 <!-- founder -->
                                 <div class="testimonial-founder d-flex align-items-center">
@@ -329,7 +329,7 @@
     <div class="categories-area section-padding30 transactions-bg">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 mb-5">
                     <div class="card text-left">
                       <h2 class="card-header">Last 10 Deposits</h2>
                       <div class="card-body">
