@@ -1,37 +1,89 @@
-{{-- <!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div> --}}
-
-<!-- header section -->
-<header class="header-section">
-    <div class="container-fluid" style="padding: 0">
-        <!-- widget prices -->
-        <div style="background-color: #1D2330; overflow:hidden; box-sizing: border-box; text-align: right; line-height:14px; font-size: 12px; font-feature-settings: normal; text-size-adjust: 100%; padding:1px;padding: 0px; margin: 0px; width: 100%;"><div style="height:40px; padding:0px; margin:0px; width: 100%;"><iframe src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=no" width="100%" height="36px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" border="0" style="border:0;margin:0;padding:0;"></iframe></div></div>
-        <div class="mobile-menu">
-            <a href="/" class="site-logo text-uppercase" style="color: white; font-size: 28px; font-weight: 900;">7EVEN<span style="color: orange">TRADE</span>FX</a>
-            <div class="nav-switch" style="z-index: 2000">
-                <i class="fa fa-bars"></i>
+<!--? Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                {{-- <img src="/home/assets/img/logo/loder.jpg" alt=""> --}}
+                <img src="/favicon.png">
             </div>
         </div>
     </div>
-</header>
-<!-- header section end-->
-
-
-<!-- Header section  -->
-<nav class="nav-section">
-    <div class="container">
-        <ul class="main-menu">
-            <!-- logo -->
-            <a href="/" class="desktop-logo text-uppercase" style="color: white; font-size: 28px; font-weight: 900;">7EVEN<span style="color: orange">TRADE</span>FX</a>
-            <!-- <li class="active"><a href="index.html">Home</a></li> -->
-            <li><a href="/#start-trading">HOW TO START?</a></li>
-            <li class="@yield('about-active')"><a href="{{ route('about') }}">ABOUT US</a></li>
-            <li class="@yield('contact-active')"><a href="{{ route('contact_us') }}">CONTACT US</a></li>
-            <li class="@yield('login-active')"><a href="{{ route('login') }}">LOGIN</a></li>
-            <li class="@yield('register-active')"><a href="{{ route('register') }}">REGISTER</a></li>
-        </ul>
+</div>
+<!-- Preloader Start -->
+<header>
+    <!-- Header Start -->
+    <div class="header-area">
+        <div class="main-header ">
+            <div class="header-top d-none d-lg-block">
+                <div class="container">
+                    <div class="col-xl-12">
+                        <div class="row d-flex justify-content-between align-items-center">
+                            <div class="header-info-left">
+                                <ul>
+                                    <li>Phone: +99 (0) 101 0000 888</li>
+                                    <li>Email: support@rapidprofit.ltd</li>
+                                </ul>
+                            </div>
+                            <div class="header-info-right">
+                                <ul class="header-social">
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li> <a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-bottom  header-sticky">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <!-- Logo -->
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo">
+                                <a href="{{ route('index') }}"><img src="{{ url('/images/logo.png') }}" width="200px" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="menu-wrapper  d-flex align-items-center justify-content-end">
+                                <!-- Main-menu -->
+                                <div class="main-menu d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="#">Home</a></li>
+                                            <li><a href="#">About</a></li>
+                                            <li><a href="#">Contact</a></li>
+                                            @if(!Auth::guard('web')->check())
+                                                <li><a href="{{ route('login') }}">Login</a></li>
+                                            @endif
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <!-- Header-btn -->
+                                <div class="header-right-btn d-none d-lg-block ml-20">
+                                    @if(!Auth::guard('web')->check())
+                                        <a href="{{ route('register') }}" class="btn header-btn">Register</a>
+                                    @else
+                                        <a href="#" class="btn header-btn" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">Logout</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</nav>
-<!-- Header section end -->
+    <!-- Header End -->
+</header>

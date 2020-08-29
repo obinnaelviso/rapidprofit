@@ -35,24 +35,12 @@ class WalletController extends Controller
         return back();
     }
 
-    public function paymentStatus($status, Request $request) {
-        $user = $this->user();
-
+    public function paymentStatus($status) {
         if ($status == 'success') {
-            $amount = ($request->method == 'pm')? $request->PAYMENT_AMOUNT : $request->amountf;
-            $user->deposits()->create([
-                    'amount' => $amount,
-                    'prev_bal' => $user->wallet->amount,
-                    'new_bal' => $user->wallet->amount + $amount,
-                    'status_id' => status(config('status.completed'))
-                ]
-            );
-            $user->wallet->amount += $amount;
-            $user->wallet->save();
-            session()->flash('success', 'Payment completed successfully! You can now make an investment.');
+            session()->flash('success', 'Payment completed successfully! Please upload your evidence of payment.');
         } else
             session()->flash('failed', 'Payment not successful! Something went wrong.');
-        return redirect()->route('user.deposit');
+        return back();
     }
 
     public function withdrawFunds(Request $request) {

@@ -16,8 +16,10 @@ class CreatePaymentReceiptsTable extends Migration
         Schema::create('payment_receipts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('amount');
             $table->string('payment_method');
-            $table->string('url');
+            $table->string('url')->nullable();
+            $table->string('status_id')->constrained();
             $table->timestamps();
         });
     }

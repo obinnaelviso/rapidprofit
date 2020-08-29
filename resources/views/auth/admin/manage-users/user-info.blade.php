@@ -13,13 +13,13 @@
             </tr>
             <tr>
                 <td class="title">Email Address</td>
-                <td>{{ $reg_user->email }}</td>
-                <td><button class="btn btn-primary btn-sm">Update Email Address</button></td>
+                <td id="email">{{ $reg_user->email }}</td>
+                <td><button class="btn btn-primary btn-sm" id="update-email">Update Email Address</button></td>
             </tr>
             <tr>
                 <td class="title">Balance</td>
-                <td class="text-success text-big">{{ config('app.currency').$reg_user->wallet->amount }}</td>
-                <td><button class="btn btn-success btn-sm">Update Balance</button></td>
+                <td class="text-success text-big" id="balance">{{ config('app.currency').$reg_user->wallet->amount }}</td>
+                <td><button class="btn btn-success btn-sm" id="update-balance">Update Balance</button></td>
             </tr>
             <tr>
                 <td class="title">Role</td>
@@ -44,7 +44,17 @@
             <tr>
                 <td class="title">Status</td>
                 <td><span class="label label-success">{{ $reg_user->status->title }}</span></td>
-                <td><button class="btn btn-danger btn-sm">Block User</button></td>
+                <td>@if($reg_user->status_id == status(config('status.active')))
+                        <button class="btn btn-danger btn-sm" onclick="event.preventDefault();
+                        document.getElementById('account-status').submit();">Deactivate Account</button>
+                    @else
+                        <button class="btn btn-success btn-sm" onclick="event.preventDefault();
+                        document.getElementById('account-status').submit();">Activate Account</button>
+                    @endif
+                    <form id="account-status" action="{{ route('admin.manage.users.account-status', $reg_user->id) }}" method="POST" style="display: none;">
+                        @csrf @method('put')
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>

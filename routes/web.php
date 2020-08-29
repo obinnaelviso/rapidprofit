@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('index');
 
 Auth::routes();
 
@@ -58,6 +56,19 @@ Route::group(['prefix'=>'/user'], function() {
 */
 Route::group(['prefix'=>'/admin'], function() {
     Route::get('/home', 'Admin\DashboardController@index')->name('admin.home');
-    Route::get('/manage/users', 'Admin\DashboardController@manageUsers')->name('admin.manage.users');
-    Route::get('/manage/users/{reg_user}', 'Admin\UserController@viewUser')->name('admin.manage.users.view');
+
+    // ---------------------> Manage User Info
+    Route::get('/users', 'Admin\DashboardController@manageUsers')->name('admin.manage.users');
+    Route::get('/users/{reg_user}', 'Admin\UserController@viewUser')->name('admin.manage.users.view');
+    Route::put('/users/{reg_user}/update-balance', 'Admin\UserController@updateBalance')->name('admin.manage.users.update-balance');
+    Route::put('/users/{reg_user}/update-email', 'Admin\UserController@updateEmail')->name('admin.manage.users.update-email');
+    Route::put('/users/{reg_user}/account-status', 'Admin\UserController@accountStatus')->name('admin.manage.users.account-status');
+    Route::post('/users/{reg_user}/deposit', 'Admin\UserController@newDeposit')->name('admin.manage.users.deposit');
+    Route::put('/users/{reg_user}/withdraw', 'Admin\UserController@newWithdrawal')->name('admin.manage.users.withdraw');
+
+    // ----------------------> Packages
+    Route::get('/packages', 'Admin\DashboardController@packages')->name('admin.packages');
+    Route::post('/packages', 'Admin\DashboardController@newPackages')->name('admin.packages.new');
+    Route::put('/packages/{package}/edit', 'Admin\DashboardController@editPackages')->name('admin.packages.edit');
+    Route::put('/packages/{package}/status', 'Admin\DashboardController@statusPackages')->name('admin.packages.status');
 });

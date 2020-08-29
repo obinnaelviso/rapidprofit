@@ -11,6 +11,7 @@
     <link href="/vendor/fonts/circular-std/style.css" rel="stylesheet">
     <link rel="stylesheet" href="/libs/css/style.css">
     <link rel="stylesheet" href="/vendor/fonts/fontawesome/css/fontawesome-all.css">
+	<link href="/favicon.png" rel="icon" type="image/png"/>
     <style>
     html,
     body {
@@ -24,6 +25,12 @@
         align-items: center;
         padding-top: 40px;
         padding-bottom: 40px;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(/home/assets/img/hero/achievements.jpg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+
     }
     </style>
 </head>

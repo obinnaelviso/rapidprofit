@@ -1,71 +1,138 @@
-	<!-- Footer section -->
-	<footer class="footer-section">
-		{{-- <div class="container footer-top">
-			<div class="row">
-				<!-- widget -->
-				<div class="col-sm-6 col-lg-3 footer-widget">
-					<div class="about-widget">
-						<img src="/home/img/logo-light.png" alt="">
-						<p>orem ipsum dolor sit amet, consecter adipiscing elite. Donec minos varius, viverra justo ut, aliquet nisl.</p>
-						<div class="social pt-1">
-							<a href=""><i class="fa fa-twitter-square"></i></a>
-							<a href=""><i class="fa fa-facebook-square"></i></a>
-							<a href=""><i class="fa fa-google-plus-square"></i></a>
-							<a href=""><i class="fa fa-linkedin-square"></i></a>
-							<a href=""><i class="fa fa-rss-square"></i></a>
-						</div>
-					</div>
-				</div>
-				<!-- widget -->
-				<div class="col-sm-6 col-lg-3 footer-widget">
-					<h6 class="fw-title">USEFUL LINK</h6>
-					<div class="dobule-link">
-						<ul>
-							<li><a href="">Home</a></li>
-							<li><a href="">About us</a></li>
-						</ul>
-						<ul>
-							<li><a href="">How to Start?</a></li>
-							<li><a href="">Trading Platform</a></li>
-							<li><a href="">FAQ</a></li>
-							<!-- <li><a href="">FAQs</a></li>
-							<li><a href="">Site map</a></li> -->
-						</ul>
-					</div>
-				</div>
-				<!-- widget -->
-				<!-- <div class="col-sm-6 col-lg-3 footer-widget">
-					<h6 class="fw-title">RECENT POST</h6>
-					<ul class="recent-post">
-						<li>
-							<p>Snackable study:How to break <br> up your master's degree</p>
-							<span><i class="fa fa-clock-o"></i>24 Mar 2018</span>
-						</li>
-						<li>
-							<p>Open University plans major <br> cuts to number of staff</p>
-							<span><i class="fa fa-clock-o"></i>24 Mar 2018</span>
-						</li>
-					</ul>
-				</div> -->
-				<!-- widget -->
-				<div class="col-sm-6 col-lg-3 footer-widget">
-					<h6 class="fw-title">CONTACT</h6>
-					<ul class="contact">
-						<li><p><i class="fa fa-map-marker"></i> 40 Baria Street 133/2, NewYork City,US</p></li>
-						<li><p><i class="fa fa-phone"></i> (+88) 111 555 666</p></li>
-						<li><p><i class="fa fa-envelope"></i> infodeercreative@gmail.com</p></li>
-						<li><p><i class="fa fa-clock-o"></i> Monday - Friday, 08:00AM - 06:00 PM</p></li>
-					</ul>
-				</div>
-			</div>
-		</div> --}}
-		<!-- copyright -->
-		<div class="copyright">
-			<div class="container">
-				<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a href="/">{{ config('app.name') }}</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-			</div>
-		</div>
-	</footer>
-	<!-- Footer section end-->
+<footer>
+    <!--? Footer Start-->
+    <div class="footer-area footer-bg">
+        <div class="container">
+            <div class="footer-top footer-padding">
+                <!-- footer Heading -->
+                <div class="footer-heading">
+                    <div class="row justify-content-between">
+                        <div class="col-xl-6 col-lg-8 col-md-8">
+                            <div class="wantToWork-caption wantToWork-caption2">
+                                <h2>Do you have any issue?<br>Reach us on our live chat or send a support ticket!</h2>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4">
+                            <span class="contact-number f-right">Call Us @ <br>+ 1 212-683-9756</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer Menu -->
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Pages</h4>
+                                <ul>
+                                    <li><a href="#">About</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                    @if(!Auth::guard('web')->check())
+                                        <li><a href="{{ route('login') }}">Login</a></li>
+                                        <li><a href="{{ route('register') }}">Register</a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>How to Invest</h4>
+                                <ul>
+                                    <li><a href="#">Make a Deposit</a></li>
+                                    <li><a href="#">Choose an Investment Plan</a></li>
+                                    <li><a href="#">Make payments</a></li>
+                                    <li><a href="#">Watch your money grow</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Legal</h4>
+                                <ul>
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">Terms and Conditions</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">About</a></li>
+                                    <li><a href="{{ route('register') }}">Register</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6">
+                        <div class="single-footer-caption mb-50">
+                            <!-- logo -->
+                            <div class="footer-logo">
+                                <a href="{{ route('index') }}"><img src="{{ url('/images/logo.png') }}" width="200px" alt="">
+                                </a>
+                            </div>
+                            <div class="footer-tittle">
+                                <div class="footer-pera">
+                                    <p class="info1">Invest today and start earning from our No.1 fast growing investment platform. Rapidprofit is the best because you see what you invest grow live.</p>
+                                </div>
+                            </div>
+                            <!-- Footer Social -->
+                            <div class="footer-social ">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href=""><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-globe"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-12">
+                        <div class="footer-copy-right text-center">
+                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy; {{ config('app.name') }}<script>document.write(new Date().getFullYear());</script> All rights reserved.
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End-->
+</footer>
+<!-- Scroll Up -->
+<div id="back-top" >
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+
+    <!-- JS here -->
+
+    <script src="/home/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="/home/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="/home/assets/js/popper.min.js"></script>
+    <script src="/home/assets/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="/home/assets/js/jquery.slicknav.min.js"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="/home/assets/js/owl.carousel.min.js"></script>
+    <script src="/home/assets/js/slick.min.js"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="/home/assets/js/wow.min.js"></script>
+    <script src="/home/assets/js/animated.headline.js"></script>
+    <script src="/home/assets/js/jquery.magnific-popup.js"></script>
+
+    <!-- Nice-select, sticky -->
+    <script src="/home/assets/js/jquery.nice-select.min.js"></script>
+    <script src="/home/assets/js/jquery.sticky.js"></script>
+
+    <!-- contact js -->
+    <script src="/home/assets/js/contact.js"></script>
+    <script src="/home/assets/js/jquery.form.js"></script>
+    <script src="/home/assets/js/jquery.validate.min.js"></script>
+    <script src="/home/assets/js/mail-script.js"></script>
+    <script src="/home/assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="/home/assets/js/plugins.js"></script>
+    <script src="/home/assets/js/main.js"></script>

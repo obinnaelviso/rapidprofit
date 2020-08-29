@@ -10,4 +10,5 @@
     <link href="/vendor/fonts/circular-std/style.css" rel="stylesheet">
     <link rel="stylesheet" href="/libs/css/style.css">
     <link rel="stylesheet" href="/vendor/fonts/fontawesome/css/fontawesome-all.css">
+	<link href="/favicon.png" rel="icon" type="image/png"/>
 </head>

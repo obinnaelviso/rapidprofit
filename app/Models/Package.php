@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Package extends Model
 {
-    //
+    protected $guarded = [];
+
+    public function status() {
+        return $this->belongsTo(Status::class);
+    }
 }

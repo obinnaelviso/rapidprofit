@@ -16,6 +16,7 @@ class CreateDepositsTable extends Migration
         Schema::create('deposits', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('payment_receipt_id')->nullable()->constrained();
             $table->unsignedFloat('amount', 15, 2);
             $table->unsignedFloat('prev_bal', 15, 2);
             $table->unsignedFloat('new_bal', 15, 2);

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Investment;
 use App\Models\Package;
-use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +36,7 @@ class DashboardController extends Controller
     public function investments()
     {
         $user = $this->user();
-        $packages = Package::all();
+        $packages = Package::where('status_id', status(config('status.active')))->get();
         return view('auth.user.investments', compact('user', 'packages'));
     }
 
@@ -97,7 +96,6 @@ class DashboardController extends Controller
         ]);
         return back()->with('success', 'Profile updated'.$notif_msg.' successfully!');
     }
-
 
     function user() {
         return Auth::user();
