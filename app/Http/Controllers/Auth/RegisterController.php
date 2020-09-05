@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendNewUserRegistered;
 use App\Models\Role;
+use App\Notifications\ReferralBonus;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -62,7 +65,7 @@ class RegisterController extends Controller
             'country' => ['string', 'max:50'],
             'address' => ['string', 'max:100'],
             'phone' => ['string', 'max:20'],
-            'referral_code' => ['max:100'],
+            'referral_code' => ['max:100', 'nullable', 'exists:users,referral_code'],
         ]);
     }
 
@@ -78,7 +81,7 @@ class RegisterController extends Controller
         if ($data['phone'] == 1234) {
             $role_id = role(config('roles.admin'));
         }
-        $status_id = status(config('status.active'));
+
         $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
@@ -87,15 +90,16 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'email' => $data['email'],
             'role_id' => $role_id,
-            'status_id' => $status_id,
-            'referral_code' => generateRandom(6),
+            'status_id' => status(config('status.active')),
+            'referral_code' => $data['referral_code'],
             'password' => $data['password'],
         ]);
-        $user->wallet()->create([
-            'amount' => config('constants.amount.default'),
-            'status_id' => $status_id,
-        ]);
-        session()->flash('success', 'Registration completed successfully! You can now login to your account.');
+
         return $user;
+    }
+
+    protected function registered(Request $request, $user) {
+        if($user)
+        return redirect($this->redirectPath())->with('success', 'Registration completed successfully! A link has been sent to your email for verification.');
     }
 }

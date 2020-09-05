@@ -16,8 +16,11 @@ class CreateReferralBonusesTable extends Migration
         Schema::create('referral_bonuses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('ref_id')->constrained('users');
             $table->string('referral_code');
             $table->unsignedFloat('amount');
+            $table->unsignedFloat('ref_amount');
+            $table->foreignId('status_id')->constrained();
             $table->timestamps();
         });
     }

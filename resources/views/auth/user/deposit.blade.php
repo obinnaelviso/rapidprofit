@@ -109,7 +109,21 @@
                     <input type="file" name="payment_evidence" id="payment_evidence" required>
                 </div>
                 <div class="col-md-12 mb-3">
-                    <label for="input-select">Payment Method</label>
+                    <label for="input-select" class="text-white">Amount</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="currency">{{ config('app.currency') }}</span>
+                        </div>
+                        <input type="number" name="amount" min="100" value="{{ old('amount') }}" class="form-control @error('amount') is-invalid @enderror " placeholder="100" aria-describedby="currency">
+                    </div>
+                    @error('amount')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="input-select" class="text-white">Payment Method</label>
                     <select name="payment_method" class="form-control @error('payment_method') is-invalid @enderror" id="input-select" required>
                         <option value="coinpayments" selected>CoinPayments</option>
                         <option value="perfect-money">Perfect Money</option>
@@ -120,9 +134,9 @@
                         </span>
                     @enderror
                 </div>
-                {{-- <div class="col-md-12">
+                <div class="col-md-12">
                     <button class="btn btn-primary btn-sm" type="submit">Submit</button>
-                </div> --}}
+                </div>
             </div>
         </form>
     </div>

@@ -16,7 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -67,7 +67,7 @@ class User extends Authenticatable
     }
 
     public function paymentReceipts() {
-        return $this->hasMany(PaymentReceipt::class);
+        return $this->hasMany(PaymentReceipt::class)->orderBy('status_id', 'asc');
     }
 
     public function payouts() {
@@ -82,8 +82,12 @@ class User extends Authenticatable
         return $this->hasMany(Deposit::class);
     }
 
-    public function referralBonuses() {
+    public function referrerBonus() {
         return $this->hasMany(ReferralBonus::class);
+    }
+
+    public function referredBonus() {
+        return $this->hasOne(ReferralBonus::class, 'ref_id');
     }
 
     public function password_check($password) {
@@ -92,5 +96,13 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($password) {
         $this->attributes['password'] = Hash::make($password);
+    }
+
+    public function createWallet() {
+        $this->wallet()->create([
+            'amount' => config('constants.wallet.amount'),
+            'bonus' => config('constants.wallet.bonus'),
+            'status_id' => status(config('status.active')),
+        ]);
     }
 }

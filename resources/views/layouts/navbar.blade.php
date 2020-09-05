@@ -9,6 +9,9 @@
                 <li class="nav-item text-light mr-2 pr-3">
                     Balance: {{ config('app.currency').$user->wallet->amount }}
                 </li>
+                <li class="nav-item text-light mr-2 pr-3">
+                    Bonus: {{ config('app.currency').$user->wallet->bonus }}
+                </li>
                 <li class="nav-item text-light mr-3">
                     {{ Auth::user()->first_name.' '.Auth::user()->last_name }}
                 </li>

@@ -26,17 +26,18 @@
                     <td class="text-uppercase">{{ $receipt->payment_method }}</td>
                     <td>
                         @if($receipt->url)
+                            <a href="{{ route('admin.manage.users.deposit.download-receipt', $receipt->id) }}" class="btn btn-primary"><i class="fa fa-download" aria-hidden="true"></i> Download </a>
                         @else
                             N/A
                         @endif
                     </td>
-                    <td>{{ $receipt->bitcoin_address?:"N/A" }}</td>
+                    <td>{{ $receipt->bitcoin_address? :"N/A" }}</td>
                     <td class="text-success">+{{ config('app.currency').$receipt->amount }}</td>
-                    <td>{{ config('app.currency').$receipt->deposit->prev_bal?: "N/A" }}</td>
-                    <td>{{ config('app.currency').$receipt->deposit->new_bal?: "N/A" }}</td>
+                    <td>@if($receipt->deposit()->count()) {{ config('app.currency').$receipt->deposit->prev_bal }} @else N/A @endif</td>
+                    <td>@if($receipt->deposit()->count()) {{ config('app.currency').$receipt->deposit->new_bal }} @else N/A @endif</td>
                     <td>{{ $receipt->created_at }}</td>
                     <td>
-                        @if($receipt->status_id = status(config('status.completed')))
+                        @if($receipt->status_id == status(config('status.completed')))
                             <div class="badge badge-success">{{ $receipt->status->title }}</div>
                         @else
                             <button class="btn btn-success btn-sm" onclick="newDeposit('{{ $receipt->id }}');">Confirm Deposit</button>

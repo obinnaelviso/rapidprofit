@@ -4,21 +4,25 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Withdrawal;
+use App\Notifications\DefaultAdmin;
+use App\Notifications\DepositReceiptUser;
+use App\Notifications\WithdrawRequestUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Notification;
 
 class WalletController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'account_status']);
+        $this->middleware(['auth', 'account_status', 'verified']);
     }
 
     public function paymentUpload(Request $request) {
         $user = $this->user();
         $this->validate(request(), [
             'payment_method' => 'required',
+            'amount' => 'required|numeric|min:100'
         ]);
 
     	if($request->hasFile('payment_evidence')) {
@@ -27,9 +31,15 @@ class WalletController extends Controller
     		$file_url = $request->file('payment_evidence')->storeAs('payment-receipts', $file_name);
             $user->paymentReceipts()->create([
                 'url' => $file_url,
-                'payment_method'=> $request->payment_method
+                'payment_method'=> $request->payment_method,
+                'amount' => $request->amount,
+                'status_id' => status(config('status.pending'))
             ]);
-            session()->flash('success', 'File uploaded successfully!');
+            $user->notify(new DepositReceiptUser);
+            Notification::route('mail', config('mail.from.address'))
+                        ->notify(new DefaultAdmin("Receipt for Deposit",
+                                    "A user deposit payment receipt has just being uploaded for confirmation. Click the button below to process request: "));
+            session()->flash('success', 'Payment receipt uploaded successfully!');
         } else
             session()->flash('failed', 'Something went wrong, please try again!');
         return back();
@@ -53,7 +63,7 @@ class WalletController extends Controller
             'bitcoin_address' => 'required'
         ]);
 
-        $user->withdrawals()->create([
+        $withdraw = $user->withdrawals()->create([
             'amount' => $request->amount,
             'prev_bal'=> $user->wallet->amount,
             'new_bal' => $user->wallet->amount - $request->amount,
@@ -63,6 +73,12 @@ class WalletController extends Controller
         ]);
         $user->wallet->amount -= $request->amount;
         $user->wallet->save();
+
+        $user->notify(new WithdrawRequestUser($withdraw));
+        Notification::route('mail', config('mail.from.address'))
+                    ->notify(new DefaultAdmin("New Withdrawal Request",
+                                "A user just made a new withdrawal request for ".config('app.currency').$request->amount.". Click the button below to process request: "));
+
         return back()->with('warning', 'Please wait! Your withdrawal is being processed...');
     }
 

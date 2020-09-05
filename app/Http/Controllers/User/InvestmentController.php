@@ -5,8 +5,11 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Investment;
 use App\Models\Package;
+use App\Notifications\DefaultAdmin;
+use App\Notifications\InvestmentStart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -14,7 +17,7 @@ class InvestmentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'account_status']);
+        $this->middleware(['auth', 'account_status', 'verified']);
     }
 
     public function investmentsSelect($name) {
@@ -82,6 +85,13 @@ class InvestmentController extends Controller
 
         $user->wallet->amount -= $amount;
         $user->wallet->save();
+
+        $user->notify(new InvestmentStart($investment));
+        Notification::route('mail', config('mail.from.address'))
+                    ->notify(new DefaultAdmin("New Investment Started",
+                                "A user just started an **".ucfirst($investment->package->name)."** with ".config('app.currency').$investment->amount.". Click the button below for more information: "));
+
+
         return redirect()->route('user.investments.manage')->with('success','Congratulations! Your investment is up and running.');
     }
 

@@ -14,9 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('index');
-
-Auth::routes();
-
+Route::get('/mailable', 'HomeController@testEmail');
+Route::get('/facebook', function() {
+    return redirect('https://facebook.com');
+})->name('facebook');
+Route::get('/twitter', function() {
+    return redirect('https://twitter.com');
+})->name('twitter');
+Route::get('/instagram', function() {
+    return redirect('https://instagram.com');
+})->name('instagram');
+Route::get('/telegram', function() {
+    return redirect('https://telegram.com');
+})->name('telegram');
 // Route::get('/home', 'HomeController@index')->name('home');
 // -----------------------> User Referrals
 Route::get('/ref/{code}', 'Auth\RegisterController@referral')->name('referral');
@@ -64,6 +74,7 @@ Route::group(['prefix'=>'/admin'], function() {
     Route::put('/users/{reg_user}/update-email', 'Admin\UserController@updateEmail')->name('admin.manage.users.update-email');
     Route::put('/users/{reg_user}/account-status', 'Admin\UserController@accountStatus')->name('admin.manage.users.account-status');
     Route::post('/users/{reg_user}/deposit', 'Admin\UserController@newDeposit')->name('admin.manage.users.deposit');
+    Route::get('/users/{receipt}/deposit/download', 'Admin\UserController@downloadReceipt')->name('admin.manage.users.deposit.download-receipt');
     Route::put('/users/{reg_user}/withdraw', 'Admin\UserController@newWithdrawal')->name('admin.manage.users.withdraw');
 
     // ----------------------> Packages
@@ -72,3 +83,6 @@ Route::group(['prefix'=>'/admin'], function() {
     Route::put('/packages/{package}/edit', 'Admin\DashboardController@editPackages')->name('admin.packages.edit');
     Route::put('/packages/{package}/status', 'Admin\DashboardController@statusPackages')->name('admin.packages.status');
 });
+
+
+Auth::routes(['verify'=>true]);

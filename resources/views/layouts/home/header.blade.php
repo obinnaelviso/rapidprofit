@@ -21,16 +21,16 @@
                         <div class="row d-flex justify-content-between align-items-center">
                             <div class="header-info-left">
                                 <ul>
-                                    <li>Phone: +99 (0) 101 0000 888</li>
+                                    {{-- <li>Phone: +99 (0) 101 0000 888</li> --}}
                                     <li>Email: support@rapidprofit.ltd</li>
                                 </ul>
                             </div>
                             <div class="header-info-right">
                                 <ul class="header-social">
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                    <li> <a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                    <li><a href="{{ route('facebook') }}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="{{ route('twitter') }}" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="{{ route('instagram') }}" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="{{ route('telegram') }}" target="_blank"><i class="fab fa-telegram"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -53,9 +53,9 @@
                                 <div class="main-menu d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="#">Home</a></li>
-                                            <li><a href="#">About</a></li>
-                                            <li><a href="#">Contact</a></li>
+                                            <li><a href="{{ route('index') }}">Home</a></li>
+                                            <li><a href="#about">About</a></li>
+                                            <li><a href="">Contact</a></li>
                                             @if(!Auth::guard('web')->check())
                                                 <li><a href="{{ route('login') }}">Login</a></li>
                                             @endif

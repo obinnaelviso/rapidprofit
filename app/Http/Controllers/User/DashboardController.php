@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Investment;
 use App\Models\Package;
+use App\Notifications\PasswordChanged;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'account_status']);
+        $this->middleware(['auth', 'account_status','verified']);
     }
 
     /**
@@ -81,7 +82,8 @@ class DashboardController extends Controller
                 $user->password = $request->password;
                 $user->save();
 
-                $notif_msg = ' and password changed';
+                $user->notify(new PasswordChanged);
+                $notif_msg = ' and password changed.';
             } else {
                 return back()->with('failed', 'Incorrect password! Please try again.');
             }

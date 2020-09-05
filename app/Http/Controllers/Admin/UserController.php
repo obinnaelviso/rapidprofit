@@ -6,8 +6,14 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Models\PaymentReceipt;
 use App\Models\Withdrawal;
+use App\Notifications\AccountActive;
+use App\Notifications\AccountBlocked;
+use App\Notifications\AccountCredited;
+use App\Notifications\EmailUpdated;
+use App\Notifications\WithdrawalConfirmed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -32,6 +38,10 @@ class UserController extends Controller
         return view('auth.admin.manage-users.view-user', compact('user', 'reg_user', 'investments', 'deposits', 'receipts', 'withdrawals'));
     }
 
+    public function downloadReceipt(PaymentReceipt $receipt) {
+        return Storage::download($receipt->url);
+    }
+
     public function updateBalance(User $reg_user, Request $request) {
         $this->validate(request(), [
             'amount' => 'required|numeric'
@@ -48,8 +58,15 @@ class UserController extends Controller
         $this->validate(request(), [
             'email' => 'required|email|unique:users'
         ]);
+        $old_email = $reg_user->email;
         $reg_user->email = $request->email;
+        $reg_user->email_verified_at = null;
         $reg_user->save();
+
+        $reg_user->sendEmailVerificationNotification();
+
+        $reg_user->notify(new EmailUpdated($old_email));
+
         return response([
             'email' => $reg_user->email,
             'message' => 'User email address updated successfully!'
@@ -59,10 +76,14 @@ class UserController extends Controller
     public function accountStatus(User $reg_user) {
         if($reg_user->status_id == status(config('status.active'))) {
             $reg_user->status_id = status(config('status.inactive'));
-            $message = "User account deactivated successfully!";
+            $message = "User account disabled successfully!";
+
+            $reg_user->notify(new AccountBlocked);
         } else {
             $reg_user->status_id = status(config('status.active'));
             $message = "User account activated successfully!";
+
+            $reg_user->notify(new AccountActive);
         }
         $reg_user->save();
         return back()->with('success', $message);
@@ -88,7 +109,7 @@ class UserController extends Controller
             ]);
         }
 
-        $reg_user->deposits()->create([
+        $deposit = $reg_user->deposits()->create([
             'amount' => $request->amount,
             'prev_bal' => $reg_user->wallet->amount,
             'new_bal' => $reg_user->wallet->amount + $amount,
@@ -98,15 +119,20 @@ class UserController extends Controller
         $reg_user->wallet->amount += $amount;
         $reg_user->wallet->save();
 
+        $reg_user->notify(new AccountCredited($deposit));
+
         return response([
             'message' => "Deposit successful!"
         ]);
     }
 
-    public function newWithdrawal(Request $request) {
+    public function newWithdrawal(Request $request, User $reg_user) {
         $withdrawal = Withdrawal::find($request->withdraw_id);
         $withdrawal->status_id = status(config('status.completed'));
         $withdrawal->save();
+
+        $reg_user->notify(new WithdrawalConfirmed);
+
         return response([
             'message' => "Withdrawal request completed successfully!"
         ]);

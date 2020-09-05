@@ -17,7 +17,7 @@
 </div>
 
 <div class="row mb-3">
-    <div class="col-md-4">
+    <div class="col-md-3 col-xs-6">
         <div class="card border-3 border-top border-top-primary">
             <div class="card-body">
                 <h5 class="text-muted">YOUR BALANCE</h5>
@@ -27,7 +27,17 @@
             </div>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-3 col-xs-6">
+        <div class="card border-3 border-top border-top-primary">
+            <div class="card-body">
+                <h5 class="text-muted">BONUS</h5>
+                <div class="metric-value d-inline-block">
+                    <h1 class="mb-1">{{ config('app.currency').$user->wallet->bonus }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
         <a href="{{ route('user.deposit') }}" class="btn btn-danger btn-block">Make Deposit</a>
         <a href="{{ route('user.withdraw') }}" class="btn btn-success btn-block">Withdraw Funds</a>
         <a href="{{ route('user.investments') }}" class="btn btn-primary btn-block">Start an Investment Plan Today!</a>
@@ -79,7 +89,7 @@
             <div class="card-body text-center">
                 <h5 class="text-muted">Referral Bonus</h5>
                 <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ config('app.currency').$user->referralBonuses->sum('amount') }}</h1>
+                    <h1 class="mb-1">{{ config('app.currency').$user->referrerBonus->sum('amount') }}</h1>
                 </div>
             </div>
         </div>

@@ -45,7 +45,7 @@
     <form class="splash-container" method="POST" action="{{ route('register') }}">
         @csrf
         <div class="text-center">
-            <a href="../index.html"><img class="logo-img" src="/images/logo.png" width="200px" alt="logo"></a>
+            <a href="{{ route('index') }}"><img class="logo-img" src="/images/logo.png" width="200px" alt="logo"></a>
             <h3 class="mb-1">Create your {{ config('app.name') }} Account</h3>
         </div>
         <div class="card">

@@ -1,6 +1,8 @@
 <?php
     return [
-        'amount' => [
-            'default' => 0,
+        'wallet' => [
+            'amount' => 0,
+            'bonus' => 0
+
         ]
     ];

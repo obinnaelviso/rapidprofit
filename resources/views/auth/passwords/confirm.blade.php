@@ -1,49 +1,82 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="en">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Confirm Password') }}</div>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Confirm Password - {{ config('app.name') }}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/libs/css/style.css">
+    <link rel="stylesheet" href="/vendor/fonts/fontawesome/css/fontawesome-all.css">
+	<link href="/images/favicon.png" rel="icon" type="image/png"/>
+    <style>
+    html,
+    body {
+        height: 100%;
+    }
 
-                <div class="card-body">
-                    {{ __('Please confirm your password before continuing.') }}
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(/home/assets/img/hero/services.jpg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+        padding-top: 3rem;
+    }
+    </style>
+</head>
 
-                    <form method="POST" action="{{ route('password.confirm') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+<body>
+    <!-- ============================================================== -->
+    <!-- confrim page  -->
+    <!-- ============================================================== -->
+    <div class="splash-container">
+        <div class="text-center"><a href="{{ route('index') }}"><img class="logo-img" src="/images/logo.png" width="200px" alt="logo"></a><span class="splash-description">Log in to your {{ config('app.name') }} account</span></div>
+        <div class="card ">
+            <h4 class="card-header text-center">Confirm Password</h4>
+            <div class="card-body">
+                <form method="POST" action="{{ route('password.confirm') }}">
+                    @csrf
+                    <h5>Please confirm your password before proceeding.</h5>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="password" class="col-md-12 col-form-label text-uppercase">Password</label>
+                            <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" required autocomplete="current-password">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
+                    </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Confirm Password') }}
-                                </button>
+                    <button type="submit" class="btn btn-dark btn-lg btn-block text-capitalize" style="color: white;">{{ __('Confirm Password') }}</button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    @if (Route::has('password.request'))
+                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                            {{ __('Forgot Your Password?') }}
+                        </a>
+                    @endif
+                </form>
             </div>
         </div>
     </div>
-</div>
-@endsection
+
+    <!-- ============================================================== -->
+    <!-- end confrim page  -->
+    <!-- ============================================================== -->
+    <!-- Optional JavaScript -->
+    <script src="/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>

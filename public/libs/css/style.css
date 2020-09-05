@@ -162,7 +162,7 @@ body {
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
-    color: orange;
+    color: palegoldenrod;
     background-color: rgb(36, 13, 2);
     -webkit-font-smoothing: antialiased;
 }
@@ -173,7 +173,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: darkorange;
+    color: #fad34e;
     margin: 0px 0px 15px 0px;
     font-family: 'Circular Std Medium';
 }
@@ -214,11 +214,11 @@ p:last-child {
 }
 
 a {
-    color: orange;
+    color: goldenrod;
 }
 
 a:hover {
-    color: darkorange;
+    color: darkgoldenrod;
     text-decoration: none;
 }
 
@@ -308,7 +308,7 @@ select.form-control {
 
 textarea.form-control {
     height: auto;
-    color: orange;
+    color: palegoldenrod;
     background-color: #fff;
     background-image: none;
     border: 1px solid #d2d2e4;
@@ -329,7 +329,7 @@ textarea::-webkit-input-placeholder {
 }
 
 textarea:focus::-webkit-input-placeholder {
-    color: orange !important;
+    color: palegoldenrod !important;
 }
 
 button.btn {}
@@ -374,13 +374,13 @@ address {}
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: orange;
-    border-color: orange;
+    background-color: palegoldenrod;
+    border-color: palegoldenrod;
 }
 
 .custom-control-input:checked~.custom-control-label::before {
     color: #fff;
-    background-color: orange;
+    background-color: palegoldenrod;
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::after {}
@@ -416,12 +416,12 @@ address {}
 }
 
 .custom-radio .custom-control-input:checked~.custom-control-label::before {
-    background-color: orange;
-    border-color: orange;
+    background-color: palegoldenrod;
+    border-color: palegoldenrod;
 }
 
 .custom-control-input:disabled~.custom-control-label::before {
-    background-color: darkorange;
+    background-color: #fad34e;
 }
 
 .custom-select-font-size {
@@ -858,7 +858,7 @@ Background Color / Color
 -------------------------*/
 
 .bg-primary {
-    background-color: orange !important;
+    background-color: palegoldenrod !important;
     color: #fff !important;
 }
 
@@ -960,7 +960,7 @@ Borders
 -------------------------*/
 
 .text-primary {
-    color: orange !important;
+    color: palegoldenrod !important;
 }
 
 .text-brand {
@@ -987,12 +987,16 @@ Borders
     color: #25d5f2 !important;
 }
 
+.text-white {
+    color: #fff !important;
+}
+
 .text-light {
     color: #fff5c5 !important;
 }
 
 .text-dark {
-    color: darkorange !important;
+    color: #343a40 !important;
 }
 
 .text-gray {
@@ -1013,11 +1017,11 @@ Borders
 -------------------------*/
 
 .border-top-primary {
-    border-top-color: orange !important;
+    border-top-color: palegoldenrod !important;
 }
 
 .border-top-warning {
-    border-top-color: orange !important;
+    border-top-color: palegoldenrod !important;
 }
 
 .border-3 {
@@ -1143,11 +1147,11 @@ Progress bar
 
 .progress-bar {
 
-    background-color: orange;
+    background-color: palegoldenrod;
 }
 
 .primary-progress-bar {
-    background-color: orange;
+    background-color: palegoldenrod;
 }
 
 .progress-sm {
@@ -1295,7 +1299,7 @@ Top Header
 
 .notification-title {
     font-size: 14px;
-    color: darkorange;
+    color: #fad34e;
     text-align: center;
     padding: 8px 0px;
     border-bottom: 1px solid #e3e3e3;
@@ -1315,7 +1319,7 @@ Top Header
 
 .notification-list .list-group-item.active {
     z-index: 2;
-    color: darkorange;
+    color: #fad34e;
     background-color: #f7f7fb;
     border-color: #e1e1e7;
 }
@@ -1336,7 +1340,7 @@ Top Header
     font-size: 11px;
     margin-top: 4px;
     text-transform: uppercase;
-    color: orange;
+    color: palegoldenrod;
 }
 
 .notification .dropdown-toggle::after,
@@ -1362,7 +1366,7 @@ Top Header
 }
 
 .notification-list-user-name {
-    color: orange;
+    color: palegoldenrod;
     font-size: 14px;
     margin-right: 8px;
 }
@@ -1375,7 +1379,7 @@ Top Header
     padding: 10px 0px;
     line-height: 1.5;
     font-weight: 700;
-    background-color: orange;
+    background-color: palegoldenrod;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
@@ -1441,7 +1445,7 @@ Top Header
     padding: 12px 7px 4px;
     display: block;
     border: 1px solid transparent;
-    color: darkorange;
+    color: #fad34e;
     font-size: 12px;
 }
 
@@ -1475,7 +1479,7 @@ Top Header
 .nav-user-name {}
 
 .nav-user-info {
-    background-color: orange;
+    background-color: palegoldenrod;
     line-height: 1.4;
     padding: 12px;
     color: #fff;
@@ -1611,19 +1615,19 @@ Top Header
 .navigation-horizontal .navbar-nav .nav-link:focus,
 .navigation-horizontal .navbar-nav .nav-link.active {
     background-color: #e2e2eb;
-    color: darkorange;
+    color: #fad34e;
     border-radius: 2px;
 }
 
 .navigation-horizontal .navbar-nav .nav-link:focus,
 .navigation-horizontal .navbar-nav .nav-link:hover {
     background-color: #e2e2eb;
-    color: darkorange;
+    color: #fad34e;
     border-radius: 2px;
 }
 
 .navigation-horizontal .submenu .nav .nav-item .nav-link:hover {
-    color: darkorange;
+    color: #fad34e;
     border-radius: 2px;
     background-color: transparent;
 }
@@ -1735,19 +1739,19 @@ Left Navigation Sidebar
 .nav-left-sidebar .navbar-nav .nav-link:focus,
 .nav-left-sidebar .navbar-nav .nav-link.active {
     background-color: #e2e2eb;
-    color: darkorange;
+    color: #fad34e;
     border-radius: 2px;
 }
 
 .nav-left-sidebar .navbar-nav .nav-link:focus,
 .nav-left-sidebar .navbar-nav .nav-link:hover {
     background-color: #e2e2eb;
-    color: darkorange;
+    color: #fad34e;
     border-radius: 2px;
 }
 
 .nav-left-sidebar .submenu .nav .nav-item .nav-link:hover {
-    color: darkorange;
+    color: #fad34e;
     border-radius: 2px;
     background-color: transparent;
 }
@@ -1824,13 +1828,13 @@ Leftsidebar - dark
 }
 
 .sidebar-dark.nav-left-sidebar .nav-link i {
-    color: orange;
+    color: palegoldenrod;
 }
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-item {}
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-link {
-    color: orange;
+    color: palegoldenrod;
 }
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-link:focus,
@@ -1886,12 +1890,12 @@ Sidebar Page Navigations
 }
 
 .sidebar-nav-fixed ul li a:hover {
-    color: orange;
+    color: palegoldenrod;
 }
 
 .sidebar-nav-fixed ul li a.active {
     display: block;
-    color: orange;
+    color: palegoldenrod;
     background: #e0e0fd;
 }
 
@@ -1901,7 +1905,7 @@ Sidebar Page Navigations
 .dropdown-menu {
     background: #fff;
     font-size: 14px;
-    color: darkorange;
+    color: #fad34e;
     border: 1px solid #fff5c5;
 }
 
@@ -1911,7 +1915,7 @@ Sidebar Page Navigations
     padding: .25rem 1.5rem;
     clear: both;
     font-weight: 400;
-    color: darkorange;
+    color: #fad34e;
     text-align: inherit;
     white-space: nowrap;
     background-color: transparent;
@@ -1919,8 +1923,8 @@ Sidebar Page Navigations
 }
 
 .dropdown-item:hover {
-    color: orange;
-    background: darkorange;
+    color: palegoldenrod;
+    background: #fad34e;
 }
 
 .page-section {}
@@ -1929,7 +1933,7 @@ Sidebar Page Navigations
 .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: orange;
+    background-color: palegoldenrod;
 }
 
 
@@ -2017,7 +2021,7 @@ Pageheader
 }
 
 .page-breadcrumb .breadcrumb-link:hover {
-    color: orange;
+    color: palegoldenrod;
 }
 
 .page-breadcrumb .breadcrumb {
@@ -2068,7 +2072,7 @@ Pageheader
 .footer {
     border-top: 1px solid rgba(152, 166, 173, .2);
     padding: 14px 30px 14px;
-    color: orange;
+    color: palegoldenrod;
     background-color: rgb(32, 32, 32);
     width: 100%;
     position: absolute; bottom: 0;
@@ -2077,7 +2081,7 @@ Pageheader
 .footer-links {}
 
 .footer .footer-links a {
-    color: orange;
+    color: palegoldenrod;
     margin-left: 1.5rem;
     -webkit-transition: all .4s;
     transition: all .4s;
@@ -2309,7 +2313,7 @@ Pageheader
 
 .traffic-sales-amount {
     float: right;
-    color: darkorange;
+    color: #fad34e;
 }
 
 hr {
@@ -2371,9 +2375,9 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 .product-rating{font-size: 12px;
 
     color: #ffa811;}
-.product-price{ position: absolute; top: 0; right: 0; font-size: 16px; color: darkorange;font-family: 'Circular Std Medium'; line-height: 1;}
+.product-price{ position: absolute; top: 0; right: 0; font-size: 16px; color: #fad34e;font-family: 'Circular Std Medium'; line-height: 1;}
 .product-btn{}
-.product-del{font-size: 14px; color: orange;}
+.product-del{font-size: 14px; color: palegoldenrod;}
 .product-sidebar{ background-color: #fff; border:1px solid #fff5c5;  }
 .product-sidebar-widget{border-bottom: 1px solid #fff5c5; padding: 10px 20px; margin-bottom: 10px;}
 .product-sidebar-widget:last-child{border:0px;}
@@ -2422,7 +2426,7 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
     background-color: rgb(224, 224, 231);
     border-radius: 100%;
 }
-.product-carousel .carousel-indicators li.active{ background-color: orange; }
+.product-carousel .carousel-indicators li.active{ background-color: palegoldenrod; }
 .product-carousel .carousel-control-next, .carousel-control-prev {display: none;}
 
 
@@ -2573,7 +2577,7 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
-  background-color: darkorange;
+  background-color: #fad34e;
 }
 
 .quantity-button.quantity-up {
@@ -2622,14 +2626,14 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 }
 
 .btn-wishlist {
-    background-color: darkorange;
+    background-color: #fad34e;
     border-radius: 100px;
     height: 30px;
     width: 30px;
     padding: 5px 3px;
     display: inline-block;
     font-size: 14px;
-    color: darkorange;
+    color: #fad34e;
     text-align: center;
     line-height: 1.7;
 }
@@ -2666,14 +2670,14 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 /*--- btn primary --*/
 
 .btn-primary {
-    color: #fff;
-    background-color: orange;
-    border-color: orange;
+    color: black;
+    background-color: palegoldenrod;
+    border-color: palegoldenrod;
 }
 
 .btn-primary:hover {
-    background-color: darkorange;
-    border-color: orange;
+    background-color: #fad34e;
+    border-color: palegoldenrod;
 }
 
 .btn-primary:disabled {
@@ -2682,15 +2686,15 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 
 /* .btn-primary:hover {
     color: #fff;
-    background-color: #4656e9;
-    border-color: #4656e9;
+    background-color: goldenrod;
+    border-color: goldenrod;
 } */
 
 .btn-primary.focus,
 .btn-primary:focus {
-    color: #fff;
-    background-color: #4656e9;
-    border-color: #4656e9;
+    color: black;
+    background-color: goldenrod;
+    border-color: goldenrod;
     box-shadow: 0 0 0 1px rgb(37, 52, 158);
 }
 
@@ -2704,8 +2708,8 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 .btn-primary:not(:disabled):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle {
     color: #fff;
-    background-color: #4656e9;
-    border-color: #4656e9;
+    background-color: goldenrod;
+    border-color: goldenrod;
 }
 
 
@@ -2936,22 +2940,22 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 /*--- btn outline primary --*/
 
 .btn-outline-primary {
-    color: orange;
+    color: palegoldenrod;
     background-color: transparent;
-    border-color: orange;
+    border-color: palegoldenrod;
 }
 
 .btn-outline-primary:hover {
     color: #fff;
-    background-color: orange;
-    border-color: orange;
+    background-color: palegoldenrod;
+    border-color: palegoldenrod;
 }
 
 .btn-outline-primary.focus,
 .btn-outline-primary:focus {
     color: #fff;
-    background-color: orange;
-    border-color: orange;
+    background-color: palegoldenrod;
+    border-color: palegoldenrod;
     box-shadow: 0 0 0 1px rgb(65, 77, 167);
 }
 
@@ -3088,14 +3092,14 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 }
 
 .btn-outline-light:hover {
-    color: orange;
+    color: palegoldenrod;
     background-color: #fff5c5;
     border-color: #cacae0;
 }
 
 .btn-outline-light.focus,
 .btn-outline-light:focus {
-    color: orange;
+    color: palegoldenrod;
     background-color: #fff5c5;
     border-color: #cacae0;
     box-shadow: 0 0 0 1px rgb(235, 235, 237);
@@ -3198,7 +3202,7 @@ btn-link
 -------------------------*/
 
 .btn-link {
-    color: orange;
+    color: palegoldenrod;
 }
 
 .btn-link:hover {
@@ -3206,7 +3210,7 @@ btn-link
 }
 
 .btn-primary-link {
-    color: orange !important;
+    color: palegoldenrod !important;
 }
 
 .btn-brand-link {
@@ -3274,7 +3278,7 @@ btn-link
 
 .card-toolbar-tabs .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
-    color: orange;
+    color: palegoldenrod;
     background-color: transparent;
 }
 
@@ -3461,7 +3465,7 @@ btn-link
 .card-header-pills {}
 
 .pills-regular .card-header-pills.nav.nav-pills .nav-item .nav-link.active {
-    background-color: orange;
+    background-color: palegoldenrod;
     color: #fff;
 }
 
@@ -3492,7 +3496,7 @@ btn-link
     font-size: 1rem;
     color: inherit;
     background-color: #f7f7fd;
-    border-bottom: 1px solid darkorange;
+    border-bottom: 1px solid #fad34e;
     border-top-left-radius: calc(.3rem - 1px);
     border-top-right-radius: calc(.3rem - 1px);
 }
@@ -3581,7 +3585,7 @@ btn-link
 .tab-regular .nav.nav-tabs .nav-link {
     display: block;
     padding: 17px 49px;
-    color: orange;
+    color: palegoldenrod;
     background-color: #dddde8;
     margin-right: 5px;
     border-color: #dddde8;
@@ -3593,7 +3597,7 @@ btn-link
 .tab-regular .nav-tabs .nav-link.active {
     background-color: #fff;
     border-color: #fff5c5 #fff5c5 #fff;
-    color: orange;
+    color: palegoldenrod;
 }
 
 .tab-regular .tab-content {
@@ -3626,7 +3630,7 @@ btn-link
     border-top-right-radius: .25rem;
     background: #fff;
     padding: 17px 49px;
-    color: orange;
+    color: palegoldenrod;
     background-color: #dddde8;
     -webkit-border-radius: 4px 0px 0px 4px;
     -moz-border-radius: 4px 0px 0px 4px;
@@ -3634,7 +3638,7 @@ btn-link
 }
 
 .tab-vertical .nav-tabs .nav-link.active {
-    color: orange;
+    color: palegoldenrod;
     background-color: #fff !important;
     border-color: transparent !important;
 }
@@ -3666,7 +3670,7 @@ btn-link
 .tab-outline .nav.nav-tabs .nav-item .nav-link {
     display: block;
     padding: 17px 49px;
-    color: orange;
+    color: palegoldenrod;
     background-color: #e9e9f2;
     border-color: #c4c4cf #c4c4cf #c4c4cf;
     margin-right: 3px;
@@ -3675,15 +3679,15 @@ btn-link
 .tab-outline .nav.nav-tabs .nav-item {}
 
 .tab-outline .nav-tabs .nav-link.active {
-    color: orange !important;
+    color: palegoldenrod !important;
     background-color: transparent !important;
-    border-color: #c4c4cf #c4c4cf darkorange !important;
+    border-color: #c4c4cf #c4c4cf #fad34e !important;
 }
 
 .tab-outline .nav-tabs .nav-link:focus,
 .nav-tabs .nav-link:hover {
     border-color: transparent;
-    color: orange !important;
+    color: palegoldenrod !important;
 }
 
 .tab-outline .tab-content {
@@ -3715,7 +3719,7 @@ btn-link
     border-top-right-radius: .25rem;
     background: #fff;
     padding: 17px 49px;
-    color: orange;
+    color: palegoldenrod;
     background-color: #e9e9f2;
     -webkit-border-radius: 4px 0px 0px 4px;
     -moz-border-radius: 4px 0px 0px 4px;
@@ -3724,10 +3728,10 @@ btn-link
 }
 
 .tab-vertical-outline .nav-tabs .nav-link.active {
-    color: orange;
+    color: palegoldenrod;
     border: 1px solid #c4c4cf !important;
     background: transparent;
-    border-right: 1px solid darkorange !important;
+    border-right: 1px solid #fad34e !important;
 }
 
 .tab-vertical-outline .nav-tabs .nav-link {
@@ -3766,7 +3770,7 @@ btn-link
 
 .simple-card .nav.nav-tabs .nav-item .nav-link {
     padding: 17px 49px;
-    color: orange;
+    color: palegoldenrod;
     background: #f8f8fb;
     border-color: #e9e9f2 #e9e9f2 #e9e9f2;
     margin-right: -1px;
@@ -3775,7 +3779,7 @@ btn-link
 }
 
 .simple-card .nav-tabs .nav-link.active {
-    color: orange !important;
+    color: palegoldenrod !important;
     background-color: transparent !important;
     border-color: #e9e9f2 #e9e9f2 #fff !important;
 }
@@ -3800,7 +3804,7 @@ btn-link
 
 .simple-outline-card .nav.nav-tabs .nav-item .nav-link {
     padding: 17px 49px;
-    color: orange;
+    color: palegoldenrod;
     background: #e9e9f2;
     border-color: #c4c4cf #c4c4cf #c4c4cf;
     margin-right: -1px;
@@ -3809,9 +3813,9 @@ btn-link
 }
 
 .simple-outline-card .nav-tabs .nav-link.active {
-    color: orange !important;
+    color: palegoldenrod !important;
     background-color: transparent !important;
-    border-color: #c4c4cf #c4c4cf darkorange !important;
+    border-color: #c4c4cf #c4c4cf #fad34e !important;
 }
 
 .simple-outline-card .tab-content {
@@ -3833,14 +3837,14 @@ Pills Regular
     background-color: #dddde8;
     padding: 14px 26px;
     margin-right: 3px;
-    color: orange;
+    color: palegoldenrod;
     font-size: 16px;
     margin-bottom: 4px;
 }
 
 .pills-regular .nav.nav-pills .nav-item .nav-link.active {
     background-color: #fff;
-    color: orange;
+    color: palegoldenrod;
 }
 
 .pills-regular .tab-content {
@@ -3864,13 +3868,13 @@ Pills Outline
     background-color: transparent;
     padding: 16px 52px;
     margin-right: 3px;
-    color: orange;
+    color: palegoldenrod;
     border: 1px solid #c4c4cf;
 }
 
 .pills-outline .nav.nav-pills .nav-item .nav-link.active {
     background-color: transparent;
-    color: orange;
+    color: palegoldenrod;
 }
 
 .pills-outline .tab-content {
@@ -3893,12 +3897,12 @@ Pills vertical
     background-color: #dddde8;
     padding: 16px 52px;
     margin-bottom: 4px;
-    color: orange;
+    color: palegoldenrod;
 }
 
 .pills-vertical .nav.nav-pills .nav-link.active {
     background-color: #fff;
-    color: orange;
+    color: palegoldenrod;
 }
 
 .pills-vertical .tab-content {
@@ -3933,7 +3937,7 @@ Pills vertical
 }
 
 .accrodion-regular .card .card-header .btn-link {
-    color: darkorange;
+    color: #fad34e;
     text-decoration: none;
 }
 
@@ -3968,7 +3972,7 @@ Pills vertical
 }
 
 .accrodion-outline .card .card-header .btn-link {
-    color: darkorange;
+    color: #fad34e;
     text-decoration: none;
 }
 
@@ -4018,14 +4022,14 @@ Pills vertical
 }
 
 .badge-primary {
-    background-color: orange;
+    background-color: palegoldenrod;
 }
 
 .badge-primary[href]:focus,
 .badge-primary[href]:hover {
     color: #fff;
     text-decoration: none;
-    background-color: #4656e9;
+    background-color: goldenrod;
 }
 
 .badge-brand {
@@ -4097,7 +4101,7 @@ Pills vertical
 }
 
 .badge-light {
-    background-color: darkorange;
+    background-color: #fad34e;
     color: #757691;
 }
 
@@ -4142,7 +4146,7 @@ Pills vertical
 }
 
 .label-primary {
-    background-color: orange;
+    background-color: palegoldenrod;
 }
 
 .label-success {
@@ -4165,7 +4169,7 @@ Pills vertical
     margin-left: 0px;
     margin-right: 5px;
     line-height: 1.25;
-    color: orange;
+    color: palegoldenrod;
     background-color: #fff;
     border: 1px solid #fff5c5;
     border-radius: 3px;
@@ -4176,15 +4180,15 @@ Pills vertical
     z-index: 2;
     color: #fff;
     text-decoration: none;
-    background-color: orange;
-    border-color: orange;
+    background-color: palegoldenrod;
+    border-color: palegoldenrod;
 }
 
 .page-item.active .page-link {
     z-index: 1;
     color: #fff;
-    background-color: orange;
-    border-color: orange;
+    background-color: palegoldenrod;
+    border-color: palegoldenrod;
 }
 
 
@@ -4227,16 +4231,16 @@ Pills vertical
     border-radius: 50%;
     background-color: transparent;
     border: 6px solid transparent;
-    border-top: 6px solid orange;
-    border-left: 6px solid orange;
+    border-top: 6px solid palegoldenrod;
+    border-left: 6px solid palegoldenrod;
     -webkit-animation: 1s spin linear infinite;
     animation: 1s spin linear infinite;
     display: inline-block;
 }
 
 .spinner-primary {
-    border-top-color: orange;
-    border-left-color: orange;
+    border-top-color: palegoldenrod;
+    border-left-color: palegoldenrod;
 }
 
 .spinner-secondary {
@@ -4357,7 +4361,7 @@ Pills vertical
 }
 
 .switch-button input[type=checkbox]:checked+span {
-    background-color: orange;
+    background-color: palegoldenrod;
     display: block;
     position: absolute;
     top: 0;
@@ -4532,7 +4536,7 @@ Pills vertical
 
 .table thead th,
 .table th {
-    color: darkorange;
+    color: goldenrod;
     font-family: 'Circular Std Medium';
 }
 
@@ -4563,7 +4567,7 @@ Pills vertical
 
 tr.group,
 tr.group:hover {
-    background-color: orange !important;
+    background-color: palegoldenrod !important;
     color: #fff;
     font-family: 'Circular Std Medium';
     font-size: 18px;
@@ -4992,7 +4996,7 @@ Vertical Timeline - by CodyHouse.co
 
 .error-section-content {
     padding-top: 30px;
-    color: darkorange;
+    color: #fad34e;
     padding-bottom: 30px;
 }
 
@@ -5417,7 +5421,7 @@ Vertical Timeline - by CodyHouse.co
 }
 
 .dd-handle:hover {
-    color: orange;
+    color: palegoldenrod;
     background: #fff;
 }
 
@@ -5531,7 +5535,7 @@ Vertical Timeline - by CodyHouse.co
 #nestable2 .dd-item>button:before {}
 
 .dd-hover>.dd-handle {
-    background: orange !important;
+    background: palegoldenrod !important;
 }
 
 
@@ -5678,7 +5682,7 @@ Vertical Timeline - by CodyHouse.co
 
 .comment-footer .action-icons a:hover,
 .comment-footer .action-icons a.active {
-    color: orange;
+    color: palegoldenrod;
 }
 
 
@@ -5845,7 +5849,7 @@ Vertical Timeline - by CodyHouse.co
     text-align: center;
     min-width: 19px;
     margin-right: 6px;
-    color: orange;
+    color: palegoldenrod;
 }
 
 .aside-nav .nav li.active a {
@@ -5863,11 +5867,11 @@ Vertical Timeline - by CodyHouse.co
     font-size: 27px;
     line-height: 27px;
     font-weight: 300;
-    color: darkorange;
+    color: #fad34e;
 }
 
 .aside-header .description {
-    color: orange;
+    color: palegoldenrod;
     margin: 0;
 }
 
@@ -5890,13 +5894,13 @@ Vertical Timeline - by CodyHouse.co
 }
 
 .aside-nav .nav li a {
-    color: orange;
+    color: palegoldenrod;
     padding: 10px 20px;
 }
 
 .aside-content .nav li a:hover {
     text-decoration: none;
-    background-color: darkorange;
+    background-color: #fad34e;
 }
 
 .aside-nav .nav li.active a .icon {
@@ -5919,7 +5923,7 @@ Vertical Timeline - by CodyHouse.co
     margin-right: 7px;
     font-size: 1.154rem;
     vertical-align: middle;
-    color: darkorange;
+    color: #fad34e;
 }
 
 .aside-nav .nav li .badge {
@@ -5931,7 +5935,7 @@ Vertical Timeline - by CodyHouse.co
 
 .aside-nav .title {
     display: block;
-    color: darkorange;
+    color: #fad34e;
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
@@ -5968,7 +5972,7 @@ Vertical Timeline - by CodyHouse.co
 
 .email-title .new-messages {
     font-size: 1rem;
-    color: darkorange;
+    color: #fad34e;
     margin-left: 3px;
 }
 
@@ -6062,13 +6066,13 @@ Vertical Timeline - by CodyHouse.co
 
 .email-list-item--unread .from,
 .email-list-item--unread .msg {
-    color: darkorange;
+    color: #fad34e;
     font-weight: 800;
     -webkit-font-smoothing: initial;
 }
 
 .email-list-item--unread .msg {
-    color: darkorange;
+    color: #fad34e;
 }
 
 .email-list-actions {
@@ -6133,7 +6137,7 @@ Vertical Timeline - by CodyHouse.co
     display: block;
     font-size: 1.769rem;
     font-weight: 300;
-    color: darkorange;
+    color: #fad34e;
 }
 
 .email-head-subject .title>a.active .icon {
@@ -6253,7 +6257,7 @@ Vertical Timeline - by CodyHouse.co
     border-bottom: 1px solid #fff5c5;
     display: block;
     font-weight: 400;
-    color: darkorange;
+    color: #fad34e;
     font-size: 1.769rem;
 }
 
@@ -6465,7 +6469,7 @@ Vertical Timeline - by CodyHouse.co
     position: relative;
     padding-top: 1rem;
     border-top: 1px solid #E9EEF2;
-    background: darkorange;
+    background: #fad34e;
 
 }
 
@@ -7008,6 +7012,10 @@ Media Query
 
 td.title {
     font-weight: bolder;
+}
+
+.card h1,h2,h3,h4,h5,h6,tr,td {
+    color: goldenrod;
 }
 
 

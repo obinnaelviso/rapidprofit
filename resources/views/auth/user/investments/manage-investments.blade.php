@@ -53,7 +53,7 @@
                                     </tr>
                                 @endforeach
                             @else
-                                <h5 class="text-danger">Sorry, but no active investment running. Click on the link to <a href="{{ route('user.investments') }}">start an investment</a>.</h5 class="text-danger">
+                                <h5 class="text-dark">Sorry, but no active investment running. Click on the link to <a href="{{ route('user.investments') }}">start an investment</a>.</h5 class="text-danger">
                             @endif
                         </tbody>
                     </table>
@@ -103,7 +103,7 @@
                                     </tr>
                                 @endforeach
                             @else
-                                <h5 class="text-primary">No completed investments yet. Click on the link to <a href="{{ route('user.investments') }}">start an investment</a>.</h5 class="text-danger">
+                                <h5 class="text-dark">No completed investments yet. Click on the link to <a href="{{ route('user.investments') }}">start an investment</a>.</h5 class="text-danger">
                             @endif
                         </tbody>
                     </table>

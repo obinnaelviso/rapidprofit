@@ -40,7 +40,7 @@
     <!-- login page  -->
     <!-- ============================================================== -->
     <div class="splash-container">
-        <div class="text-center"><a href="../index.html"><img class="logo-img" src="/images/logo.png" width="200px" alt="logo"></a><span class="splash-description">Log in to your {{ config('app.name') }} account</span></div>
+        <div class="text-center"><a href="{{ route('index') }}"><img class="logo-img" src="/images/logo.png" width="200px" alt="logo"></a><span class="splash-description">Log in to your {{ config('app.name') }} account</span></div>
         <div class="card ">
             <div class="card-body">
                 <form method="POST" action="{{ route('login') }}">
@@ -48,7 +48,7 @@
                     @include('layouts.alerts')
                     <div class="form-group">
                         <label for="email" class="col-md-12 col-form-label text-uppercase">Email Address</label>
-                        <input class="form-control form-control-lg" id="email" type="text" autocomplete="off" name="email">
+                        <input class="form-control form-control-lg" id="email" value="{{ old('email') }}" type="text" autocomplete="off" name="email">
                     </div>
                     <div class="form-group">
                         <label for="password" class="col-md-12 col-form-label text-uppercase">Password</label>
@@ -56,7 +56,7 @@
                     </div>
                     <div class="form-group">
                         <label class="custom-control custom-checkbox">
-                            <a href="#">Forget Password?</a>
+                            <a href="{{ route('password.request') }}">Forget Password?</a>
                         </label>
                     </div>
                     <button type="submit" class="btn btn-dark btn-lg btn-block" style="color: white">Log in</button>

@@ -21,7 +21,7 @@
         </div>
     </div>
     <!-- slider Area End-->
-    <div class="about-low-area section-padding30">
+    <div class="about-low-area section-padding30" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
@@ -33,7 +33,7 @@
                         </div>
                         <p>Are you looking for the highest returns on your investments? {{ config('app.name') }} - a fully automated online investment platform is a top secured and profitable option for you. Part of {{ config('app.name') }} – the team of professional traders focusing mainly on Bitcoin and other cryptocurrencies trading over multiple Exchanges and markets. Thanks to the extraordinary diversification of our finances, we can deliver steady returns for our investors.</p>
                         <p>Headquartered in London in 2019, {{ config('app.name') }} is already becoming the Panam's fastest-growing FinTech company. Our name is synonymous with productive and profitable trading solutions where our investors need little to no trading experience at all. With {{ config('app.name') }}, investors choose one of our three simple investment designs, make a deposit and sit back while our experts take the control. {{ config('app.name') }} official website is fully automated. Our clients can enjoy the first time experience. If you are looking for a steady and secure investment platform, then {{ config('app.name') }} is the best option available right now. Join {{ config('app.name') }} today and let our professional service help you succeed in this volatile crypto markets!.</p>
-                        <a href="#" class="btn">Find Out More</a>
+                        <a href="{{ route('register') }}" class="btn">Find Out More</a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
