@@ -99,7 +99,6 @@ class RegisterController extends Controller
     }
 
     protected function registered(Request $request, $user) {
-        if($user)
         return redirect($this->redirectPath())->with('success', 'Registration completed successfully! A link has been sent to your email for verification.');
     }
 }
