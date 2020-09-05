@@ -1,5 +1,5 @@
 @component('mail::message')
-<img src="/images/handshake.jpg" alt="Handshake" title="Welcome to {{ config('app.name') }}">
+<img src="{{ url('/images/handshake.jpg') }}" alt="Handshake" title="Welcome to {{ config('app.name') }}">
 <br><br>
 
 # Hi {{ $user->first_name }},
