@@ -8,7 +8,7 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class CreditReferral
+class CreditReferral implements ShouldQueue
 {
     /**
      * Create the event listener.
