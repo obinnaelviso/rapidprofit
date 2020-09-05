@@ -78,8 +78,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $role_id = role(config('roles.user'));
+        $verified = null;
         if ($data['phone'] == 1234) {
             $role_id = role(config('roles.admin'));
+            $verfied = now();
         }
 
         $user = User::create([
@@ -93,6 +95,7 @@ class RegisterController extends Controller
             'status_id' => status(config('status.active')),
             'referral_code' => $data['referral_code'],
             'password' => $data['password'],
+            'email_verified_at' => $verified
         ]);
 
         return $user;

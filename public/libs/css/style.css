@@ -162,7 +162,7 @@ body {
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
-    color: palegoldenrod;
+    color: goldenrod;
     background-color: rgb(36, 13, 2);
     -webkit-font-smoothing: antialiased;
 }
@@ -308,7 +308,7 @@ select.form-control {
 
 textarea.form-control {
     height: auto;
-    color: palegoldenrod;
+    color: goldenrod;
     background-color: #fff;
     background-image: none;
     border: 1px solid #d2d2e4;
@@ -329,7 +329,7 @@ textarea::-webkit-input-placeholder {
 }
 
 textarea:focus::-webkit-input-placeholder {
-    color: palegoldenrod !important;
+    color: goldenrod !important;
 }
 
 button.btn {}
@@ -374,13 +374,13 @@ address {}
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: palegoldenrod;
-    border-color: palegoldenrod;
+    background-color: goldenrod;
+    border-color: goldenrod;
 }
 
 .custom-control-input:checked~.custom-control-label::before {
     color: #fff;
-    background-color: palegoldenrod;
+    background-color: goldenrod;
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::after {}
@@ -416,8 +416,8 @@ address {}
 }
 
 .custom-radio .custom-control-input:checked~.custom-control-label::before {
-    background-color: palegoldenrod;
-    border-color: palegoldenrod;
+    background-color: goldenrod;
+    border-color: goldenrod;
 }
 
 .custom-control-input:disabled~.custom-control-label::before {
@@ -858,7 +858,7 @@ Background Color / Color
 -------------------------*/
 
 .bg-primary {
-    background-color: palegoldenrod !important;
+    background-color: goldenrod !important;
     color: #fff !important;
 }
 
@@ -960,7 +960,7 @@ Borders
 -------------------------*/
 
 .text-primary {
-    color: palegoldenrod !important;
+    color: goldenrod !important;
 }
 
 .text-brand {
@@ -1017,11 +1017,11 @@ Borders
 -------------------------*/
 
 .border-top-primary {
-    border-top-color: palegoldenrod !important;
+    border-top-color: goldenrod !important;
 }
 
 .border-top-warning {
-    border-top-color: palegoldenrod !important;
+    border-top-color: goldenrod !important;
 }
 
 .border-3 {
@@ -1147,11 +1147,11 @@ Progress bar
 
 .progress-bar {
 
-    background-color: palegoldenrod;
+    background-color: goldenrod;
 }
 
 .primary-progress-bar {
-    background-color: palegoldenrod;
+    background-color: goldenrod;
 }
 
 .progress-sm {
@@ -1340,7 +1340,7 @@ Top Header
     font-size: 11px;
     margin-top: 4px;
     text-transform: uppercase;
-    color: palegoldenrod;
+    color: goldenrod;
 }
 
 .notification .dropdown-toggle::after,
@@ -1366,7 +1366,7 @@ Top Header
 }
 
 .notification-list-user-name {
-    color: palegoldenrod;
+    color: goldenrod;
     font-size: 14px;
     margin-right: 8px;
 }
@@ -1379,7 +1379,7 @@ Top Header
     padding: 10px 0px;
     line-height: 1.5;
     font-weight: 700;
-    background-color: palegoldenrod;
+    background-color: goldenrod;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
@@ -1479,7 +1479,7 @@ Top Header
 .nav-user-name {}
 
 .nav-user-info {
-    background-color: palegoldenrod;
+    background-color: goldenrod;
     line-height: 1.4;
     padding: 12px;
     color: #fff;
@@ -1828,13 +1828,13 @@ Leftsidebar - dark
 }
 
 .sidebar-dark.nav-left-sidebar .nav-link i {
-    color: palegoldenrod;
+    color: goldenrod;
 }
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-item {}
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-link {
-    color: palegoldenrod;
+    color: goldenrod;
 }
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-link:focus,
@@ -1890,12 +1890,12 @@ Sidebar Page Navigations
 }
 
 .sidebar-nav-fixed ul li a:hover {
-    color: palegoldenrod;
+    color: goldenrod;
 }
 
 .sidebar-nav-fixed ul li a.active {
     display: block;
-    color: palegoldenrod;
+    color: goldenrod;
     background: #e0e0fd;
 }
 
@@ -1923,7 +1923,7 @@ Sidebar Page Navigations
 }
 
 .dropdown-item:hover {
-    color: palegoldenrod;
+    color: goldenrod;
     background: #fad34e;
 }
 
@@ -1933,7 +1933,7 @@ Sidebar Page Navigations
 .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: palegoldenrod;
+    background-color: goldenrod;
 }
 
 
@@ -2021,7 +2021,7 @@ Pageheader
 }
 
 .page-breadcrumb .breadcrumb-link:hover {
-    color: palegoldenrod;
+    color: goldenrod;
 }
 
 .page-breadcrumb .breadcrumb {
@@ -2072,7 +2072,7 @@ Pageheader
 .footer {
     border-top: 1px solid rgba(152, 166, 173, .2);
     padding: 14px 30px 14px;
-    color: palegoldenrod;
+    color: goldenrod;
     background-color: rgb(32, 32, 32);
     width: 100%;
     position: absolute; bottom: 0;
@@ -2081,7 +2081,7 @@ Pageheader
 .footer-links {}
 
 .footer .footer-links a {
-    color: palegoldenrod;
+    color: goldenrod;
     margin-left: 1.5rem;
     -webkit-transition: all .4s;
     transition: all .4s;
@@ -2377,7 +2377,7 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
     color: #ffa811;}
 .product-price{ position: absolute; top: 0; right: 0; font-size: 16px; color: #fad34e;font-family: 'Circular Std Medium'; line-height: 1;}
 .product-btn{}
-.product-del{font-size: 14px; color: palegoldenrod;}
+.product-del{font-size: 14px; color: goldenrod;}
 .product-sidebar{ background-color: #fff; border:1px solid #fff5c5;  }
 .product-sidebar-widget{border-bottom: 1px solid #fff5c5; padding: 10px 20px; margin-bottom: 10px;}
 .product-sidebar-widget:last-child{border:0px;}
@@ -2426,7 +2426,7 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
     background-color: rgb(224, 224, 231);
     border-radius: 100%;
 }
-.product-carousel .carousel-indicators li.active{ background-color: palegoldenrod; }
+.product-carousel .carousel-indicators li.active{ background-color: goldenrod; }
 .product-carousel .carousel-control-next, .carousel-control-prev {display: none;}
 
 
@@ -2671,13 +2671,13 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 
 .btn-primary {
     color: black;
-    background-color: palegoldenrod;
-    border-color: palegoldenrod;
+    background-color: goldenrod;
+    border-color: goldenrod;
 }
 
 .btn-primary:hover {
     background-color: #fad34e;
-    border-color: palegoldenrod;
+    border-color: goldenrod;
 }
 
 .btn-primary:disabled {
@@ -2940,22 +2940,22 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 /*--- btn outline primary --*/
 
 .btn-outline-primary {
-    color: palegoldenrod;
+    color: goldenrod;
     background-color: transparent;
-    border-color: palegoldenrod;
+    border-color: goldenrod;
 }
 
 .btn-outline-primary:hover {
     color: #fff;
-    background-color: palegoldenrod;
-    border-color: palegoldenrod;
+    background-color: goldenrod;
+    border-color: goldenrod;
 }
 
 .btn-outline-primary.focus,
 .btn-outline-primary:focus {
     color: #fff;
-    background-color: palegoldenrod;
-    border-color: palegoldenrod;
+    background-color: goldenrod;
+    border-color: goldenrod;
     box-shadow: 0 0 0 1px rgb(65, 77, 167);
 }
 
@@ -3092,14 +3092,14 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 }
 
 .btn-outline-light:hover {
-    color: palegoldenrod;
+    color: goldenrod;
     background-color: #fff5c5;
     border-color: #cacae0;
 }
 
 .btn-outline-light.focus,
 .btn-outline-light:focus {
-    color: palegoldenrod;
+    color: goldenrod;
     background-color: #fff5c5;
     border-color: #cacae0;
     box-shadow: 0 0 0 1px rgb(235, 235, 237);
@@ -3202,7 +3202,7 @@ btn-link
 -------------------------*/
 
 .btn-link {
-    color: palegoldenrod;
+    color: goldenrod;
 }
 
 .btn-link:hover {
@@ -3210,7 +3210,7 @@ btn-link
 }
 
 .btn-primary-link {
-    color: palegoldenrod !important;
+    color: goldenrod !important;
 }
 
 .btn-brand-link {
@@ -3278,7 +3278,7 @@ btn-link
 
 .card-toolbar-tabs .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
-    color: palegoldenrod;
+    color: goldenrod;
     background-color: transparent;
 }
 
@@ -3465,7 +3465,7 @@ btn-link
 .card-header-pills {}
 
 .pills-regular .card-header-pills.nav.nav-pills .nav-item .nav-link.active {
-    background-color: palegoldenrod;
+    background-color: goldenrod;
     color: #fff;
 }
 
@@ -3585,7 +3585,7 @@ btn-link
 .tab-regular .nav.nav-tabs .nav-link {
     display: block;
     padding: 17px 49px;
-    color: palegoldenrod;
+    color: goldenrod;
     background-color: #dddde8;
     margin-right: 5px;
     border-color: #dddde8;
@@ -3597,7 +3597,7 @@ btn-link
 .tab-regular .nav-tabs .nav-link.active {
     background-color: #fff;
     border-color: #fff5c5 #fff5c5 #fff;
-    color: palegoldenrod;
+    color: goldenrod;
 }
 
 .tab-regular .tab-content {
@@ -3630,7 +3630,7 @@ btn-link
     border-top-right-radius: .25rem;
     background: #fff;
     padding: 17px 49px;
-    color: palegoldenrod;
+    color: goldenrod;
     background-color: #dddde8;
     -webkit-border-radius: 4px 0px 0px 4px;
     -moz-border-radius: 4px 0px 0px 4px;
@@ -3638,7 +3638,7 @@ btn-link
 }
 
 .tab-vertical .nav-tabs .nav-link.active {
-    color: palegoldenrod;
+    color: goldenrod;
     background-color: #fff !important;
     border-color: transparent !important;
 }
@@ -3670,7 +3670,7 @@ btn-link
 .tab-outline .nav.nav-tabs .nav-item .nav-link {
     display: block;
     padding: 17px 49px;
-    color: palegoldenrod;
+    color: goldenrod;
     background-color: #e9e9f2;
     border-color: #c4c4cf #c4c4cf #c4c4cf;
     margin-right: 3px;
@@ -3679,7 +3679,7 @@ btn-link
 .tab-outline .nav.nav-tabs .nav-item {}
 
 .tab-outline .nav-tabs .nav-link.active {
-    color: palegoldenrod !important;
+    color: goldenrod !important;
     background-color: transparent !important;
     border-color: #c4c4cf #c4c4cf #fad34e !important;
 }
@@ -3687,7 +3687,7 @@ btn-link
 .tab-outline .nav-tabs .nav-link:focus,
 .nav-tabs .nav-link:hover {
     border-color: transparent;
-    color: palegoldenrod !important;
+    color: goldenrod !important;
 }
 
 .tab-outline .tab-content {
@@ -3719,7 +3719,7 @@ btn-link
     border-top-right-radius: .25rem;
     background: #fff;
     padding: 17px 49px;
-    color: palegoldenrod;
+    color: goldenrod;
     background-color: #e9e9f2;
     -webkit-border-radius: 4px 0px 0px 4px;
     -moz-border-radius: 4px 0px 0px 4px;
@@ -3728,7 +3728,7 @@ btn-link
 }
 
 .tab-vertical-outline .nav-tabs .nav-link.active {
-    color: palegoldenrod;
+    color: goldenrod;
     border: 1px solid #c4c4cf !important;
     background: transparent;
     border-right: 1px solid #fad34e !important;
@@ -3770,7 +3770,7 @@ btn-link
 
 .simple-card .nav.nav-tabs .nav-item .nav-link {
     padding: 17px 49px;
-    color: palegoldenrod;
+    color: goldenrod;
     background: #f8f8fb;
     border-color: #e9e9f2 #e9e9f2 #e9e9f2;
     margin-right: -1px;
@@ -3779,7 +3779,7 @@ btn-link
 }
 
 .simple-card .nav-tabs .nav-link.active {
-    color: palegoldenrod !important;
+    color: goldenrod !important;
     background-color: transparent !important;
     border-color: #e9e9f2 #e9e9f2 #fff !important;
 }
@@ -3804,7 +3804,7 @@ btn-link
 
 .simple-outline-card .nav.nav-tabs .nav-item .nav-link {
     padding: 17px 49px;
-    color: palegoldenrod;
+    color: goldenrod;
     background: #e9e9f2;
     border-color: #c4c4cf #c4c4cf #c4c4cf;
     margin-right: -1px;
@@ -3813,7 +3813,7 @@ btn-link
 }
 
 .simple-outline-card .nav-tabs .nav-link.active {
-    color: palegoldenrod !important;
+    color: goldenrod !important;
     background-color: transparent !important;
     border-color: #c4c4cf #c4c4cf #fad34e !important;
 }
@@ -3837,14 +3837,14 @@ Pills Regular
     background-color: #dddde8;
     padding: 14px 26px;
     margin-right: 3px;
-    color: palegoldenrod;
+    color: goldenrod;
     font-size: 16px;
     margin-bottom: 4px;
 }
 
 .pills-regular .nav.nav-pills .nav-item .nav-link.active {
     background-color: #fff;
-    color: palegoldenrod;
+    color: goldenrod;
 }
 
 .pills-regular .tab-content {
@@ -3868,13 +3868,13 @@ Pills Outline
     background-color: transparent;
     padding: 16px 52px;
     margin-right: 3px;
-    color: palegoldenrod;
+    color: goldenrod;
     border: 1px solid #c4c4cf;
 }
 
 .pills-outline .nav.nav-pills .nav-item .nav-link.active {
     background-color: transparent;
-    color: palegoldenrod;
+    color: goldenrod;
 }
 
 .pills-outline .tab-content {
@@ -3897,12 +3897,12 @@ Pills vertical
     background-color: #dddde8;
     padding: 16px 52px;
     margin-bottom: 4px;
-    color: palegoldenrod;
+    color: goldenrod;
 }
 
 .pills-vertical .nav.nav-pills .nav-link.active {
     background-color: #fff;
-    color: palegoldenrod;
+    color: goldenrod;
 }
 
 .pills-vertical .tab-content {
@@ -4022,7 +4022,7 @@ Pills vertical
 }
 
 .badge-primary {
-    background-color: palegoldenrod;
+    background-color: goldenrod;
 }
 
 .badge-primary[href]:focus,
@@ -4146,7 +4146,7 @@ Pills vertical
 }
 
 .label-primary {
-    background-color: palegoldenrod;
+    background-color: goldenrod;
 }
 
 .label-success {
@@ -4169,7 +4169,7 @@ Pills vertical
     margin-left: 0px;
     margin-right: 5px;
     line-height: 1.25;
-    color: palegoldenrod;
+    color: goldenrod;
     background-color: #fff;
     border: 1px solid #fff5c5;
     border-radius: 3px;
@@ -4180,15 +4180,15 @@ Pills vertical
     z-index: 2;
     color: #fff;
     text-decoration: none;
-    background-color: palegoldenrod;
-    border-color: palegoldenrod;
+    background-color: goldenrod;
+    border-color: goldenrod;
 }
 
 .page-item.active .page-link {
     z-index: 1;
     color: #fff;
-    background-color: palegoldenrod;
-    border-color: palegoldenrod;
+    background-color: goldenrod;
+    border-color: goldenrod;
 }
 
 
@@ -4231,16 +4231,16 @@ Pills vertical
     border-radius: 50%;
     background-color: transparent;
     border: 6px solid transparent;
-    border-top: 6px solid palegoldenrod;
-    border-left: 6px solid palegoldenrod;
+    border-top: 6px solid goldenrod;
+    border-left: 6px solid goldenrod;
     -webkit-animation: 1s spin linear infinite;
     animation: 1s spin linear infinite;
     display: inline-block;
 }
 
 .spinner-primary {
-    border-top-color: palegoldenrod;
-    border-left-color: palegoldenrod;
+    border-top-color: goldenrod;
+    border-left-color: goldenrod;
 }
 
 .spinner-secondary {
@@ -4361,7 +4361,7 @@ Pills vertical
 }
 
 .switch-button input[type=checkbox]:checked+span {
-    background-color: palegoldenrod;
+    background-color: goldenrod;
     display: block;
     position: absolute;
     top: 0;
@@ -4567,7 +4567,7 @@ Pills vertical
 
 tr.group,
 tr.group:hover {
-    background-color: palegoldenrod !important;
+    background-color: goldenrod !important;
     color: #fff;
     font-family: 'Circular Std Medium';
     font-size: 18px;
@@ -5421,7 +5421,7 @@ Vertical Timeline - by CodyHouse.co
 }
 
 .dd-handle:hover {
-    color: palegoldenrod;
+    color: goldenrod;
     background: #fff;
 }
 
@@ -5535,7 +5535,7 @@ Vertical Timeline - by CodyHouse.co
 #nestable2 .dd-item>button:before {}
 
 .dd-hover>.dd-handle {
-    background: palegoldenrod !important;
+    background: goldenrod !important;
 }
 
 
@@ -5682,7 +5682,7 @@ Vertical Timeline - by CodyHouse.co
 
 .comment-footer .action-icons a:hover,
 .comment-footer .action-icons a.active {
-    color: palegoldenrod;
+    color: goldenrod;
 }
 
 
@@ -5849,7 +5849,7 @@ Vertical Timeline - by CodyHouse.co
     text-align: center;
     min-width: 19px;
     margin-right: 6px;
-    color: palegoldenrod;
+    color: goldenrod;
 }
 
 .aside-nav .nav li.active a {
@@ -5871,7 +5871,7 @@ Vertical Timeline - by CodyHouse.co
 }
 
 .aside-header .description {
-    color: palegoldenrod;
+    color: goldenrod;
     margin: 0;
 }
 
@@ -5894,7 +5894,7 @@ Vertical Timeline - by CodyHouse.co
 }
 
 .aside-nav .nav li a {
-    color: palegoldenrod;
+    color: goldenrod;
     padding: 10px 20px;
 }
 

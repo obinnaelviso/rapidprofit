@@ -43,7 +43,7 @@ class AccountCredited extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)->subject(config('app.name').': New Credit Alert!')
-                                ->markdown('emails.payout-notify', ['user' => $notifiable, 'deposit' => $this->deposit]);
+                                ->markdown('emails.account-credited', ['user' => $notifiable, 'deposit' => $this->deposit]);
     }
 
     /**
