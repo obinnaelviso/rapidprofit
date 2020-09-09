@@ -55,7 +55,7 @@
                                         <ul id="navigation">
                                             <li><a href="{{ route('index') }}">Home</a></li>
                                             <li><a href="#about">About</a></li>
-                                            <li><a href="">Contact</a></li>
+                                            <li><a href="{{ route('contact') }}">Contact</a></li>
                                             @if(!Auth::guard('web')->check())
                                                 <li><a href="{{ route('login') }}">Login</a></li>
                                             @endif

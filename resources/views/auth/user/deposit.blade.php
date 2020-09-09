@@ -20,6 +20,7 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-12">
         {{-- <form method="POST" action="#"> --}}
@@ -41,7 +42,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="currency">{{ config('app.currency') }}</span>
                         </div>
-                        <input type="number" name="amount" min="100"  value="{{ old('amount') }}" class="form-control" id="amount" placeholder="100" aria-describedby="currency" autofocus= required="">
+                        <input type="number" name="amount" min="{{ $min_dep }}" max={{ $max_dep }}  value="{{ old('amount') }}" class="form-control" id="amount" placeholder="{{ $min_dep }}" aria-describedby="currency" autofocus= required="">
                     </div>
                     <div class="invalid-feedback" id="amountFeedback"></div>
                 </div>
@@ -57,7 +58,7 @@
                         <input type="hidden" name="merchant" value="{{ config('payments.coinpayments') }}">
                         <input type="hidden" name="item_name" value="{{ ucfirst(config('app.name')) }} Account Deposit">
                         <input type="hidden" name="currency" value="USD">
-                        <input type="hidden" id="cp_amount" name="amountf" value="100.00">
+                        <input type="hidden" id="cp_amount" name="amountf" value="{{ $min_dep }}">
                         <input type="hidden" name="quantity" value="1">
                         <input type="hidden" name="allow_quantity" value="0">
                         <input type="hidden" name="want_shipping" value="0">
@@ -70,7 +71,7 @@
                     <form action="https://perfectmoney.is/api/step1.asp" method="post" style="display: inline">
                         <input type="hidden" name="PAYEE_ACCOUNT" value="{{ config('payments.perfect_money') }}">
                         <input type="hidden" name="PAYEE_NAME" value="{{ config('app.name') }}">
-                        <input type="hidden" id="pm_amount" name="PAYMENT_AMOUNT" value="100">
+                        <input type="hidden" id="pm_amount" name="PAYMENT_AMOUNT" value="{{ $min_dep }}">
                         <input type="hidden" name="PAYMENT_UNITS" value="USD">
                         <input type="hidden" name="STATUS_URL"
                             value="{{ route('user.deposit.payment-status', 'success') }}">
@@ -114,7 +115,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="currency">{{ config('app.currency') }}</span>
                         </div>
-                        <input type="number" name="amount" min="100" value="{{ old('amount') }}" class="form-control @error('amount') is-invalid @enderror " placeholder="100" aria-describedby="currency">
+                        <input type="number" name="amount" min="{{ $min_dep }}" value="{{ old('amount') }}" class="form-control @error('amount') is-invalid @enderror " placeholder="{{ $min_dep }}" aria-describedby="currency">
                     </div>
                     @error('amount')
                         <span class="invalid-feedback" role="alert">
@@ -150,17 +151,21 @@
 
     function computeAmount() {
         var amount = $('#amount').val()
-        var min_amount = 0
+        var min_amount = {{ $min_dep }}
+        var max_amount = {{ $max_dep }}
         $('#cp_amount').val(amount)
         $('#pm_amount').val(amount)
-        if(amount > min_amount) {
+        if(amount >= min_amount && amount <= max_amount) {
             $('#cp_button').prop('disabled', false)
             $('#pm_button').prop('disabled', false)
             $('#amountFeedback').hide()
         } else {
             $('#cp_button').prop('disabled', true)
             $('#pm_button').prop('disabled', true)
-            $('#amountFeedback').html('!! Amount must be greater than '+min_amount)
+            if ( amount < min_amount)
+                $('#amountFeedback').html('!! Amount must be greater than $'+min_amount)
+            else
+                $('#amountFeedback').html('!! You can only deposit a maximum of $'+max_amount+' at a time.')
             $('#amountFeedback').show()
         }
     }

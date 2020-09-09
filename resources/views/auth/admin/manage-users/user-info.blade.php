@@ -44,17 +44,57 @@
                 <td class="title">Status</td>
                 <td><span class="label label-success">{{ $reg_user->status->title }}</span></td>
                 <td>@if($reg_user->status_id == status(config('status.active')))
-                        <button class="btn btn-danger btn-sm" onclick="event.preventDefault();
-                        document.getElementById('account-status').submit();">Deactivate Account</button>
+                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#blockUser">Block Account</button>
                     @else
                         <button class="btn btn-success btn-sm" onclick="event.preventDefault();
                         document.getElementById('account-status').submit();">Activate Account</button>
                     @endif
                     <form id="account-status" action="{{ route('admin.manage.users.account-status', $reg_user->id) }}" method="POST" style="display: none;">
-                        @csrf @method('put')
+                        @csrf
                     </form>
                 </td>
             </tr>
+            @if($reg_user->status_id == status(config('status.inactive')))
+                <tr>
+                    <td class="title text-danger">Reason for Account Deactivation *</td>
+                    <td>{{ $reg_user->blacklist->reason }}</td>
+                </tr>
+            @endif
         </tbody>
     </table>
+</div>
+{{-- Block User --}}
+<div class="modal fade" id="blockUser" tabindex="-1" role="dialog" aria-labelledby="blockUserLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-danger text-uppercase"> Reason *
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+            <div class="modal-body">
+                <form class="splash-container" method="POST" action="{{ route('admin.manage.users.account-status', $reg_user->id) }}">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <textarea name="reason" class="form-control" id="reason" cols="30" rows="10" placeholder="Write your reasons here *"></textarea>
+                                @error('reason')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-block btn-danger" type="submit">Block Account</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-warning" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+    </div>
 </div>

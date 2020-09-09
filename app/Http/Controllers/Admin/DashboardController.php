@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Deposit;
+use App\Models\Investment;
 use App\Models\Package;
+use App\Models\PaymentReceipt;
+use App\Models\Payout;
+use App\Models\Setting;
+use App\Models\Withdrawal;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,12 +29,26 @@ class DashboardController extends Controller
 
     public function index() {
         $user = $this->user();
-        return view('auth.admin.home', compact('user'));
+        $users = User::users();
+        $verified_users = User::verified();
+        $active_users = User::active();
+        $blocked_users = User::blocked();
+        $packages = Package::all();
+        $total_investments = Investment::all();
+        $active_investments = Investment::active();
+        $completed_investments = Investment::completed();
+        $total_payouts = Payout::all();
+        $withdraw_requests = Withdrawal::pending();
+        $deposit_requests = PaymentReceipt::pending();
+        // $referral_bonus = ReferralBonus::all();
+        return view('auth.admin.home', compact('user', 'users', 'verified_users', 'active_users', 'blocked_users', 'packages',
+                                         'total_investments', 'active_investments', 'completed_investments', 'total_payouts',
+                                         'withdraw_requests', 'deposit_requests', 'withdraw_requests'));
     }
 
     public function manageUsers() {
         $user = $this->user();
-        $reg_users = User::where('role_id', role(config('roles.user')))->get();
+        $reg_users = User::where('role_id', role(config('roles.user')))->orderBy('status_id', 'desc')->get();
         return view('auth.admin.manage-users', compact('user', 'reg_users'));
     }
 
@@ -67,6 +87,26 @@ class DashboardController extends Controller
         return back()->with('success', 'Package updated successfully!');
     }
 
+    public function withdrawals() {
+        $user = $this->user();
+        $pending_requests = Withdrawal::pending();
+        $completed_requests = Withdrawal::completed()->paginate(25);
+        return view('auth.admin.withdraw', compact('user', 'pending_requests', 'completed_requests'));
+    }
+
+    public function deposits() {
+        $user = $this->user();
+        $payment_receipts = PaymentReceipt::orderBy('status_id', 'asc');
+        return view('auth.admin.deposit', compact('user', 'payment_receipts'));
+    }
+
+    public function investments() {
+        $user = $this->user();
+        $active_investments = Investment::active()->get();
+        $completed_investments = Investment::completed()->get();
+        return view('auth.admin.investments', compact('user', 'active_investments', 'completed_investments'));
+    }
+
     public function statusPackages(Package $package) {
         if($package->status_id == status(config('status.active'))) {
             $package->status_id = status(config('status.inactive'));
@@ -77,6 +117,26 @@ class DashboardController extends Controller
         }
         $package->save();
         return back()->with('success', $notif_msg);
+    }
+
+    public function settings() {
+        $user = $this->user();
+        $gen_settings = Setting::where('key', 'general')->first();
+        if (!$gen_settings) {
+            $gen_settings = $user->settings()->create(['key' => 'general', 'value' => "[]"]);
+        }
+        $general = json_decode($gen_settings->value);
+        return view('auth.admin.settings.general', compact('user', 'general', 'gen_settings'));
+    }
+
+    public function homepageSettings() {
+        $user = $this->user();
+        $home_settings = Setting::where('key', 'homepage')->first();
+        if (!$home_settings) {
+            $home_settings = $user->settings()->create(['key' => 'homepage', 'value' => "[]"]);
+        }
+        $homepage = json_decode($home_settings->value);
+        return view('auth.admin.settings.homepage', compact('user', 'homepage', 'home_settings'));
     }
 
     protected function user() {

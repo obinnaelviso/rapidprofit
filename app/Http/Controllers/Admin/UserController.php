@@ -73,16 +73,21 @@ class UserController extends Controller
         ]);
     }
 
-    public function accountStatus(User $reg_user) {
+    public function accountStatus(Request $request, User $reg_user) {
         if($reg_user->status_id == status(config('status.active'))) {
+            $this->validate(request(), [
+                'reason' => 'required'
+            ]);
+
             $reg_user->status_id = status(config('status.inactive'));
+            $reg_user->blacklist()->create($request->all());
             $message = "User account disabled successfully!";
 
-            $reg_user->notify(new AccountBlocked);
+            $reg_user->notify(new AccountBlocked($request->reason));
         } else {
             $reg_user->status_id = status(config('status.active'));
             $message = "User account activated successfully!";
-
+            $reg_user->blacklist()->delete();
             $reg_user->notify(new AccountActive);
         }
         $reg_user->save();

@@ -1,5 +1,5 @@
 @component('mail::message')
-## Hi, this is <span style="color: blue">{{ $name }}</span> from RapidProfit
+## Hi, this is <span style="color: blue">{{ $name }}</span> from {{ config('app.name') }},
 
 Dear {{ $user_firstname }},
 

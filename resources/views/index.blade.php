@@ -175,6 +175,12 @@
             </div>
         </div>
     </div>
+    @php
+        $active_investors = array_key_exists('active_investors', $homepage) ? $homepage->active_investors: "N/A";
+        $active_invest = array_key_exists('active_invest', $homepage) ? $homepage->active_invest: "N/A";
+        $average_dep = array_key_exists('average_dep', $homepage) ? $homepage->average_dep: "N/A";
+        $average_pay = array_key_exists('average_pay', $homepage) ? $homepage->average_pay: "N/A";
+    @endphp
     <!-- Testimonial End -->
     <div class="section-padding30 achievements-bg">
         <div class="container">
@@ -189,7 +195,7 @@
                       <div class="card-body">
                         <h1 class="fa fa-users"></h1>
                         <br>
-                        <h1 class="card-title">7,913</h1>
+                        <h1 class="card-title" id="active-investors">{{ $active_investors }}</h1>
                         <h5 class="card-text">Active Investors</h5>
                         <br>
                       </div>
@@ -200,7 +206,7 @@
                       <div class="card-body">
                         <h1 class="fa fa-money-bill-alt text-success"></h1>
                         <br>
-                        <h1 class="card-title">8,818</h1>
+                        <h1 class="card-title" id="active-invest">{{ $active_invest }}</h1>
                         <h5 class="card-text">Active Investments</h5>
                         <br>
                       </div>
@@ -211,7 +217,7 @@
                       <div class="card-body">
                         <h1 class="fa fa-arrow-down text-danger"></h1>
                         <br>
-                        <h1 class="card-title">$18,818,410</h1>
+                        <h1 class="card-title" id="average-dep">{{ $average_dep }}</h1>
                         <h5 class="card-text">Average Deposit Per Month</h5>
                         <br>
                       </div>
@@ -222,7 +228,7 @@
                       <div class="card-body">
                         <h1 class="fa fa-arrow-up text-success"></h1>
                         <br>
-                        <h1 class="card-title">$99,956,440</h1>
+                        <h1 class="card-title" id="average-pay">{{ $average_pay }}</h1>
                         <h5 class="card-text">Average Payouts Per Month</h5>
                         <br>
                       </div>
@@ -400,4 +406,23 @@
         </div>
     </div>
 </main>
+@endsection
+
+@section('input-js')
+<script>
+    console.log(numberWithCommas($('#active-investors').html()))
+    var active_investors = "{{ config('app.currency') }}" + numberWithCommas($('#active-investors').html())
+    var active_invest = "{{ config('app.currency') }}" + numberWithCommas($('#active-invest').html())
+    var average_dep = "{{ config('app.currency') }}" + numberWithCommas($('#average-dep').html())
+    var average_pay = "{{ config('app.currency') }}" + numberWithCommas($('#average-pay').html())
+
+    $('#active-investors').html(active_investors)
+    $('#active-invest').html(active_invest)
+    $('#average-dep').html(average_dep)
+    $('#average-pay').html(average_pay)
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+</script>
 @endsection

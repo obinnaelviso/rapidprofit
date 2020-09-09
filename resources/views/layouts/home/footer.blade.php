@@ -127,12 +127,14 @@
     <script src="/home/assets/js/jquery.sticky.js"></script>
 
     <!-- contact js -->
-    <script src="/home/assets/js/contact.js"></script>
+    {{-- <script src="/home/assets/js/contact.js"></script> --}}
     <script src="/home/assets/js/jquery.form.js"></script>
     <script src="/home/assets/js/jquery.validate.min.js"></script>
-    <script src="/home/assets/js/mail-script.js"></script>
+    {{-- <script src="/home/assets/js/mail-script.js"></script> --}}
     <script src="/home/assets/js/jquery.ajaxchimp.min.js"></script>
 
     <!-- Jquery Plugins, main Jquery -->
     <script src="/home/assets/js/plugins.js"></script>
     <script src="/home/assets/js/main.js"></script>
+
+    @yield('input-js')

@@ -1,5 +1,5 @@
-@component('mail::message')
-# Hi {{ ucfirst($user->wallet->amount) }},
+g@component('mail::message')
+# Hi {{ ucfirst($user->first_name) }},
 
 Your **{{ config('app.name') }}** account has been successfully credited.<br>
 Below are the details of the transaction:
@@ -10,7 +10,7 @@ Below are the details of the transaction:
 
 **NEW BALANCE:** {{ config('app.currency').$deposit->new_bal }}
 
-Now you can start investing and earning. Click on the button below:
+Start an investment plan today to start earning. Click on the button below:
 
 @component('mail::button', ['url' => route('user.investments')])
 Go to Dashboard >>

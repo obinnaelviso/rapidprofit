@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <form class="splash-container" method="POST" action="{{ route('admin.packages.edit', $package->id) }}">
-                    @csrf
+                    @method('put') @csrf
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="max_amount" class="col-md-12 col-form-label text-uppercase">max Amount</label>
+                                <label for="max_amount" class="col-md-12 col-form-label text-uppercase">Max Amount</label>
                                 <input class="form-control @error('max_amount') is-invalid @enderror" type="number" min="0" name="max_amount" value="{{ old('max_amount')?:$package->max_amount }}" placeholder="0.0" required>
                                 @error('max_amount')
                                     <span class="invalid-feedback" role="alert">

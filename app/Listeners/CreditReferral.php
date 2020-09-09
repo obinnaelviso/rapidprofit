@@ -28,31 +28,30 @@ class CreditReferral implements ShouldQueue
      */
     public function handle(Verified $event)
     {
+
+        $general = settings('general');
+        $referrer_bon = array_key_exists('referrer_bon', $general) ?$general->referrer_bon:100;
+        $referred_bon = array_key_exists('referred_bon', $general) ?$general->referred_bon:1000000;
+
         $ref_code = $event->user->referral_code;
         $event->user->referral_code = generateRandom(6);
         $event->user->save();
 
-        $referrer_bonus = 50;
-        $referred_bonus = 25;
+        $referrer_bonus = $referrer_bon;
+        $referred_bonus = $referred_bon;
 
         $ref_user = User::where('referral_code', $ref_code)->first();
         if($ref_user) {
-            $ref_user->wallet->bonus += $referrer_bonus;
-            $ref_user->wallet->save();
-
-            $event->user->wallet->bonus += $referred_bonus;
-            $event->user->wallet->save();
-
             $ref_user->referrerBonus()->create([
                 'ref_id' => $event->user->id,
                 'referral_code' => $ref_code,
                 'amount' => $referrer_bonus,
                 'ref_amount' => $referred_bonus,
-                'status_id' => status(config('status.expired'))
+                'status_id' => status(config('status.pending'))
             ]);
 
-            $ref_user->notify(new ReferralBonus($referrer_bonus));
-            $event->user->notify(new ReferralBonus($referred_bonus));
+            // $ref_user->notify(new ReferralBonus($referrer_bonus));
+            // $event->user->notify(new ReferralBonus($referred_bonus));
         }
 
     }

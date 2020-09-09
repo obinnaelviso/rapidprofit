@@ -28,10 +28,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-
         $user = $this->user();
+        $general = settings('general');
+        $referral_limit = array_key_exists('referral_limit', $general) ?$general->referral_limit:100;
         $active_investments = Investment::where('user_id', $user->id)->where('status_id', status(config('status.active')))->get();
-        return view('auth.user.home', compact('user', 'active_investments'));
+        return view('auth.user.home', compact('user', 'active_investments', 'referral_limit'));
     }
 
     public function investments()
@@ -43,15 +44,18 @@ class DashboardController extends Controller
 
     public function deposit() {
         $user = $this->user();
-
-        return view('auth.user.deposit', compact('user'));
+        $general = settings('general');
+        $min_dep = array_key_exists('min_dep', $general) ?$general->min_dep:100;
+        $max_dep = array_key_exists('max_dep', $general) ?$general->max_dep:1000000;
+        return view('auth.user.deposit', compact('user', 'min_dep', 'max_dep'));
     }
 
     public function withdraw() {
         $user = $this->user();
+        $general = settings('general');
         $withdrawals = $user->withdrawals()->where('status_id', status(config('status.pending')))->orderBy('created_at', 'desc')->get();
 
-        return view('auth.user.withdraw', compact('user', 'withdrawals'));
+        return view('auth.user.withdraw', compact('user', 'withdrawals', 'general'));
     }
 
     public function profile() {

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Model\Blacklist;
 use App\Models\Investment;
 use App\Models\Payout;
 use App\Models\ReferralBonus;
@@ -11,6 +12,7 @@ use App\Models\Status;
 use App\Models\Withdrawal;
 use App\Models\Deposit;
 use App\Models\PaymentReceipt;
+use App\Models\Setting;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -86,16 +88,20 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(ReferralBonus::class);
     }
 
-    public function referredBonus() {
-        return $this->hasOne(ReferralBonus::class, 'ref_id');
-    }
-
     public function password_check($password) {
         return Hash::check($password, $this->attributes['password']);
     }
 
+    public function settings() {
+        return $this->hasMany(Setting::class);
+    }
+
     public function setPasswordAttribute($password) {
         $this->attributes['password'] = Hash::make($password);
+    }
+
+    public function blacklist() {
+        return $this->hasOne(Blacklist::class);
     }
 
     public function createWallet() {
@@ -104,5 +110,21 @@ class User extends Authenticatable implements MustVerifyEmail
             'bonus' => config('constants.wallet.bonus'),
             'status_id' => status(config('status.active')),
         ]);
+    }
+
+    public static function blocked() {
+        return User::where('status_id', status(config('status.inactive')));
+    }
+
+    public static function active() {
+        return User::where('status_id', status(config('status.active')))->where('email_verified_at', '!=', null)->where('role_id', role(config('roles.user')));
+    }
+
+    public static function verified() {
+        return User::where('email_verified_at', '!=', null)->where('role_id', role(config('roles.user')))->orWhere('email_verified_at', '!=', '');
+    }
+
+    public static function users() {
+        return User::where('role_id', role(config('roles.user')));
     }
 }

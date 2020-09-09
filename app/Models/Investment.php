@@ -28,4 +28,12 @@ class Investment extends Model
     public function payout() {
         return $this->hasOne(Payout::class);
     }
+
+    public static function active() {
+        return Investment::where('status_id', status(config('status.active')));
+    }
+
+    public static function completed() {
+        return Investment::where('status_id', status(config('status.completed')));
+    }
 }

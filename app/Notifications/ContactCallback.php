@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class AccountBlocked extends Notification implements ShouldQueue
+class ContactCallback extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -16,12 +16,10 @@ class AccountBlocked extends Notification implements ShouldQueue
      *
      * @return void
      */
-
-    protected $reason;
-
-    public function __construct(string $reason)
+    protected $name;
+    public function __construct(string $name)
     {
-        $this->reason = $reason;
+        $this->name = $name;
     }
 
     /**
@@ -43,14 +41,10 @@ class AccountBlocked extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->subject(config('app.name').': Account Temporarily Disabled!')
-                    ->greeting('Dear User, ')
-                    ->line('Your account has been temporary disabled due to the following reason: ')
-                    ->line("")
-                    ->line($this->reason)
-                    ->line('')
-                    ->line('Send us a support ticket at '.config('mail.from.address').' or message us on our live chat and our live agent will talk to you.')
-                    ->line('Thank you for choosing '.config('app.name').'!');
+        return (new MailMessage)->subject(config('app.name').': Contact Form')
+                                ->greeting('Hi '.ucfirst($this->name).', ')
+                                ->line("We've just received your mail and we'll get back to you shortly. Thank You!")
+                                ->line('Thank you for choosing '.config('app.name').'.');
     }
 
     /**

@@ -12,6 +12,7 @@
             <h2 class="pageheader-title">Home</h2>
             {{-- <p class="pageheader-text">Get to manage all your wallets in one place</p> --}}
             <hr>
+            @include('layouts.alerts')
         </div>
     </div>
 </div>
@@ -43,7 +44,9 @@
         <a href="{{ route('user.investments') }}" class="btn btn-primary btn-block">Start an Investment Plan Today!</a>
     </div>
 </div>
+
 <hr>
+
 <div class="row">
     <div class="col-md-12">
         <div class="alert alert-info text-center" role="alert">
@@ -84,12 +87,22 @@
             </div>
         </div>
     </div>
+    @php
+        $referralSum = $user->wallet->bonus;
+    @endphp
     <div class="col-md-4">
         <div class="card border-3 border-top border-top-warning">
             <div class="card-body text-center">
                 <h5 class="text-muted">Referral Bonus</h5>
                 <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ config('app.currency').$user->referrerBonus->sum('amount') }}</h1>
+                    <h1 class="mb-1">{{ config('app.currency').$referralSum }}</h1>
+                    @if($referralSum >= $referral_limit)
+                        <button class="btn btn-success btn-sm" onclick="event.preventDefault();
+                        document.getElementById('transfer-bonus').submit();">{{ config('app.currency') }}Transfer Bonus</button>
+                    @endif
+                    <form id="transfer-bonus" action="{{ route('user.transfer-bonus') }}" method="POST" style="display: none;">
+                        @csrf @method('put')
+                    </form>
                 </div>
             </div>
         </div>

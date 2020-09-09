@@ -14,19 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('index');
+Route::get('/contact-us', 'HomeController@contactUs')->name('contact');
+Route::post('/contact-us', 'HomeController@contact');
 Route::get('/mailable', 'HomeController@testEmail');
-Route::get('/facebook', function() {
-    return redirect('https://facebook.com');
-})->name('facebook');
-Route::get('/twitter', function() {
-    return redirect('https://twitter.com');
-})->name('twitter');
-Route::get('/instagram', function() {
-    return redirect('https://instagram.com');
-})->name('instagram');
-Route::get('/telegram', function() {
-    return redirect('https://telegram.com');
-})->name('telegram');
+Route::get('/facebook', 'HomeController@facebook')->name('facebook');
+Route::get('/twitter', 'HomeController@twitter')->name('twitter');
+Route::get('/instagram', 'HomeController@instagram')->name('instagram');
+Route::get('/telegram', 'HomeController@telegram')->name('telegram');
 // Route::get('/home', 'HomeController@index')->name('home');
 // -----------------------> User Referrals
 Route::get('/ref/{code}', 'Auth\RegisterController@referral')->name('referral');
@@ -41,6 +35,7 @@ Route::group(['prefix'=>'/user'], function() {
 
     // ---------------------> Investments
     Route::get('/investments', 'User\DashboardController@investments')->name('user.investments');
+    Route::put('/transfer-bonus', 'User\WalletController@transferBonus')->name('user.transfer-bonus');
     Route::get('/investments/manage', 'User\InvestmentController@manageInvestments')->name('user.investments.manage');
     Route::get('/investments/calculate-profit', 'User\InvestmentController@investmentsCalculateProfit')->name('user.investments.calculate-profit');
     Route::get('/investments/{name}', 'User\InvestmentController@investmentsSelect')->name('user.investments.select');
@@ -72,7 +67,7 @@ Route::group(['prefix'=>'/admin'], function() {
     Route::get('/users/{reg_user}', 'Admin\UserController@viewUser')->name('admin.manage.users.view');
     Route::put('/users/{reg_user}/update-balance', 'Admin\UserController@updateBalance')->name('admin.manage.users.update-balance');
     Route::put('/users/{reg_user}/update-email', 'Admin\UserController@updateEmail')->name('admin.manage.users.update-email');
-    Route::put('/users/{reg_user}/account-status', 'Admin\UserController@accountStatus')->name('admin.manage.users.account-status');
+    Route::post('/users/{reg_user}/account-status', 'Admin\UserController@accountStatus')->name('admin.manage.users.account-status');
     Route::post('/users/{reg_user}/deposit', 'Admin\UserController@newDeposit')->name('admin.manage.users.deposit');
     Route::get('/users/{receipt}/deposit/download', 'Admin\UserController@downloadReceipt')->name('admin.manage.users.deposit.download-receipt');
     Route::put('/users/{reg_user}/withdraw', 'Admin\UserController@newWithdrawal')->name('admin.manage.users.withdraw');
@@ -82,6 +77,23 @@ Route::group(['prefix'=>'/admin'], function() {
     Route::post('/packages', 'Admin\DashboardController@newPackages')->name('admin.packages.new');
     Route::put('/packages/{package}/edit', 'Admin\DashboardController@editPackages')->name('admin.packages.edit');
     Route::put('/packages/{package}/status', 'Admin\DashboardController@statusPackages')->name('admin.packages.status');
+
+    // -----------------------> Settings
+    Route::get('/settings', 'Admin\DashboardController@settings')->name('admin.settings');
+    Route::put('/settings/{general}/general', 'Admin\SettingsController@editGeneral')->name('admin.settings.general');
+    Route::get('/settings/homepage', 'Admin\DashboardController@homepageSettings')->name('admin.settings.homepage');
+    Route::put('/settings/{homepage}/homepage', 'Admin\SettingsController@editHomepage')->name('admin.settings.homepage.update');
+
+    // ------------------------> Deposit
+    Route::get('/deposit', 'Admin\DashboardController@deposits')->name('admin.deposit');
+    Route::post('/deposit', 'Admin\WalletController@newDeposit');
+
+    // -------------------------> Wtihdrawal
+    Route::get('/withdraw', 'Admin\DashboardController@withdrawals')->name('admin.withdraw');
+    Route::put('/withdraw', 'Admin\WalletController@newWithdrawal');
+
+    // ------------------------> Investments
+    Route::get('/investments', 'Admin\DashboardController@investments')->name('admin.investments');
 });
 
 

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Investment;
 use App\Models\Package;
+use App\Models\ReferralBonus;
 use App\Notifications\DefaultAdmin;
 use App\Notifications\InvestmentStart;
+use App\Notifications\ReferralBonus as NotificationsReferralBonus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -29,8 +30,8 @@ class InvestmentController extends Controller
 
     public function manageInvestments() {
         $user = $this->user();
-        $active_investments = Investment::where('status_id', status(config('status.active')))->orderBy('created_at','desc')->get();
-        $completed_investments = Investment::where('status_id', status(config('status.completed')))->orderBy('created_at','desc')->get();
+        $active_investments = $user->investments()->where('status_id', status(config('status.active')))->orderBy('created_at','desc')->get();
+        $completed_investments = $user->investments()->where('status_id', status(config('status.completed')))->orderBy('created_at','desc')->get();
 
         return view('auth.user.investments.manage-investments', compact('user', 'active_investments', 'completed_investments'));
     }
@@ -86,10 +87,29 @@ class InvestmentController extends Controller
         $user->wallet->amount -= $amount;
         $user->wallet->save();
 
+        // Referral Code
+        $referral = ReferralBonus::where('ref_id', $user->id)->where('status_id', status(config('status.pending')))->first();
+        if($referral) {
+            $general = settings('general');
+            $referrer_bon = array_key_exists('referrer_bon', $general) ?$general->referrer_bon:10;
+            $referred_bon = array_key_exists('referred_bon', $general) ?$general->referred_bon:5;
+            $referral->user->wallet->bonus += $referrer_bon;
+            $user->wallet->bonus += $referred_bon;
+            $referral->status_id = status(config('status.expired'));
+            $referral->amount = $referrer_bon;
+            $referral->ref_amount = $referred_bon;
+            $referral->user->wallet->save();
+            $user->wallet->save();
+            $referral->save();
+
+            $referral->user->notify(new NotificationsReferralBonus((int)$referrer_bon));
+            $user->notify(new NotificationsReferralBonus((int)$referred_bon));
+        }
+
         $user->notify(new InvestmentStart($investment));
         Notification::route('mail', config('mail.from.address'))
                     ->notify(new DefaultAdmin("New Investment Started",
-                                "A user just started an **".ucfirst($investment->package->name)."** with ".config('app.currency').$investment->amount.". Click the button below for more information: "));
+                                ucfirst($user->first_name)." just started **".ucfirst($investment->package->name)."** investment with **".config('app.currency').$investment->amount."**. Click on the button below for more information: "));
 
 
         return redirect()->route('user.investments.manage')->with('success','Congratulations! Your investment is up and running.');

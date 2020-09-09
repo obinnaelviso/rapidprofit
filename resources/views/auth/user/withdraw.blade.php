@@ -36,16 +36,20 @@
                     <h1 class="text-right">{{ config('app.currency').$user->wallet->amount }}</h1>
                 </div>
             </div><hr>
+            @php
+                $min_with = array_key_exists('min_with', $general) ?$general->min_with:100;
+                $max_with = array_key_exists('max_with', $general) ?$general->max_with:1000000;
+            @endphp
             <div class="form-row">
                 <div class="col-md-6">
-                    <h3>Amount (minimum: {{ config('app.currency') }}100)</h3>
+                    <h3>Amount (minimum: {{ config('app.currency').$min_with }})</h3>
                 </div>
                 <div class="col-md-6 text-right">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="currency">{{ config('app.currency') }}</span>
                         </div>
-                        <input type="number" name="amount" min="100"  value="{{ old('amount') }}" class="form-control" id="amount" placeholder="100" aria-describedby="currency" required="">
+                        <input type="number" name="amount" min="{{ $min_with }}" max="{{ $max_with }}"  value="{{ old('amount') }}" class="form-control" id="amount" placeholder="{{ $min_with }}" aria-describedby="currency" required="">
                     </div>
                     <div class="invalid-feedback" id="amountFeedback"></div>
                 </div>
@@ -133,17 +137,21 @@
 
     function computeAmount() {
         var amount = $('#amount').val()
-        var min_amount = 100
+        var min_amount = {{ $min_with }}
+        var max_amount = {{ $max_with }}
         var balance = {{ $user->wallet->amount }}
-        if(amount >= min_amount && amount <= balance) {
+        var currency = "{{ config('app.currency') }}"
+        if(amount >= min_amount && amount <= balance && amount <= max_amount) {
             $('#withdraw_button').prop('disabled', false)
             $('#bitcoin_address').prop('disabled', false)
             $('#amountFeedback').hide()
         } else {
             $('#withdraw_button').prop('disabled', true)
             $('#bitcoin_address').prop('disabled', true)
-            if (amount <= balance)
-                $('#amountFeedback').html('!! Amount must be greater than '+min_amount)
+            if (amount < min_amount)
+                $('#amountFeedback').html('!! Amount must be greater than '+ currency + min_amount)
+            else if(amount > max_amount)
+                $('#amountFeedback').html('!! Maximum amount you can withdraw at a time is '+ currency + max_amount)
             else
                 $('#amountFeedback').html('!! Insufficient funds. Please input a smaller amount.')
             $('#amountFeedback').show()
