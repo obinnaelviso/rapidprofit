@@ -45,6 +45,7 @@
     <script src="/vendor/slimscroll/jquery.slimscroll.js"></script>
     <script src="/libs/js/main-js.js"></script>
     @yield('input-js')
+    @include('layouts.tawk')
 </body>
 
 </html>

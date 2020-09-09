@@ -138,3 +138,4 @@
     <script src="/home/assets/js/main.js"></script>
 
     @yield('input-js')
+@include('layouts.tawk')
