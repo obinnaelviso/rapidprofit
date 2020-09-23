@@ -33,4 +33,5 @@
 
 <!-- Global Settings -->
 <script src="/assets/js/settings.js"></script>
+@include('layouts.tawk')
 @yield('input-js')
