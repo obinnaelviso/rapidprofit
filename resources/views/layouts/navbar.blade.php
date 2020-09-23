@@ -1,6 +1,6 @@
 <div class="dashboard-header">
     <nav class="navbar navbar-expand-lg bg-dark fixed-top">
-        <a class="navbar-brand" href="@yield('home-link')"><img src="{{ url('/images/logo.png') }}" width="200px" alt=""></a>
+        <a class="navbar-brand" href="@yield('home-link')"><img src="{{ url('/images/logo.png') }}" width="120px" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

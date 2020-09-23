@@ -1,4 +1,4 @@
-g@component('mail::message')
+@component('mail::message')
 # Hi {{ ucfirst($user->first_name) }},
 
 Your **{{ config('app.name') }}** account has been successfully credited.<br>

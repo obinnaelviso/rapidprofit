@@ -95,10 +95,10 @@ class UserController extends Controller
     }
 
     public function newDeposit(User $reg_user, Request $request) {
+
         $this->validate(request(), [
             'amount' => 'required|numeric'
         ]);
-
         $amount = $request->amount;
         if($request->receipt_id) {
             $receipt = PaymentReceipt::find($request->receipt_id);
@@ -115,7 +115,7 @@ class UserController extends Controller
         }
 
         $deposit = $reg_user->deposits()->create([
-            'amount' => $request->amount,
+            'amount' => $amount,
             'prev_bal' => $reg_user->wallet->amount,
             'new_bal' => $reg_user->wallet->amount + $amount,
             'status_id' => status(config('status.completed')),

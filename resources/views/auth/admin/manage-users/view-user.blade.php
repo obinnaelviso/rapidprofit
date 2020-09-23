@@ -113,7 +113,7 @@
             });
         }
     }
-    
+
     function newWithdrawal(withdraw_id) {
         $.ajax({
             type: "PUT",
