@@ -3625,13 +3625,16 @@ hero-btn {
     margin-bottom: 17px
 }
 
+.testimonial-area .testimonial-caption .testimonial-top-cap p::before {
+    content: '"'
+ }
 .testimonial-area .testimonial-caption .testimonial-top-cap p {
-    color: #a4acc3;
-    font-weight: 500;
+    color: #e0ecee;
+    font-weight: 900;
     line-height: 1.5;
     padding: 0 3px;
     margin-bottom: 50px;
-    font-size: 16px
+    font-size: 23px
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
