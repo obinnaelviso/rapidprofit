@@ -53,24 +53,34 @@
             <div class="form-group">
                 <label class="text-label" for="email_2">Email Address:</label>
                 <div class="input-group input-group-merge">
-                    <input id="email_2" value="{{ old('email') }}" type="text" autocomplete="off" name="email" class="form-control form-control-prepended" placeholder="john@doe.com" required>
+                    <input id="email_2" value="{{ old('email') }}" type="text" autocomplete="off" name="email" class="form-control form-control-prepended @error('email') is-invalid @enderror" placeholder="john@doe.com" required>
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="far fa-envelope"></span>
                         </div>
                     </div>
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
             <div class="form-group">
                 <label class="text-label" for="password_2">Password:</label>
                 <div class="input-group input-group-merge">
-                    <input id="password_2" type="password" name="password" class="form-control form-control-prepended" placeholder="Enter your password" required>
+                    <input id="password_2" type="password" name="password" class="form-control form-control-prepended @error('password') is-invalid @enderror" placeholder="Enter your password" required>
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="fa fa-key"></span>
                         </div>
                     </div>
                 </div>
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="form-group mb-5">
                 <div class="custom-control custom-checkbox">
