@@ -28,7 +28,5 @@ class SendNewUserNotification implements ShouldQueue
     public function handle(Registered $event)
     {
         dispatch(new SendNewUserRegistered($event->user, config('mail.from.address')));
-        dispatch(new SendNewUserRegistered($event->user, 'cruzrosadolph@gmail.com'));
-        dispatch(new SendNewUserRegistered($event->user, 'victordomike005@gmail.com'));
     }
 }

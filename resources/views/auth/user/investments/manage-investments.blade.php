@@ -1,25 +1,37 @@
-@extends('layouts.main')
-@section('title', 'Manage Investments - '.config('app.name'))
+@extends('layouts.dashboard.main')
+@section('title', 'Manage Investments')
 @section('manage-investments-active', 'active')
 @section('sidebar')
-@include('layouts.user-sidebar')
+@include('layouts.sidebar-user')
 @endsection
 
 @section('content')
-<div class="row mb-3">
-    <div class="col-md-12">
-        <h1>Manage Investments</h1>
-        <hr>
+<div class="container-fluid page__heading-container">
+    <div class="page__heading d-flex align-items-center">
+        <div class="flex">
+            {{-- <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav> --}}
+            <h1 class="m-0">Manage Investment Packages</h1>
+        </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        @include('layouts.alerts')
-        <div class="card">
+
+
+
+
+<div class="container-fluid page__container">
+    <div class="card card-form">
+        <div class="row no-gutters">
             <h3 class="card-header">Active Investments</h3>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover">
+            <div class="col-lg-12 card-body">
+
+                <div class="table-responsive border-bottom">
+
+                    <table class="table mb-0 thead-border-top-0">
                         <thead>
                             <tr>
                                 @php $i = 1; @endphp
@@ -53,23 +65,27 @@
                                     </tr>
                                 @endforeach
                             @else
-                                <h5 class="text-dark">Sorry, but no active investment running. Click on the link to <a href="{{ route('user.investments') }}">start an investment</a>.</h5 class="text-danger">
+                                <p class="text-muted text-uppercase">Sorry, but there are no active investments running. Click on the link to <a href="{{ route('user.investments') }}">start an investment</a>.</p>
                             @endif
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-<hr>
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
+
+<div class="container-fluid page__container">
+    <div class="card card-form">
+        <div class="row no-gutters">
             <h3 class="card-header">Completed Investments</h3>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover">
+            <div class="col-lg-12 card-body">
+
+                <div class="table-responsive border-bottom">
+
+
+                    <table class="table mb-0 thead-border-top-0">
                         <thead>
                             <tr>
                                 @php $i = 1; @endphp
@@ -103,14 +119,17 @@
                                     </tr>
                                 @endforeach
                             @else
-                                <h5 class="text-dark">No completed investments yet. Click on the link to <a href="{{ route('user.investments') }}">start an investment</a>.</h5 class="text-danger">
+                                <p class="text-muted text-uppercase">No completed investments yet. Click on the link to <a href="{{ route('user.investments') }}">start an investment</a>.</p>
                             @endif
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+@section('input-js')
 
 @endsection

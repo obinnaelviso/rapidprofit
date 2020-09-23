@@ -6,12 +6,12 @@
     <div class="slider-area ">
         <div class="slider-active">
             <!-- Single Slider -->
-            <div class="single-slider slider-height d-flex align-items-center">
+            <div class="single-slider slider-height d-flex  align-items-center">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-9 col-lg-9">
                             <div class="hero__caption">
-                                <h1 class="shadow-5">No.1 Top Fastest Earning Investment Platform.</h1>
+                                <h1 class="shadow-5">Welcome to the Fastest Growing Investment Platform</h1>
                             </div>
                            <a href="{{ route('register') }}" class="btn">Start Earning Today</a>
                         </div>
@@ -39,9 +39,7 @@
                 <div class="col-lg-6 col-md-12">
                     <!-- about-img -->
                     <div class="about-img ">
-                        <div class="about-font-img">
-                            <img src="/home/assets/img/hero/our-staffs.jpg" alt="">
-                        </div>
+                            <img src="/home/assets/img/hero/our-staffs.jpg" class="img-fluid" alt="">
                         {{-- <div class="about-back-img d-none d-lg-block">
                             <img src="assets/img/gallery/about1.png" alt="">
                         </div> --}}

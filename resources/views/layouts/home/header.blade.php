@@ -22,7 +22,7 @@
                             <div class="header-info-left">
                                 <ul>
                                     {{-- <li>Phone: +99 (0) 101 0000 888</li> --}}
-                                    <li>Email: support@rapidprofit.ltd</li>
+                                    <li>Email: {{ config('mail.from.address') }}</li>
                                 </ul>
                             </div>
                             <div class="header-info-right">
@@ -43,7 +43,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                                <a href="{{ route('index') }}"><img src="{{ url('/images/logo.png') }}" width="200px" alt="">
+                                <a href="{{ route('index') }}"><img src="{{ url('/images/logo.png') }}" width="150px" alt="">
                                 </a>
                             </div>
                         </div>
@@ -67,11 +67,7 @@
                                     @if(!Auth::guard('web')->check())
                                         <a href="{{ route('register') }}" class="btn header-btn">Register</a>
                                     @else
-                                        <a href="#" class="btn header-btn" onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">Logout</a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
+                                    <a href="{{ route('user.home') }}" class="btn header-btn">Dashboard</a>
                                     @endif
                                 </div>
                             </div>

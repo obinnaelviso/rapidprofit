@@ -77,6 +77,10 @@ class HomeController extends Controller
         return redirect($settings->telegram);
     }
 
+    public function new_home() {
+        return view('auth.user.profile-new');
+    }
+
     public function testEmail() {
         // $name = "Stella";
         // $subject = "You just got a bonus on your account";

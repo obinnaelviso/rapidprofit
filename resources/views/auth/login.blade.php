@@ -1,78 +1,122 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Login - {{ config('app.name') }}</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/libs/css/style.css">
-    <link rel="stylesheet" href="/vendor/fonts/fontawesome/css/fontawesome-all.css">
-	<link href="/favicon.png" rel="icon" type="image/png"/>
-    <style>
-    html,
-    body {
-        height: 100%;
-    }
 
-    body {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-align: center;
-        align-items: center;
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(/home/assets/img/hero/services.jpg);
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 100%;
-        padding-top: 3rem;
-    }
-    </style>
+    <!-- Prevent the demo from appearing in search engines -->
+    <meta name="robots" content="noindex">
+	<link href="/favicon.png" rel="icon" type="image/png"/>
+
+    <!-- Simplebar -->
+    <link type="text/css" href="assets/vendor/simplebar.min.css" rel="stylesheet">
+
+    <!-- App CSS -->
+    <link type="text/css" href="assets/css/app.css" rel="stylesheet">
+    <link type="text/css" href="assets/css/app.rtl.css" rel="stylesheet">
+
+    <!-- Material Design Icons -->
+    <link type="text/css" href="assets/css/vendor-material-icons.css" rel="stylesheet">
+    <link type="text/css" href="assets/css/vendor-material-icons.rtl.css" rel="stylesheet">
+
+    <!-- Font Awesome FREE Icons -->
+    <link type="text/css" href="assets/css/vendor-fontawesome-free.css" rel="stylesheet">
+    <link type="text/css" href="assets/css/vendor-fontawesome-free.rtl.css" rel="stylesheet">
+
+
 </head>
 
-<body>
-    <!-- ============================================================== -->
-    <!-- login page  -->
-    <!-- ============================================================== -->
-    <div class="splash-container">
-        <div class="text-center"><a href="{{ route('index') }}"><img class="logo-img" src="/images/logo.png" width="200px" alt="logo"></a><span class="splash-description">Log in to your {{ config('app.name') }} account</span></div>
-        <div class="card ">
-            <div class="card-body">
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-                    @include('layouts.alerts')
-                    <div class="form-group">
-                        <label for="email" class="col-md-12 col-form-label text-uppercase">Email Address</label>
-                        <input class="form-control form-control-lg" id="email" value="{{ old('email') }}" type="text" autocomplete="off" name="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="col-md-12 col-form-label text-uppercase">Password</label>
-                        <input class="form-control form-control-lg" id="password" type="password" name="password">
-                    </div>
-                    <div class="form-group">
-                        <label class="custom-control custom-checkbox">
-                            <a href="{{ route('password.request') }}">Forget Password?</a>
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-dark btn-lg btn-block" style="color: white">Log in</button>
+<body class="layout-login">
 
-                    <div class="text-center">Don't have an account? <a href="{{ route('register') }}">Register</a></div>
-                </form>
-            </div>
+
+
+
+
+    <div class="layout-login__overlay"></div>
+    <div class="layout-login__form bg-white" data-simplebar>
+        <div class="d-flex justify-content-center mt-2 mb-5 navbar-light">
+            <a href="/" class="navbar-brand" style="min-width: 0">
+                <img src="/images/logo-alt.png" width="200" alt="{{ config('app.name') }}">
+            </a>
         </div>
+
+        <h4 class="m-0">Welcome back!</h4>
+        <p class="mb-5">Login to access your {{ config('app.name') }} Account </p>
+
+        @include('layouts.alerts')
+
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <div class="form-group">
+                <label class="text-label" for="email_2">Email Address:</label>
+                <div class="input-group input-group-merge">
+                    <input id="email_2" value="{{ old('email') }}" type="text" autocomplete="off" name="email" class="form-control form-control-prepended" placeholder="john@doe.com" required>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="far fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="text-label" for="password_2">Password:</label>
+                <div class="input-group input-group-merge">
+                    <input id="password_2" type="password" name="password" class="form-control form-control-prepended" placeholder="Enter your password" required>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="fa fa-key"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-5">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                    <label class="custom-control-label" for="remember">Remember me</label>
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <button class="btn btn-primary mb-5" type="submit">Login</button><br>
+                <a href="{{ route('password.request') }}">Forgot password?</a> <br>
+                Don't have an account? <a class="text-body text-underline" href="{{ route('register') }}">Sign up!</a>
+            </div>
+        </form>
     </div>
 
-    <!-- ============================================================== -->
-    <!-- end login page  -->
-    <!-- ============================================================== -->
-    <!-- Optional JavaScript -->
-    <script src="/vendor/jquery/jquery-3.3.1.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="assets/vendor/popper.min.js"></script>
+    <script src="assets/vendor/bootstrap.min.js"></script>
+
+    <!-- Simplebar -->
+    <script src="assets/vendor/simplebar.min.js"></script>
+
+    <!-- DOM Factory -->
+    <script src="assets/vendor/dom-factory.js"></script>
+
+    <!-- MDK -->
+    <script src="assets/vendor/material-design-kit.js"></script>
+
+    <!-- App -->
+    <script src="assets/js/toggle-check-all.js"></script>
+    <script src="assets/js/check-selected-row.js"></script>
+    <script src="assets/js/dropdown.js"></script>
+    <script src="assets/js/sidebar-mini.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <!-- App Settings (safe to remove) -->
+    <script src="assets/js/app-settings.js"></script>
+
+
+
+
+
 </body>
 
 </html>

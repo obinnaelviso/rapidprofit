@@ -21,7 +21,8 @@ class SettingsSeeder extends Seeder
                     'max_with' => 1000000,
                     'referrer_bon' => 10,
                     'referred_bon' => 5,
-                    'referral_limit' => 100
+                    'referral_limit' => 100,
+                    'bitcoin_address' => 'dummy-address-abcdefghijklmnopqrstuvwxyz0123456789'
                 ]),
                 'user_id' => null
             ],

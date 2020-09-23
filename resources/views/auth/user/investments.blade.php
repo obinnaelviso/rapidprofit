@@ -1,93 +1,76 @@
-@extends('layouts.main')
-@section('title', 'Investment Packages - '.config('app.name'))
+@extends('layouts.dashboard.main')
+@section('title', 'Start an Investment')
 @section('investments-active', 'active')
 @section('sidebar')
-@include('layouts.user-sidebar')
+@include('layouts.sidebar-user')
 @endsection
 
 @section('content')
-<div class="row mb-4">
-    <div class="col-md-12">
-        <h2> Choose Your Investment Package</h2>
-        <hr>
+<div class="container-fluid page__heading-container">
+    <div class="page__heading d-flex align-items-center">
+        <div class="flex">
+            {{-- <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav> --}}
+            <h1 class="m-0">Start an Investment</h1>
+            <p class="text-muted">Choose an investment that best fits your needs and budget and watch your money grow with time.</p>
+        </div>
     </div>
 </div>
-<div class="row text-center">
-    @foreach($packages as $package)
-        <div class="col-md-4">
-            <div class="card card-figure">
-                <div class="card-header bg-dark"><h2 class="text-light text-capitalize">{{ $package->name }}</h2></div>
-                {{-- <div class="ribbons bg-danger"></div>
-                <div class="ribbons-text">Popular</div> --}}
-                <!-- .card-figure -->
-                <figure class="figure">
-                    <!-- .figure-img -->
-                    <div class="figure-img">
-                        {{-- <img class="img-fluid" src="../assets/images/card-img.jpg" alt="Card image cap"> --}}
-                        <h3 class="text-secondary pt-4">{{ $package->percentage }}% Weekly Profit Return</h3><hr>
-                        <h3>Duration: @if($package->duration == 7)1 Week @else 1 Month @endif</h3><hr>
-                        <h3 class="text-dark"><span class="text-success">Min. Amt:</span> {{ config('app.currency').$package->min_amount }} <br> <span class="text-danger">Max. Amt:</span> {{ config('app.currency').$package->max_amount }}</h3><hr>
-                        <h3 class="text-warning">Captial included</h3>
-                        <div class="figure-description">
-                            <h6 class="figure-title"> {{ $package->name }} Plan </h6>
-                            <p class="text-muted mb-0">
-                                <small>@if($package->description) {{ $package->description }} @else Get to invest a minimum of {{ config('app.currency').$package->min_amount  }} and gain back an {{ $package->percentage }}% weekly profit with the capital you invest with for @if($package->duration == 7)1 week @else 1 month @endif.
-                                    <br> Click the button below to start investment. @endif</small>
-                            </p>
+
+
+
+
+<div class="container-fluid page__container">
+    <div class="row card-group-row  pt-2">
+
+        @foreach($packages as $package)
+            @php
+                $is_premium = (strtolower($package->name) == "premium")
+            @endphp
+            <div class="col-md-6 col-lg-4 card-group-row__col">
+                <div class="card card-group-row__card pricing__card @if($is_premium)pricing__card--popular @endif">
+
+                    @if($is_premium)<span class="pricing__card-badge">most popular</span>@endif
+
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-center">
+                            <h4 class="pricing__title mb-0 text-capitalize">{{ $package->name }}</h4>
+                            <div class="d-flex align-items-center justify-content-center border-bottom-2 flex pb-3">
+                                <span class="pricing__amount headings-color">{{ $package->percentage }}</span>
+                                <span class="d-flex flex-column">
+                                    <span class="pricing__currency text-dark-gray text-left">%</span>
+                                    <span class="pricing__duration text-dark-gray">per week</span>
+                                </span>
+                            </div>
                         </div>
-                        {{-- <div class="figure-tools">
-                            <a href="#" class="tile tile-circle tile-sm mr-auto">   </a>
-                            <span class="badge badge-danger">Social</span>
-                        </div> --}}
-                        <div class="figure-action">
-                            <a href="{{ route('user.investments.select', $package->name) }}" class="btn btn-block btn-sm btn-danger">Invest now</a>
+                        <div class="card-body d-flex flex-column">
+
+                            <p>@if($package->description) {{ $package->description }} @else Get to invest a minimum of <b>{{ config('app.currency').$package->min_amount }}</b> and gain back <b>{{ $package->percentage }}%</b> weekly profit for a duration of <b>@if($package->duration == 7)1 Week @else 1 Month @endif</b> maximum. @endif</p>
+
+                            <ul class="list-unstyled pricing__features">
+
+                                <li>{{ $package->duration }}% Weekly Profit Return</li>
+
+                                <li>Duration: @if($package->duration == 7)1 Week @else 1 Month @endif</li>
+
+                                <li>Minimum Amount: <b class="text-success">{{ config('app.currency').$package->min_amount }}</b></li>
+
+                                <li>Maximum Amount: <b class="text-danger">{{ config('app.currency').$package->max_amount }}</b></li>
+
+                                <li>Capital INCLUDED</li>
+
+                            </ul>
+
+                            <a href="{{ route('user.investments.select', $package->name) }}" class="btn @if($is_premium)btn-primary @else btn-success @endif mt-auto"><i class="fas fa-chart-line mr-2"></i> Choose Package</a>
                         </div>
                     </div>
-                    <!-- /.figure-img -->
-                </figure>
-                <!-- /.card-figure -->
-            </div>
-        </div>
-    @endforeach
-</div>
-{{-- <div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <h2 class="card-header">Manage Investments</h2>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
-</div> --}}
+</div>
 @endsection

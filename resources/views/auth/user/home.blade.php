@@ -1,155 +1,145 @@
-@extends('layouts.main')
-@section('title', 'Your Dashboard - '.config('app.name'))
+@extends('layouts.dashboard.main')
+@section('title', 'My Dashboard')
 @section('home-active', 'active')
 @section('sidebar')
-@include('layouts.user-sidebar')
+@include('layouts.sidebar-user')
 @endsection
 
 @section('content')
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-12">
-        <div class="page-header">
-            <h2 class="pageheader-title">Home</h2>
-            {{-- <p class="pageheader-text">Get to manage all your wallets in one place</p> --}}
-            <hr>
-            @include('layouts.alerts')
+<div class="container-fluid page__heading-container">
+    <div class="page__heading d-flex align-items-center">
+        <div class="flex">
+            {{-- <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav> --}}
+            <h1 class="m-0">Dashboard</h1>
         </div>
     </div>
 </div>
 
-<div class="row mb-3">
-    <div class="col-md-3 col-xs-6">
-        <div class="card border-3 border-top border-top-primary">
-            <div class="card-body">
-                <h5 class="text-muted">YOUR BALANCE</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ config('app.currency').$user->wallet->amount }}</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-xs-6">
-        <div class="card border-3 border-top border-top-primary">
-            <div class="card-body">
-                <h5 class="text-muted">BONUS</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ config('app.currency').$user->wallet->bonus }}</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <a href="{{ route('user.deposit') }}" class="btn btn-danger btn-block">Make Deposit</a>
-        <a href="{{ route('user.withdraw') }}" class="btn btn-success btn-block">Withdraw Funds</a>
-        <a href="{{ route('user.investments') }}" class="btn btn-primary btn-block">Start an Investment Plan Today!</a>
-    </div>
-</div>
 
-<hr>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="alert alert-info text-center" role="alert">
-          <h4 class="alert-heading">Earn bonus when users register with your referral code: <b id="ref_code" onclick="copyAddress('ref_code')">{{ $user->referral_code }}</b></h4>
-          <b>or by sharing link:</b> <h4><a href="javascript:void(0)" id="ref_address" onclick="copyAddress('ref_address')">{{ route('referral', $user->referral_code) }}</a></h4>
-          <p class="mb-0">click link to copy <span class="ti-cut"></span></p>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-12">
-        <div class="page-header">
-            <h2 class="pageheader-title">Statistics</h2>
-            {{-- <p class="pageheader-text">Get to manage all your wallets in one place</p> --}}
-            <hr>
-        </div>
-    </div>
-</div>
 
-<div class="row mb-3">
-    <div class="col-md-4">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Active Investments</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $active_investments->count() }}</h1>
+<div class="container-fluid page__container">
+
+    <div class="alert alert-soft-info d-flex align-items-center card-margin" role="alert">
+        <i class="material-icons mr-3">error</i>
+        <div class="text-body"><strong>You can also earn by  inviting people using your referral link:</strong> <a href="javascript::void(0)" id="ref_code" onclick="copyAddress('ref_code')">{{ route('referral', $user->referral_code ?: 'ABCDEFG12') }}</a><small> ** click to copy link</small></div>
+    </div>
+
+    <div class="row card-group-row">
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Account Balance</div>
+                    <div class="text-amount">{{ config('app.currency').$user->wallet->amount }}</div>
                 </div>
+                <div><i class="material-icons icon-muted icon-40pt ml-3">monetization_on</i></div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Total Investments</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $user->investments->count() }}</h1>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Referral Bonus</div>
+                    <div class="text-amount">{{ config('app.currency').$user->wallet->bonus }}</div>
                 </div>
+                <div><i class="fas fa-piggy-bank icon-muted icon-40pt ml-3"></i></div>
             </div>
         </div>
+        <div class="col-lg-4 col-md-12">
+            <button type="button" class="btn btn-block btn-outline-danger"><i class="fas fa-wallet icon-20pt mr-2"></i> Make a Deposit</button>
+            <button type="button" class="btn btn-block btn-outline-success"><i class="fas fa-hand-holding-usd icon-20pt mr-2"></i>Withdraw Funds</button>
+            <button type="button" class="btn btn-block bg-lg btn-primary"><i class="fas fa-chart-line icon-20pt mr-2"></i>Start an Investment</button>
+        </div>
     </div>
-    @php
-        $referralSum = $user->wallet->bonus;
-    @endphp
-    <div class="col-md-4">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Referral Bonus</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ config('app.currency').$referralSum }}</h1>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-dark-gray d-flex align-items-center mt-3">
+                <i class="fas fa-tachometer-alt icon-muted mr-2"></i>
+                <strong>User Statistics</strong>
+            </p>
+        </div>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Active Investments</div>
+                    <div class="text-amount">{{ $active_investments->count() }}</div>
+                </div>
+                <div><i class="fas fa-chart-line icon-muted icon-40pt ml-2"></i></div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Total Investments</div>
+                    <div class="text-amount">{{ $user->investments->count() }}</div>
+                </div>
+                <div><i class="fas fa-chart-line icon-muted icon-40pt ml-2"></i></div>
+            </div>
+        </div>
+        @php
+            $referralSum = $user->wallet->bonus;
+        @endphp
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Referral Bonus</div>
+                    <div class="text-amount">{{ config('app.currency').$referralSum }}</div>
                     @if($referralSum >= $referral_limit)
-                        <button class="btn btn-success btn-sm" onclick="event.preventDefault();
-                        document.getElementById('transfer-bonus').submit();">{{ config('app.currency') }}Transfer Bonus</button>
+                        <button type="button" class="btn btn-block btn-success btn-sm mt-3" onclick="event.preventDefault();
+                        document.getElementById('transfer-bonus').submit();"><i class="fas fa-coins icon-20pt mr-2"></i>Transfer Bonus</button>
+                        <form id="transfer-bonus" action="{{ route('user.transfer-bonus') }}" method="POST" style="display: none;">
+                            @csrf @method('put')
+                        </form>
                     @endif
-                    <form id="transfer-bonus" action="{{ route('user.transfer-bonus') }}" method="POST" style="display: none;">
-                        @csrf @method('put')
-                    </form>
                 </div>
+                <div><i class="fas fa-coins icon-muted icon-40pt ml-2"></i></div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Total Amount Invested</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ config('app.currency').$user->investments->sum('amount') }}</h1>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Total Amount Invested</div>
+                    <div class="text-amount">{{ config('app.currency').$user->investments->sum('amount') }}</div>
                 </div>
+                <div><i class="fas fa-dollar-sign icon-muted icon-40pt ml-2"></i></div>
             </div>
         </div>
-    </div>
-    @php
-        $completed_status_id = status(config('status.completed'));
-        $total_invested = $user->investments->where('status_id', $completed_status_id)->sum('amount');
-        $total_payouts = $user->payouts()->where('status_id', $completed_status_id)->sum('amount');
-        $total_profit = $total_payouts-$total_invested;
-    @endphp
-    <div class="col-md-4">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Total Profit Earned</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ config('app.currency').$total_profit }}</h1>
+        @php
+            $completed_status_id = status(config('status.completed'));
+            $total_invested = $user->investments->where('status_id', $completed_status_id)->sum('amount');
+            $total_payouts = $user->payouts()->where('status_id', $completed_status_id)->sum('amount');
+            $total_profit = $total_payouts-$total_invested;
+        @endphp
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Total Profit Earned</div>
+                    <div class="text-amount">{{ config('app.currency').$total_profit }}</div>
                 </div>
+                <div><i class="fas fa-money-bill-wave icon-muted icon-40pt ml-2"></i></div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Total Payouts</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ config('app.currency').$total_payouts }}</h1>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Total Payouts</div>
+                    <div class="text-amount">{{ config('app.currency').$total_payouts }}</div>
                 </div>
+                <div><i class="material-icons icon-muted icon-40pt ml-3">trending_up</i></div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Total Pending Payouts</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ config('app.currency').$user->payouts()->where('status_id', status(config('status.pending')))->sum('amount') }}</h1>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Total Pending Payouts</div>
+                    <div class="text-amount">{{ config('app.currency').$user->payouts()->where('status_id', status(config('status.pending')))->sum('amount') }}</div>
                 </div>
+                <div><i class="material-icons icon-muted icon-40pt ml-3">update</i></div>
             </div>
         </div>
     </div>
@@ -158,31 +148,32 @@
 @section('input-js')
 <script>
     function copyAddress(id) {
-    /* Get the text field */
-    var copyText = document.getElementById(id);
+        /* Get the text field */
+        var copyText = document.getElementById(id);
 
-    /* Select the text field */
-    selectText(id)
-    // copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+        /* Select the text field */
+        selectText(id)
+        // copyText.setSelectionRange(0, 99999); /*For mobile devices*/
 
-    /* Copy the text inside the text field */
-    document.execCommand("copy");
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
 
-    /* Alert the copied text */
-    alert("Text copied to clipboard!");
-}
-
-function selectText(containerid) {
-    if (document.selection) { // IE
-        var range = document.body.createTextRange();
-        range.moveToElementText(document.getElementById(containerid));
-        range.select();
-    } else if (window.getSelection) {
-        var range = document.createRange();
-        range.selectNode(document.getElementById(containerid));
-        window.getSelection().removeAllRanges();
-        window.getSelection().addRange(range);
+        /* Alert the copied text */
+        alert("Text copied to clipboard!");
     }
-}
+
+    function selectText(containerid) {
+        if (document.selection) { // IE
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(containerid));
+            range.select();
+        } else if (window.getSelection) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(containerid));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+        }
+    }
+
 </script>
 @endsection

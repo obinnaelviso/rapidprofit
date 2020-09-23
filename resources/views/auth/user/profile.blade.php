@@ -1,38 +1,45 @@
-@extends('layouts.main')
-@section('title', 'Profile - '.config('app.name'))
+@extends('layouts.dashboard.main')
+@section('title', 'Profile')
 @section('profile-active', 'active')
 @section('sidebar')
-@include('layouts.user-sidebar')
+@include('layouts.sidebar-user')
 @endsection
 
 @section('content')
-<div class="row mb-3">
-    <div class="col-md-12">
-        <div class="section-block" id="select">
-            <h1 class="section-title">Profile</h1>
-            <p>Modify your profile details, change password and contact admin to change email address.</p>
+<div class="container-fluid page__heading-container">
+    <div class="page__heading d-flex align-items-center">
+        <div class="flex">
+            {{-- <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav> --}}
+            <h1 class="m-0">User Profile</h1>
         </div>
-        <hr>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        @include('layouts.alerts')
-        {{-- <div class="alert alert-info">
-            <i class="fa fa-arrow-right" aria-hidden="true"></i> <b>Note:</b> You cannot modify your Email Address.<br>
-        </div> --}}
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <form class="splash-container" method="POST" action="{{ route('user.profile') }}">
-            @csrf @method('put')
-            <div class="card">
-                <div class="card-body">
+
+
+
+
+<div class="container-fluid page__container">
+    @include('layouts.alerts')
+    <div class="card card-form">
+        <div class="row no-gutters">
+            <div class="col-lg-4 card-body">
+                <p><strong class="headings-color text-uppercase text-danger">Edit Your Profile</strong></p>
+                <p class="text-muted mb-2">Leave password field empty if you don't want to change your password!</p>
+                <p class="text-muted mb-0">You cannot change your email address after registration. Contact admin for more information!</p>
+            </div>
+            <div class="col-lg-8 card-form__body card-body">
+
+                <form class="splash-container" method="POST" action="{{ route('user.profile') }}">
+                    @csrf @method('put')
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="first_name" class="col-md-12 col-form-label text-uppercase">First Name</label>
+                                <label for="first_name">First Name</label>
                                 <input class="form-control @error('first_name') is-invalid @enderror" type="text" name="first_name" value="{{ $user->first_name ?: old('first_name') }}" placeholder="e.g John" required>
                                 @error('first_name')
                                     <span class="invalid-feedback" role="alert">
@@ -43,7 +50,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="last_name" class="col-md-12 col-form-label text-uppercase">Last Name</label>
+                                <label for="last_name">Last Name</label>
                                 <input class="form-control @error('last_name') is-invalid @enderror" type="text" name="last_name" value="{{ $user->last_name ?: old('last_name') }}" placeholder="e.g Doe" required>
                                 @error('last_name')
                                     <span class="invalid-feedback" role="alert">
@@ -56,7 +63,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="address" class="col-md-12 col-form-label text-uppercase">Address</label>
+                                <label for="address">Address</label>
                                 <input class="form-control" value="{{ $user->address ?: old('address') }}" type="text" name="address" placeholder="e.g No 3. Freedom Street, LA" required>
                                 @error('address')
                                     <span class="invalid-feedback" role="alert">
@@ -67,7 +74,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="country" class="col-md-12 col-form-label text-uppercase">Country</label>
+                                <label for="country">Country</label>
                                 <select style="cursor: pointer;" class="form-control mb-4" name="country" required>
                                         <option value="">Select Country</option>
                                         <option>Afghanistan</option>
@@ -326,8 +333,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="phone" class="col-md-12 col-form-label text-uppercase">Phone Number</label>
-                                <input class="form-control" type="text" name="phone" placeholder="e.g +1234567890" value="{{ $user->phone ?: old('phone') }}" required>
+                                <label for="phone">Phone Number</label>
+                                <input class="form-control" type="text" name="phone" placeholder="e.g +634567890" value="{{ $user->phone ?: old('phone') }}" required>
                             </div>
                             @error('phone')
                                 <span class="invalid-feedback" role="alert">
@@ -337,7 +344,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="email" class="col-md-12 col-form-label text-uppercase">Email Address</label>
+                                <label for="email">Email Address</label>
                                 <input class="form-control" type="email" name="email" value="{{ $user->email ?: old('email') }}" readonly>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -350,7 +357,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="password" class="col-md-12 col-form-label text-uppercase">Old Password</label>
+                                <label for="password">Old Password</label>
                                 <input class="form-control  @error('password') is-invalid @enderror" id="pass1" name="old_password" type="password" placeholder="Type in your old password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -361,7 +368,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="password" class="col-md-12 col-form-label text-uppercase">New Password</label>
+                                <label for="password">New Password</label>
                                 <input class="form-control  @error('password') is-invalid @enderror" id="pass1" name="password" type="password" placeholder="Please type in any 8-digit alphanumeric characters with uppercase and symbols">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -372,7 +379,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="password-confirmation" class="col-md-12 col-form-label text-uppercase">Confirm Password</label>
+                                <label for="password-confirmation">Confirm Password</label>
                                 <input class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" type="password" placeholder="Retype New Password">
                                 @error('password_confirmation')
                                     <span class="invalid-feedback" role="alert">
@@ -383,17 +390,17 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="referral_code" class="col-md-12 col-form-label text-uppercase">Referral Code</label>
+                                <label for="referral_code">Referral Code</label>
                                 <input class="form-control" type="text" name="referral_code" value="{{ $user->referral_code }}" readonly placeholder="Referral Code (if any)">
                             </div>
                         </div>
                     </div>
                     <div class="form-group pt-2">
-                        <button class="btn btn-block btn-dark" type="submit" style="color: white">Edit Profile</button>
+                        <button class="btn btn-block btn-primary" type="submit"><i class="material-icons mr-2">account_circle</i> Update Profile</button>
                     </div>
-                </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 @endsection

@@ -1,95 +1,94 @@
-@extends('layouts.main')
-@section('title', 'Withdraw Funds - '.config('app.name'))
+@extends('layouts.dashboard.main')
+@section('title', 'Withdraw Funds')
 @section('withdraw-active', 'active')
 @section('sidebar')
-@include('layouts.user-sidebar')
+@include('layouts.sidebar-user')
 @endsection
 
 @section('content')
-<div class="row mb-3">
-    <div class="col-md-12">
-        <div class="section-block" id="select">
-            <h1 class="section-title">Withdraw Funds</h1>
-            <p>Make a withdraw request and get creditted almost instant (max time of 1hr)</p>
-        </div>
-        <hr>
-    </div>
-    <div class="col-md-12">
-        @include('layouts.alerts')
-        <div class="alert alert-info">
-            <i class="fa fa-arrow-right" aria-hidden="true"></i> You can withdraw a minimum of <b>$100</b>.<br>
-            <i class="fa fa-arrow-right" aria-hidden="true"></i> All withdrawal requests are processed within 0-60 minutes. <br>
-            <i class="fa fa-arrow-right" aria-hidden="true"></i> No amount is charged per withdrawal.
+<div class="container-fluid page__heading-container">
+    <div class="page__heading d-flex align-items-center">
+        <div class="flex">
+            {{-- <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav> --}}
+            <h1 class="m-0">Withdraw Funds</h1>
         </div>
     </div>
 </div>
 
-<div class="row mb-5">
-    <div class="col-md-12">
-        <form method="POST" action="{{ route('user.withdraw.funds') }}">
-            @csrf
-            <div class="form-row">
-                <div class="col-md-6">
-                    <h4>Balance:</h4>
-                </div>
-                <div class="col-md-6">
-                    <h1 class="text-right">{{ config('app.currency').$user->wallet->amount }}</h1>
-                </div>
-            </div><hr>
-            @php
-                $min_with = array_key_exists('min_with', $general) ?$general->min_with:100;
-                $max_with = array_key_exists('max_with', $general) ?$general->max_with:1000000;
-            @endphp
-            <div class="form-row">
-                <div class="col-md-6">
-                    <h3>Amount (minimum: {{ config('app.currency').$min_with }})</h3>
-                </div>
-                <div class="col-md-6 text-right">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="currency">{{ config('app.currency') }}</span>
+
+
+<div class="container-fluid page__container">
+    <div class="alert alert-soft-info d-flex align-items-center card-margin" role="alert">
+        <i class="material-icons mr-3">error</i>
+        <div class="text-body">
+            <i class="fas fa-arrow-right mr-3" aria-hidden="true"></i> You can withdraw a minimum of <b>$100</b>.<br>
+            <i class="fas fa-arrow-right mr-3" aria-hidden="true"></i> All withdrawal requests are processed within 0-60 minutes. <br>
+            <i class="fas fa-arrow-right mr-3" aria-hidden="true"></i> No amount is charged per withdrawal.
+        </div>
+    </div>
+
+    <div class="card card-form">
+        <div class="row no-gutters">
+            <div class="col-lg-4 card-body">
+                <p><strong class="headings-color text-uppercase text-danger">Note that all funds are processed within an hour. Thanks!!!</strong></p>
+                <p class="text-muted mb-0">Fill in the form to process withdrawal</p>
+            </div>
+            <div class="col-lg-8 card-form__body card-body">
+                <form method="POST" action="{{ route('user.withdraw.funds') }}">
+                    @csrf
+                    @php
+                        $min_with = array_key_exists('min_with', $general) ?$general->min_with:100;
+                        $max_with = array_key_exists('max_with', $general) ?$general->max_with:1000000;
+                    @endphp
+                    <div class="form-row">
+                        <div class="col-md-12 mb-4">
+                            <label for="amount">Amount (minimum: {{ config('app.currency').$min_with }})</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="currency">{{ config('app.currency') }}</span>
+                                </div>
+                                <input type="number" name="amount" min="{{ $min_with }}" max="{{ $max_with }}"  value="{{ old('amount') }}" class="form-control" id="amount" placeholder="{{ $min_with }}" aria-describedby="currency" required="">
+                            </div>
+                            <div class="invalid-feedback" id="amountFeedback"></div>
                         </div>
-                        <input type="number" name="amount" min="{{ $min_with }}" max="{{ $max_with }}"  value="{{ old('amount') }}" class="form-control" id="amount" placeholder="{{ $min_with }}" aria-describedby="currency" required="">
                     </div>
-                    <div class="invalid-feedback" id="amountFeedback"></div>
-                </div>
-            </div><hr>
-            <div class="form-row">
-                <div class="col-md-6">
-                    <h4>Withdrawal Method:</h4>
-                </div>
-                <div class="col-md-6">
-                    <label class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" name="withdraw_method" value="bitcoin" checked="" class="custom-control-input"><span class="custom-control-label"><img src="/images/payments/bitcoin.png" alt="Withdraw to Bitcoin Address" width="100px"></span>
-                    </label>
-                </div>
-            </div><hr>
-            <div class="form-row mb-3">
-                <div class="col-md-6">
-                    <h4>Enter Bitcoin Address:</h4>
-                </div>
-                <div class="col-md-6">
-                    <input type="text" name="bitcoin_address" min="100" disabled value="{{ old('bitcoin_address') }}" class="form-control" id="bitcoin_address" placeholder="e.g 16oEfPvNr9RL2otUVPrQtpzQPCfgXjk5cr" required="">
-                </div>
+                    <div class="form-row">
+                        <div class="col-md-3">
+                            <label for="withdraw_method">SELECT YOUR WITHDRAWAL METHOD:</label>
+                            <label class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" name="withdraw_method" value="bitcoin" checked="" class="custom-control-input"><span class="custom-control-label"><img src="/images/payments/bitcoin.png" alt="Withdraw to Bitcoin Address" width="100px"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <label for="bitcoin_address">Enter Bitcoin Address:</label>
+                            <input type="text" name="bitcoin_address" min="100" disabled value="{{ old('bitcoin_address') }}" class="form-control" id="bitcoin_address" placeholder="e.g 16oEfPvNr9RL2otUVPrQtpzQPCfgXjk5cr" required="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary btn-block" id="withdraw_button" disabled type="submit"><i class="fas fa-hand-holding-usd mr-2"></i> Withdraw</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <hr>
-            <div class="form-row">
-                <div class="col-md-12">
-                    <button class="btn btn-primary btn-block" id="withdraw_button" disabled type="submit">Submit</button>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
 @if($withdrawals->count() > 0)
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <h3 class="card-header">Pending Withdrawals</h3>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover">
+<div class="container-fluid page__container">
+    <div class="card card-form">
+        <div class="row no-gutters">
+            <h3 class="card-header">Active Investments</h3>
+            <div class="col-lg-12 card-body">
+
+                <div class="table-responsive border-bottom">
+
+                    <table class="table mb-0 thead-border-top-0">
                         <thead>
                             <tr>
                                 @php $i = 1; @endphp
