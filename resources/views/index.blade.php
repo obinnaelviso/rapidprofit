@@ -109,7 +109,7 @@
                                 <img src="/images/stocks/adidas.svg" alt="adidas" class="img-fluid" width="100">
                             </div>
                             <div class="col-md-3 mb-3 col-6">
-                                <img src="/images/stocks/amazon.svg.web" alt="amazon" class="img-fluid" width="100">
+                                <img src="/images/stocks/amazon.svg.png" alt="amazon" class="img-fluid pt-5" width="170">
                             </div>
                             <div class="col-md-3 mb-3 col-6">
                                 <img src="/images/stocks/amd.svg" alt="amd" class="img-fluid" width="100">
