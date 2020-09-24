@@ -31,7 +31,7 @@
             <i class="fas fa-arrow-right mr-3" aria-hidden="true"></i> No amount is charged per withdrawal.
         </div>
     </div>
-
+    @include('layouts.alerts')
     <div class="card card-form">
         <div class="row no-gutters">
             <div class="col-lg-4 card-body">

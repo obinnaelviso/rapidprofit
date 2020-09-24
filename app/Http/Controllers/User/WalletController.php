@@ -117,7 +117,7 @@ class WalletController extends Controller
                     ->notify(new DefaultAdmin("New Withdrawal Request",
                     "**".ucfirst($user->first_name).' ('.$user->email.")** just made a new withdrawal request for **".config('app.currency').$request->amount."**. Click the button below to process request: "));
 
-        return back()->with('warning', 'Please wait! Your withdrawal is being processed...');
+        return back()->with('warning', 'Please wait while your withdrawal request is being processed...');
     }
 
     public function withdrawCancel(Withdrawal $withdrawal) {
