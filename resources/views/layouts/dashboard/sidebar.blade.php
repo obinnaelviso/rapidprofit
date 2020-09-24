@@ -7,22 +7,25 @@
                         <img src="/assets/images/avatar/avatar.svg" alt="avatar" class="avatar-img rounded-circle">
                     </span>
                     <span class="flex d-flex flex-column">
-                        <strong>{{ strtoupper(Auth::user()->first_name.' '.Auth::user()->last_name) }}</strong>
+                        <strong>{{ ucfirst(Auth::user()->first_name.' '.Auth::user()->last_name) }}</strong>
                     </span>
                 </a>
                 <div class="dropdown ml-auto">
                     <a href="#" data-toggle="dropdown" data-caret="false" class="text-muted"><i class="material-icons">more_vert</i></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <div class="dropdown-item-text dropdown-item-text--lh">
-                            <div><strong>Adrian Demian</strong></div>
-                            <div>@adriandemian</div>
+                            <div><strong>{{ ucfirst(Auth::user()->first_name.' '.Auth::user()->last_name) }}</strong></div>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item active" href="index.html">Dashboard</a>
-                        <a class="dropdown-item" href="profile.html">My profile</a>
-                        <a class="dropdown-item" href="edit-account.html">Edit account</a>
+                        <a class="dropdown-item @yield('home-active')" href="{{ route('user.home') }}">Dashboard</a>
+                        <a class="dropdown-item @yield('manage-investments-active')" href="{{ route('user.investments.manage') }}">My Investments</a>
+                        <a class="dropdown-item @yield('profile-active')" href="{{ route('user.profile') }}">My profile</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="javascript::void(0)" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </div>
             </div>

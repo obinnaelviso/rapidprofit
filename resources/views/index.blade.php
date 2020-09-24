@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-xl-9 col-lg-9">
                             <div class="hero__caption">
-                                <h1 class="shadow-5">Welcome to the Fastest Growing Investment Platform</h1>
+                                <h1 class="shadow-5">Welcome to the Fastest Growing Stock Trading Investment Platform</h1>
                             </div>
                            <a href="{{ route('register') }}" class="btn">Start Earning Today</a>
                         </div>
@@ -28,11 +28,15 @@
                     <div class="about-caption">
                         <!-- Section Tittle -->
                         <div class="section-tittle">
-                            <span>About {{ config('app.name') }}</span>
-                            <h2 class="">No. 1 Fastest Growing Crypto Investment Company In The World</h2>
+                            <span>Why choose {{ config('app.name') }}?</span>
+                            <h2 class="">No. 1 Fastest Growing Stock Trading Investment Company In The World</h2>
                         </div>
-                        <p>Are you looking for the highest returns on your investments? {{ config('app.name') }} - a fully automated online investment platform is a top secured and profitable option for you. Part of {{ config('app.name') }} – the team of professional traders focusing mainly on Bitcoin and other cryptocurrencies trading over multiple Exchanges and markets. Thanks to the extraordinary diversification of our finances, we can deliver steady returns for our investors.</p>
-                        <p>Headquartered in London in 2019, {{ config('app.name') }} is already becoming the Panam's fastest-growing FinTech company. Our name is synonymous with productive and profitable trading solutions where our investors need little to no trading experience at all. With {{ config('app.name') }}, investors choose one of our three simple investment designs, make a deposit and sit back while our experts take the control. {{ config('app.name') }} official website is fully automated. Our clients can enjoy the first time experience. If you are looking for a steady and secure investment platform, then {{ config('app.name') }} is the best option available right now. Join {{ config('app.name') }} today and let our professional service help you succeed in this volatile crypto markets!.</p>
+                        <p>We trade both currency pairs and commodities in the live market five(5) days a week with our group of experienced traders and market analysts in order to maximize our investors profit. After years of professional trading.</p>
+
+                        <p>{{ config('app.name') }} we trade both currency pairs and commodities in the live market five(5) days a week with our group of experienced traders and market analysts in order to maximize our investors profit. After years of professional trading.</p>
+                        <p>Having all the necessary features for professionals, our trading platform is easily accessible even for newcomers!</p>
+                        {{-- <p>Are you looking for the highest returns on your investments? {{ config('app.name') }} - a fully automated online investment platform is a top secured and profitable option for you. Part of {{ config('app.name') }} – the team of professional traders focusing mainly on Bitcoin and other cryptocurrencies trading over multiple Exchanges and markets. Thanks to the extraordinary diversification of our finances, we can deliver steady returns for our investors.</p> --}}
+                        {{-- <p>Headquartered in London in 2019, {{ config('app.name') }} is already becoming the Panam's fastest-growing FinTech company. Our name is synonymous with productive and profitable trading solutions where our investors need little to no trading experience at all. With {{ config('app.name') }}, investors choose one of our three simple investment designs, make a deposit and sit back while our experts take the control. {{ config('app.name') }} official website is fully automated. Our clients can enjoy the first time experience. If you are looking for a steady and secure investment platform, then {{ config('app.name') }} is the best option available right now. Join {{ config('app.name') }} today and let our professional service help you succeed in this volatile crypto markets!.</p> --}}
                         <a href="{{ route('register') }}" class="btn">Find Out More</a>
                     </div>
                 </div>
@@ -57,7 +61,7 @@
                     <div class="section-tittle text-center mb-80">
                         <span>What we have for you</span>
                         <h2>OUR INVESTMENT PACKAGES</h2>
-                        <p>{{ config('app.name') }} presents you with the most comfortable investment environment. {{ config('app.name') }} focuses mainly on crypto trading, especially types of crypto trade systems such as Lending and Leverage trading. The Portfolio will be taken care of by the right minds and skills and don't worry. We've got you covered!</p>
+                        <p>{{ config('app.name') }} presents you with the most comfortable investment environment. {{ config('app.name') }} focuses mainly on stock trading, especially types of stock trade systems such as Lending and Leverage trading. The Portfolio will be taken care of by the right minds and skills and don't worry. We've got you covered!</p>
                     </div>
                 </div>
             </div>
@@ -90,6 +94,47 @@
         </div>
     </section>
     <!-- Categories Area End -->
+    <!--? Categories Area Start -->
+    <div class="categories-area mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle text-center mb-80">
+                        {{-- <span>What we have for you</span> --}}
+                        <h2>TRADED STOCKS</h2>
+                        <p>Below are a rundown of {{ config('app.name') }}'s traded stocks in the market.</p>
+                        <div class="row">
+                            <div class="col-md-3 mb-3 col-6">
+                                <img src="/images/stocks/adidas.svg" alt="adidas" class="img-fluid" width="100">
+                            </div>
+                            <div class="col-md-3 mb-3 col-6">
+                                <img src="/images/stocks/amazon.svg.web" alt="amazon" class="img-fluid" width="100">
+                            </div>
+                            <div class="col-md-3 mb-3 col-6">
+                                <img src="/images/stocks/amd.svg" alt="amd" class="img-fluid" width="100">
+                            </div>
+                            <div class="col-md-3 mb-3 col-6">
+                                <img src="/images/stocks/apple.svg" alt="apple" class="img-fluid" width="100">
+                            </div>
+                            <div class="col-md-3 mb-3 col-6">
+                                <img src="/images/stocks/facebook.svg" alt="facebook" class="img-fluid" width="100">
+                            </div>
+                            <div class="col-md-3 mb-3 col-6">
+                                <img src="/images/stocks/netflix.svg" alt="netflix" class="img-fluid" width="100">
+                            </div>
+                            <div class="col-md-3 mb-3 col-6">
+                                <img src="/images/stocks/nike.svg" alt="nike" class="img-fluid" width="100">
+                            </div>
+                            <div class="col-md-3 mb-3 col-6">
+                                <img src="/images/stocks/tesla.svg" alt="tesla" class="img-fluid" width="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="categories-area section-padding30 services-bg">
         <div class="container">
@@ -155,7 +200,7 @@
                         </div>
                         <div class="cat-cap">
                             <h5><a href="#" class="text-warning">PROFESSIONAL TEAMS</a></h5>
-                            <p class="text-white">Our Portfolio is diversified and taken care of by the most skilled crypto analyst and traders.</p>
+                            <p class="text-white">Our Portfolio is diversified and taken care of by the most skilled stock analyst and traders.</p>
                         </div>
                     </div>
                 </div>
@@ -330,12 +375,66 @@
             </div>
         </div>
     </div>
+
+    <!--? Categories Area Start -->
+    <div class="categories-area mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle text-center mb-80">
+                        {{-- <span>What we have for you</span> --}}
+                        <h2>OUR AFFILIATES</h2>
+                        {{-- <p>{{ config('app.name') }} presents you with the most comfortable investment environment. {{ config('app.name') }} focuses mainly on crypto trading, especially types of crypto trade systems such as Lending and Leverage trading. The Portfolio will be taken care of by the right minds and skills and don't worry. We've got you covered!</p> --}}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="owl-carousel owl-theme">
+                                    <img src="/images/affiliates/360.jpg" alt="360">
+                                    <img src="/images/affiliates/adara.png" alt="adara">
+                                    <img src="/images/affiliates/artis.png" alt="artis">
+                                    <img src="/images/affiliates/bar.png" alt="bar">
+                                    <img src="/images/affiliates/bg.jpg" alt="bg">
+                                    <img src="/images/affiliates/black.jpg" alt="black">
+                                    <img src="/images/affiliates/Brunel.jpg" alt="Brunel">
+                                    <img src="/images/affiliates/cognitive.png" alt="cognitive">
+                                    <img src="/images/affiliates/confux.jpg" alt="confux">
+                                    <img src="/images/affiliates/cook.jpg" alt="cook">
+                                    <img src="/images/affiliates/ela.png" alt="ela">
+                                    <img src="/images/affiliates/elgin.jpg" alt="elgin">
+                                    <img src="/images/affiliates/engild.jpg" alt="engild">
+                                    <img src="/images/affiliates/eversky.jpg" alt="eversky">
+                                    <img src="/images/affiliates/gesher.png" alt="gesher">
+                                    <img src="/images/affiliates/Key.jpg" alt="Key">
+                                    <img src="/images/affiliates/lane.jpg" alt="lane">
+                                    <img src="/images/affiliates/newLegacy.jpg" alt="newLegacy">
+                                    <img src="/images/affiliates/newlight.png" alt="newlight">
+                                    <img src="/images/affiliates/Present.jpg" alt="Present">
+                                    <img src="/images/affiliates/ps.jpg" alt="ps">
+                                    <img src="/images/affiliates/ready.jpg" alt="ready">
+                                    <img src="/images/affiliates/red.png" alt="red">
+                                    <img src="/images/affiliates/sancap.png" alt="sancap">
+                                    <img src="/images/affiliates/Slaine.jpg" alt="Slaine">
+                                    <img src="/images/affiliates/swf.jpg" alt="swf">
+                                    <img src="/images/affiliates/tamaskia.jpg" alt="tamaskia">
+                                    <img src="/images/affiliates/tanariva.png" alt="tanariva">
+                                    <img src="/images/affiliates/Titanium.png" alt="Titanium">
+                                    <img src="/images/affiliates/torrey.png" alt="torrey">
+                                    <img src="/images/affiliates/Willet.jpg" alt="Willet">
+                                    <img src="/images/affiliates/yesod.jpg" alt="yesod">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="categories-area section-padding30 transactions-bg">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 mb-5">
                     <div class="card text-left">
-                      <h2 class="card-header">Last 10 Deposits</h2>
+                      <h2 class="card-header">Last 5 Deposits</h2>
                       <div class="card-body">
                         <table class="table table-striped table-inverse table-responsive">
                             <thead class="thead-inverse">
@@ -348,14 +447,14 @@
                                 </thead>
                                 <tbody>
                                     @php
-                                        $pay_method = array('PM', 'BTC');
+                                        $pay_method = array('BTC');
                                     @endphp
-                                    @for ($i = 0; $i < 10; $i++)
+                                    @for ($i = 0; $i < 5; $i++)
                                         @php
                                             shuffle($pay_method);
                                         @endphp
                                         <tr>
-                                            <td scope="row">{{ now()->subHours($i/10)->subMinutes($i+4)->subSeconds($i+3) }}</td>
+                                            <td scope="row">{{ now()->subHours($i/5)->subMinutes($i+4)->subSeconds($i+3) }}</td>
                                             <td>{{ $faker->firstName }}</td>
                                             <td class="text-danger"> <i class="fa fa-arrow-down" aria-hidden="true"></i>{{ config('app.currency') }}{{ rand(500, 500000) }}</td>
                                             <td>{{ $pay_method[0] }}</td>
@@ -369,7 +468,7 @@
 
                 <div class="col-md-6">
                     <div class="card text-left">
-                      <h2 class="card-header">Last 10 Withdrawals</h2>
+                      <h2 class="card-header">Last 5 Withdrawals</h2>
                       <div class="card-body">
                         <table class="table table-striped table-inverse table-responsive">
                             <thead class="thead-inverse">
@@ -384,7 +483,7 @@
                                     @php
                                         $pay_method = array('BTC');
                                     @endphp
-                                    @for ($i = 0; $i < 10; $i++)
+                                    @for ($i = 0; $i < 5; $i++)
                                         @php
                                             shuffle($pay_method);
                                         @endphp
@@ -403,10 +502,29 @@
             </div>
         </div>
     </div>
+
 </main>
 @endsection
 
 @section('input-js')
+<script>
+    $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:20,
+    autoplay:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000: {
+            items:5
+        }
+    }
+})
+</script>
 <script>
     console.log(numberWithCommas($('#active-investors').html()))
     var active_investors = "{{ config('app.currency') }}" + numberWithCommas($('#active-investors').html())

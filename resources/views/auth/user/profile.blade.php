@@ -76,7 +76,7 @@
                             <div class="form-group">
                                 <label for="country">Country</label>
                                 <select style="cursor: pointer;" class="form-control mb-4" name="country" required>
-                                        <option value="">Select Country</option>
+                                        <option>{{ $user->country }}</option>
                                         <option>Afghanistan</option>
                                         <option>Åland Islands</option>
                                         <option>Albania</option>
@@ -388,12 +388,12 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <div class="form-group">
                                 <label for="referral_code">Referral Code</label>
                                 <input class="form-control" type="text" name="referral_code" value="{{ $user->referral_code }}" readonly placeholder="Referral Code (if any)">
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="form-group pt-2">
                         <button class="btn btn-block btn-primary" type="submit"><i class="material-icons mr-2">account_circle</i> Update Profile</button>

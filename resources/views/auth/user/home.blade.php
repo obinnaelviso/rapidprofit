@@ -25,10 +25,10 @@
 
 <div class="container-fluid page__container">
 
-    <div class="alert alert-soft-info d-flex align-items-center card-margin" role="alert">
+    {{-- <div class="alert alert-soft-info d-flex align-items-center card-margin" role="alert">
         <i class="material-icons mr-3">error</i>
         <div class="text-body"><strong>You can also earn by  inviting people using your referral link:</strong> <a href="javascript::void(0)" id="ref_code" onclick="copyAddress('ref_code')">{{ route('referral', $user->referral_code ?: 'ABCDEFG12') }}</a><small> ** click to copy link</small></div>
-    </div>
+    </div> --}}
 
     <div class="row card-group-row">
         <div class="col-lg-4 col-md-6 card-group-row__col">
@@ -43,7 +43,7 @@
         <div class="col-lg-4 col-md-6 card-group-row__col">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
                 <div class="flex">
-                    <div class="card-header__title text-muted mb-2">Referral Bonus</div>
+                    <div class="card-header__title text-muted mb-2">Bonus</div>
                     <div class="text-amount">{{ config('app.currency').$user->wallet->bonus }}</div>
                 </div>
                 <div><i class="fas fa-piggy-bank icon-muted icon-40pt ml-3"></i></div>
@@ -84,7 +84,7 @@
         @php
             $referralSum = $user->wallet->bonus;
         @endphp
-        <div class="col-lg-4 col-md-6 card-group-row__col">
+        {{-- <div class="col-lg-4 col-md-6 card-group-row__col">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
                 <div class="flex">
                     <div class="card-header__title text-muted mb-2">Referral Bonus</div>
@@ -99,7 +99,7 @@
                 </div>
                 <div><i class="fas fa-coins icon-muted icon-40pt ml-2"></i></div>
             </div>
-        </div>
+        </div> --}}
         <div class="col-lg-4 col-md-6 card-group-row__col">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
                 <div class="flex">

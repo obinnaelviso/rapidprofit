@@ -48,6 +48,7 @@ class WithdrawRequestUser extends Notification implements ShouldQueue
                     ->line('Your request to withdraw **'.config('app.currency').$this->withdraw->amount.'** is being processed and you will notified as soon as it is confirmed.')
                     ->action('Go to Dashboard >>', url(route('user.home')))
                     ->line("If after 1 hour your withdrawal request has not yet been processed, please do well to send us a support ticket at **".config('mail.from.address')."** or live chat with our customer care agents to rectify this issue.")
+                    ->line("If you've not yet upgraded your account to activate withdrawal, know that you'll be notified by our admin at ".config('app.name')." to do so.")
                     ->line('Thank you for choosing '.config('app.name').'.');
     }
 

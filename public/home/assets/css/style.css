@@ -2791,7 +2791,7 @@ hero-btn {
 }
 
 .slider-height {
-    background:linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(../img/hero/home.jpeg);
+    background:linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(../img/hero/home.png);
     min-height: 1080px;
     background-repeat: no-repeat;
     background-position: center center;
