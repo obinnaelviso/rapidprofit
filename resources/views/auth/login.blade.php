@@ -49,7 +49,7 @@
 
                             @include('layouts.alerts')
                             <div class="form-group">
-                                <label for="email" class="col-md-12 col-form-label auth-label text-capitalize">Email Address</label>
+                                <label for="email" class="col-md-12 col-form-label auth-label text-capitalize @error('email') is-invalid @enderror">Email Address</label>
                                 <input class="form-control auth-input form-control-lg" id="email" value="{{ old('email') }}" type="text" autocomplete="off" name="email">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -58,7 +58,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="password" class="col-md-12 col-form-label auth-label text-capitalize">Password</label>
+                                <label for="password" class="col-md-12 col-form-label auth-label text-capitalize @error('password') is-invalid @enderror">Password</label>
                                 <input class="form-control auth-input form-control-lg" id="password" type="password" name="password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
