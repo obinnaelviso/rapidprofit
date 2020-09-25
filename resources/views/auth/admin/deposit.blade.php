@@ -8,19 +8,18 @@
 @section('content')
 <div class="row mb-3">
     <div class="col-md-12">
-        <h1>Manage Deposits</h1>
-        <hr>
+        <h2>Manage Deposits</h2>
     </div>
 </div>
 
 <div class="row mb-3">
     <div class="col-md-12 mb-3" id="deposit-table">
         @if($payment_receipts->count())
-            <div class="card text-left">
+            <div class="card manage-investments">
+                    <h4 class="card-header">New Payment Receipts</h4>
                 <div class="card-body">
-                    <h4 class="card-title">New Payment Receipts</h4>
                     <div>
-                        <table class="table table-striped table-inverse">
+                        <table class="table table-borderless">
                             <thead class="thead-inverse">
                                 <tr>
                                     @php $i = 1; @endphp

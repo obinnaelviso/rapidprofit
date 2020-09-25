@@ -8,17 +8,17 @@
 @section('content')
 <div class="row mb-3">
     <div class="col-md-12">
-        <h1>Manage Users</h1>
-        <hr>
+        <h2>Manage Users</h2>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
+        @include('layouts.alerts')
+        <div class="card manage-investments">
             <h3 class="card-header">All Registered Users</h3>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-borderless">
                         <thead>
                             <tr>
                                 @php $i = 1; @endphp
@@ -29,6 +29,7 @@
                                 <th scope="col">Investments</th>
                                 <th scope="col">Deposit Reqs.</th>
                                 <th scope="col">Withdrawal Reqs.</th>
+                                <th scope="col">Role</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Actions</th>
                             </tr>
@@ -44,18 +45,39 @@
                                         <td>{{ $reg_user->investments->count() }}</td>
                                         <td>{{ $reg_user->deposits ->count() }}</td>
                                         <td>{{ $reg_user->withdrawals->count() }}</td>
+                                        <td><span class="label @if($reg_user->role_id == role(config('roles.user'))) label-success @else label-danger @endif">{{ $reg_user->role->title }}</span></td>
                                         <td><span class="label @if($reg_user->status_id == status(config('status.active'))) label-success @else label-danger @endif">{{ $reg_user->status->title }}</span></td>
                                         <td>@if($reg_user->status_id == status(config('status.active')))
-                                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#blockUser{{ $reg_user->id }}">Block Account</button>
+                                                @if($reg_user->role_id == role(config('roles.user')))
+                                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#blockUser{{ $reg_user->id }}">Block Account</button>
+                                                @endif
                                             @else
                                                 <button class="btn btn-success btn-sm" onclick="event.preventDefault();
                                                 document.getElementById('account-status{{ $reg_user->id }}').submit();">Activate Account</button>
+                                                {{-- Activate User Account --}}
+                                                <form id="account-status{{ $reg_user->id }}" action="{{ route('admin.manage.users.account-status', $reg_user->id) }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
                                             @endif
-                                            <form id="account-status{{ $reg_user->id }}" action="{{ route('admin.manage.users.account-status', $reg_user->id) }}" method="POST" style="display: none;">
-                                                @csrf
-                                            </form>
+                                            @if($reg_user->role_id == role(config('roles.user')))
+                                                <button class="btn btn-block btn-dark btn-sm d-block mt-2" type="submit" onclick="deleteUser({{ $reg_user->id }})">Delete Account</button>
+                                                {{-- Delete User Account --}}
+                                                <form id="delete-user-{{ $reg_user->id }}" action="{{ route('admin.manage.users.delete', $reg_user->id) }}" method="POST" style="display: none;">
+                                                    @csrf @method('delete')
+                                                </form>
+                                            @endif
                                         </td>
-                                        {{-- Block User --}}
+
+
+
+
+
+
+
+
+
+
+                                        {{-- Block User Modal --}}
                                         <div class="modal fade" id="blockUser{{ $reg_user->id }}" tabindex="-1" role="dialog" aria-labelledby="blockUserLabel" aria-hidden="true" style="display: none;">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -102,4 +124,15 @@
         </div>
     </div>
 </div>
+@endsection
+@section('input-js')
+<script>
+    function deleteUser(user_id = 0) {
+        var delete_account = confirm('Are you sure you want to permanently delete this user account?')
+        if(delete_account) {
+            console.log(user_id)
+            $("#delete-user-"+user_id).submit();
+        }
+    }
+</script>
 @endsection

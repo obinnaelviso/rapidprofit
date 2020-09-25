@@ -84,6 +84,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Deposit::class);
     }
 
+    public function activeReferrals() {
+        return $this->hasMany(ReferralBonus::class)->where('status_id', status(config('status.expired')));
+    }
+
     public function referrerBonus() {
         return $this->hasMany(ReferralBonus::class);
     }

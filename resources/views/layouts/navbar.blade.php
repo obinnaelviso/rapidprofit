@@ -15,10 +15,10 @@
                     Bonus: {{ config('app.currency').$user->wallet->bonus }}
                 </li>
             @endif
-                <li class="nav-item username mr-5">
+                <a href="{{ route('user.profile') }}"><li class="nav-item username mr-5">
                     <img src="{{ url('images/icons/profile-pic.svg') }}" class="mr-2" alt="user photo">
                     {{ Auth::user()->first_name.' '.Auth::user()->last_name }}
-                </li>
+                </li></a>
                 {{--<li class="nav-item dropdown notification">
                     <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>
                     <ul class="dropdown-menu dropdown-menu-right notification-dropdown">

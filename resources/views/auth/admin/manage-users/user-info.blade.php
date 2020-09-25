@@ -1,6 +1,6 @@
 <h3>Profile Information</h3>
 <div class="table-responsive">
-    <table class="table table-hover">
+    <table class="table table-borderless">
         <tbody>
             <tr>
                 <td class="title">First Name</td>

@@ -13,12 +13,12 @@
         </div>
         <hr>
     </div>
-    {{-- <div class="col-md-12">
+    <div class="col-md-12">
         @include('layouts.alerts')
-        <div class="alert alert-info">
+        {{-- <div class="alert alert-info">
             Please make sure to <a class="alert-link" href="#evidenceOfPayment">upload your evidence of payment</a>(e.g a screenshot or receipt document) after making payment!
-        </div>
-    </div> --}}
+        </div> --}}
+    </div>
 </div>
 
 <div class="row">
@@ -117,13 +117,13 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text fund-input-icon"><img src="/images/icons/dollar-sign.svg" alt="Amount To Fund"></span>
                         </div>
-                        <input type="number" name="amount" min="{{ $min_dep }}" value="{{ old('amount') }}" class="form-control fund-input @error('amount') is-invalid @enderror " placeholder="{{ $min_dep }}" aria-describedby="currency">
+                        <input type="number" name="amount" min="{{ $min_dep }}" value="{{ old('amount') }}" class="form-control fund-input @error('amount') is-invalid @enderror" placeholder="{{ $min_dep }}" aria-describedby="currency">
+                        @error('amount')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('amount')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-md-3 mb-3">
                     <select name="payment_method" class="form-control fund-input @error('payment_method') is-invalid @enderror" id="input-select" required>

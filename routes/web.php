@@ -66,6 +66,7 @@ Route::group(['prefix'=>'/admin'], function() {
     // ---------------------> Manage User Info
     Route::get('/users', 'Admin\DashboardController@manageUsers')->name('admin.manage.users');
     Route::get('/users/{reg_user}', 'Admin\UserController@viewUser')->name('admin.manage.users.view');
+    Route::delete('/users/{reg_user}/delete', 'Admin\UserController@deleteUser')->name('admin.manage.users.delete');
     Route::put('/users/{reg_user}/update-balance', 'Admin\UserController@updateBalance')->name('admin.manage.users.update-balance');
     Route::put('/users/{reg_user}/update-email', 'Admin\UserController@updateEmail')->name('admin.manage.users.update-email');
     Route::post('/users/{reg_user}/account-status', 'Admin\UserController@accountStatus')->name('admin.manage.users.account-status');
@@ -95,6 +96,7 @@ Route::group(['prefix'=>'/admin'], function() {
 
     // ------------------------> Investments
     Route::get('/investments', 'Admin\DashboardController@investments')->name('admin.investments');
+    Route::delete('/investments/{investment}/cancel', 'Admin\WalletController@cancelInvestment')->name('admin.investments.cancel');
 });
 
 

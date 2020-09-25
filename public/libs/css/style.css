@@ -4994,6 +4994,23 @@ button.profile-btn:hover {
     box-shadow: unset;
 }
 
+.pills-vertical .nav.nav-pills .nav-link.user-tabs {
+    background-color: #404040;
+    border-radius: .5em;
+    color: #FCC81A
+}
+
+.pills-vertical .tab-content {
+    background-color: #0f0f0f;
+    border-radius: .5em;
+}
+
+.pills-vertical .nav.nav-pills .nav-link.user-tabs.active {
+    background-color: #0f0f0f;
+    border-radius: .5em;
+    color: #FCC81A
+}
+
 .manage-investments h4 {
     font-weight: 100;
     color: #777777
@@ -5024,6 +5041,12 @@ button.profile-btn:hover {
 .invest-btn:hover {
     background-color: #f8cb37;
     color: black;
+}
+
+.referral-input {
+    position: absolute;
+    top: -10000px;
+    left: -10000px;
 }
 
 .invest-card {

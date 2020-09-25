@@ -48,7 +48,7 @@ class DashboardController extends Controller
 
     public function manageUsers() {
         $user = $this->user();
-        $reg_users = User::where('role_id', role(config('roles.user')))->orderBy('status_id', 'desc')->get();
+        $reg_users = User::orderBy('role_id')->get();
         return view('auth.admin.manage-users', compact('user', 'reg_users'));
     }
 

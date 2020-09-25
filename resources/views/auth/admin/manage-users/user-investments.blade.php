@@ -5,7 +5,7 @@
 
 <h3>Active Investments</h3>
 <div class="table-responsive mb-5">
-    <table class="table table-hover">
+    <table class="table table-borderless">
         <thead>
             <tr>
                 @php $i = 1; @endphp
@@ -40,11 +40,11 @@
         </tbody>
     </table>
 </div>
-<hr>
+
 
 <h3 class="mt-5">Completed Investments</h3>
 <div class="table-responsive">
-    <table class="table table-hover">
+    <table class="table table-borderless">
         <thead>
             <tr>
                 @php $i = 1; @endphp

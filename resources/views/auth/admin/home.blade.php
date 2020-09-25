@@ -8,15 +8,14 @@
 @section('content')
 <div class="row mb-3">
     <div class="col-md-12">
-        <h1>Home Overview</h1>
-        <hr>
+        <h2>Dashboard Overview</h2>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-12 col-sm-12 col-12">
         <div class="page-header">
-            <h2 class="pageheader-title">Recent Activities</h2>
+            <h3 class="pageheader-title text-muted">Recent Activities</h3>
             {{-- <p class="pageheader-text">Get to manage all your wallets in one place</p> --}}
         </div>
     </div>
@@ -25,11 +24,11 @@
 <div class="row mb-3">
     <div class="col-md-6 mb-3" id="deposit-table">
         @if($deposit_requests->count())
-            <div class="card text-left">
+            <div class="card manage-investments">
                 <div class="card-body">
-                    <h4 class="card-title">New Payment Receipts</h4>
+                    <h4 class="card-header">New Payment Receipts</h4>
                     <div>
-                        <table class="table table-striped table-inverse table-responsive">
+                        <table class="table table-borderless table-inverse table-responsive">
                             <thead class="thead-inverse">
                                 <tr>
                                     <th scope="col">Name</th>
@@ -47,7 +46,7 @@
                                         <td class="text-uppercase">{{ $receipt->payment_method }}</td>
                                         <td>
                                             @if($receipt->url)
-                                                <a href="{{ route('admin.manage.users.deposit.download-receipt', $receipt->id) }}" class="btn btn-primary"><i class="fa fa-download" aria-hidden="true"></i> Download </a>
+                                                <a href="{{ route('admin.manage.users.deposit.download-receipt', $receipt->id) }}" class="btn auth-button"><i class="fa fa-download" aria-hidden="true"></i> Download </a>
                                             @else
                                                 N/A
                                             @endif
@@ -65,7 +64,7 @@
                 </div>
             </div>
         @else
-            <div class="card text-left">
+            <div class="card manage-investments">
               <div class="card-body">
                 <h4 class="card-text text-success">No Payment Receipts Available</h4>
               </div>
@@ -74,11 +73,11 @@
     </div>
     <div class="col-md-6 mb-3" id="withdrawal-table">
         @if($withdraw_requests->count())
-            <div class="card text-left">
+            <div class="card manage-investments">
                 <div class="card-body">
                     <h4 class="card-title">New Withdrawal Receipt</h4>
                     <div>
-                        <table class="table table-striped table-inverse table-responsive">
+                        <table class="table table-borderless table-inverse table-responsive">
                             <thead class="thead-inverse">
                                 <tr>
                                     <th scope="col">Name</th>
@@ -108,7 +107,7 @@
                 </div>
             </div>
         @else
-            <div class="card text-left">
+            <div class="card manage-investments">
               <div class="card-body">
                 <h4 class="card-text text-success">No Withdrawal Requests Available</h4>
               </div>
@@ -120,7 +119,7 @@
 <div class="row">
     <div class="col-md-12 col-sm-12 col-12">
         <div class="page-header">
-            <h2 class="pageheader-title">Statistics</h2>
+            <h3 class="pageheader-title">Statistics</h3>
             {{-- <p class="pageheader-text">Get to manage all your wallets in one place</p> --}}
         </div>
     </div>
@@ -128,111 +127,109 @@
 
 <div class="row">
     <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
+        <div class="card statistics statistics-left-bg">
             <div class="card-body text-center">
-                <h5 class="text-muted">Registered Users</h5>
+                <h5 class="statistics-heading">Registered Users</h5>
+                <h2 class="statistics-text mt-0">{{ $users->count() }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-xs-6 mb-3">
+        <div class="card statistics statistics-left-bg">
+            <div class="card-body text-center">
+                <h5 class="statistics-heading">Verified Users</h5>
                 <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $users->count() }}</h1>
+                    <h2 class="mb-1">{{ $verified_users->count() }}</h2>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
+        <div class="card statistics statistics-left-bg">
             <div class="card-body text-center">
-                <h5 class="text-muted">Verified Users</h5>
+                <h5 class="statistics-heading">Active Users</h5>
                 <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $verified_users->count() }}</h1>
+                    <h2 class="mb-1 text-success">{{ $active_users->count() }}</h2>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
+        <div class="card statistics statistics-left-bg">
             <div class="card-body text-center">
-                <h5 class="text-muted">Active Users</h5>
+                <h5 class="statistics-heading">Blocked Users</h5>
                 <div class="metric-value d-inline-block">
-                    <h1 class="mb-1 text-success">{{ $active_users->count() }}</h1>
+                    <h2 class="mb-1 text-danger">{{ $blocked_users->count() }}</h2>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
+        <div class="card statistics statistics-left-bg">
             <div class="card-body text-center">
-                <h5 class="text-muted">Blocked Users</h5>
+                <h5 class="statistics-heading">Investment Packages</h5>
                 <div class="metric-value d-inline-block">
-                    <h1 class="mb-1 text-danger">{{ $blocked_users->count() }}</h1>
+                    <h2 class="mb-1">{{ $packages->count() }}</h2>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
+        <div class="card statistics statistics-left-bg">
             <div class="card-body text-center">
-                <h5 class="text-muted">Investment Packages</h5>
+                <h5 class="statistics-heading">Total Investments</h5>
                 <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $packages->count() }}</h1>
+                    <h2 class="mb-1">{{ $total_investments->count() }}</h2>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
+        <div class="card statistics statistics-left-bg">
             <div class="card-body text-center">
-                <h5 class="text-muted">Total Investments</h5>
+                <h5 class="statistics-heading">Active Investments</h5>
                 <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $total_investments->count() }}</h1>
+                    <h2 class="mb-1">{{ $active_investments->count() }}</h2>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
+        <div class="card statistics statistics-left-bg">
             <div class="card-body text-center">
-                <h5 class="text-muted">Active Investments</h5>
+                <h5 class="statistics-heading">Completed Investments</h5>
                 <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $active_investments->count() }}</h1>
+                    <h2 class="mb-1 text-success">{{ $completed_investments->count() }}</h2>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
+        <div class="card statistics statistics-left-bg">
             <div class="card-body text-center">
-                <h5 class="text-muted">Completed Investments</h5>
+                <h5 class="statistics-heading">Total Payouts</h5>
                 <div class="metric-value d-inline-block">
-                    <h1 class="mb-1 text-success">{{ $completed_investments->count() }}</h1>
+                    <h2 class="mb-1" id="total-payouts">{{ $total_payouts->sum('amount') }}</h2>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
+        <div class="card statistics statistics-left-bg">
             <div class="card-body text-center">
-                <h5 class="text-muted">Total Payouts</h5>
+                <h5 class="statistics-heading">Withdrawal Requests</h5>
                 <div class="metric-value d-inline-block">
-                    <h1 class="mb-1" id="total-payouts">{{ $total_payouts->sum('amount') }}</h1>
+                    <h2 class="mb-1">{{ $withdraw_requests->count() }}</h2>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
+        <div class="card statistics statistics-left-bg">
             <div class="card-body text-center">
-                <h5 class="text-muted">Withdrawal Requests</h5>
+                <h5 class="statistics-heading">Deposit Requests</h5>
                 <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $withdraw_requests->count() }}</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Deposit Requests</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $deposit_requests->count() }}</h1>
+                    <h2 class="mb-1">{{ $deposit_requests->count() }}</h2>
                 </div>
             </div>
         </div>

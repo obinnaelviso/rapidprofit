@@ -168,7 +168,7 @@
                         </div>
                         <div class="cat-cap">
                             <h5><a href="#" class="text-warning">24/7 CUSTOMER SUPPORT</a></h5>
-                            <p class="text-white">Our customer support are available 24 hours a day and 7 days a week to attend to all your queries and reqeusts through our live chat or support ticket.</p>
+                            <p class="text-white">Our customer support are available 24 hours a day and 7 days a week to attend to all your queries and requests through our live chat or support ticket.</p>
                         </div>
                     </div>
                 </div>

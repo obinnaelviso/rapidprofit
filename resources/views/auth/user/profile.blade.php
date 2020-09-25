@@ -22,7 +22,7 @@
                                 <div class="card-body">
                                     <div class="active-referrals">
                                         <p class="profile-stats-heading">Active<br>Referral</p>
-                                        <h2 class="profile-stats-text" id="active-investments">5</h2>
+                                        <h2 class="profile-stats-text" id="active-investments">{{ $user->activeReferrals->count() }}</h2>
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
             <div class="col-md-4 mb-2"><div class="btn btn-block profile-btn" id="but-d">Referral Code</div></div>
             <div class="col-md-5 mb-2"><input type="text" value="{{ $user->referral_code }}" class="form-control fund-input profile-ref" readonly></div>
             <div class="col-md-3 mb-2"><button class="btn btn-block profile-btn" onclick="copyAddress('referral-link')" type="button">Copy Link</button></div>
-            <a id="referral-link" class="d-none">{{ route('referral', $user->referral_code) }}</a>
+            <input id="referral-link" type="text" class="referral-input" value="{{ route('referral', $user->referral_code) }}"></a>
         </div>
     </div>
 </div>
@@ -450,8 +450,9 @@
         var copyText = document.getElementById(id);
 
         /* Select the text field */
-        selectText(id)
-        // copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+        // selectText(id)
+        copyText.select()
+        copyText.setSelectionRange(0, 99999); /*For mobile devices*/
 
         /* Copy the text inside the text field */
         document.execCommand("copy");

@@ -131,6 +131,21 @@ class UserController extends Controller
         ]);
     }
 
+    public function deleteUser(User $reg_user) {
+        if ($reg_user->role_id == role(config('roles.user'))) {
+            $reg_user->payouts()->delete();
+            $reg_user->investments()->delete();
+            $reg_user->deposits()->delete();
+            $reg_user->paymentReceipts()->delete();
+            $reg_user->withdrawals()->delete();
+            $reg_user->referrerBonus()->delete();
+            $reg_user->delete();
+            // $request->session()->flash('success', 'User account deleted successfully!');
+            return back()->with('success', 'User account deleted successfully!');
+        } else
+            return back()->with('failed','Oops, something went wrong!');
+    }
+
     public function newWithdrawal(Request $request, User $reg_user) {
         $withdrawal = Withdrawal::find($request->withdraw_id);
         $withdrawal->status_id = status(config('status.completed'));

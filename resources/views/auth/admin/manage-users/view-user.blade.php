@@ -20,10 +20,10 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-12">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link active show" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Profile</a>
-                        <a class="nav-link" id="v-pills-deposits-tab" data-toggle="pill" href="#v-pills-deposits" role="tab" aria-controls="v-pills-deposits" aria-selected="false">Deposit Receipts</a>
-                        <a class="nav-link" id="v-pills-investments-tab" data-toggle="pill" href="#v-pills-investments" role="tab" aria-controls="v-pills-investments" aria-selected="false">Investments</a>
-                        <a class="nav-link" id="v-pills-withdrawals-tab" data-toggle="pill" href="#v-pills-withdrawals" role="tab" aria-controls="v-pills-withdrawals" aria-selected="false">Withdrawal Requests</a>
+                        <a class="nav-link user-tabs active show" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Profile</a>
+                        <a class="nav-link user-tabs" id="v-pills-deposits-tab" data-toggle="pill" href="#v-pills-deposits" role="tab" aria-controls="v-pills-deposits" aria-selected="false">Deposit Receipts</a>
+                        <a class="nav-link user-tabs" id="v-pills-investments-tab" data-toggle="pill" href="#v-pills-investments" role="tab" aria-controls="v-pills-investments" aria-selected="false">Investments</a>
+                        <a class="nav-link user-tabs" id="v-pills-withdrawals-tab" data-toggle="pill" href="#v-pills-withdrawals" role="tab" aria-controls="v-pills-withdrawals" aria-selected="false">Withdrawal Requests</a>
                     </div>
                 </div>
                 <div class="col-xl-9 col-lg-9 col-md-9 col-sm-8 col-12 ">

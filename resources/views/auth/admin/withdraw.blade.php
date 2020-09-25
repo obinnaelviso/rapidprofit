@@ -8,18 +8,17 @@
 @section('content')
 <div class="row mb-3">
     <div class="col-md-12">
-        <h1>Manage Withdrawals</h1>
-        <hr>
+        <h2>Manage Withdrawals</h2>
     </div>
 </div>
 <div class="row mb-3">
     <div class="col-md-12 mb-3" id="withdrawal-table">
         @if($pending_requests->count())
-            <div class="card text-left">
+            <div class="card manage-investments">
+                <h4 class="card-header">Pending Withdrawal Requests</h4>
                 <div class="card-body">
-                    <h4 class="card-title">Pending Withdrawal Requests</h4>
                     <div>
-                        <table class="table table-striped table-inverse table-responsive">
+                        <table class="table table-borderless">
                             <thead class="thead-inverse">
                                 <tr>
                                     @php $i = 1; @endphp
@@ -36,7 +35,7 @@
                                 @foreach($pending_requests->get() as $withdrawal)
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
-                                        <td class="text-capitalize"><a class="text-dark" href="{{ route('admin.manage.users.view', $withdrawal->user->id) }}" target="_blank">{{ $withdrawal->user->first_name.' '.$withdrawal->user->last_name }}</td></td>
+                                        <td class="text-capitalize"><a href="{{ route('admin.manage.users.view', $withdrawal->user->id) }}" target="_blank">{{ $withdrawal->user->first_name.' '.$withdrawal->user->last_name }}</td></td>
                                         <td class="text-capitalize">{{ $withdrawal->withdraw_method }}</td>
                                         <td>{{ config('app.currency').$withdrawal->amount }}</td>
                                         <td>{{ $withdrawal->bitcoin_address }}</td>
@@ -52,7 +51,7 @@
                 </div>
             </div>
         @else
-            <div class="card text-left">
+            <div class="card manage-investments">
               <div class="card-body">
                 <h4 class="card-text text-success">No Pending Withdrawal Requests Available</h4>
               </div>
@@ -63,7 +62,7 @@
 <div class="row mb-3">
     <div class="col-md-12 mb-3" id="withdrawal-table">
         @if($completed_requests->count())
-            <div class="card text-left">
+            <div class="card manage-investments">
                 <div class="card-body">
                     <h4 class="card-title">Completed Withdrawal Requests</h4>
                     <div>
@@ -85,7 +84,7 @@
                                 @foreach($completed_requests as $withdrawal)
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
-                                        <td class="text-capitalize"><a class="text-dark" href="{{ route('admin.manage.users.view', $withdrawal->user->id) }}" target="_blank">{{ $withdrawal->user->first_name.' '.$withdrawal->user->last_name }}</a></td>
+                                        <td class="text-capitalize"><a href="{{ route('admin.manage.users.view', $withdrawal->user->id) }}" target="_blank">{{ $withdrawal->user->first_name.' '.$withdrawal->user->last_name }}</a></td>
                                         <td class="text-capitalize">{{ $withdrawal->withdraw_method }}</td>
                                         <td>{{ config('app.currency').$withdrawal->amount }}</td>
                                         <td>{{ $withdrawal->bitcoin_address }}</td>
@@ -101,7 +100,7 @@
                 </div>
             </div>
         @else
-            <div class="card text-left">
+            <div class="card manage-investments">
               <div class="card-body">
                 <h4 class="card-text text-success">No Withdrawal Requests Available</h4>
               </div>

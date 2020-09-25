@@ -19,12 +19,12 @@
         $max_with = array_key_exists('max_with', $general) ?$general->max_with:1000000;
     @endphp
     <div class="col-md-12">
-        @include('layouts.alerts')
         <div class="alert alert-warning withdraw-alert">
             <i class="fa fa-arrow-right" aria-hidden="true"></i> You can withdraw a minimum of <b>{{ config('app.currency').$min_with }}</b>
             <i class="fa fa-arrow-right" aria-hidden="true"></i> All withdrawal requests are processed within 0-60 minutes.
             <i class="fa fa-arrow-right" aria-hidden="true"></i> No amount is charged per withdrawal.
         </div>
+        @include('layouts.alerts')
     </div>
 </div><hr>
 <div class="row">
@@ -38,54 +38,57 @@
     </div>
     <div class="col-md-8">
 
-        {{-- Row 1: Amount --}}
-        <div class="form-row mb-3">
-            {{-- Amount Label --}}
-            <div class="col-md-6 mb-3 text-right">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text fund-input-icon"><img src="/images/icons/amount-to-fund.svg" alt="Amount To Fund"></span>
+        <form method="POST" action="{{ route('user.withdraw.funds') }}">
+            @csrf
+            {{-- Row 1: Amount --}}
+            <div class="form-row mb-3">
+                {{-- Amount Label --}}
+                <div class="col-md-6 mb-3 text-right">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text fund-input-icon"><img src="/images/icons/amount-to-fund.svg" alt="Amount To Fund"></span>
+                        </div>
+                        <input type="text" value="Amount To Fund ({{ config('app.currency') }})" class="form-control fund-input" readonly>
                     </div>
-                    <input type="text" value="Amount To Fund ({{ config('app.currency') }})" class="form-control fund-input" readonly>
+                </div>
+
+                {{-- Amount Input --}}
+                <div class="col-md-6 text-right">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text fund-input-icon"><img src="/images/icons/dollar-sign.svg" alt="Amount To Fund"></span>
+                        </div>
+                        <input type="number" name="amount" min="{{ $min_with }}" max="{{ $max_with }}"  value="{{ old('amount') }}" class="form-control fund-input" id="amount" placeholder="{{ $min_with }}" aria-describedby="currency" required="">
+                    </div>
+                    <div class="invalid-feedback" id="amountFeedback"></div>
                 </div>
             </div>
 
-            {{-- Amount Input --}}
-            <div class="col-md-6 text-right">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text fund-input-icon"><img src="/images/icons/dollar-sign.svg" alt="Amount To Fund"></span>
-                    </div>
-                    <input type="number" name="amount" min="{{ $min_with }}" max="{{ $max_with }}"  value="{{ old('amount') }}" class="form-control fund-input" id="amount" placeholder="{{ $min_with }}" aria-describedby="currency" required="">
+
+            {{-- Row 2 Withdraw Method & Bitcoin ADdress --}}
+            <div class="form-row mb-3">
+                {{-- Select Withdraw Method --}}
+                <div class="col-md-6 mb-3">
+                    <select name="withdraw_method" class="form-control fund-input @error('withdraw_method') is-invalid @enderror" id="input-select" required>
+                        <option value="bitcoin" selected>Bitcoin</option>
+                    </select>
+                    <div class="invalid-feedback" id="amountFeedback"></div>
                 </div>
-                <div class="invalid-feedback" id="amountFeedback"></div>
-            </div>
-        </div>
 
-
-        {{-- Row 2 Withdraw Method & Bitcoin ADdress --}}
-        <div class="form-row mb-3">
-            {{-- Select Withdraw Method --}}
-            <div class="col-md-6 mb-3">
-                <select name="withdraw_method" class="form-control fund-input @error('withdraw_method') is-invalid @enderror" id="input-select" required>
-                    <option value="bitcoin" selected>Bitcoin</option>
-                </select>
-                <div class="invalid-feedback" id="amountFeedback"></div>
-            </div>
-
-            {{-- Bitcoin Address Input --}}
-            <div class="col-md-6 text-right">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text fund-input-icon"><img src="/images/icons/bitcoin-wallet.svg" alt="bitcoin-wallet"></span>
+                {{-- Bitcoin Address Input --}}
+                <div class="col-md-6 text-right">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text fund-input-icon"><img src="/images/icons/bitcoin-wallet.svg" alt="bitcoin-wallet"></span>
+                        </div>
+                        <input type="text" name="bitcoin_address" disabled value="{{ old('bitcoin_address') }}" class="form-control fund-input" id="bitcoin_address" placeholder="Enter Address e.g 16oEfPvNr9RL2otUVPrQtpzQPCfgXjk5cr" required="">
                     </div>
-                    <input type="text" name="bitcoin_address" disabled value="{{ old('bitcoin_address') }}" class="form-control fund-input" id="bitcoin_address" placeholder="Enter Address e.g 16oEfPvNr9RL2otUVPrQtpzQPCfgXjk5cr" required="">
                 </div>
             </div>
-        </div>
 
-        {{-- Submit Button --}}
-        <button class="btn btn-primary btn-block fund-btn btn-sm" disabled type="submit">Submit</button>
+            {{-- Submit Button --}}
+            <button class="btn btn-primary btn-block fund-btn btn-sm" id="withdraw_button" disabled type="submit">Submit</button>
+        </form>
     </div>
 </div><hr>
 

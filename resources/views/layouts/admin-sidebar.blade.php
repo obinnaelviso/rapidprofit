@@ -2,7 +2,7 @@
 <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav flex-column">
         <li class="nav-item">
-            <a class="nav-link @yield('home-active')" href="{{ route('admin.home') }}">Home</a>
+            <a class="nav-link @yield('home-active')" href="{{ route('admin.home') }}">Dashboard</a>
         </li>
         <li class="nav-item">
             <a class="nav-link @yield('users-active')" href="{{ route('admin.manage.users') }}">Manage Users</a>

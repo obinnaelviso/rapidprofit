@@ -8,18 +8,17 @@
 @section('content')
 <div class="row mb-3">
     <div class="col-md-12">
-        <h1>Manage Investement Packages</h1>
-        <hr>
+        <h2>Manage Investement Packages</h2>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
+        <div class="card manage-investments">
             <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addInvestment"><i class="fa fa-plus" aria-hidden="true"></i> Click To Add Investment Package</button>
             @include('auth.admin.packages.packages-create-modal')
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-borderless">
                         <thead>
                             <tr>
                                 @php $i = 1; @endphp

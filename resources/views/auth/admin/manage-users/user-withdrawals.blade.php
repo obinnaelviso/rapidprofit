@@ -4,7 +4,7 @@
 @endphp
 <h3>Withdrawal Requests</h3>
 <div class="table-responsive mb-5">
-    <table class="table table-hover" id="withdrawal-table">
+    <table class="table table-borderless" id="withdrawal-table">
         <thead>
             <tr>
                 @php $i = 1; @endphp
@@ -35,7 +35,7 @@
 
 <h3>Completed Withdrawal Requests</h3>
 <div class="table-responsive">
-    <table class="table table-hover" id="withdrawal-comp-table">
+    <table class="table table-borderless" id="withdrawal-comp-table">
         <thead>
             <tr>
                 @php $i = 1; @endphp

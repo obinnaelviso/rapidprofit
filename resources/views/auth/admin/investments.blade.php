@@ -15,11 +15,11 @@
 <div class="row">
     <div class="col-md-12">
         @include('layouts.alerts')
-        <div class="card">
+        <div class="card manage-investments">
             <h3 class="card-header">Active Investments</h3>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-borderless">
                         <thead>
                             <tr>
                                 @php $i = 1; @endphp
@@ -33,6 +33,7 @@
                                 <th scope="col">Start Date</th>
                                 <th scope="col">Due Date</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,16 +47,23 @@
                                         <td class="text-capitalize">{{ $investment->user->first_name.' '.$investment->user->last_name }}</td>
                                         <td class="text-capitalize">{{ $investment->package->name }}</td>
                                         <td class="text-danger">{{ config('app.currency').$investment->amount }}</td>
-                                        <td>@if($investment->package->duration == 7) 1 week @else 1 month @endif</td>
+                                        <td>@if($investment->package->duration == 7) 1 Week @else 1 Month @endif</td>
                                         <td class="text-success">+{{ config('app.currency').$investment_return[0] }}</td>
                                         <td class="text-success">{{ config('app.currency').$investment_return[1] }}</td>
                                         <td>{{ $investment->created_at->toFormattedDateString() }}</td>
                                         <td class="text-danger">{{ $investment->expiry_date->toFormattedDateString() }}</td>
-                                        <td><span class="label label-primary"> {{ $investment->status->title }}</td>
+                                        <td><span class="label label-primary"> {{ $investment->status->title }}</span></td>
+                                        <td>
+                                            <button class="btn btn-warning btn-sm" onclick="deleteInvestment({{ $investment->id }})">Cancel</button>
+                                            {{-- Delete User Account --}}
+                                            <form id="delete-investment-{{ $investment->id }}" action="{{ route('admin.investments.cancel', $investment->id) }}" method="POST" style="display: none;">
+                                                @csrf @method('delete')
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             @else
-                                <h5 class="text-dark">Sorry, but no active investment running. Click on the link to <a href="{{ route('user.investments') }}">start an investment</a>.</h5 class="text-danger">
+                                <h5 class="text-dark">No active investment yet.
                             @endif
                         </tbody>
                     </table>
@@ -64,14 +72,14 @@
         </div>
     </div>
 </div>
-<hr>
+
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
+        <div class="card manage-investments">
             <h3 class="card-header">Completed Investments</h3>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-borderless">
                         <thead>
                             <tr>
                                 @php $i = 1; @endphp
@@ -103,11 +111,11 @@
                                         <td class="text-success">{{ config('app.currency').$investment_return[1] }}</td>
                                         <td>{{ $investment->created_at->toFormattedDateString() }}</td>
                                         <td class="text-danger">{{ $investment->expiry_date->toFormattedDateString() }}</td>
-                                        <td><span class="label label-success"> {{ $investment->status->title }}</td>
+                                        <td><span class="label label-success"> {{ $investment->status->title }}</span></td>
                                     </tr>
                                 @endforeach
                             @else
-                                <h5 class="text-dark">No completed investments yet. Click on the link to <a href="{{ route('user.investments') }}">start an investment</a>.</h5 class="text-danger">
+                                <h5 class="text-dark">No completed investments yet.
                             @endif
                         </tbody>
                     </table>
@@ -117,4 +125,14 @@
     </div>
 </div>
 
+@endsection
+@section('input-js')
+<script>
+    function deleteInvestment(investment_id = 0) {
+        var delete_investment = confirm('Are you sure you want to cancel this investment?')
+        if(delete_investment) {
+            $("#delete-investment-"+investment_id).submit();
+        }
+    }
+</script>
 @endsection

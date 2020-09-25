@@ -22,7 +22,7 @@ class AccountStatus
             return redirect()->route('login')->with('failed',
             'Your account has being temporarily blocked due to security reasons.
             Please live chat with our team or send us a support ticket at
-            support@rapidprofit.ltd with the email address of the affected account. Thanks.');
+            '.config('mail.from.address').' with the email address of the affected account. Thanks.');
         return $next($request);
     }
 

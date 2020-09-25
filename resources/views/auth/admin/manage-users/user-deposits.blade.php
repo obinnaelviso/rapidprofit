@@ -4,7 +4,7 @@
     </div>
 </div>
 <div class="table-responsive">
-    <table class="table table-hover" id="deposit-table">
+    <table class="table table-borderless" id="deposit-table">
         <thead>
             <tr>
                 @php $i = 1; @endphp
