@@ -69,7 +69,7 @@
                             </div>
                             <div class="footer-tittle">
                                 <div class="footer-pera">
-                                    <p class="info1">Invest today and start earning from our No.1 fast growing investment platform. Rapidprofit is the best because you see what you invest grow live.</p>
+                                    <p class="info1">Invest today and start earning from our No.1 fast growing investment platform. {{ config('app.name') }} is the best because you see what you invest grow live.</p>
                                 </div>
                             </div>
                             <!-- Footer Social -->
