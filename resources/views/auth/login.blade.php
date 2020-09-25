@@ -51,10 +51,20 @@
                             <div class="form-group">
                                 <label for="email" class="col-md-12 col-form-label auth-label text-capitalize">Email Address</label>
                                 <input class="form-control auth-input form-control-lg" id="email" value="{{ old('email') }}" type="text" autocomplete="off" name="email">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="password" class="col-md-12 col-form-label auth-label text-capitalize">Password</label>
                                 <input class="form-control auth-input form-control-lg" id="password" type="password" name="password">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label class="auth-label auth-radio-container">
