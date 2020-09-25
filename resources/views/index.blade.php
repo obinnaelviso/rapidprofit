@@ -333,9 +333,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="owl-carousel owl-theme">
-                        <a href="{{ route('register') }}" target="_blank"><img src="/images/slides/rapidprofit-ad1.jpg" alt="rapidprofit-ad1"></a>
-                        <a href="{{ route('register') }}" target="_blank"><img src="/images/slides/rapidprofit-ad2.jpg" alt="rapidprofit-ad2"></a>
-                        <a href="{{ route('register') }}" target="_blank"><img src="/images/slides/rapidprofit-ad3.jpg" alt="rapidprofit-ad3"></a>
+                        <a href="{{ route('register') }}" target="_blank"><img src="/images/slides/rapidprofit-1.jpg" alt="rapidprofit-1"></a>
+                        <a href="{{ route('register') }}" target="_blank"><img src="/images/slides/rapidprofit-2.jpg" alt="rapidprofit-2"></a>
+                        <a href="{{ route('register') }}" target="_blank"><img src="/images/slides/rapidprofit-3.jpg" alt="rapidprofit-3"></a>
                     </div>
                 </div>
             </div>
