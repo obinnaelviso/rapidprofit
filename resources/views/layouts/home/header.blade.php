@@ -67,11 +67,7 @@
                                     @if(!Auth::guard('web')->check())
                                         <a href="{{ route('register') }}" class="btn header-btn">Register</a>
                                     @else
-                                        <a href="#" class="btn header-btn" onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">Logout</a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
+                                        <a href="{{ route('user.home') }}" class="btn header-btn">Go to Dashboard</a>
                                     @endif
                                 </div>
                             </div>

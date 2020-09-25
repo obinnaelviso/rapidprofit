@@ -2791,7 +2791,7 @@ hero-btn {
 }
 
 .slider-height {
-    background-image: url(../img/hero/home.jpeg);
+    background-image: url(../img/hero/home.jpg);
     min-height: 1080px;
     background-repeat: no-repeat;
     background-position: center center;
@@ -3626,12 +3626,20 @@ hero-btn {
 }
 
 .testimonial-area .testimonial-caption .testimonial-top-cap p {
-    color: #a4acc3;
+    color: #323232;
     font-weight: 500;
     line-height: 1.5;
-    padding: 0 3px;
+    padding: 0 10px;
     margin-bottom: 50px;
-    font-size: 16px
+    font-size: 22px
+}
+
+.testimonial-area .testimonial-caption .testimonial-top-cap p::before {
+    content: '"';
+    font-size: 50px;
+    color: black;
+    font-weight: 900;
+    font-family: fangsong;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {

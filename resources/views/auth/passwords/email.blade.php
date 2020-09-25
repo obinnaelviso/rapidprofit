@@ -25,12 +25,8 @@
         align-items: center;
         padding-top: 40px;
         padding-bottom: 40px;
-        background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(/home/assets/img/hero/services.jpg);
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
+        background-color: black;
         height: 100%;
-        padding-top: 3rem;
     }
     </style>
 </head>
@@ -39,35 +35,46 @@
     <!-- ============================================================== -->
     <!-- reset page  -->
     <!-- ============================================================== -->
-    <div class="splash-container">
-        <div class="text-center"><a href="{{ route('index') }}"><img class="logo-img" src="/images/logo.png" width="200px" alt="logo"></a><span class="splash-description">Log in to your {{ config('app.name') }} account</span></div>
-        <div class="card ">
-            <h4 class="card-header text-center">Reset Password</h4>
+    <div class="auth-container">
+        <div class="card auth">
             <div class="card-body">
-                <form method="POST" action="{{ route('password.email') }}">
-                    @csrf
+                <div class="row">
+                    <div class="col-md-6 reset-email">
+                        <form method="POST" action="{{ route('password.email') }}">
+                            @csrf
+                            {{-- Website Title Heading  --}}
+                            <a href="/"><img src="/images/logo.png" class="mb-4 d-md-none" width="200px" alt="{{ config('app.name') }}"></a>
+                            <h2 class="auth-heading">Reset Password</h2>
+                            <p class="auth-subheading mb-5">Type in your email address to reset password</p>
 
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
 
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="email" class="col-md-12 col-form-label text-uppercase">Email Address</label>
-                            <input class="form-control @error('email') is-invalid @enderror" type="text" name="email" value="{{ old('email') }}" placeholder="e.g johndoe@example.com" required>
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="email" class="col-md-12 col-form-label auth-label text-captialize">Email Address</label>
+                                    <input class="form-control auth-input @error('email') is-invalid @enderror" type="text" name="email" value="{{ old('email') }}" placeholder="e.g johndoe@example.com" required>
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            <button type="submit" class="btn auth-button mt-2 text-capitalize">{{ __('Send Reset Link') }}</button>
+                            <div class="mt-2 float-right"><a href="{{ route('login') }}"><< Back to Login</a></div>
+                            
+                        </form>
                     </div>
-
-
-                    <button type="submit" class="btn btn-dark btn-lg btn-block text-capitalize" style="color: white;">{{ __('Send Reset Link') }}</button>
-                </form>
+                    <div class="col-md-6 d-none d-sm-flex auth-bg">
+                        <a href="/"><img src="/images/logo.png" alt="{{ config('app.name') }}"></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

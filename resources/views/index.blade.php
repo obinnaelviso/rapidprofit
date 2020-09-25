@@ -246,7 +246,7 @@
                     <!-- Section Tittle -->
                     <div class="section-tittle section-tittle2 mb-25">
                         <span>Clients Testimonials</span>
-                        <h2>What Our Investors Say!</h2>
+                        <h2 class="text-dark">What Our Investors Say!</h2>
                     </div>
                     <div class="h1-testimonial-active mb-70">
                         <!-- Single Testimonial -->
@@ -254,7 +254,7 @@
                             <!-- Testimonial Content -->
                             <div class="testimonial-caption ">
                                 <div class="testimonial-top-cap">
-                                    <p>Best investment platform ever. I wish I new about it earlier.</p>
+                                    <p class>Best investment platform ever. I wish I new about it earlier.</p>
                                 </div>
                                 <!-- founder -->
                                 <div class="testimonial-founder d-flex align-items-center">
@@ -320,7 +320,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Form Start -->
+                {{-- <!-- Form Start -->
                 <div class="col-xl-4 col-lg-5 col-md-8">
                     <div class="testimonial-form text-center">
                         <h3>Always listening, always understanding.</h3>
@@ -328,7 +328,16 @@
                         <button name="submit" class="submit-btn">Request a Quote</button>
                     </div>
                 </div>
-                <!-- Form End -->
+                <!-- Form End --> --}}
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="owl-carousel owl-theme">
+                        <a href="{{ route('register') }}" target="_blank"><img src="/images/slides/rapidprofit-ad1.jpg" alt="rapidprofit-ad1"></a>
+                        <a href="{{ route('register') }}" target="_blank"><img src="/images/slides/rapidprofit-ad2.jpg" alt="rapidprofit-ad2"></a>
+                        <a href="{{ route('register') }}" target="_blank"><img src="/images/slides/rapidprofit-ad3.jpg" alt="rapidprofit-ad3"></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -409,6 +418,22 @@
 @endsection
 
 @section('input-js')
+<script>
+    $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:20,
+    nav:true,
+    autoplay:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        }
+    }
+})
+</script>
 <script>
     console.log(numberWithCommas($('#active-investors').html()))
     var active_investors = "{{ config('app.currency') }}" + numberWithCommas($('#active-investors').html())

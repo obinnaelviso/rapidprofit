@@ -25,12 +25,8 @@
         align-items: center;
         padding-top: 40px;
         padding-bottom: 40px;
-        background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(/home/assets/img/hero/services.jpg);
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
         height: 100%;
-        padding-top: 3rem;
+        background-color: black;
     }
     </style>
 </head>
@@ -39,30 +35,45 @@
     <!-- ============================================================== -->
     <!-- login page  -->
     <!-- ============================================================== -->
-    <div class="splash-container">
-        <div class="text-center"><a href="{{ route('index') }}"><img class="logo-img" src="/images/logo.png" width="200px" alt="logo"></a><span class="splash-description">Log in to your {{ config('app.name') }} account</span></div>
-        <div class="card ">
+    <div class="auth-container">
+        <div class="card auth">
             <div class="card-body">
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-                    @include('layouts.alerts')
-                    <div class="form-group">
-                        <label for="email" class="col-md-12 col-form-label text-uppercase">Email Address</label>
-                        <input class="form-control form-control-lg" id="email" value="{{ old('email') }}" type="text" autocomplete="off" name="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="col-md-12 col-form-label text-uppercase">Password</label>
-                        <input class="form-control form-control-lg" id="password" type="password" name="password">
-                    </div>
-                    <div class="form-group">
-                        <label class="custom-control custom-checkbox">
-                            <a href="{{ route('password.request') }}">Forget Password?</a>
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-dark btn-lg btn-block" style="color: white">Log in</button>
+                <div class="row">
+                    <div class="col-md-6 login">
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                            {{-- Website Title Heading  --}}
+                            <a href="/"><img src="/images/logo.png" class="mb-4 d-md-none" width="200px" alt="{{ config('app.name') }}"></a>
+                            <h2 class="auth-heading">Sign in into your account!</h2>
+                            <p class="auth-subheading mb-5">Sign in with your data used in registration</p>
 
-                    <div class="text-center">Don't have an account? <a href="{{ route('register') }}">Register</a></div>
-                </form>
+                            @include('layouts.alerts')
+                            <div class="form-group">
+                                <label for="email" class="col-md-12 col-form-label auth-label text-capitalize">Email Address</label>
+                                <input class="form-control auth-input form-control-lg" id="email" value="{{ old('email') }}" type="text" autocomplete="off" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-md-12 col-form-label auth-label text-capitalize">Password</label>
+                                <input class="form-control auth-input form-control-lg" id="password" type="password" name="password">
+                            </div>
+                            <div class="form-group">
+                                <label class="auth-label auth-radio-container">
+                                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <span class="auth-radio"></span> Remember me
+                                </label>
+                                <label class="auth-label float-md-right">
+                                    <a href="{{ route('password.request') }}">Forget Password?</a>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn auth-button mt-2">Sign in to Your Account</button>
+
+                            <div class="auth-label">Don't have an account? <a href="{{ route('register') }}">Sign Up!</a></div>
+                        </form>
+                    </div>
+                    <div class="col-md-6 d-none d-sm-flex auth-bg">
+                        <a href="/"><img src="/images/logo.png" alt="{{ config('app.name') }}"></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

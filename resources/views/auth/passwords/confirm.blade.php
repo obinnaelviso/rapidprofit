@@ -25,12 +25,8 @@
         align-items: center;
         padding-top: 40px;
         padding-bottom: 40px;
-        background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(/home/assets/img/hero/services.jpg);
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
+        background-color: black;
         height: 100%;
-        padding-top: 3rem;
     }
     </style>
 </head>
@@ -39,34 +35,44 @@
     <!-- ============================================================== -->
     <!-- confrim page  -->
     <!-- ============================================================== -->
-    <div class="splash-container">
-        <div class="text-center"><a href="{{ route('index') }}"><img class="logo-img" src="/images/logo.png" width="200px" alt="logo"></a><span class="splash-description">Log in to your {{ config('app.name') }} account</span></div>
-        <div class="card ">
-            <h4 class="card-header text-center">Confirm Password</h4>
+    <div class="auth-container">
+        <div class="card auth">
             <div class="card-body">
-                <form method="POST" action="{{ route('password.confirm') }}">
-                    @csrf
-                    <h5>Please confirm your password before proceeding.</h5>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="password" class="col-md-12 col-form-label text-uppercase">Password</label>
-                            <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" required autocomplete="current-password">
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                <div class="row">
+                    <div class="col-md-6 reset-email">
+                        <form method="POST" action="{{ route('password.confirm') }}">
+                            @csrf
+                            {{-- Website Title Heading  --}}
+                            <a href="/"><img src="/images/logo.png" class="mb-4 d-md-none" width="200px" alt="{{ config('app.name') }}"></a>
+                            <h2 class="auth-heading">Confirm Password</h2>
+                            <p class="auth-subheading mb-5">Type in your email address and new password</p>
+
+                            <h5>Please confirm your password before proceeding.</h5>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="password" class="col-md-12 auth-label col-form-label text-uppercase">Password</label>
+                                    <input class="form-control auth-input @error('password') is-invalid @enderror" type="password" name="password" required autocomplete="current-password">
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn auth-button text-capitalize" style="color: white;">{{ __('Confirm Password') }}</button>
+
+                            @if (Route::has('password.request'))
+                                <a href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                            @endif
+                        </form>
                     </div>
-
-                    <button type="submit" class="btn btn-dark btn-lg btn-block text-capitalize" style="color: white;">{{ __('Confirm Password') }}</button>
-
-                    @if (Route::has('password.request'))
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                            {{ __('Forgot Your Password?') }}
-                        </a>
-                    @endif
-                </form>
+                    <div class="col-md-6 d-none d-sm-flex auth-bg">
+                        <a href="/"><img src="/images/logo.png" alt="{{ config('app.name') }}"></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

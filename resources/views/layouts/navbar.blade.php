@@ -1,5 +1,5 @@
 <div class="dashboard-header">
-    <nav class="navbar navbar-expand-lg bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg dashboard-bg fixed-top">
         <a class="navbar-brand" href="@yield('home-link')"><img src="{{ url('/images/logo.png') }}" width="200px" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,14 +8,15 @@
             <ul class="navbar-nav ml-auto navbar-right-top">
 
             @if(Auth::user()->role_id == role(config('roles.user')))
-                <li class="nav-item text-light mr-2 pr-3">
+                <li class="nav-item balance-border mr-3">
                     Balance: {{ config('app.currency').$user->wallet->amount }}
                 </li>
-                <li class="nav-item text-light mr-2 pr-3">
+                <li class="nav-item bonus-border mr-5">
                     Bonus: {{ config('app.currency').$user->wallet->bonus }}
                 </li>
             @endif
-                <li class="nav-item text-light mr-3">
+                <li class="nav-item username mr-5">
+                    <img src="{{ url('images/icons/profile-pic.svg') }}" class="mr-2" alt="user photo">
                     {{ Auth::user()->first_name.' '.Auth::user()->last_name }}
                 </li>
                 {{--<li class="nav-item dropdown notification">

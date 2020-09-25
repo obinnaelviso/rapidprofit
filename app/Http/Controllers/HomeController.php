@@ -20,6 +20,7 @@ use App\Notifications\InvestmentStart;
 use App\Notifications\WelcomeUser;
 use App\User;
 use Carbon\Carbon;
+use Twilio\Rest\Client;
 use Illuminate\Http\Request;
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\Notification;
@@ -83,13 +84,21 @@ class HomeController extends Controller
         // $user_firstname = "Obinna";
         // $message = "<p>Your account has just being credited with the sum of $200. Please contact our support to make a claim of it. Thanks!</p>";
 
-        $user = User::find(3);
-        $investment = Investment::find(1);
+        // $user = User::find(3);
+        // $investment = Investment::find(1);
+
         // dispatch(new SendNewUserRegistered($user, config('mail.from.address')));
 
         // $user->notify(new WelcomeUser);
 
         // return (new DefaultAdmin("Receipt for Deposit", "A user deposit receipt of payment has just being uploaded for confirmation. Click the button below to process request: "))->toMail($user);
         // return (new InvestmentStart($investment))->toMail($user);
+        $account_sid = config('twilio.account_sid');
+        $auth_token = config('twilio.auth_token');
+        $number = config('twilio.number');
+        $twilio = new Client($account_sid, $auth_token);
+        $twilio->messages->create('+2348026978647', array(
+                                        'from' => $number,
+                                        'body' => 'There is another in the fire :)'));
     }
 }
