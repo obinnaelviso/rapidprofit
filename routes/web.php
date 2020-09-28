@@ -52,7 +52,8 @@ Route::group(['prefix'=>'/user'], function() {
     Route::put('/withdraw/{withdrawal}/cancel', 'User\WalletController@withdrawCancel')->name('user.withdraw.cancel');
     // -----------------------> Profile
     Route::get('/profile', 'User\DashboardController@profile')->name('user.profile');
-    Route::put('/profile', 'User\DashboardController@profile_update')->name('user.profile');
+    Route::get('/profile/referrals', 'User\DashboardController@referrals')->name('user.profile.referrals');
+    Route::put('/profile', 'User\DashboardController@profileUpdate')->name('user.profile');
 });
 
 /*
@@ -68,6 +69,7 @@ Route::group(['prefix'=>'/admin'], function() {
     Route::get('/users/{reg_user}', 'Admin\UserController@viewUser')->name('admin.manage.users.view');
     Route::delete('/users/{reg_user}/delete', 'Admin\UserController@deleteUser')->name('admin.manage.users.delete');
     Route::put('/users/{reg_user}/update-balance', 'Admin\UserController@updateBalance')->name('admin.manage.users.update-balance');
+    Route::put('/users/{reg_user}/update-bonus', 'Admin\UserController@updateBonus')->name('admin.manage.users.update-bonus');
     Route::put('/users/{reg_user}/update-email', 'Admin\UserController@updateEmail')->name('admin.manage.users.update-email');
     Route::post('/users/{reg_user}/account-status', 'Admin\UserController@accountStatus')->name('admin.manage.users.account-status');
     Route::post('/users/{reg_user}/deposit', 'Admin\UserController@newDeposit')->name('admin.manage.users.deposit');

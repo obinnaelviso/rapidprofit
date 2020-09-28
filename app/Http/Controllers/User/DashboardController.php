@@ -63,7 +63,13 @@ class DashboardController extends Controller
         return view('auth.user.profile', compact('user'));
     }
 
-    public function profile_update(Request $request) {
+    public function referrals() {
+        $user = $this->user();
+        $referrals = $user->referrerBonus()->orderBy('status_id', 'asc')->get();
+        return view('auth.user.referrals', compact('user','referrals'));
+    }
+
+    public function profileUpdate(Request $request) {
         $user = $this->user();
 
         $this->validate(request(), [

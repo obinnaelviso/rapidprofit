@@ -71,6 +71,27 @@
         }
     })
 
+    $('#update-bonus').click(function() {
+        var bonus = prompt('Enter New Bonus', '')
+        if(bonus != null && bonus !="") {
+            $.ajax({
+                type: "PUT",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "bonus": bonus
+                },
+                url: "{{ route('admin.manage.users.update-bonus', $reg_user->id) }}",
+                success: function(response){
+                    $("#bonus").fadeOut(200, function() {
+                            // form.html($response).fadeIn().delay(2000);
+                            $("#bonus").hide().html("{{ config('app.currency') }}"+response.bonus).fadeIn().delay(200);
+                    }).hide()
+                alert(response.message)
+                }
+            });
+        }
+    })
+
     $('#update-email').click(function() {
         var email = prompt('Enter New Email Address', '')
         if(email != null && email !="") {
@@ -113,7 +134,7 @@
             });
         }
     }
-    
+
     function newWithdrawal(withdraw_id) {
         $.ajax({
             type: "PUT",

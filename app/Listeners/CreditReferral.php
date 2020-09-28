@@ -8,7 +8,7 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class CreditReferral implements ShouldQueue
+class CreditReferral
 {
     /**
      * Create the event listener.
@@ -47,7 +47,7 @@ class CreditReferral implements ShouldQueue
                 'referral_code' => $ref_code,
                 'amount' => $referrer_bonus,
                 'ref_amount' => $referred_bonus,
-                'status_id' => status(config('status.pending'))
+                'status_id' => status(config('status.inactive'))
             ]);
 
             // $ref_user->notify(new ReferralBonus($referrer_bonus));

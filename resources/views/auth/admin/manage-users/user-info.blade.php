@@ -21,6 +21,11 @@
                 <td><button class="btn btn-success btn-sm" id="update-balance">Update Balance</button></td>
             </tr>
             <tr>
+                <td class="title">Bonus</td>
+                <td class="text-warning text-big" id="bonus">{{ config('app.currency').$reg_user->wallet->bonus }}</td>
+                <td><button class="btn btn-warning btn-sm" id="update-bonus">Update Bonus</button></td>
+            </tr>
+            <tr>
                 <td class="title">Role</td>
                 <td class="text-secondary text-capitalize">{{ $reg_user->role->title }}</td>
             </tr>

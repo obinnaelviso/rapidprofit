@@ -15,7 +15,7 @@
                     Bonus: {{ config('app.currency').$user->wallet->bonus }}
                 </li>
             @endif
-                <a href="{{ route('user.profile') }}"><li class="nav-item username mr-5">
+                <a href="@if(Auth::user()->role_id == role(config('roles.user'))) {{ route('user.profile') }} @else javascript::void(0) @endif"><li class="nav-item username mr-5">
                     <img src="{{ url('images/icons/profile-pic.svg') }}" class="mr-2" alt="user photo">
                     {{ Auth::user()->first_name.' '.Auth::user()->last_name }}
                 </li></a>

@@ -7,6 +7,7 @@ use App\Models\Withdrawal;
 use App\Notifications\DefaultAdmin;
 use App\Notifications\DepositReceiptUser;
 use App\Notifications\WithdrawRequestUser;
+use App\Notifications\WithdrawalCancel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -15,7 +16,8 @@ class WalletController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'account_status', 'verified']);
+        $this->middleware(['auth', 'account_status']);
+        $this->middleware('verified')->except('withdrawCancel');
     }
 
     public function transferBonus() {
@@ -121,7 +123,7 @@ class WalletController extends Controller
     }
 
     public function withdrawCancel(Withdrawal $withdrawal) {
-        $user = $this->user();
+        $user = $withdrawal->user;
 
         $withdrawal->status_id = status(config('status.inactive'));
         $withdrawal->save();
@@ -129,6 +131,7 @@ class WalletController extends Controller
         $user->wallet->amount += $withdrawal->amount;
         $user->wallet->save();
 
+        $user->notify(new WithdrawalCancel);
         return back()->with('success', 'Withdrawal request cancelled!');
     }
 

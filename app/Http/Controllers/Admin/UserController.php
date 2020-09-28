@@ -54,6 +54,18 @@ class UserController extends Controller
         ]);
     }
 
+    public function updateBonus(User $reg_user, Request $request) {
+        $this->validate(request(), [
+            'bonus' => 'required|numeric'
+        ]);
+        $reg_user->wallet->bonus = $request->bonus;
+        $reg_user->wallet->save();
+        return response([
+            'bonus' => $reg_user->wallet->bonus,
+            'message' => 'User bonus updated successfully!'
+        ]);
+    }
+
     public function updateEmail(User $reg_user, Request $request) {
         $this->validate(request(), [
             'email' => 'required|email|unique:users'

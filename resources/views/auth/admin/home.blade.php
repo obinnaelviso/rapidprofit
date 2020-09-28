@@ -12,16 +12,16 @@
     </div>
 </div>
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-md-12 col-sm-12 col-12">
         <div class="page-header">
             <h3 class="pageheader-title text-muted">Recent Activities</h3>
-            {{-- <p class="pageheader-text">Get to manage all your wallets in one place</p> --}}
+            <p class="pageheader-text">Get to manage all your wallets in one place</p>
         </div>
     </div>
-</div>
+</div> --}}
 
-<div class="row mb-3">
+{{-- <div class="row mb-3">
     <div class="col-md-6 mb-3" id="deposit-table">
         @if($deposit_requests->count())
             <div class="card manage-investments">
@@ -114,12 +114,12 @@
             </div>
         @endif
     </div>
-</div>
+</div> --}}
 
 <div class="row">
     <div class="col-md-12 col-sm-12 col-12">
         <div class="page-header">
-            <h3 class="pageheader-title">Statistics</h3>
+            <h3 class="pageheader-title text-muted">Statistics</h3>
             {{-- <p class="pageheader-text">Get to manage all your wallets in one place</p> --}}
         </div>
     </div>

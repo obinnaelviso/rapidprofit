@@ -122,7 +122,7 @@
                                     <td><div class="badge badge-warning">{{ $withdrawal->status->title }}</div></td>
                                     <td>{{ $withdrawal->created_at }}</td>
                                     <td>
-                                        <a class="btn btn-danger" href="#" onclick="event.preventDefault();
+                                        <a class="btn btn-danger" href="javascript::void(0)" onclick="event.preventDefault();
                                         document.getElementById('cancel-withdrawal-form').submit();">Cancel</a>
                                         <form id="cancel-withdrawal-form" action="{{ route('user.withdraw.cancel', $withdrawal->id) }}" method="POST" style="display: none;">
                                             @csrf @method('put')

@@ -21,7 +21,7 @@
                             <div class="card mb-0 statistics statistics-left-bg">
                                 <div class="card-body">
                                     <div class="active-referrals">
-                                        <p class="profile-stats-heading">Active<br>Referral</p>
+                                        <p class="profile-stats-heading"><a href="{{ route('user.profile.referrals') }}" class="auth-link">Active<br>Referral</a></p>
                                         <h2 class="profile-stats-text" id="active-investments">{{ $user->activeReferrals->count() }}</h2>
                                     </div>
                                 </div>
@@ -31,7 +31,7 @@
                             <div class="card mb-0 statistics statistics-middle-bg">
                                 <div class="card-body">
                                     <div class="total-referrals">
-                                        <p class="profile-stats-heading">Total<br>Referral</p>
+                                        <p class="profile-stats-heading"><a href="{{ route('user.profile.referrals') }}" class="auth-link">Total<br>Referral</a></p>
                                         <h2 class="profile-stats-text" id="active-investments">{{ $user->referrerBonus->count() }}</h2>
                                     </div>
                                 </div>

@@ -95,7 +95,7 @@ class InvestmentController extends Controller
             $referred_bon = array_key_exists('referred_bon', $general) ?$general->referred_bon:5;
             $referral->user->wallet->bonus += $referrer_bon;
             $user->wallet->bonus += $referred_bon;
-            $referral->status_id = status(config('status.expired'));
+            $referral->status_id = status(config('status.active'));
             $referral->amount = $referrer_bon;
             $referral->ref_amount = $referred_bon;
             $referral->user->wallet->save();

@@ -5197,6 +5197,17 @@ input[type=file].fund-input {
     color: #FCC81A;
 }
 
+.auth-link {
+    color: #FCD759;
+}
+
+.auth-link:hover,
+.auth-link:active,
+.auth-link:focus {
+    text-decoration: none;
+    color: #FCC81A;
+}
+
 .auth-radio-container {
     display: inline-block;
     position: relative;
@@ -5316,6 +5327,7 @@ input[type=file].fund-input {
     letter-spacing: 0.06em;
     padding: 0;
     transition: border-bottom-color 200ms ease-in-out;
+    z-index: 3000;
 }
 
 .form-control.auth-select:-webkit-autofill,

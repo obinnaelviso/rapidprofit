@@ -11,6 +11,7 @@
         <h2>Manage Withdrawals</h2>
     </div>
 </div>
+    @include('layouts.alerts')
 <div class="row mb-3">
     <div class="col-md-12 mb-3" id="withdrawal-table">
         @if($pending_requests->count())
@@ -41,7 +42,13 @@
                                         <td>{{ $withdrawal->bitcoin_address }}</td>
                                         <td>{{ $withdrawal->created_at }}</td>
                                         <td>
-                                            <button class="btn btn-success btn-sm" onclick="newWithdrawal('{{ $withdrawal->id }}', {{ $withdrawal->user->id }})">Complete Withdrawal</button>
+                                            <button class="btn btn-success btn-sm btn-block" onclick="newWithdrawal('{{ $withdrawal->id }}', {{ $withdrawal->user->id }})">Complete Withdrawal</button>
+                                            {{-- Cancel Withdrawal --}}
+                                            <a class="btn btn-danger btn-sm d-block mt-2" href="javascript::void(0)" onclick="event.preventDefault();
+                                            document.getElementById('cancel-withdrawal-form').submit();">Cancel</a>
+                                            <form id="cancel-withdrawal-form" action="{{ route('user.withdraw.cancel', $withdrawal->id) }}" method="POST" style="display: none;">
+                                                @csrf @method('put')
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -66,7 +73,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Completed Withdrawal Requests</h4>
                     <div>
-                        <table class="table table-striped table-inverse">
+                        <table class="table table-borderless">
                             <thead class="thead-inverse">
                                 <tr>
                                     @php $i = 1; @endphp
