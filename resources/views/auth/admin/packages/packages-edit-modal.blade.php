@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="name" class="col-md-12 col-form-label text-uppercase">Name</label>
+                                <label for="name">Name</label>
                                 <input class="form-control @error('name') is-invalid @enderror" type="text" name="name" value="{{ old('name')?:$package->name }}" placeholder="e.g Premium" required>
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-md-8">
                             <div class="form-group">
-                                <label for="description" class="col-md-12 col-form-label text-uppercase">Description (optional)</label>
+                                <label for="description">Description (optional)</label>
                                 <textarea name="description" class="form-control" rows="5" placeholder="Type description here...">{{ old('description'?:$package->description) }}</textarea>
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
@@ -38,7 +38,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="min_amount" class="col-md-12 col-form-label text-uppercase">Min Amount</label>
+                                <label for="min_amount">Min Amount</label>
                                 <input class="form-control @error('min_amount') is-invalid @enderror" type="number" min="0" name="min_amount" value="{{ old('min_amount')?:$package->min_amount }}" placeholder="0.0" required>
                                 @error('min_amount')
                                     <span class="invalid-feedback" role="alert">
@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="max_amount" class="col-md-12 col-form-label text-uppercase">Max Amount</label>
+                                <label for="max_amount">Max Amount</label>
                                 <input class="form-control @error('max_amount') is-invalid @enderror" type="number" min="0" name="max_amount" value="{{ old('max_amount')?:$package->max_amount }}" placeholder="0.0" required>
                                 @error('max_amount')
                                     <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="gift_bonus" class="col-md-12 col-form-label text-uppercase">Gift Bonus</label>
+                                <label for="gift_bonus">Gift Bonus</label>
                                 <input class="form-control @error('gift_bonus') is-invalid @enderror" type="number" min="0" name="gift_bonus" value="{{ old('gift_bonus')?:$package->gift_bonus }}" placeholder="0.0" required>
                                 @error('gift_bonus')
                                     <span class="invalid-feedback" role="alert">
@@ -73,7 +73,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="percentage" class="col-md-12 col-form-label text-uppercase">Percentage</label>
+                                <label for="percentage">Percentage</label>
                                 <input class="form-control @error('percentage') is-invalid @enderror" type="number" min="1" name="percentage" value="{{ old('percentage')?:$package->percentage }}" placeholder="e.g Premium" required>
                                 @error('max_amount')
                                     <span class="invalid-feedback" role="alert">
@@ -86,7 +86,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="duration" class="col-md-12 col-form-label text-uppercase">Duration</label>
+                                <label for="duration">Duration</label>
                                 <select name="duration" id="duration" class="form-control">
                                     <option value="7" @if($package->duration == 7) selected @endif>7 days</option>
                                     <option value="30" @if($package->duration == 30) selected @endif>30 days</option>

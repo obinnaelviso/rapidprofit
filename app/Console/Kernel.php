@@ -32,8 +32,7 @@ class Kernel extends ConsoleKernel
                  ->everyFiveMinutes();
 
         $schedule->command('queue:work --daemon')
-                 ->everyMinute()
-                 ->withoutOverlapping();
+                 ->everyMinute();
     }
 
     /**

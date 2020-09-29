@@ -66,15 +66,6 @@
         <div class="col-lg-4 col-md-6 card-group-row__col">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
                 <div class="flex">
-                    <div class="card-header__title text-muted mb-2">Active Investments</div>
-                    <div class="text-amount">{{ $active_investments->count() }}</div>
-                </div>
-                <div><i class="fas fa-chart-line icon-muted icon-40pt ml-2"></i></div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 card-group-row__col">
-            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
-                <div class="flex">
                     <div class="card-header__title text-muted mb-2">Total Investments</div>
                     <div class="text-amount">{{ $user->investments->count() }}</div>
                 </div>

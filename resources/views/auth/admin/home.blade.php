@@ -1,36 +1,38 @@
-@extends('layouts.main')
-@section('title', 'My Dashboard - '.' Admin '.config('app.name'))
+@extends('layouts.dashboard.main')
+@section('title', 'Admin Dashboard')
 @section('home-active', 'active')
 @section('sidebar')
-@include('layouts.admin-sidebar')
+@include('layouts.sidebar-admin')
 @endsection
 
 @section('content')
-<div class="row mb-3">
-    <div class="col-md-12">
-        <h1>Home Overview</h1>
-        <hr>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-12">
-        <div class="page-header">
-            <h2 class="pageheader-title">Recent Activities</h2>
-            {{-- <p class="pageheader-text">Get to manage all your wallets in one place</p> --}}
+<div class="container-fluid page__heading-container">
+    <div class="page__heading d-flex align-items-center">
+        <div class="flex">
+            {{-- <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav> --}}
+            <h1 class="m-0">Admin Dashboard</h1>
         </div>
     </div>
 </div>
 
-<div class="row mb-3">
-    <div class="col-md-6 mb-3" id="deposit-table">
-        @if($deposit_requests->count())
-            <div class="card text-left">
-                <div class="card-body">
-                    <h4 class="card-title">New Payment Receipts</h4>
-                    <div>
-                        <table class="table table-striped table-inverse table-responsive">
-                            <thead class="thead-inverse">
+
+
+
+{{-- <div class="container-fluid page__container">
+    <div class="card card-form">
+        <div class="row no-gutters">
+            <div class="col-lg-6 card-body">
+                @if($deposit_requests->count())
+                    <h5 class="card-heading">Recent Deposit Requests</h5>
+                    <div class="table-responsive border-bottom">
+
+                        <table class="table mb-0 thead-border-top-0">
+                            <thead>
                                 <tr>
                                     <th scope="col">Name</th>
                                     <th scope="col">Payment Method</th>
@@ -40,8 +42,8 @@
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
-                                <tbody>
-                                    @foreach($deposit_requests->get() as $receipt)
+                            <tbody>
+                                @foreach($deposit_requests->get() as $receipt)
                                     <tr>
                                         <td class="text-uppercase">{{ $receipt->user->first_name.' '.$receipt->user->last_name }}</td>
                                         <td class="text-uppercase">{{ $receipt->payment_method }}</td>
@@ -58,28 +60,21 @@
                                             <button class="btn btn-success btn-sm" onclick="newDeposit('{{ $receipt->id }}', {{ $receipt->user->id }});">Confirm Deposit</button>
                                         </td>
                                     </tr>
-                                    @endforeach
-                                </tbody>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
-                </div>
+                @else
+                    <h5 class="card-text text-success">No Payment Receipts Available</h5>
+                @endif
             </div>
-        @else
-            <div class="card text-left">
-              <div class="card-body">
-                <h4 class="card-text text-success">No Payment Receipts Available</h4>
-              </div>
-            </div>
-        @endif
-    </div>
-    <div class="col-md-6 mb-3" id="withdrawal-table">
-        @if($withdraw_requests->count())
-            <div class="card text-left">
-                <div class="card-body">
-                    <h4 class="card-title">New Withdrawal Receipt</h4>
-                    <div>
-                        <table class="table table-striped table-inverse table-responsive">
-                            <thead class="thead-inverse">
+            <div class="col-lg-6 card-body">
+                @if($withdraw_requests->count())
+                    <h5 class="card-heading">Recent Withdraw Requests</h5>
+                    <div class="table-responsive border-bottom">
+
+                        <table class="table mb-0 thead-border-top-0">
+                            <thead>
                                 <tr>
                                     <th scope="col">Name</th>
                                     <th scope="col">Method</th>
@@ -105,135 +100,113 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+                @else
+                    <h5 class="card-text text-success">No Withdrawal Requests Available</h5>
+                @endif
             </div>
-        @else
-            <div class="card text-left">
-              <div class="card-body">
-                <h4 class="card-text text-success">No Withdrawal Requests Available</h4>
-              </div>
-            </div>
-        @endif
+        </div>
     </div>
-</div>
+</div> --}}
 
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-12">
-        <div class="page-header">
-            <h2 class="pageheader-title">Statistics</h2>
-            {{-- <p class="pageheader-text">Get to manage all your wallets in one place</p> --}}
-        </div>
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Registered Users</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $users->count() }}</h1>
+
+<div class="container-fluid page__container">
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-dark-gray d-flex align-items-center mt-3">
+                <i class="fas fa-tachometer-alt icon-muted mr-2"></i>
+                <strong>Statistics</strong>
+            </p>
+        </div>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-primary mb-2">Verified Users</div>
+                    <div class="text-amount">{{ $verified_users->count() }}</div>
                 </div>
+                <div><i class="fas fa-users icon-muted icon-40pt ml-2"></i></div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Verified Users</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $verified_users->count() }}</h1>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-success mb-2">Active Users</div>
+                    <div class="text-amount">{{ $active_users->count() }}</div>
                 </div>
+                <div><i class="fas fa-users icon-muted icon-40pt ml-2"></i></div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Active Users</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1 text-success">{{ $active_users->count() }}</h1>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-danger mb-2">Blocked Users</div>
+                    <div class="text-amount">{{ $blocked_users->count() }}</div>
                 </div>
+                <div><i class="fas fa-users icon-muted icon-40pt ml-2"></i></div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Blocked Users</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1 text-danger">{{ $blocked_users->count() }}</h1>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Investment Packages</div>
+                    <div class="text-amount">{{ $packages->count() }}</div>
                 </div>
+                <div><i class="fas fa-boxes icon-muted icon-40pt ml-2"></i></div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Investment Packages</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $packages->count() }}</h1>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Total Investments</div>
+                    <div class="text-amount">{{ $total_investments->count() }}</div>
                 </div>
+                <div><i class="fas fa-chart-line icon-muted icon-40pt ml-2"></i></div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Total Investments</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $total_investments->count() }}</h1>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Active Investments</div>
+                    <div class="text-amount">{{ $active_investments->count() }}</div>
                 </div>
+                <div><i class="fas fa-chart-line icon-muted icon-40pt ml-2"></i></div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Active Investments</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $active_investments->count() }}</h1>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Completed Investments</div>
+                    <div class="text-amount">{{ $completed_investments->count() }}</div>
                 </div>
+                <div><i class="fas fa-chart-line icon-muted icon-40pt ml-2"></i></div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Completed Investments</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1 text-success">{{ $completed_investments->count() }}</h1>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Total Payouts</div>
+                    <div class="text-amount" id="total-payouts">{{ $total_payouts->sum('amount') }}</div>
                 </div>
+                <div><i class="fas fa-money-bill-wave icon-muted icon-40pt ml-2"></i></div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Total Payouts</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1" id="total-payouts">{{ $total_payouts->sum('amount') }}</h1>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Withdrawal Requests</div>
+                    <div class="text-amount">{{ $withdraw_requests->count() }}</div>
                 </div>
+                <div><i class="fas fa-hand-holding-usd icon-muted icon-40pt ml-2"></i></div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Withdrawal Requests</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $withdraw_requests->count() }}</h1>
+        <div class="col-lg-4 col-md-6 card-group-row__col">
+            <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
+                <div class="flex">
+                    <div class="card-header__title text-muted mb-2">Deposit Requests</div>
+                    <div class="text-amount">{{ $deposit_requests->count() }}</div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-xs-6 mb-3">
-        <div class="card border-3 border-top border-top-warning">
-            <div class="card-body text-center">
-                <h5 class="text-muted">Deposit Requests</h5>
-                <div class="metric-value d-inline-block">
-                    <h1 class="mb-1">{{ $deposit_requests->count() }}</h1>
-                </div>
+                <div><i class="fas fa-wallet icon-muted icon-40pt ml-2"></i></div>
             </div>
         </div>
     </div>
@@ -247,48 +220,6 @@
 
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    function newDeposit(receipt_id = 0, user_id) {
-        var amount = prompt('Enter New Deposit', '')
-        if(amount != null && amount !="") {
-            $.ajax({
-                type: "POST",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "amount": amount,
-                "receipt_id": receipt_id,
-                    "reg_user_id": user_id
-                },
-                url: "{{ route('admin.deposit') }}",
-                success: function(response){
-                    $("#deposit-table").fadeOut(200, function() {
-                            // form.html($response).fadeIn().delay(2000);
-                            $("#deposit-table").hide().load(location.href + " #deposit-table").fadeIn().delay(200);
-                    }).hide()
-                alert(response.message)
-                }
-            });
-        }
-    }
-
-    function newWithdrawal(withdraw_id, user_id) {
-        $.ajax({
-            type: "PUT",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "withdraw_id": withdraw_id,
-                "reg_user_id": user_id
-            },
-            url: "{{ route('admin.withdraw') }}",
-            success: function(response){
-                $("#withdrawal-table").fadeOut(200, function() {
-                        // form.html($response).fadeIn().delay(2000);
-                        $("#withdrawal-table").hide().load(location.href + " #withdraw-table").fadeIn().delay(200);
-                }).hide()
-            alert(response.message)
-            }
-        });
     }
 </script>
 @endsection

@@ -83,9 +83,9 @@
 <div class="container-fluid page__container">
     <div class="card card-form">
         <div class="row no-gutters">
-            <h3 class="card-header">Active Investments</h3>
-            <div class="col-lg-12 card-body">
 
+            <div class="col-lg-12 card-body">
+                <h3 class="card-header">Active Investments</h3>
                 <div class="table-responsive border-bottom">
 
                     <table class="table mb-0 thead-border-top-0">

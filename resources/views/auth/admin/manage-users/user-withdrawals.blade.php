@@ -3,11 +3,11 @@
     $completed_withdrawals = $withdrawals->where('status_id', status(config('status.completed')));
 @endphp
 <h3>Withdrawal Requests</h3>
-<div class="table-responsive mb-5">
-    <table class="table table-hover" id="withdrawal-table">
+<div class="table-responsive border-bottom mb-5">
+
+    <table class="table mb-0 thead-border-top-0" id="withdrawal-table">
         <thead>
             <tr>
-                @php $i = 1; @endphp
                 <th scope="col">#</th>
                 <th scope="col">Method</th>
                 <th scope="col">Amount</th>
@@ -19,13 +19,18 @@
         <tbody>
             @foreach($active_withdrawals as $withdrawal)
                 <tr>
-                    <th scope="row">{{ $i++ }}</th>
+                    <th scope="row">{{ $loop->iteration }}</th>
                     <td class="text-capitalize">{{ $withdrawal->withdraw_method }}</td>
                     <td>{{ config('app.currency').$withdrawal->amount }}</td>
                     <td>{{ $withdrawal->bitcoin_address }}</td>
                     <td>{{ $withdrawal->created_at }}</td>
                     <td>
-                        <button class="btn btn-success btn-sm" onclick="newWithdrawal('{{ $withdrawal->id }}');">Complete Withdrawal</button>
+                        <button class="btn btn-warning btn-sm btn-block" onclick="newWithdrawal('{{ $withdrawal->id }}');">Complete Withdrawal</button>
+                        <button class="btn btn-danger btn-sm btn-block mt-2" onclick="event.preventDefault();
+                        document.getElementById('cancel-withdrawal-form').submit();">Cancel</button>
+                        <form id="cancel-withdrawal-form" action="{{ route('user.withdraw.cancel', $withdrawal->id) }}" method="POST" style="display: none;">
+                            @csrf @method('put')
+                        </form>
                     </td>
                 </tr>
             @endforeach
@@ -34,11 +39,11 @@
 </div>
 
 <h3>Completed Withdrawal Requests</h3>
-<div class="table-responsive">
-    <table class="table table-hover" id="withdrawal-comp-table">
+<div class="table-responsive border-bottom">
+
+    <table class="table mb-0 thead-border-top-0" id="withdrawal-comp-table">
         <thead>
             <tr>
-                @php $i = 1; @endphp
                 <th scope="col">#</th>
                 <th scope="col">Method</th>
                 <th scope="col">Amount</th>
@@ -51,7 +56,7 @@
         <tbody>
             @foreach($withdrawals as $withdrawal)
                 <tr>
-                    <th scope="row">{{ $i++ }}</th>
+                    <th scope="row">{{ $loop->iteration }}</th>
                     <td class="text-capitalize">{{ $withdrawal->withdraw_method }}</td>
                     <td>{{ config('app.currency').$withdrawal->amount }}</td>
                     <td>{{ $withdrawal->bitcoin_address }}</td>

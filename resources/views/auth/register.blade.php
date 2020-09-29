@@ -401,7 +401,7 @@
                         </div>
                     </div>
                 </div>
-                @error('phone')
+                @error('password')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

@@ -11,6 +11,7 @@ use App\Models\Wallet;
 use App\Models\Status;
 use App\Models\Withdrawal;
 use App\Models\Deposit;
+use App\Models\Package;
 use App\Models\PaymentReceipt;
 use App\Models\Setting;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -60,8 +61,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Status::class);
     }
 
-    public function role() {
-        return $this->belongsTo(Role::class);
+    public function packages() {
+        return $this->hasMany(Package::class);
     }
 
     public function investments() {
@@ -78,6 +79,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function withdrawals() {
         return $this->hasMany(Withdrawal::class);
+    }
+
+    public function role() {
+        return $this->belongsTo(Role::class);
     }
 
     public function deposits() {

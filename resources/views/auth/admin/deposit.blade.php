@@ -1,29 +1,41 @@
-@extends('layouts.main')
-@section('title', 'My Dashboard - '.' Admin '.config('app.name'))
+@extends('layouts.dashboard.main')
+@section('title', 'Manage Deposits')
 @section('deposits-active', 'active')
 @section('sidebar')
-@include('layouts.admin-sidebar')
+@include('layouts.sidebar-admin')
 @endsection
 
 @section('content')
-<div class="row mb-3">
-    <div class="col-md-12">
-        <h1>Manage Deposits</h1>
-        <hr>
+<div class="container-fluid page__heading-container">
+    <div class="page__heading d-flex align-items-center">
+        <div class="flex">
+            {{-- <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav> --}}
+            <h1 class="m-0">Manage Deposits</h1>
+        </div>
     </div>
 </div>
 
-<div class="row mb-3">
-    <div class="col-md-12 mb-3" id="deposit-table">
-        @if($payment_receipts->count())
-            <div class="card text-left">
-                <div class="card-body">
-                    <h4 class="card-title">New Payment Receipts</h4>
-                    <div>
-                        <table class="table table-striped table-inverse">
+
+
+
+<div class="container-fluid page__container">
+    @include('layouts.alerts')
+    <div class="card card-form">
+        <div class="row no-gutters" id="deposit-table">
+
+            @if($payment_receipts->count())
+                <div class="col-lg-12">
+                    <h3 class="card-header">New Payment Receipts</h3>
+                    <div class="table-responsive border-bottom">
+
+                        <table class="table mb-0 thead-border-top-0">
                             <thead class="thead-inverse">
                                 <tr>
-                                    @php $i = 1; @endphp
                                     <th scope="col">#</th>
                                     <th scope="col">User</th>
                                     <th scope="col">Payment Method</th>
@@ -36,10 +48,10 @@
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
-                                <tbody>
-                                    @foreach($payment_receipts->get() as $receipt)
+                            <tbody>
+                                @foreach($payment_receipts->get() as $receipt)
                                     <tr>
-                                        <th scope="row">{{ $i++ }}</th>
+                                        <th scope="row">{{ $loop->iteration }}</th>
                                         <td class="text-capitalize">{{ $receipt->user->first_name.' '.$receipt->user->last_name }}</td>
                                         <td class="text-uppercase">{{ $receipt->payment_method }}</td>
                                         <td>
@@ -58,26 +70,23 @@
                                             @if($receipt->status_id == status(config('status.completed')))
                                                 <div class="badge badge-success">{{ $receipt->status->title }}</div>
                                             @else
-                                                <button class="btn btn-success btn-sm" onclick="newDeposit('{{ $receipt->id }}', {{ $receipt->user->id }});">Confirm Deposit</button>
+                                                <button class="btn btn-warning btn-sm" onclick="newDeposit('{{ $receipt->id }}', {{ $receipt->user->id }});">Confirm Deposit</button>
                                             @endif
                                         </td>
                                     </tr>
-                                    @endforeach
-                                </tbody>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
-            </div>
-        @else
-            <div class="card text-left">
-              <div class="card-body">
-                <h4 class="card-text text-success">No Payment Receipts Available</h4>
-              </div>
-            </div>
-        @endif
+            @else
+                <div class="col-lg-12 card-body">
+                    <h4 class="text-success">No Payment Receipts Available</h4>
+                </div>
+            @endif
+        </div>
     </div>
 </div>
-
 @endsection
 @section('input-js')
 <script>
@@ -95,9 +104,9 @@
                 },
                 url: "{{ route('admin.deposit') }}",
                 success: function(response){
-                    $("#deposit-table").fadeOut(200, function() {
-                            // form.html($response).fadeIn().delay(2000);
-                            $("#deposit-table").hide().load(location.href + " #deposit-table").fadeIn().delay(200);
+                    $("#deposit-table").fadeOut(100, function() {
+                            // form.html($response).fadeIn().delay(1000);
+                            $("#deposit-table").hide().load(location.href + " #deposit-table>").fadeIn().delay(100);
                     }).hide()
                 alert(response.message)
                 }

@@ -1,82 +1,106 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Confirm Password - {{ config('app.name') }}</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/libs/css/style.css">
-    <link rel="stylesheet" href="/vendor/fonts/fontawesome/css/fontawesome-all.css">
-	<link href="/favicon.png" rel="icon" type="image/png"/>
-    <style>
-    html,
-    body {
-        height: 100%;
-    }
 
-    body {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-align: center;
-        align-items: center;
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(/home/assets/img/hero/services.jpg);
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 100%;
-        padding-top: 3rem;
-    }
-    </style>
+    <!-- Prevent the demo from appearing in search engines -->
+    <meta name="robots" content="noindex">
+	<link href="/favicon.png" rel="icon" type="image/png"/>
+
+    <!-- Simplebar -->
+    <link type="text/css" href="/assets/vendor/simplebar.min.css" rel="stylesheet">
+
+    <!-- App CSS -->
+    <link type="text/css" href="/assets/css/app.css" rel="stylesheet">
+    <link type="text/css" href="/assets/css/app.rtl.css" rel="stylesheet">
+
+    <!-- Material Design Icons -->
+    <link type="text/css" href="/assets/css/vendor-material-icons.css" rel="stylesheet">
+    <link type="text/css" href="/assets/css/vendor-material-icons.rtl.css" rel="stylesheet">
+
+    <!-- Font Awesome FREE Icons -->
+    <link type="text/css" href="/assets/css/vendor-fontawesome-free.css" rel="stylesheet">
+    <link type="text/css" href="/assets/css/vendor-fontawesome-free.rtl.css" rel="stylesheet">
+
+
 </head>
 
-<body>
-    <!-- ============================================================== -->
-    <!-- confrim page  -->
-    <!-- ============================================================== -->
-    <div class="splash-container">
-        <div class="text-center"><a href="{{ route('index') }}"><img class="logo-img" src="/images/logo.png" width="200px" alt="logo"></a><span class="splash-description">Log in to your {{ config('app.name') }} account</span></div>
-        <div class="card ">
-            <h4 class="card-header text-center">Confirm Password</h4>
-            <div class="card-body">
-                <form method="POST" action="{{ route('password.confirm') }}">
-                    @csrf
-                    <h5>Please confirm your password before proceeding.</h5>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="password" class="col-md-12 col-form-label text-uppercase">Password</label>
-                            <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" required autocomplete="current-password">
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
+<body class="layout-login">
 
-                    <button type="submit" class="btn btn-dark btn-lg btn-block text-capitalize" style="color: white;">{{ __('Confirm Password') }}</button>
 
-                    @if (Route::has('password.request'))
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                            {{ __('Forgot Your Password?') }}
-                        </a>
-                    @endif
-                </form>
-            </div>
+
+
+
+    <div class="layout-login__overlay"></div>
+    <div class="layout-login__form bg-white" data-simplebar>
+        <div class="d-flex justify-content-center mt-2 mb-5 navbar-light">
+            <a href="/" class="navbar-brand" style="min-width: 0">
+                <img src="/images/logo-alt.png" width="200" alt="{{ config('app.name') }}">
+            </a>
         </div>
+
+        <h4 class="m-0">Welcome back!</h4>
+        <p class="mb-5">Confirm Password</p>
+        <form method="POST" action="{{ route('password.confirm') }}">
+            @csrf
+            <h5>Please confirm your password before proceeding.</h5>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" required autocomplete="current-password">
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block text-capitalize">{{ __('Confirm Password') }}</button>
+
+            @if (Route::has('password.request'))
+                <a class="btn btn-link" href="{{ route('password.request') }}">
+                    {{ __('Forgot Your Password?') }}
+                </a>
+            @endif
+        </form>
     </div>
 
-    <!-- ============================================================== -->
-    <!-- end confrim page  -->
-    <!-- ============================================================== -->
-    <!-- Optional JavaScript -->
-    <script src="/vendor/jquery/jquery-3.3.1.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <!-- jQuery -->
+    <script src="/assets/vendor/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="/assets/vendor/popper.min.js"></script>
+    <script src="/assets/vendor/bootstrap.min.js"></script>
+
+    <!-- Simplebar -->
+    <script src="/assets/vendor/simplebar.min.js"></script>
+
+    <!-- DOM Factory -->
+    <script src="/assets/vendor/dom-factory.js"></script>
+
+    <!-- MDK -->
+    <script src="/assets/vendor/material-design-kit.js"></script>
+
+    <!-- App -->
+    <script src="/assets/js/toggle-check-all.js"></script>
+    <script src="/assets/js/check-selected-row.js"></script>
+    <script src="/assets/js/dropdown.js"></script>
+    <script src="/assets/js/sidebar-mini.js"></script>
+    <script src="/assets/js/app.js"></script>
+
+    <!-- App Settings (safe to remove) -->
+    <script src="/assets/js/app-settings.js"></script>
+
+
+
+
+
 </body>
 
 </html>

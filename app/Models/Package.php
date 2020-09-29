@@ -11,4 +11,8 @@ class Package extends Model
     public function status() {
         return $this->belongsTo(Status::class);
     }
+
+    public function investments() {
+        return $this->hasMany(Investment::class);
+    }
 }

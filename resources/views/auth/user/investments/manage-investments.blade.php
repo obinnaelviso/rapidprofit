@@ -61,7 +61,7 @@
                                         <td class="text-success">{{ config('app.currency').$investment_return[1] }}</td>
                                         <td>{{ $investment->created_at->toFormattedDateString() }}</td>
                                         <td class="text-danger">{{ $investment->expiry_date->toFormattedDateString() }}</td>
-                                        <td><span class="label label-primary"> {{ $investment->status->title }}</td>
+                                        <td><span class="badge badge-primary"> {{ $investment->status->title }}</td>
                                     </tr>
                                 @endforeach
                             @else
@@ -115,7 +115,7 @@
                                         <td class="text-success">{{ config('app.currency').$investment_return[1] }}</td>
                                         <td>{{ $investment->created_at->toFormattedDateString() }}</td>
                                         <td class="text-danger">{{ $investment->expiry_date->toFormattedDateString() }}</td>
-                                        <td><span class="label label-success"> {{ $investment->status->title }}</td>
+                                        <td><span class="badge badge-success"> {{ $investment->status->title }}</td>
                                     </tr>
                                 @endforeach
                             @else

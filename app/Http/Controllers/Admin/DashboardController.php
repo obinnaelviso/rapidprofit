@@ -48,7 +48,7 @@ class DashboardController extends Controller
 
     public function manageUsers() {
         $user = $this->user();
-        $reg_users = User::where('role_id', role(config('roles.user')))->orderBy('status_id', 'desc')->get();
+        $reg_users = User::orderBy('role_id', 'asc')->get();
         return view('auth.admin.manage-users', compact('user', 'reg_users'));
     }
 
@@ -105,6 +105,14 @@ class DashboardController extends Controller
         $active_investments = Investment::active()->get();
         $completed_investments = Investment::completed()->get();
         return view('auth.admin.investments', compact('user', 'active_investments', 'completed_investments'));
+    }
+
+    public function deletePackage(Package $package) {
+        if(!$package->investments->count()) {
+            $package->delete();
+            session()->flash('success', 'Investment package removed successfully!');
+        } else session()->flash('failed', 'Oops! Something went wrong.');
+        return back();
     }
 
     public function statusPackages(Package $package) {

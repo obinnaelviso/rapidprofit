@@ -3,11 +3,11 @@
         <button class="btn btn-primary" onclick="newDeposit(0)"><i class="fa fa-plus" aria-hidden="true"></i> Add New Deposit</button>
     </div>
 </div>
-<div class="table-responsive">
-    <table class="table table-hover" id="deposit-table">
+<div class="table-responsive border-bottom">
+
+    <table class="table mb-0 thead-border-top-0" id="deposit-table">
         <thead>
             <tr>
-                @php $i = 1; @endphp
                 <th scope="col">#</th>
                 <th scope="col">Payment Method</th>
                 <th scope="col">Receipt</th>
@@ -22,7 +22,7 @@
         <tbody>
             @foreach($receipts as $receipt)
                 <tr>
-                    <th scope="row">{{ $i++ }}</th>
+                    <th scope="row">{{ $loop->iteration }}</th>
                     <td class="text-uppercase">{{ $receipt->payment_method }}</td>
                     <td>
                         @if($receipt->url)

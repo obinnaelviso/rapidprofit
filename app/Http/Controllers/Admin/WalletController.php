@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Investment;
 use App\Models\PaymentReceipt;
 use App\Models\Withdrawal;
 use App\Notifications\AccountCredited;
@@ -69,5 +70,13 @@ class WalletController extends Controller
         return response([
             'message' => "Withdrawal request completed successfully!"
         ]);
+    }
+
+    public function cancelInvestment(Investment $investment) {
+        $investment->user->wallet->amount += $investment->amount;
+        $investment->user->wallet->save();
+        $investment->payout()->delete();
+        $investment->delete();
+        return back()->with('success', 'Investment cancelled successfully!');
     }
 }

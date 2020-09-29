@@ -1,24 +1,38 @@
-@extends('layouts.main')
-@section('title', 'Manage Users - '.' Admin '.config('app.name'))
+@extends('layouts.dashboard.main')
+@section('title', 'Manage Users')
 @section('users-active', 'active')
 @section('sidebar')
-@include('layouts.admin-sidebar')
+@include('layouts.sidebar-admin')
 @endsection
 
 @section('content')
-<div class="row mb-3">
-    <div class="col-md-12">
-        <h1>Manage Users</h1>
-        <hr>
+<div class="container-fluid page__heading-container">
+    <div class="page__heading d-flex align-items-center">
+        <div class="flex">
+            {{-- <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav> --}}
+            <h1 class="m-0">Manage Users</h1>
+        </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <h3 class="card-header">All Registered Users</h3>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover">
+
+
+
+
+<div class="container-fluid page__container">
+    @include('layouts.alerts')
+    <div class="card card-form">
+        <div class="row no-gutters">
+
+            <div class="col-lg-12">
+                <h3 class="card-header">All Registered Users</h3>
+                <div class="table-responsive border-bottom">
+
+                    <table class="table mb-0 thead-border-top-0">
                         <thead>
                             <tr>
                                 @php $i = 1; @endphp
@@ -29,6 +43,7 @@
                                 <th scope="col">Investments</th>
                                 <th scope="col">Deposit Reqs.</th>
                                 <th scope="col">Withdrawal Reqs.</th>
+                                <th scope="col">Role</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Actions</th>
                             </tr>
@@ -44,7 +59,8 @@
                                         <td>{{ $reg_user->investments->count() }}</td>
                                         <td>{{ $reg_user->deposits ->count() }}</td>
                                         <td>{{ $reg_user->withdrawals->count() }}</td>
-                                        <td><span class="label @if($reg_user->status_id == status(config('status.active'))) label-success @else label-danger @endif">{{ $reg_user->status->title }}</span></td>
+                                        <td><span class="badge @if($reg_user->status_id == status(config('status.active'))) badge-success @else badge-danger @endif">{{ $reg_user->status->title }}</span></td>
+                                        <td><span class="badge @if($reg_user->role_id == role(config('roles.user'))) badge-success @else badge-danger @endif">{{ $reg_user->role->title }}</span></td>
                                         <td>@if($reg_user->status_id == status(config('status.active')))
                                                 <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#blockUser{{ $reg_user->id }}">Block Account</button>
                                             @else

@@ -32,10 +32,10 @@ class UserController extends Controller
     public function viewUser(User $reg_user) {
         $user = $this->user();
         $investments = $reg_user->investments;
-        $receipts = $reg_user->paymentReceipts;
-        $deposits = $reg_user->deposits;
+        $receipts = $reg_user->paymentReceipts()->orderBy('updated_at', 'desc')->get();
+        // $deposits = $reg_user->deposits;
         $withdrawals = $reg_user->withdrawals;
-        return view('auth.admin.manage-users.view-user', compact('user', 'reg_user', 'investments', 'deposits', 'receipts', 'withdrawals'));
+        return view('auth.admin.manage-users.view-user', compact('user', 'reg_user', 'investments', 'receipts', 'withdrawals'));
     }
 
     public function downloadReceipt(PaymentReceipt $receipt) {
@@ -51,6 +51,18 @@ class UserController extends Controller
         return response([
             'amount' => $reg_user->wallet->amount,
             'message' => 'User balance updated successfully!'
+        ]);
+    }
+
+    public function updateBonus(User $reg_user, Request $request) {
+        $this->validate(request(), [
+            'bonus' => 'required|numeric'
+        ]);
+        $reg_user->wallet->bonus = $request->bonus;
+        $reg_user->wallet->save();
+        return response([
+            'bonus' => $reg_user->wallet->bonus,
+            'message' => 'User bonus updated successfully!'
         ]);
     }
 

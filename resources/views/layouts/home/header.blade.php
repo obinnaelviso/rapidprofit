@@ -15,7 +15,7 @@
     <!-- Header Start -->
     <div class="header-area">
         <div class="main-header ">
-            <div class="header-top d-none d-lg-block">
+            <div class="header-top d-none">
                 <div class="container">
                     <div class="col-xl-12">
                         <div class="row d-flex justify-content-between align-items-center">
@@ -43,7 +43,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                                <a href="{{ route('index') }}"><img src="{{ url('/images/logo.png') }}" width="150px" alt="">
+                                <a href="{{ route('index') }}"><img src="{{ url('/images/logo.png') }}" width="150px" alt="{{ config('app.name') }}">
                                 </a>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="{{ route('index') }}">Home</a></li>
-                                            <li><a href="#about">About</a></li>
+                                            <li><a href="{{ route('index') }}#about">About</a></li>
                                             <li><a href="{{ route('contact') }}">Contact</a></li>
                                             @if(!Auth::guard('web')->check())
                                                 <li><a href="{{ route('login') }}">Login</a></li>
@@ -67,7 +67,7 @@
                                     @if(!Auth::guard('web')->check())
                                         <a href="{{ route('register') }}" class="btn header-btn">Register</a>
                                     @else
-                                    <a href="{{ route('user.home') }}" class="btn header-btn">Dashboard</a>
+                                        <a href="@if(Auth::user()->role_id == role(config('roles.user'))){{ route('user.home') }}@else{{ route('admin.home') }}@endif" class="btn header-btn">Dashboard</a>
                                     @endif
                                 </div>
                             </div>

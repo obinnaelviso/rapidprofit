@@ -1,6 +1,7 @@
 <h3>Profile Information</h3>
-<div class="table-responsive">
-    <table class="table table-hover">
+<div class="table-responsive border-bottom">
+
+    <table class="table mb-0 thead-border-top-0">
         <tbody>
             <tr>
                 <td class="title">First Name</td>
@@ -19,6 +20,11 @@
                 <td class="title">Balance</td>
                 <td class="text-success text-big" id="balance">{{ config('app.currency').$reg_user->wallet->amount }}</td>
                 <td><button class="btn btn-success btn-sm" id="update-balance">Update Balance</button></td>
+            </tr>
+            <tr>
+                <td class="title">Bonus</td>
+                <td class="text-warning text-big" id="bonus">{{ config('app.currency').$reg_user->wallet->bonus }}</td>
+                <td><button class="btn btn-warning btn-sm" id="update-bonus">Update Bonus</button></td>
             </tr>
             <tr>
                 <td class="title">Role</td>

@@ -78,7 +78,7 @@ class HomeController extends Controller
     }
 
     public function new_home() {
-        return view('auth.user.profile-new');
+        return view('contact-new');
     }
 
     public function testEmail() {

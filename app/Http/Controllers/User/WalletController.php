@@ -15,7 +15,8 @@ class WalletController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'account_status', 'verified']);
+        $this->middleware(['auth', 'account_status']);
+        $this->middleware('verified')->except('withdrawCancel');
     }
 
     public function transferBonus() {
@@ -121,7 +122,7 @@ class WalletController extends Controller
     }
 
     public function withdrawCancel(Withdrawal $withdrawal) {
-        $user = $this->user();
+        $user = $withdrawal->user;
 
         $withdrawal->status_id = status(config('status.inactive'));
         $withdrawal->save();

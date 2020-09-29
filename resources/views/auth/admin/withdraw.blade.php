@@ -1,28 +1,40 @@
-@extends('layouts.main')
-@section('title', 'My Dashboard - '.' Admin '.config('app.name'))
+@extends('layouts.dashboard.main')
+@section('title', 'Manage Withdrawals')
 @section('withdrawals-active', 'active')
 @section('sidebar')
-@include('layouts.admin-sidebar')
+@include('layouts.sidebar-admin')
 @endsection
 
 @section('content')
-<div class="row mb-3">
-    <div class="col-md-12">
-        <h1>Manage Withdrawals</h1>
-        <hr>
+<div class="container-fluid page__heading-container">
+    <div class="page__heading d-flex align-items-center">
+        <div class="flex">
+            {{-- <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav> --}}
+            <h1 class="m-0">Manage Withdrawals</h1>
+        </div>
     </div>
 </div>
-<div class="row mb-3">
-    <div class="col-md-12 mb-3" id="withdrawal-table">
-        @if($pending_requests->count())
-            <div class="card text-left">
-                <div class="card-body">
-                    <h4 class="card-title">Pending Withdrawal Requests</h4>
-                    <div>
-                        <table class="table table-striped table-inverse table-responsive">
+
+
+
+
+<div class="container-fluid page__container">
+    <div class="card card-form">
+        <div class="row no-gutters" id="pending-table">
+
+            @if($pending_requests->count())
+                <div class="col-lg-12">
+                    <h3 class="card-header">Pending Withdrawal Requests</h3>
+                    <div class="table-responsive border-bottom">
+
+                        <table class="table mb-0 thead-border-top-0">
                             <thead class="thead-inverse">
                                 <tr>
-                                    @php $i = 1; @endphp
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Method</th>
@@ -35,14 +47,19 @@
                             <tbody>
                                 @foreach($pending_requests->get() as $withdrawal)
                                     <tr>
-                                        <th scope="row">{{ $i++ }}</th>
+                                        <th scope="row">{{ $loop->iteration }}</th>
                                         <td class="text-capitalize"><a class="text-dark" href="{{ route('admin.manage.users.view', $withdrawal->user->id) }}" target="_blank">{{ $withdrawal->user->first_name.' '.$withdrawal->user->last_name }}</td></td>
                                         <td class="text-capitalize">{{ $withdrawal->withdraw_method }}</td>
                                         <td>{{ config('app.currency').$withdrawal->amount }}</td>
                                         <td>{{ $withdrawal->bitcoin_address }}</td>
                                         <td>{{ $withdrawal->created_at }}</td>
                                         <td>
-                                            <button class="btn btn-success btn-sm" onclick="newWithdrawal('{{ $withdrawal->id }}', {{ $withdrawal->user->id }})">Complete Withdrawal</button>
+                                            <button class="btn btn-warning btn-sm btn-block" onclick="newWithdrawal('{{ $withdrawal->id }}', {{ $withdrawal->user->id }})">Complete Withdrawal</button>
+                                            <button class="btn btn-danger btn-sm btn-block mt-2" onclick="event.preventDefault();
+                                            document.getElementById('cancel-withdrawal-form').submit();">Cancel</button>
+                                            <form id="cancel-withdrawal-form" action="{{ route('user.withdraw.cancel', $withdrawal->id) }}" method="POST" style="display: none;">
+                                                @csrf @method('put')
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -50,27 +67,27 @@
                         </table>
                     </div>
                 </div>
-            </div>
-        @else
-            <div class="card text-left">
-              <div class="card-body">
-                <h4 class="card-text text-success">No Pending Withdrawal Requests Available</h4>
-              </div>
-            </div>
-        @endif
+            @else
+                <div class="col-lg-12 card-body">
+                    <h4 class="text-success">No Pending Withdrawal Requests Available</h4>
+                </div>
+            @endif
+        </div>
     </div>
 </div>
-<div class="row mb-3">
-    <div class="col-md-12 mb-3" id="withdrawal-table">
-        @if($completed_requests->count())
-            <div class="card text-left">
-                <div class="card-body">
-                    <h4 class="card-title">Completed Withdrawal Requests</h4>
-                    <div>
-                        <table class="table table-striped table-inverse">
+
+<div class="container-fluid page__container">
+    <div class="card card-form">
+        <div class="row no-gutters" id="completed-table">
+            {{-- Completed Withdrawal Requests --}}
+            @if($completed_requests->count())
+                <div class="col-lg-12">
+                    <h3 class="card-header">Completed Withdrawal Requests</h3>
+                    <div class="table-responsive border-bottom">
+
+                        <table class="table mb-0 thead-border-top-0">
                             <thead class="thead-inverse">
                                 <tr>
-                                    @php $i = 1; @endphp
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Method</th>
@@ -84,7 +101,7 @@
                             <tbody>
                                 @foreach($completed_requests as $withdrawal)
                                     <tr>
-                                        <th scope="row">{{ $i++ }}</th>
+                                        <th scope="row">{{ $loop->iteration }}</th>
                                         <td class="text-capitalize"><a class="text-dark" href="{{ route('admin.manage.users.view', $withdrawal->user->id) }}" target="_blank">{{ $withdrawal->user->first_name.' '.$withdrawal->user->last_name }}</a></td>
                                         <td class="text-capitalize">{{ $withdrawal->withdraw_method }}</td>
                                         <td>{{ config('app.currency').$withdrawal->amount }}</td>
@@ -99,17 +116,16 @@
                         {{ $completed_requests->links() }}
                     </div>
                 </div>
-            </div>
-        @else
-            <div class="card text-left">
-              <div class="card-body">
-                <h4 class="card-text text-success">No Withdrawal Requests Available</h4>
-              </div>
-            </div>
-        @endif
+            @else
+                <div class="col-lg-12 card-body">
+                    <h4 class="text-success">No Completed Withdrawal Requests</h4>
+                </div>
+            @endif
+        </div>
     </div>
 </div>
 @endsection
+
 @section('input-js')
 <script>
     function newWithdrawal(withdraw_id, user_id) {
@@ -122,11 +138,15 @@
             },
             url: "{{ route('admin.withdraw') }}",
             success: function(response){
-                $("#withdrawal-table").fadeOut(200, function() {
-                        // form.html($response).fadeIn().delay(2000);
-                        $("#withdrawal-table").hide().load(location.href + " #withdraw-table").fadeIn().delay(200);
-                }).hide()
             alert(response.message)
+                $("#completed-table").fadeOut(100, function() {
+                        // form.html($response).fadeIn().delay(2000);
+                        $("#completed-table").hide().load(location.href + " #completed-table>").fadeIn().delay(100);
+                }).hide()
+                $("#pending-table").fadeOut(100, function() {
+                        // form.html($response).fadeIn().delay(2000);
+                        $("#pending-table").hide().load(location.href + " #pending-table>").fadeIn().delay(100);
+                }).hide()
             }
         });
     }
