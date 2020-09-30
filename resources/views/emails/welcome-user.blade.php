@@ -4,7 +4,7 @@
 
 # Hi {{ $user->first_name }},
 
-Welcome to **{{ config('app.name') }}**, the No.1 top fastest earning investment platform. Are you looking for the highest returns on your investments? **{{ config('app.name') }}** - a fully automated online investment platform is a top secured and profitable option for you. Part of **{{ config('app.name') }}** – the team of professional traders focusing mainly on Bitcoin and other cryptocurrencies trading over multiple Exchanges and markets.
+Welcome to **{{ config('app.name') }}**, the No.1 top fastest earning investment platform. Are you looking for the highest returns on your investments? **{{ config('app.name') }}** - a fully automated online investment platform is a top secured and profitable option for you. Part of **{{ config('app.name') }}** – the team of professional traders focusing mainly on stock trading markets.
 
 # How to get started?
 * First of all you need to make deposit a into your **{{ config('app.name') }}** account using any payment method of your choice.
@@ -25,7 +25,6 @@ Go to Dashboard >
 * Our servers are secured with the best internet security to secure your data and prevent DDoS attacks or any malicious internet virus.
 * We support a wide range of payment options.
 * 24/7 live chat.
-* Earn through referrals that can be used at any time.
 * Huge profit earnings.
 * Quick withdrawals with a maximum of 1hr wait time.
 

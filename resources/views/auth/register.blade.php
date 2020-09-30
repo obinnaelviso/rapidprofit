@@ -434,15 +434,20 @@
                     </span>
                 @enderror
             </div>
-            {{-- <div class="form-group mb-5">
+            <div class="form-group mb-5">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" checked="" class="custom-control-input" id="terms" />
-                    <label class="custom-control-label" for="terms">I accept <a href="#">Terms and Conditions</a></label>
+                    <input type="checkbox" class="custom-control-input" name="terms" onchange="activateButton(this)" value="accepted" id="terms" />
+                    <label class="custom-control-label" for="terms">By clicking this box, you agree to the <a href="{{ asset('/legal/stock-premium-terms-of-use.pdf') }}" download>terms and conditions</a> of this site</label>
+                    @error('terms')
+                        <span class="invalid-feed" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-            </div> --}}
+            </div>
             <div class="form-group text-center">
-                <button class="btn btn-primary mb-2" type="submit">Create Account</button><br>
-                <a class="text-body text-underline" href="{{ route('login') }}">Have an account? Login</a>
+                <button class="btn btn-primary mb-2" type="submit" id="submit" disabled>Create Account</button><br>
+                <a class="text-body text-underline" href="{{ route('login') }}">Already have a {{ strtolower(config('app.name')) }} account? Login</a>
             </div>
         </form>
     </div>
@@ -474,7 +479,18 @@
     <!-- App Settings (safe to remove) -->
     <script src="/assets/js/app-settings.js"></script>
 
+    <script>
+        function activateButton(element) {
 
+            if(element.checked) {
+                document.getElementById("submit").disabled = false;
+            }
+            else  {
+                document.getElementById("submit").disabled = true;
+            }
+
+        }
+    </script>
 
 
 

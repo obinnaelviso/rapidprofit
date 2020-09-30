@@ -53,7 +53,7 @@
 
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="email">Email Address</label>
+                    <label class="text-label" for="email">Email Address</label>
                     <input class="form-control @error('email') is-invalid @enderror" type="text" name="email" value="{{ old('email') }}" placeholder="e.g johndoe@example.com" required>
                     @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -65,7 +65,7 @@
 
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="password" class="col-md-12 col-form-label text-uppercase">New Password</label>
+                    <label class="text-label" for="password">New Password</label>
                     <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" required autocomplete="new-password">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -77,7 +77,7 @@
 
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="password-confirm" class="col-md-12 col-form-label text-uppercase">Retype Password</label>
+                    <label class="text-label" for="password-confirm">Retype Password</label>
                     <input class="form-control" type="password" name="password_confirmation" required autocomplete="new-password">
                 </div>
             </div>

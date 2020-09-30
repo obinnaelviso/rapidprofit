@@ -66,6 +66,7 @@ class RegisterController extends Controller
             'address' => ['string', 'max:100'],
             'phone' => ['string', 'max:20'],
             'referral_code' => ['max:100', 'nullable', 'exists:users,referral_code'],
+            'terms' => ['required']
         ]);
     }
 

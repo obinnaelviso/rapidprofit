@@ -16,7 +16,7 @@
                         <a href="{{ route('index') }}" class="footer-logo"><img src="{{ url('/images/logo.png') }}" width="200px" alt="{{ config('app.name') }}"></a>
                         <p>
                             Copyright &copy; {{ config('app.name') }} <script>document.write(new Date().getFullYear());</script> All rights reserved.</p>
-                            <p>Legal | <a href="#">Terms And Conditions</a> | <a href="#">Disclosure</a></p>
+                            <p>Legal | <a href="/legal/stock-premium-terms-of-use.pdf">Terms And Conditions</a> | <a href="/legal/stock-premium-disclosure.pdf">Disclosure</a></p>
 
                     </div>
                     <!--end copyright -->

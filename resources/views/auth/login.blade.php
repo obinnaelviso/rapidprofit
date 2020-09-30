@@ -82,14 +82,14 @@
                     </span>
                 @enderror
             </div>
-            <div class="form-group mb-5">
+            <div class="form-group">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                     <label class="custom-control-label" for="remember">Remember me</label>
                 </div>
             </div>
             <div class="form-group text-center">
-                <button class="btn btn-primary mb-5" type="submit">Login</button><br>
+                <button class="btn btn-primary mb-2" type="submit">Login</button><br>
                 <a href="{{ route('password.request') }}">Forgot password?</a> <br>
                 Don't have an account? <a class="text-body text-underline" href="{{ route('register') }}">Sign up!</a>
             </div>

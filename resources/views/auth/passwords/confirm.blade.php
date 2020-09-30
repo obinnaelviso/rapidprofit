@@ -50,7 +50,7 @@
             <h5>Please confirm your password before proceeding.</h5>
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label class="text-label" for="password">Password</label>
                     <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" required autocomplete="current-password">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
