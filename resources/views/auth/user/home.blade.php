@@ -50,9 +50,9 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-12">
-            <button type="button" class="btn btn-block btn-outline-danger"><i class="fas fa-wallet icon-20pt mr-2"></i> Make a Deposit</button>
-            <button type="button" class="btn btn-block btn-outline-success"><i class="fas fa-hand-holding-usd icon-20pt mr-2"></i>Withdraw Funds</button>
-            <button type="button" class="btn btn-block bg-lg btn-primary"><i class="fas fa-chart-line icon-20pt mr-2"></i>Start an Investment</button>
+            <a href="{{ route('user.deposit') }}" class="btn btn-block btn-outline-danger"><i class="fas fa-wallet icon-20pt mr-2"></i> Make a Deposit</a>
+            <a href="{{ route('user.withdraw') }}" class="btn btn-block btn-outline-success"><i class="fas fa-hand-holding-usd icon-20pt mr-2"></i>Withdraw Funds</a>
+            <a href="{{ route('user.investments') }}" class="btn btn-block bg-lg btn-primary"><i class="fas fa-chart-line icon-20pt mr-2"></i>Start an Investment</a>
         </div>
     </div>
 

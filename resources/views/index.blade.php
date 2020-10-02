@@ -785,7 +785,7 @@ $('.owl-carousel').owlCarousel({
 </script>
 <script>
     console.log(numberWithCommas($('#active-investors').html()))
-    var active_investors = "{{ config('app.currency') }}" + numberWithCommas($('#active-investors').html())
+    var active_investors = numberWithCommas($('#active-investors').html())
     var active_invest = "{{ config('app.currency') }}" + numberWithCommas($('#active-invest').html())
     var average_dep = "{{ config('app.currency') }}" + numberWithCommas($('#average-dep').html())
     var average_pay = "{{ config('app.currency') }}" + numberWithCommas($('#average-pay').html())
