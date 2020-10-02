@@ -77,6 +77,11 @@ class HomeController extends Controller
         return redirect($settings->telegram);
     }
 
+    public function discord() {
+        $settings = settings('homepage');
+        return redirect('https://discordapp.com/channels/@me/759893702025412669/761239047922253916');
+    }
+
     public function new_home() {
         return view('contact-new');
     }

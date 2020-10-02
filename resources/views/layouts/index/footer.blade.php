@@ -24,18 +24,23 @@
                     <!--begin footer_social -->
                     <ul class="footer_social">
                         <li>
-                            <a href="{{ route('facebook') }}">
+                            <a href="{{ route('facebook') }}" target="_blank">
                                 <i class="icon icon-facebook"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('twitter') }}">
+                            <a href="{{ route('twitter') }}" target="_blank">
                                 <i class="icon icon-twitter"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('instagram') }}">
+                            <a href="{{ route('instagram') }}" target="_blank">
                                 <i class="icon icon-instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('discord') }}" target="_blank">
+                                <i class="fab fa-discord"></i>
                             </a>
                         </li>
                     </ul>

@@ -22,6 +22,7 @@ Route::get('/facebook', 'HomeController@facebook')->name('facebook');
 Route::get('/twitter', 'HomeController@twitter')->name('twitter');
 Route::get('/instagram', 'HomeController@instagram')->name('instagram');
 Route::get('/telegram', 'HomeController@telegram')->name('telegram');
+Route::get('/discord', 'HomeController@discord')->name('discord');
 // Route::get('/home', 'HomeController@index')->name('home');
 // -----------------------> User Referrals
 Route::get('/ref/{code}', 'Auth\RegisterController@referral')->name('referral');

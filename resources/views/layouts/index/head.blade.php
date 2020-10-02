@@ -21,6 +21,8 @@
 
     <!-- Font Awesome -->
     <link href="/index/css/fonts.css" rel="stylesheet">
+    <link type="text/css" href="/assets/css/vendor-fontawesome-free.css" rel="stylesheet">
+    <link type="text/css" href="/assets/css/vendor-fontawesome-free.rtl.css" rel="stylesheet">
 
     <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,100' rel='stylesheet' type='text/css'>
