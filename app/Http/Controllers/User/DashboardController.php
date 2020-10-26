@@ -53,7 +53,7 @@ class DashboardController extends Controller
     public function withdraw() {
         $user = $this->user();
         $general = settings('general');
-        $withdrawals = $user->withdrawals()->where('status_id', status(config('status.pending')))->orderBy('created_at', 'desc')->get();
+        $withdrawals = $user->withdrawals()->whereIn('status_id',[status(config('status.completed')), status(config('status.pending'))])->orderBy('status_id', 'asc')->get();
 
         return view('auth.user.withdraw', compact('user', 'withdrawals', 'general'));
     }

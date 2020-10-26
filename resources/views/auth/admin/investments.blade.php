@@ -54,9 +54,19 @@
                                         <td class="text-danger">{{ $investment->expiry_date->toFormattedDateString() }}</td>
                                         <td><span class="label label-primary"> {{ $investment->status->title }}</span></td>
                                         <td>
-                                            <button class="btn btn-warning btn-sm" onclick="deleteInvestment({{ $investment->id }})">Cancel</button>
-                                            {{-- Delete User Account --}}
-                                            <form id="delete-investment-{{ $investment->id }}" action="{{ route('admin.investments.cancel', $investment->id) }}" method="POST" style="display: none;">
+                                            <button class="btn btn-success btn-sm" onclick="completeInvestment({{ $investment->id }})">Mark As Complete</button>
+                                            <button class="btn btn-warning btn-sm" onclick="cancelInvestment({{ $investment->id }})">Cancel</button>
+                                            <button class="btn btn-danger btn-sm" onclick="deleteInvestment({{ $investment->id }})">Delete</button>
+                                            {{-- Complete Investment --}}
+                                            <form id="complete-investment-{{ $investment->id }}" action="{{ route('admin.investments.complete', $investment->id) }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                            {{-- Cancel Investment --}}
+                                            <form id="cancel-investment-{{ $investment->id }}" action="{{ route('admin.investments.cancel', $investment->id) }}" method="POST" style="display: none;">
+                                                @csrf @method('delete')
+                                            </form>
+                                            {{-- Delete Investment --}}
+                                            <form id="delete-investment-{{ $investment->id }}" action="{{ route('admin.investments.cancel', [$investment->id, 1]) }}" method="POST" style="display: none;">
                                                 @csrf @method('delete')
                                             </form>
                                         </td>
@@ -93,6 +103,7 @@
                                 <th scope="col">Start Date</th>
                                 <th scope="col">Due Date</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -112,6 +123,13 @@
                                         <td>{{ $investment->created_at->toFormattedDateString() }}</td>
                                         <td class="text-danger">{{ $investment->expiry_date->toFormattedDateString() }}</td>
                                         <td><span class="label label-success"> {{ $investment->status->title }}</span></td>
+                                        <td>
+                                            <button class="btn btn-danger btn-sm" onclick="deleteInvestment({{ $investment->id }})">Delete</button>
+                                            {{-- Delete User Account --}}
+                                            <form id="delete-investment-{{ $investment->id }}" action="{{ route('admin.investments.cancel', [$investment->id, 1]) }}" method="POST" style="display: none;">
+                                                @csrf @method('delete')
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             @else
@@ -128,8 +146,20 @@
 @endsection
 @section('input-js')
 <script>
+    function completeInvestment(investment_id = 0) {
+        var complete_investment = confirm('Are you sure you want to mark this investment as complete?')
+        if(complete_investment) {
+            $("#complete-investment-"+investment_id).submit();
+        }
+    }
+    function cancelInvestment(investment_id = 0) {
+        var cancel_investment = confirm('Are you sure you want to cancel this investment? \nInvested amount will be refunded to the user!')
+        if(cancel_investment) {
+            $("#cancel-investment-"+investment_id).submit();
+        }
+    }
     function deleteInvestment(investment_id = 0) {
-        var delete_investment = confirm('Are you sure you want to cancel this investment?')
+        var delete_investment = confirm('Are you sure you want to delete this investment? \nWarning!!! Invested amount will not be refunded to the user!')
         if(delete_investment) {
             $("#delete-investment-"+investment_id).submit();
         }

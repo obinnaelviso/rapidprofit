@@ -3,16 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Package;
 use App\User;
 use App\Models\PaymentReceipt;
+use App\Models\Status;
 use App\Models\Withdrawal;
 use App\Notifications\AccountActive;
 use App\Notifications\AccountBlocked;
 use App\Notifications\AccountCredited;
+use App\Notifications\DefaultAdmin;
 use App\Notifications\EmailUpdated;
+use App\Notifications\InvestmentStart;
 use App\Notifications\WithdrawalConfirmed;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -35,7 +41,9 @@ class UserController extends Controller
         $receipts = $reg_user->paymentReceipts;
         $deposits = $reg_user->deposits;
         $withdrawals = $reg_user->withdrawals;
-        return view('auth.admin.manage-users.view-user', compact('user', 'reg_user', 'investments', 'deposits', 'receipts', 'withdrawals'));
+        $packages = Package::where('status_id', status(config('status.active')))->get();
+        $statuses = Status::find([status(config('status.completed')), status(config('status.active'))]);
+        return view('auth.admin.manage-users.view-user', compact('user', 'reg_user', 'investments', 'deposits', 'receipts', 'withdrawals', 'packages', 'statuses'));
     }
 
     public function downloadReceipt(PaymentReceipt $receipt) {
@@ -168,6 +176,41 @@ class UserController extends Controller
         return response([
             'message' => "Withdrawal request completed successfully!"
         ]);
+    }
+
+    public function newInvestment(Request $request, User $reg_user) {
+        $package = Package::find($request->package);
+
+        $percentage = $package->percentage;
+        $duration = $package->duration;
+        $amount = $request->amount;
+
+        $start_date = Carbon::create($request->start_date);
+        $expiry_date = Carbon::create($request->start_date)->addDays($package->duration);
+        // Add to investments
+        $investment = $reg_user->investments()->create([
+            'package_id' => $package->id,
+            'amount' => $amount,
+            'prev_bal' => $reg_user->wallet->amount,
+            'new_bal' => $reg_user->wallet->amount,
+            'created_at' => $start_date,
+            'expiry_date' => $expiry_date,
+            'status_id' => $request->status
+        ]);
+
+        $payout = calculateInvestmentReturn($amount, $percentage, $duration)[1];
+
+        $investment->payout()->create([
+            'user_id' => $reg_user->id,
+            'amount' => $payout,
+            'status_id' => $request->status
+        ]);
+
+        // $reg_user->notify(new InvestmentStart($investment));
+        // Notification::route('mail', config('mail.from.address'))
+        //             ->notify(new DefaultAdmin("New Investment Started",
+        //                         ucfirst($reg_user->first_name)." just started **".ucfirst($investment->package->name)."** investment with **".config('app.currency').$investment->amount."**. Click on the button below for more information: "));
+        return back()->with('success','Investment created successfully.');
     }
 
     protected function user() {

@@ -7,6 +7,7 @@ use App\Models\PaymentReceipt;
 use App\Models\Withdrawal;
 use App\Models\Investment;
 use App\Notifications\AccountCredited;
+use App\Notifications\InvestmentPayout;
 use App\Notifications\WithdrawalConfirmed;
 use App\User;
 use Illuminate\Http\Request;
@@ -72,11 +73,34 @@ class WalletController extends Controller
         ]);
     }
 
-    public function cancelInvestment(Investment $investment) {
-        $investment->user->wallet->amount += $investment->amount;
-        $investment->user->wallet->save();
+    public function cancelInvestment(Investment $investment, $delete = null) {
         $investment->payout()->delete();
         $investment->delete();
-        return back()->with('success', 'Investment cancelled successfully!');
+        if(!$delete == 1) {
+            $investment->user->wallet->amount += $investment->amount;
+            $investment->user->wallet->save();
+            $message = 'Investment cancelled successfully!';
+        } else
+            $message = 'Investment deleted successfully!';
+        return back()->with('success', $message);
+    }
+
+
+    public function completeInvestment(Investment $investment) {
+        $current_date = now();
+        $end_date = $investment->expiry_date;
+
+        if ($end_date->lessThanOrEqualTo($current_date)) {
+            $investment->status_id = status(config('status.completed'));
+            $investment->payout->status_id = status(config('status.completed'));
+            $investment->user->wallet->amount += $investment->payout->amount;
+            $investment->save();
+            $investment->user->wallet->save();
+            $investment->payout->save();
+
+            $investment->user->notify(new InvestmentPayout($investment));
+            session()->flash('success', 'Investment completed successfully!');
+        } else session()->flash('failed',"Sorry! You cannot mark this investment as complete. It's not yet due.");
+        return back();
     }
 }

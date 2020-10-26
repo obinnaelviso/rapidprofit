@@ -49,108 +49,134 @@
 </div>
 @endsection
 @section('input-js')
-<script>
-    $('#update-balance').click(function() {
-        var amount = prompt('Enter New Balance', '')
-        if(amount != null && amount !="") {
-            $.ajax({
-                type: "PUT",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "amount": amount
-                },
-                url: "{{ route('admin.manage.users.update-balance', $reg_user->id) }}",
-                success: function(response){
-                    $("#balance").fadeOut(200, function() {
-                            // form.html($response).fadeIn().delay(2000);
-                            $("#balance").hide().html("{{ config('app.currency') }}"+response.amount).fadeIn().delay(200);
-                    }).hide()
-                alert(response.message)
+    <script src="/vendor/moment/moment-with-locales.min.js"></script>
+    <script src="/vendor/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script>
+        $(function () {
+            $('#startdate').datetimepicker({
+                icons: {
+                    time: 'fa fa-clock'
                 }
             });
-        }
-    })
-
-    $('#update-bonus').click(function() {
-        var bonus = prompt('Enter New Bonus', '')
-        if(bonus != null && bonus !="") {
-            $.ajax({
-                type: "PUT",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "bonus": bonus
-                },
-                url: "{{ route('admin.manage.users.update-bonus', $reg_user->id) }}",
-                success: function(response){
-                    $("#bonus").fadeOut(200, function() {
-                            // form.html($response).fadeIn().delay(2000);
-                            $("#bonus").hide().html("{{ config('app.currency') }}"+response.bonus).fadeIn().delay(200);
-                    }).hide()
-                alert(response.message)
-                }
-            });
-        }
-    })
-
-    $('#update-email').click(function() {
-        var email = prompt('Enter New Email Address', '')
-        if(email != null && email !="") {
-            $.ajax({
-                type: "PUT",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "email": email
-                },
-                url: "{{ route('admin.manage.users.update-email', $reg_user->id) }}",
-                success: function(response){
-                    $("#email").fadeOut(200, function() {
-                            // form.html($response).fadeIn().delay(2000);
-                            $("#email").hide().html(response.email).fadeIn().delay(200);
-                    }).hide()
-                alert(response.message)
-                }
-            });
-        }
-    })
-
-    function newDeposit(receipt_id = 0) {
-        var amount = prompt('Enter New Deposit', '')
-        if(amount != null && amount !="") {
-            $.ajax({
-                type: "POST",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "amount": amount,
-                    "receipt_id": receipt_id
-                },
-                url: "{{ route('admin.manage.users.deposit', $reg_user->id) }}",
-                success: function(response){
-                    $("#deposit-table").fadeOut(200, function() {
-                            // form.html($response).fadeIn().delay(2000);
-                            $("#deposit-table").hide().load(location.href + " #deposit-table").fadeIn().delay(200);
-                    }).hide()
-                alert(response.message)
-                }
-            });
-        }
-    }
-
-    function newWithdrawal(withdraw_id) {
-        $.ajax({
-            type: "PUT",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "withdraw_id": withdraw_id
-            },
-            url: "{{ route('admin.manage.users.withdraw', $reg_user->id) }}",
-            success: function(response){
-                $("#withdrawal-table").fadeOut(200, function() {
-                        // form.html($response).fadeIn().delay(2000);
-                        $("#withdrawal-table").hide().load(location.href + " #withdraw-table").fadeIn().delay(200);
-                }).hide()
-            alert(response.message)
-            }
+            // $('#enddate').datetimepicker({
+            //     useCurrent: false, //Important! See issue #1075
+            //     icons: {
+            //         time: 'fa fa-clock'
+            //     }
+            // });
+            // $("#startdate").on("dp.change", function (e) {
+            //     $('#enddate').data("DateTimePicker").minDate(e.date);
+            // });
+            // $("#enddate").on("dp.change", function (e) {
+            //     $('#startdate').data("DateTimePicker").maxDate(e.date);
+            // });
         });
-    }
-</script>
+    </script>
+    <script>
+        $('#update-balance').click(function() {
+            var amount = prompt('Enter New Balance', '')
+            if(amount != null && amount !="") {
+                $.ajax({
+                    type: "PUT",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "amount": amount
+                    },
+                    url: "{{ route('admin.manage.users.update-balance', $reg_user->id) }}",
+                    success: function(response){
+                        $("#balance").fadeOut(200, function() {
+                                // form.html($response).fadeIn().delay(2000);
+                                $("#balance").hide().html("{{ config('app.currency') }}"+response.amount).fadeIn().delay(200);
+                        }).hide()
+                    alert(response.message)
+                    }
+                });
+            }
+        })
+
+        $('#update-bonus').click(function() {
+            var bonus = prompt('Enter New Bonus', '')
+            if(bonus != null && bonus !="") {
+                $.ajax({
+                    type: "PUT",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "bonus": bonus
+                    },
+                    url: "{{ route('admin.manage.users.update-bonus', $reg_user->id) }}",
+                    success: function(response){
+                        $("#bonus").fadeOut(200, function() {
+                                // form.html($response).fadeIn().delay(2000);
+                                $("#bonus").hide().html("{{ config('app.currency') }}"+response.bonus).fadeIn().delay(200);
+                        }).hide()
+                    alert(response.message)
+                    }
+                });
+            }
+        })
+
+        $('#update-email').click(function() {
+            var email = prompt('Enter New Email Address', '')
+            if(email != null && email !="") {
+                $.ajax({
+                    type: "PUT",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "email": email
+                    },
+                    url: "{{ route('admin.manage.users.update-email', $reg_user->id) }}",
+                    success: function(response){
+                        $("#email").fadeOut(200, function() {
+                                // form.html($response).fadeIn().delay(2000);
+                                $("#email").hide().html(response.email).fadeIn().delay(200);
+                        }).hide()
+                    alert(response.message)
+                    }
+                });
+            }
+        })
+
+        function newDeposit(receipt_id = 0) {
+            var amount = prompt('Enter New Deposit', '')
+            if(amount != null && amount !="") {
+                $.ajax({
+                    type: "POST",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "amount": amount,
+                        "receipt_id": receipt_id
+                    },
+                    url: "{{ route('admin.manage.users.deposit', $reg_user->id) }}",
+                    success: function(response){
+                        $("#deposit-table").fadeOut(200, function() {
+                                // form.html($response).fadeIn().delay(2000);
+                                $("#deposit-table").hide().load(location.href + " #deposit-table").fadeIn().delay(200);
+                        }).hide()
+                    alert(response.message)
+                    }
+                });
+            }
+        }
+
+        function newWithdrawal(withdraw_id) {
+            $.ajax({
+                type: "PUT",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "withdraw_id": withdraw_id
+                },
+                url: "{{ route('admin.manage.users.withdraw', $reg_user->id) }}",
+                success: function(response){
+                    $("#withdrawal-table").fadeOut(200, function() {
+                            // form.html($response).fadeIn().delay(2000);
+                            $("#withdrawal-table").hide().load(location.href + " #withdraw-table").fadeIn().delay(200);
+                    }).hide()
+                alert(response.message)
+                }
+            });
+        }
+    </script>
+@endsection
+@section('input-css')
+<link rel="stylesheet" href="/vendor/datetimepicker/bootstrap-datetimepicker.min.css">
 @endsection

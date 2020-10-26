@@ -67,7 +67,7 @@
                                     @if(!Auth::guard('web')->check())
                                         <a href="{{ route('register') }}" class="btn header-btn">Register</a>
                                     @else
-                                        <a href="{{ route('user.home') }}" class="btn header-btn">Go to Dashboard</a>
+                                        <a href="@if(Auth::user()->role_id == role(config('roles.user'))){{ route('user.home') }}@else{{ route('admin.home') }}@endif" class="btn header-btn">Go to Dashboard</a>
                                     @endif
                                 </div>
                             </div>

@@ -119,14 +119,23 @@
                                     <td class="text-capitalize">{{ $withdrawal->withdraw_method }}</td>
                                     <td>{{ config('app.currency').$withdrawal->amount }}</td>
                                     <td>{{ $withdrawal->bitcoin_address }}</td>
-                                    <td><div class="badge badge-warning">{{ $withdrawal->status->title }}</div></td>
+                                    <td>
+                                        @if ($withdrawal->status_id == status(config('status.pending')))
+                                            <div class="badge badge-warning">
+                                        @else
+                                            <div class="badge badge-success">
+                                        @endif
+                                            {{ $withdrawal->status->title }}</div>
+                                    </td>
                                     <td>{{ $withdrawal->created_at }}</td>
                                     <td>
-                                        <a class="btn btn-danger" href="javascript::void(0)" onclick="event.preventDefault();
-                                        document.getElementById('cancel-withdrawal-form').submit();">Cancel</a>
-                                        <form id="cancel-withdrawal-form" action="{{ route('user.withdraw.cancel', $withdrawal->id) }}" method="POST" style="display: none;">
-                                            @csrf @method('put')
-                                        </form>
+                                        @if ($withdrawal->status_id == status(config('status.pending')))
+                                            <a class="btn btn-warning" href="javascript::void(0)" onclick="event.preventDefault();
+                                            document.getElementById('cancel-withdrawal-form').submit();">Cancel</a>
+                                            <form id="cancel-withdrawal-form" action="{{ route('user.withdraw.cancel', $withdrawal->id) }}" method="POST" style="display: none;">
+                                                @csrf @method('put')
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

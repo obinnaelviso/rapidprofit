@@ -10,7 +10,7 @@
 <div class="row mb-3">
     <div class="col-md-12">
         <h2>Homepage Settings</h2>
-        
+
     </div>
 </div>
 <div class="row mb-3">
@@ -77,7 +77,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name" class="col-md-12 auth-label text-uppercase">Facebook</label>
-                            <input class="form-control auth-input @error('facebook') is-invalid @enderror" min=0 type="text" name="facebook" value="{{ array_key_exists('facebook', $homepage) ?$homepage->facebook:'' }}" placeholder="0.0" required>
+                            <input class="form-control auth-input @error('facebook') is-invalid @enderror" min=0 type="text" name="facebook" value="{{ array_key_exists('facebook', $homepage) ?$homepage->facebook:'' }}" placeholder="https://facebook.com/john_doe/" required>
                             @error('facebook')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -88,7 +88,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name" class="col-md-12 auth-label text-uppercase">Instagram</label>
-                            <input class="form-control auth-input @error('instagram') is-invalid @enderror" min=0 type="text" name="instagram" value="{{ array_key_exists('instagram', $homepage) ?$homepage->instagram:'' }}" placeholder="0.0" required>
+                            <input class="form-control auth-input @error('instagram') is-invalid @enderror" min=0 type="text" name="instagram" value="{{ array_key_exists('instagram', $homepage) ?$homepage->instagram:'' }}" placeholder="https://instagram.com/john_doe/" required>
                             @error('instagram')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -99,7 +99,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name" class="col-md-12 auth-label text-uppercase">Twitter</label>
-                            <input class="form-control auth-input @error('twitter') is-invalid @enderror" min=0 type="text" name="twitter" value="{{ array_key_exists('twitter', $homepage) ?$homepage->twitter:'' }}" placeholder="0.0" required>
+                            <input class="form-control auth-input @error('twitter') is-invalid @enderror" min=0 type="text" name="twitter" value="{{ array_key_exists('twitter', $homepage) ?$homepage->twitter:'' }}" placeholder="https://twitter.com/john_doe/" required>
                             @error('twitter')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -110,7 +110,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name" class="col-md-12 auth-label text-uppercase">Telegram</label>
-                            <input class="form-control auth-input @error('telegram') is-invalid @enderror" min=0 type="text" name="telegram" value="{{ array_key_exists('telegram', $homepage) ?$homepage->telegram:'' }}" placeholder="0.0" required>
+                            <input class="form-control auth-input @error('telegram') is-invalid @enderror" min=0 type="text" name="telegram" value="{{ array_key_exists('telegram', $homepage) ?$homepage->telegram:'' }}" placeholder="https://telegram.com/john_doe/" required>
                             @error('telegram')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

@@ -74,7 +74,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="percentage" class="col-md-12 col-form-label text-uppercase">Percentage</label>
-                                <input class="form-control @error('percentage') is-invalid @enderror" type="number" min="1" name="percentage" value="{{ old('max_amount') }}" placeholder="e.g Premium" required>
+                                <input class="form-control @error('percentage') is-invalid @enderror" type="number" min="1" name="percentage" value="{{ old('max_amount') }}" placeholder="e.g 20" required>
                                 @error('max_amount')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -2,7 +2,12 @@
     $active_investments = $investments->where('status_id', status(config('status.active')));
     $completed_investments = $investments->where('status_id', status(config('status.completed')));
 @endphp
-
+<div class="row text-center mb-3">
+    <div class="col-md-12">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#addInvestment"><i class="fa fa-plus" aria-hidden="true"></i> Start New Investment</button>
+    </div>
+</div>
+@include('auth.admin.manage-users.investments-create-modal')
 <h3>Active Investments</h3>
 <div class="table-responsive mb-5">
     <table class="table table-borderless">

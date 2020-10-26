@@ -75,6 +75,7 @@ Route::group(['prefix'=>'/admin'], function() {
     Route::post('/users/{reg_user}/deposit', 'Admin\UserController@newDeposit')->name('admin.manage.users.deposit');
     Route::get('/users/{receipt}/deposit/download', 'Admin\UserController@downloadReceipt')->name('admin.manage.users.deposit.download-receipt');
     Route::put('/users/{reg_user}/withdraw', 'Admin\UserController@newWithdrawal')->name('admin.manage.users.withdraw');
+    Route::post('/users/{reg_user}/investments/create', 'Admin\UserController@newInvestment')->name('admin.manage.users.investment.create');
 
     // ----------------------> Packages
     Route::get('/packages', 'Admin\DashboardController@packages')->name('admin.packages');
@@ -98,7 +99,8 @@ Route::group(['prefix'=>'/admin'], function() {
 
     // ------------------------> Investments
     Route::get('/investments', 'Admin\DashboardController@investments')->name('admin.investments');
-    Route::delete('/investments/{investment}/cancel', 'Admin\WalletController@cancelInvestment')->name('admin.investments.cancel');
+    Route::delete('/investments/{investment}/cancel/{delete?}', 'Admin\WalletController@cancelInvestment')->name('admin.investments.cancel');
+    Route::post('/investments/{investment}/complete', 'Admin\WalletController@completeInvestment')->name('admin.investments.complete');
 });
 
 
