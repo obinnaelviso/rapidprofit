@@ -96,7 +96,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card manage-investments">
-            <h4 class="card-header">Pending Withdrawals</h4>
+            <h4 class="card-header">Withdrawal History</h4>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-borderless">
