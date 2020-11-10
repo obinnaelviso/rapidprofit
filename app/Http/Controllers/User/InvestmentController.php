@@ -66,11 +66,12 @@ class InvestmentController extends Controller
         $percentage = $package->percentage;
         $duration = $package->duration;
         $amount = $request->amount;
-
+        $commission = calculateCommission($amount, $package->commissions_percentage);
         // Add to investments
         $investment = $user->investments()->create([
             'package_id' => $package->id,
             'amount' => $amount,
+            'commission' => $commission,
             'prev_bal' => $user->wallet->amount,
             'new_bal' => $user->wallet->amount - $amount,
             'expiry_date' => now()->addDays($package->duration),
@@ -85,6 +86,7 @@ class InvestmentController extends Controller
         ]);
 
         $user->wallet->amount -= $amount;
+        $user->wallet->commissions += $commission;
         $user->wallet->save();
 
         // Referral Code

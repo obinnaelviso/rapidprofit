@@ -64,7 +64,7 @@ class DashboardController extends Controller
             'name' => 'required|string',
             'min_amount' => 'required|numeric|min:0',
             'max_amount' => 'required|numeric|min:0',
-            'gift_bonus' => 'required|numeric|min:0',
+            'commissions_percentage' => 'required|numeric|min:1',
             'percentage' => 'required|numeric|min:1',
             'duration' => 'required|numeric|min:7',
         ]);
@@ -79,7 +79,7 @@ class DashboardController extends Controller
             'name' => 'required|string',
             'min_amount' => 'required|numeric|min:0',
             'max_amount' => 'required|numeric|min:0',
-            'gift_bonus' => 'required|numeric|min:0',
+            'commissions_percentage' => 'required|numeric|min:1',
             'percentage' => 'required|numeric|min:1',
             'duration' => 'required|numeric|min:7',
         ]);

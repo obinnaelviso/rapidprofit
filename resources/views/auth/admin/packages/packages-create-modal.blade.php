@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="max_amount">max Amount</label>
+                                <label for="max_amount">Max Amount</label>
                                 <input class="form-control @error('max_amount') is-invalid @enderror" type="number" min="0" name="max_amount" value="{{ old('max_amount') }}" placeholder="0.0" required>
                                 @error('max_amount')
                                     <span class="invalid-feedback" role="alert">
@@ -61,9 +61,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="gift_bonus">Gift Bonus</label>
-                                <input class="form-control @error('gift_bonus') is-invalid @enderror" type="number" min="0" name="gift_bonus" value="{{ old('gift_bonus') }}" placeholder="0.0" required>
-                                @error('gift_bonus')
+                                <label for="commissions_percentage">Commissions Percentage</label>
+                                <input class="form-control @error('commissions_percentage') is-invalid @enderror" type="number" min="1" name="commissions_percentage" value="{{ old('commissions_percentage') }}" placeholder="Minimum of 1%" required>
+                                @error('commissions_percentage')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -73,7 +73,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="percentage">Percentage</label>
-                                <input class="form-control @error('percentage') is-invalid @enderror" type="number" min="1" name="percentage" value="{{ old('max_amount') }}" placeholder="e.g Premium" required>
+                                <input class="form-control @error('percentage') is-invalid @enderror" type="number" min="1" name="percentage" value="{{ old('max_amount') }}" placeholder="Minimum of 1%" required>
                                 @error('max_amount')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

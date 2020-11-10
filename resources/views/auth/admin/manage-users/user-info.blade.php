@@ -27,6 +27,11 @@
                 <td><button class="btn btn-warning btn-sm" id="update-bonus">Update Bonus</button></td>
             </tr>
             <tr>
+                <td class="title">Commission</td>
+                <td class="text-primary text-big" id="commissions">{{ config('app.currency').$reg_user->wallet->commissions }}</td>
+                {{-- <td><button class="btn btn-warning btn-sm" id="update-bonus">Update Bonus</button></td> --}}
+            </tr>
+            <tr>
                 <td class="title">Role</td>
                 <td class="text-secondary text-capitalize">{{ $reg_user->role->title }}</td>
             </tr>

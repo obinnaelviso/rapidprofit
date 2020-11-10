@@ -39,8 +39,9 @@
                                 <th scope="col">Description</th>
                                 <th scope="col">Min. Amount</th>
                                 <th scope="col">Max. Amount</th>
-                                <th scope="col">Gift Bonus</th>
+                                {{-- <th scope="col">Gift Bonus</th> --}}
                                 <th scope="col">Percentage</th>
+                                <th scope="col">Commissions <br>Percentage</th>
                                 <th scope="col">Duration (days)</th>
                                 <th scope="col">Investments</th>
                                 <th scope="col">Status</th>
@@ -55,8 +56,9 @@
                                     <td>{{ $package->description?:"N/A" }}</td>
                                     <td>{{ config('app.currency').$package->min_amount }}</td>
                                     <td>{{ config('app.currency').$package->max_amount }}</td>
-                                    <td class="text-success">+{{ config('app.currency').$package->gift_bonus }}</td>
+                                    {{-- <td class="text-success">+{{ config('app.currency').$package->gift_bonus }}</td> --}}
                                     <td>{{ $package->percentage }}%</td>
+                                    <td>{{ $package->commissions_percentage }}%</td>
                                     <td>{{ $package->duration }}</td>
                                     <td>{{ $package->investments->count() }}</td>
                                     <td>@if($package->status_id == status(config('status.active')))<div class="badge badge-success"> @else <div class="badge badge-danger"> @endif {{ $package->status->title }}</div></td>

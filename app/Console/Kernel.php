@@ -3,6 +3,8 @@
 namespace App\Console;
 
 use App\Tasks\CheckInvestments;
+use App\Tasks\SendSummaryForTheMonth;
+use App\Tasks\WithdrawalDateNotify;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -28,11 +30,15 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->everyMinute();
         $schedule->call(new CheckInvestments)->everyTwoMinutes();
 
+        $schedule->call(new WithdrawalDateNotify)->lastDayOfMonth();
+        $schedule->call(new SendSummaryForTheMonth)->monthly();
+
         $schedule->command('queue:restart')
                  ->everyFiveMinutes();
 
         $schedule->command('queue:work --daemon')
                  ->everyMinute();
+
     }
 
     /**

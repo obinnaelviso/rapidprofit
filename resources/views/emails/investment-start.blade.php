@@ -13,6 +13,8 @@ Congratulations. Your investment is up and running!
 
 **Payout:** {{ config('app.currency').$investment->payout->amount }}
 
+**Commission:** {{ config('app.currency').$investment->commission }}
+
 **Date:** {{ $investment->expiry_date->toFormattedDateString() }}
 
 For more details, click the button below:

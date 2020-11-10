@@ -434,32 +434,113 @@
         <div class="container testimonials-wrapper">
 
             <!--begin row-->
-            <div class="row">
+            <div class="owl-carousel owl-theme" id="testimony">
+                <div class="row">
 
-                <!--begin col-sm-5 -->
-                <div class="col-sm-5">
+                    <!--begin col-sm-5 -->
+                    <div class="col-sm-5">
 
-                    <!--begin testimonials-info-->
-                    <div class="testimonials-info">
+                        <!--begin testimonials-info-->
 
-                        <p class="author-name">Zurich Chamberlain<br><span>CEO P & P Farms</span></p>
+                        <div class="testimonials-info">
+
+                            <p class="author-name">Zurich Chamberlain<br><span>CEO P & P Farms</span></p>
+
+                        </div>
+                        <!--end testimonials-info-->
 
                     </div>
-                    <!--end testimonials-info-->
+                    <!--end col-sm-5 -->
+
+                    <!--begin col-sm-7 -->
+                    <div class="col-sm-7">
+
+                        <p class="testimonials-text">"It only get's better with {{ config('app.name') }}. I just keep investing and investing and investing, and my funds keep growing, growing and growing."</p>
+
+                    </div>
+                    <!--end col-sm-7 -->
 
                 </div>
-                <!--end col-sm-5 -->
+                <div class="row">
 
-                <!--begin col-sm-7 -->
-                <div class="col-sm-7">
+                    <!--begin col-sm-5 -->
+                    <div class="col-sm-5">
 
-                    <p class="testimonials-text">"It only get's better with {{ config('app.name') }}. I just keep investing and investing and investing, and my funds keep growing, growing and growing."</p>
+                        <!--begin testimonials-info-->
+
+                        <div class="testimonials-info">
+
+                            <p class="author-name">Dr. Jose Ramirez</p>
+
+                        </div>
+                        <!--end testimonials-info-->
+
+                    </div>
+                    <!--end col-sm-5 -->
+
+                    <!--begin col-sm-7 -->
+                    <div class="col-sm-7">
+
+                        <p class="testimonials-text">"An enthralling journey into wealth creation"</p>
+
+                    </div>
+                    <!--end col-sm-7 -->
 
                 </div>
-                <!--end col-sm-7 -->
+                <div class="row">
 
+                    <!--begin col-sm-5 -->
+                    <div class="col-sm-5">
+
+                        <!--begin testimonials-info-->
+
+                        <div class="testimonials-info">
+
+                            <p class="author-name">Jo Benton<br><span>Head of Marketing and PR at Saxo Markets</span></p>
+
+                        </div>
+                        <!--end testimonials-info-->
+
+                    </div>
+                    <!--end col-sm-5 -->
+
+                    <!--begin col-sm-7 -->
+                    <div class="col-sm-7">
+
+                        <p class="testimonials-text">"took me by surprise, a secure rarity"</p>
+
+                    </div>
+                    <!--end col-sm-7 -->
+
+                </div>
+                <!--end row-->
+                <div class="row">
+
+                    <!--begin col-sm-5 -->
+                    <div class="col-sm-5">
+
+                        <!--begin testimonials-info-->
+
+                        <div class="testimonials-info">
+
+                            <p class="author-name">Georgios Kalpaxidis<br><span>Business Developer/Trading Assistant at DEGIRO</span></p>
+
+                        </div>
+                        <!--end testimonials-info-->
+
+                    </div>
+                    <!--end col-sm-5 -->
+
+                    <!--begin col-sm-7 -->
+                    <div class="col-sm-7">
+
+                        <p class="testimonials-text">"{{ config('app.name') }} is a Global Stocks Almagamation!"</p>
+
+                    </div>
+                    <!--end col-sm-7 -->
+
+                </div>
             </div>
-            <!--end row-->
 
         </div>
         <!--end container-->
@@ -593,7 +674,7 @@
                 <!--begin col-sm-12-->
                 <div class="col-sm-12 sponsors">
                     <h1>Our Affiliates</h1>
-                    <div class="owl-carousel owl-theme">
+                    <div class="owl-carousel owl-theme" id="affiliates">
                         <img src="/images/affiliates/360.jpg" alt="360">
                         <img src="/images/affiliates/adara.png" alt="adara">
                         <img src="/images/affiliates/artis.png" alt="artis">
@@ -765,7 +846,7 @@
 
 @section('input-js')
 <script>
-$('.owl-carousel').owlCarousel({
+$('#affiliates').owlCarousel({
     loop:true,
     margin:20,
     autoplay:true,
@@ -778,6 +859,16 @@ $('.owl-carousel').owlCarousel({
         },
         1000: {
             items:5
+        }
+    }
+})
+$('#testimony').owlCarousel({
+    loop:true,
+    margin:20,
+    autoplay:true,
+    responsive:{
+        0:{
+            items:1
         }
     }
 })

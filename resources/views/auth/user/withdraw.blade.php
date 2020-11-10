@@ -69,11 +69,17 @@
                             <input type="text" name="bitcoin_address" min="100" disabled value="{{ old('bitcoin_address') }}" class="form-control" id="bitcoin_address" placeholder="e.g 16oEfPvNr9RL2otUVPrQtpzQPCfgXjk5cr" required="">
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="col-md-12">
-                            <button class="btn btn-primary btn-block" id="withdraw_button" disabled type="submit"><i class="fas fa-hand-holding-usd mr-2"></i> Withdraw</button>
+                    @if(now()->day == now()->daysInMonth)
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <button class="btn btn-primary btn-block" id="withdraw_button" disabled type="submit"><i class="fas fa-hand-holding-usd mr-2"></i> Withdraw</button>
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="alert alert-info" role="alert">
+                            <strong>Please wait till the end of the month to commence withdrawal. Thanks!</strong>
+                        </div>
+                    @endif
                 </form>
             </div>
         </div>

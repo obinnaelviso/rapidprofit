@@ -1,7 +1,7 @@
 <div class="sidebar-block p-0">
     <ul class="sidebar-menu" id="components_menu">
         <li class="sidebar-menu-item @yield('home-active')">
-            <a class="sidebar-menu-button" href="{{ route('user.home') }}">
+            <a class="sidebar-menu-button" href="{{ route('admin.home') }}">
                 <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">home</i>
                 <span class="sidebar-menu-text">Dashboard</span>
             </a>

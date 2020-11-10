@@ -7,6 +7,7 @@ use App\Models\Investment;
 use App\Models\PaymentReceipt;
 use App\Models\Withdrawal;
 use App\Notifications\AccountCredited;
+use App\Notifications\CommissionsCleared;
 use App\Notifications\WithdrawalConfirmed;
 use App\User;
 use Illuminate\Http\Request;
@@ -40,17 +41,33 @@ class WalletController extends Controller
             ]);
         }
 
-        $deposit = $reg_user->deposits()->create([
-            'amount' => $request->amount,
-            'prev_bal' => $reg_user->wallet->amount,
-            'new_bal' => $reg_user->wallet->amount + $amount,
-            'status_id' => status(config('status.completed')),
-            'payment_receipt_id' => $receipt->id
-        ]);
-        $reg_user->wallet->amount += $amount;
+
+        if ($receipt->payment_type == config('constants.commission')) {
+            $deposit = $reg_user->deposits()->create([
+                'amount' => $request->amount,
+                'prev_bal' => $reg_user->wallet->commissions,
+                'new_bal' => $reg_user->wallet->commissions - $amount,
+                'status_id' => status(config('status.completed')),
+                'payment_receipt_id' => $receipt->id]);
+
+                $reg_user->wallet->commissions -= $amount;
+                $reg_user->notify(new CommissionsCleared($deposit));
+
+        } else {
+            $deposit = $reg_user->deposits()->create([
+                'amount' => $request->amount,
+                'prev_bal' => $reg_user->wallet->amount,
+                'new_bal' => $reg_user->wallet->amount + $amount,
+                'status_id' => status(config('status.completed')),
+                'payment_receipt_id' => $receipt->id]);
+
+            $reg_user->wallet->amount += $amount;
+            $reg_user->notify(new AccountCredited($deposit));
+
+        }
+
         $reg_user->wallet->save();
 
-        $reg_user->notify(new AccountCredited($deposit));
 
         return response([
             'message' => "Deposit successful!"

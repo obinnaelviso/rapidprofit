@@ -38,6 +38,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">User</th>
+                                    <th scope="col">Payment Type</th>
                                     <th scope="col">Payment Method</th>
                                     <th scope="col">Receipt</th>
                                     <th scope="col">Bitcoin Address</th>
@@ -53,6 +54,7 @@
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td class="text-capitalize">{{ $receipt->user->first_name.' '.$receipt->user->last_name }}</td>
+                                        <td class="text-uppercase">{{ $receipt->payment_type }}</td>
                                         <td class="text-uppercase">{{ $receipt->payment_method }}</td>
                                         <td>
                                             @if($receipt->url)
@@ -62,10 +64,10 @@
                                             @endif
                                         </td>
                                         <td>{{ $receipt->bitcoin_address? :"N/A" }}</td>
+                                        <td class="text-success">+{{ config('app.currency').$receipt->amount }}</td>
                                         <td>@if($receipt->deposit()->count()) {{ config('app.currency').$receipt->deposit->prev_bal }} @else N/A @endif</td>
                                         <td>@if($receipt->deposit()->count()) {{ config('app.currency').$receipt->deposit->new_bal }} @else N/A @endif</td>
                                         <td>{{ $receipt->created_at }}</td>
-                                        <td class="text-success">+{{ config('app.currency').$receipt->amount }}</td>
                                         <td>
                                             @if($receipt->status_id == status(config('status.completed')))
                                                 <div class="badge badge-success">{{ $receipt->status->title }}</div>

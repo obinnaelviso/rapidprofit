@@ -28,6 +28,10 @@ function calculateInvestmentReturn($amount, $percentage, $duration) {
     return [$profit, $payout];
 }
 
+function calculateCommission($amount, $commission_percentage) {
+    return ($amount * $commission_percentage/100);
+}
+
 function settings(string $value) {
     $settings = Setting::where('key', $value)->first();
     return json_decode($settings->value);
