@@ -21,7 +21,11 @@
 </div>
 
 
+<<<<<<< HEAD
 
+=======
+@include('layouts.alerts')
+>>>>>>> c8af4c4502f697f3e94eb2411d212dee0ab504cc
 
 <div class="container-fluid page__container">
     <div class="card card-form">
@@ -45,7 +49,13 @@
                         <li>Make payment to the address generated from coinpayments</li>
                         {{-- <li>Here is the Bitcoin Address: <a class="text-danger" id="bitcoin-address" href="javascript::void(0)" onclick="copyAddress('bitcoin-address')">adkaf738bd678ikmnhy7890pl76r432qas</a> <small>** click or select to copy address</small></li> --}}
                         <li>After making payment, fill the form below to upload proof of payment (either a screenshot or pdf document)</li>
+<<<<<<< HEAD
                         <li>Your {{ config('app.name') }} account will be credited as soon as payment has been confirmed.</li>
+=======
+                        <li>Select payment method to indicate if your want to credit your <b class="text-success">1. MAIN BALANCE</b> or <b class="text-success">2. CLEAR COMMISSIONS BALANCE</b></li>
+                        <li><b class="text-danger">Take Note!!!</b> Your payment will not be considered valid until you upload your proof of payment (for security reasons).</li>
+                        <li>Your {{ config('app.name') }} account will be credited / commissions cleared as soon as payment has been confirmed.</li>
+>>>>>>> c8af4c4502f697f3e94eb2411d212dee0ab504cc
                         <li><b class="text-danger">Please Note:</b> Payment confirmation takes less than an hour to be processed.</li>
                         <li>Don't hesitate to contact us through our live chat or to send us a mail when you encounter a problem while making deposit.</li>
                     </ul>
@@ -111,7 +121,11 @@
                                 </span>
                             @enderror
                         </div>
+<<<<<<< HEAD
                         <div class="col-md-12 mb-3">
+=======
+                        <div class="col-md-6 mb-3">
+>>>>>>> c8af4c4502f697f3e94eb2411d212dee0ab504cc
                             <label for="input-select">Payment Method</label>
                             <select name="payment_method" class="form-control @error('payment_method') is-invalid @enderror" id="input-select" readonly>
                                 <option value="bitcoin-address" selected>Bitcoin Address</option>
@@ -122,6 +136,21 @@
                                 </span>
                             @enderror
                         </div>
+<<<<<<< HEAD
+=======
+                        <div class="col-md-6 mb-3">
+                            <label for="input-select">Payment Type</label>
+                            <select name="payment_type" class="form-control @error('payment_type') is-invalid @enderror" id="input-select" readonly>
+                                <option value="balance" selected>Main Balance</option>
+                                <option value="commission" >Clear Commissions</option>
+                            </select>
+                            @error('payment_type')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+>>>>>>> c8af4c4502f697f3e94eb2411d212dee0ab504cc
                         <div class="col-md-12">
                             <button class="btn btn-primary btn-block btn-lg" type="submit">Submit</button>
                         </div>

@@ -38,6 +38,10 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Package Name</th>
                                 <th scope="col">Amount</th>
+<<<<<<< HEAD
+=======
+                                <th scope="col">Commission</th>
+>>>>>>> c8af4c4502f697f3e94eb2411d212dee0ab504cc
                                 <th scope="col">Duration</th>
                                 <th scope="col">Profit-Per-Week</th>
                                 <th scope="col">Total Payout</th>
@@ -56,6 +60,10 @@
                                         <th scope="row">{{ $i++ }}</th>
                                         <td class="text-capitalize">{{ $investment->package->name }}</td>
                                         <td class="text-danger">{{ config('app.currency').$investment->amount }}</td>
+<<<<<<< HEAD
+=======
+                                        <td>{{ config('app.currency').$investment->commission }}</td>
+>>>>>>> c8af4c4502f697f3e94eb2411d212dee0ab504cc
                                         <td>@if($investment->package->duration == 7) 1 week @else 1 month @endif</td>
                                         <td class="text-success">+{{ config('app.currency').$investment_return[0] }}</td>
                                         <td class="text-success">{{ config('app.currency').$investment_return[1] }}</td>

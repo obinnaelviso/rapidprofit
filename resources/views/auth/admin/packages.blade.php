@@ -39,8 +39,14 @@
                                 <th scope="col">Description</th>
                                 <th scope="col">Min. Amount</th>
                                 <th scope="col">Max. Amount</th>
+<<<<<<< HEAD
                                 <th scope="col">Gift Bonus</th>
                                 <th scope="col">Percentage</th>
+=======
+                                {{-- <th scope="col">Gift Bonus</th> --}}
+                                <th scope="col">Percentage</th>
+                                <th scope="col">Commissions <br>Percentage</th>
+>>>>>>> c8af4c4502f697f3e94eb2411d212dee0ab504cc
                                 <th scope="col">Duration (days)</th>
                                 <th scope="col">Investments</th>
                                 <th scope="col">Status</th>
@@ -55,8 +61,14 @@
                                     <td>{{ $package->description?:"N/A" }}</td>
                                     <td>{{ config('app.currency').$package->min_amount }}</td>
                                     <td>{{ config('app.currency').$package->max_amount }}</td>
+<<<<<<< HEAD
                                     <td class="text-success">+{{ config('app.currency').$package->gift_bonus }}</td>
                                     <td>{{ $package->percentage }}%</td>
+=======
+                                    {{-- <td class="text-success">+{{ config('app.currency').$package->gift_bonus }}</td> --}}
+                                    <td>{{ $package->percentage }}%</td>
+                                    <td>{{ $package->commissions_percentage }}%</td>
+>>>>>>> c8af4c4502f697f3e94eb2411d212dee0ab504cc
                                     <td>{{ $package->duration }}</td>
                                     <td>{{ $package->investments->count() }}</td>
                                     <td>@if($package->status_id == status(config('status.active')))<div class="badge badge-success"> @else <div class="badge badge-danger"> @endif {{ $package->status->title }}</div></td>

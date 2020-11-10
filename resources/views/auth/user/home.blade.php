@@ -16,6 +16,10 @@
                 </ol>
             </nav> --}}
             <h1 class="m-0">Dashboard</h1>
+<<<<<<< HEAD
+=======
+            <h4>Summary for the month of {{ now()->monthName }}</h4>
+>>>>>>> c8af4c4502f697f3e94eb2411d212dee0ab504cc
         </div>
     </div>
 </div>
@@ -43,8 +47,13 @@
         <div class="col-lg-4 col-md-6 card-group-row__col">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
                 <div class="flex">
+<<<<<<< HEAD
                     <div class="card-header__title text-muted mb-2">Bonus</div>
                     <div class="text-amount">{{ config('app.currency').$user->wallet->bonus }}</div>
+=======
+                    <div class="card-header__title text-muted mb-2">Commissions</div>
+                    <div class="text-amount">{{ config('app.currency').$user->wallet->commissions }}</div>
+>>>>>>> c8af4c4502f697f3e94eb2411d212dee0ab504cc
                 </div>
                 <div><i class="fas fa-piggy-bank icon-muted icon-40pt ml-3"></i></div>
             </div>

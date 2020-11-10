@@ -2,7 +2,11 @@
     <div class="mdk-drawer__content">
         <div class="sidebar sidebar-light sidebar-left simplebar" data-simplebar>
             <div class="d-flex align-items-center sidebar-p-a border-bottom sidebar-account">
+<<<<<<< HEAD
                 <a href="{{ route('user.profile') }}" class="flex d-flex align-items-center text-underline-0 text-body">
+=======
+                <a href="@if($user->role_id == role(config('roles.user'))){{ route('user.profile') }} @else javascript:void(0); @endif" class="flex d-flex align-items-center text-underline-0 text-body">
+>>>>>>> c8af4c4502f697f3e94eb2411d212dee0ab504cc
                     <span class="avatar mr-3">
                         <img src="/assets/images/avatar/avatar.svg" alt="avatar" class="avatar-img rounded-circle">
                     </span>
@@ -17,9 +21,22 @@
                             <div><strong>{{ ucfirst(Auth::user()->first_name.' '.Auth::user()->last_name) }}</strong></div>
                         </div>
                         <div class="dropdown-divider"></div>
+<<<<<<< HEAD
                         <a class="dropdown-item @yield('home-active')" href="{{ route('user.home') }}">Dashboard</a>
                         <a class="dropdown-item @yield('manage-investments-active')" href="{{ route('user.investments.manage') }}">My Investments</a>
                         <a class="dropdown-item @yield('profile-active')" href="{{ route('user.profile') }}">My profile</a>
+=======
+                        @if($user->role_id == role(config('roles.user')))
+                            <a class="dropdown-item @yield('home-active')" href="{{ route('user.home') }}">Dashboard</a>
+                            <a class="dropdown-item @yield('manage-investments-active')" href="{{ route('user.investments.manage') }}">My Investments</a>
+                            <a class="dropdown-item @yield('profile-active')" href="{{ route('user.profile') }}">My profile</a>
+                        @else
+                            <a class="dropdown-item @yield('home-active')" href="{{ route('admin.home') }}">Dashboard</a>
+                            <a class="dropdown-item @yield('users-active')" href="{{ route('admin.manage.users') }}">Manage Users</a>
+                            <a class="dropdown-item @yield('packages-active')" href="{{ route('admin.packages') }}">Manage Packages</a>
+                            <a class="dropdown-item @yield('general-active')" href="{{ route('admin.settings') }}">Settings</a>
+                        @endif
+>>>>>>> c8af4c4502f697f3e94eb2411d212dee0ab504cc
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="javascript::void(0)" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">Logout</a>
