@@ -38,7 +38,7 @@
                     <li>Minimum Deposit: <strong class="text-success">{{ config('app.currency').$package->min_amount }}</strong></li>
                     <li>Maximum Deposit: <strong class="text-danger">{{ config('app.currency').$package->max_amount }}</strong></li>
                     <li>Start Date: <strong class="text-success">{{ now()->toFormattedDateString() }}</strong></li>
-                    <li>End Date: <strong class="text-danger">{{ now()->addDays($package->duration)->toFormattedDateString() }}</strong></li>
+                    <li>End Date: <strong class="text-danger">{{ now()->endOfMonth()->subHours(18)->addMicroseconds(1)->toFormattedDateString() }}</strong></li>
                 </ul>
                 <em class="text-muted text-capitalize">Want to invest more and earn more profit?</em> <a href="{{ route('user.investments') }}" class="text-danger">Select a bigger investment plan.</a>
             </div>
@@ -96,7 +96,7 @@
         var min_amount = {{ $package->min_amount }}
         var max_amount = {{ $package->max_amount }}
         var balance = {{ $user->wallet->amount }}
-        var duration = {{ $package->duration }}
+        var duration = {{ $duration }}
         $('#profit-loading').show()
         $('#amountFeedback').hide()
         $.ajax({

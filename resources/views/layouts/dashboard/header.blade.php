@@ -21,16 +21,16 @@
 
                 @if(Auth::user()->role_id == role(config('roles.user')))
                     <ul class="nav navbar-nav ml-auto d-none d-md-flex">
-                            <li class="nav-item mr-3">
-                                <div href="" class="btn btn-outline-info">
-                                    <i class="material-icons">monetization_on</i> Balance: {{ config('app.currency').$user->wallet->amount }}
-                                </div>
-                            </li>
-                            <li class="nav-item mr-3">
-                                <div class="btn btn-outline-warning">
-                                    <i class="fas fa-piggy-bank"></i> Commissions: {{ config('app.currency').$user->wallet->commissions }}
-                                </div>
-                            </li>
+                        <li class="nav-item mr-3">
+                            <div href="" class="btn btn-outline-info">
+                                <i class="material-icons">monetization_on</i> Monthly Balance ({{ now()->monthName }}): {{ config('app.currency').$user->wallet->amount }}
+                            </div>
+                        </li>
+                        {{-- <li class="nav-item mr-3">
+                            <div class="btn btn-outline-warning">
+                                <i class="fas fa-piggy-bank"></i> Commissions: {{ config('app.currency').$user->wallet->commissions }}
+                            </div>
+                        </li> --}}
                     </ul>
                 @endif
 

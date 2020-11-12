@@ -16,7 +16,6 @@
                 </ol>
             </nav> --}}
             <h1 class="m-0">Dashboard</h1>
-            <h4>Summary for the month of {{ now()->monthName }}</h4>
         </div>
     </div>
 </div>
@@ -32,16 +31,16 @@
     </div> --}}
 
     <div class="row card-group-row">
-        <div class="col-lg-4 col-md-6 card-group-row__col">
+        <div class="col-lg-6 col-md-6 card-group-row__col">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
                 <div class="flex">
-                    <div class="card-header__title text-muted mb-2">Account Balance</div>
+                    <div class="card-header__title text-muted mb-2">Monthly Balance ({{ now()->monthName }})</div>
                     <div class="text-amount">{{ config('app.currency').$user->wallet->amount }}</div>
                 </div>
                 <div><i class="material-icons icon-muted icon-40pt ml-3">monetization_on</i></div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 card-group-row__col">
+        {{-- <div class="col-lg-4 col-md-6 card-group-row__col">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
                 <div class="flex">
                     <div class="card-header__title text-muted mb-2">Commissions</div>
@@ -49,8 +48,8 @@
                 </div>
                 <div><i class="fas fa-piggy-bank icon-muted icon-40pt ml-3"></i></div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-12">
+        </div> --}}
+        <div class="col-lg-6 col-md-12">
             <a href="{{ route('user.deposit') }}" class="btn btn-block btn-outline-danger"><i class="fas fa-wallet icon-20pt mr-2"></i> Make a Deposit</a>
             <a href="{{ route('user.withdraw') }}" class="btn btn-block btn-outline-success"><i class="fas fa-hand-holding-usd icon-20pt mr-2"></i>Withdraw Funds</a>
             <a href="{{ route('user.investments') }}" class="btn btn-block bg-lg btn-primary"><i class="fas fa-chart-line icon-20pt mr-2"></i>Start an Investment</a>

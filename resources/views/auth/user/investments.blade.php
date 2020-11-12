@@ -49,13 +49,13 @@
                         </div>
                         <div class="card-body d-flex flex-column">
 
-                            <p>@if($package->description) {{ $package->description }} @else Get to invest a minimum of <b>{{ config('app.currency').$package->min_amount }}</b> and gain back <b>{{ $package->percentage }}%</b> weekly profit for a duration of <b>@if($package->duration == 7)1 Week @else 1 Month @endif</b> maximum. @endif</p>
+                            <p>@if($package->description) {{ $package->description }} @else Get to invest a minimum of <b>{{ config('app.currency').$package->min_amount }}</b> and gain back <b>{{ $package->percentage }}%</b> weekly profit till the end of the month. @endif</p>
 
                             <ul class="list-unstyled pricing__features">
 
                                 <li>{{ $package->duration }}% Weekly Profit Return</li>
 
-                                <li>Duration: @if($package->duration == 7)1 Week @else 1 Month @endif</li>
+                                {{-- <li>Duration: @if($package->duration == 7)1 Week @else 1 Month @endif</li> --}}
 
                                 <li>Minimum Amount: <b class="text-success">{{ config('app.currency').$package->min_amount }}</b></li>
 

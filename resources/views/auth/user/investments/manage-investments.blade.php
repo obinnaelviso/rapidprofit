@@ -38,8 +38,6 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Package Name</th>
                                 <th scope="col">Amount</th>
-                                <th scope="col">Commission</th>
-                                <th scope="col">Duration</th>
                                 <th scope="col">Profit-Per-Week</th>
                                 <th scope="col">Total Payout</th>
                                 <th scope="col">Start Date</th>
@@ -57,8 +55,6 @@
                                         <th scope="row">{{ $i++ }}</th>
                                         <td class="text-capitalize">{{ $investment->package->name }}</td>
                                         <td class="text-danger">{{ config('app.currency').$investment->amount }}</td>
-                                        <td>{{ config('app.currency').$investment->commission }}</td>
-                                        <td>@if($investment->package->duration == 7) 1 week @else 1 month @endif</td>
                                         <td class="text-success">+{{ config('app.currency').$investment_return[0] }}</td>
                                         <td class="text-success">{{ config('app.currency').$investment_return[1] }}</td>
                                         <td>{{ $investment->created_at->toFormattedDateString() }}</td>

@@ -24,8 +24,15 @@ class InvestmentController extends Controller
     public function investmentsSelect($name) {
         $user = $this->user();
         $package = Package::where('name', $name)->first();
+        $currentDay = now()->day;
+        $endOfMonth = now()->daysInMonth;
+        $daysRemaining = $endOfMonth - $currentDay;
+        if ($daysRemaining >= 7)
+            $duration = $daysRemaining;
+        else
+            $duration = 7;
 
-        return view('auth.user.investments.investment-select', compact('user','package'));
+        return view('auth.user.investments.investment-select', compact('user', 'package', 'duration'));
     }
 
     public function manageInvestments() {
@@ -64,6 +71,14 @@ class InvestmentController extends Controller
         $this->invest_validator($request, $user->wallet->amount, $package->min_amount, $package->max_amount)->validate();
 
         $percentage = $package->percentage;
+        $currentDay = now()->day;
+        $endOfMonth = now()->daysInMonth;
+        $daysRemaining = $endOfMonth - $currentDay;
+        if ($daysRemaining >= 7)
+            $duration = $daysRemaining;
+        else
+            $duration = 7;
+
         $duration = $package->duration;
         $amount = $request->amount;
         $commission = calculateCommission($amount, $package->commissions_percentage);
@@ -74,7 +89,7 @@ class InvestmentController extends Controller
             'commission' => $commission,
             'prev_bal' => $user->wallet->amount,
             'new_bal' => $user->wallet->amount - $amount,
-            'expiry_date' => now()->addDays($package->duration),
+            'expiry_date' => now()->endOfMonth()->subHours(18)->addMicroseconds(1),
             'status_id' => status(config('status.active'))
         ]);
         $payout = calculateInvestmentReturn($amount, $percentage, $duration)[1];
