@@ -39,8 +39,8 @@
                                     <th scope="col">User</th>
                                     <th scope="col">Package Name</th>
                                     <th scope="col">Amount</th>
-                                    <th scope="col">Duration</th>
-                                    <th scope="col">Profit-Per-Week</th>
+                                    <th scope="col">Commissions</th>
+                                    <th scope="col">Profit-Per-Day <br> (exc. weekends)</th>
                                     <th scope="col">Total Payout</th>
                                     <th scope="col">Start Date</th>
                                     <th scope="col">Due Date</th>
@@ -58,10 +58,16 @@
                                         <td class="text-capitalize">{{ $investment->user->first_name.' '.$investment->user->last_name }}</td>
                                         <td class="text-capitalize">{{ $investment->package->name }}</td>
                                         <td class="text-danger">{{ config('app.currency').$investment->amount }}</td>
-                                        <td>@if($investment->package->duration == 7) 1 week @else 1 month @endif</td>
+                                        <td class="text-danger">{{ config('app.currency').$investment->commission }}</td>
                                         <td class="text-success">+{{ config('app.currency').$investment_return[0] }}</td>
-                                        <td class="text-success">{{ config('app.currency').$investment_return[1] }}</td>
-                                        <td>{{ $investment->created_at->toFormattedDateString() }}</td>
+                                        <td class="text-success">{{ config('app.currency').$investment->payout->amount }}</td>
+                                        <td>
+                                            @if($investment->start_at != null)
+                                                {{ $investment->start_at->toFormattedDateString() }}
+                                            @else
+                                                {{ $investment->created_at->toFormattedDateString() }}
+                                            @endif
+                                        </td>
                                         <td class="text-danger">{{ $investment->expiry_date->toFormattedDateString() }}</td>
                                         <td><span class="badge badge-primary"> {{ $investment->status->title }}</td>
                                         <td>
@@ -102,8 +108,8 @@
                                     <th scope="col">User</th>
                                     <th scope="col">Package Name</th>
                                     <th scope="col">Amount</th>
-                                    <th scope="col">Duration</th>
-                                    <th scope="col">Profit-Per-Week</th>
+                                    <th scope="col">Commission</th>
+                                    <th scope="col">Profit-Per-Day <br> (exc. weekends)</th>
                                     <th scope="col">Total Payout</th>
                                     <th scope="col">Start Date</th>
                                     <th scope="col">Due Date</th>
@@ -116,14 +122,20 @@
                                         @php
                                             $investment_return = calculateInvestmentReturn($investment->amount, $investment->package->percentage, $investment->package->duration);
                                         @endphp
-                                        <th scope="row">{{ $i++ }}</th>
+                                        <th scope="row">{{ $investment->iteration }}</th>
                                         <td class="text-capitalize">{{ $investment->user->first_name.' '.$investment->user->last_name }}</td>
                                         <td class="text-capitalize">{{ $investment->package->name }}</td>
                                         <td class="text-danger">{{ config('app.currency').$investment->amount }}</td>
-                                        <td>@if($investment->package->duration == 7) 1 week @else 1 month @endif</td>
+                                        <td class="text-danger">{{ config('app.currency').$investment->commission }}</td>
                                         <td class="text-success">+{{ config('app.currency').$investment_return[0] }}</td>
-                                        <td class="text-success">{{ config('app.currency').$investment_return[1] }}</td>
-                                        <td>{{ $investment->created_at->toFormattedDateString() }}</td>
+                                        <td class="text-success">{{ config('app.currency').$investment->payout->amount }}</td>
+                                        <td>
+                                            @if($investment->start_at != null)
+                                                {{ $investment->start_at->toFormattedDateString() }}
+                                            @else
+                                                {{ $investment->created_at->toFormattedDateString() }}
+                                            @endif
+                                        </td>
                                         <td class="text-danger">{{ $investment->expiry_date->toFormattedDateString() }}</td>
                                         <td><span class="badge badge-success"> {{ $investment->status->title }}</td>
                                     </tr>

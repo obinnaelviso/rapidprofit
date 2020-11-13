@@ -22,8 +22,7 @@ function calculateInvestmentReturn($amount, $percentage, $duration) {
     $profit = ($amount * $percentage/100);
 
     // Payout
-    $no_of_payouts = floor($duration / 7);
-    $payout = $amount + ($profit * $no_of_payouts);
+    $payout = $amount + ($profit * $duration);
 
     return [$profit, $payout];
 }

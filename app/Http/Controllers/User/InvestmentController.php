@@ -8,6 +8,7 @@ use App\Models\ReferralBonus;
 use App\Notifications\DefaultAdmin;
 use App\Notifications\InvestmentStart;
 use App\Notifications\ReferralBonus as NotificationsReferralBonus;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -24,44 +25,23 @@ class InvestmentController extends Controller
     public function investmentsSelect($name) {
         $user = $this->user();
         $package = Package::where('name', $name)->first();
-        $currentDay = now()->day;
-        $endOfMonth = now()->daysInMonth;
-        $daysRemaining = $endOfMonth - $currentDay;
-        if ($daysRemaining >= 7)
-            $duration = $daysRemaining;
-        else
-            $duration = 7;
 
-        return view('auth.user.investments.investment-select', compact('user', 'package', 'duration'));
-    }
+        if (now()->isWeekend() || now()->day == now()->endOfMonth()->day) {
+            $investmentDate = now()->nextWeekday();
+        } else {
+            $investmentDate = now();
+        }
 
-    public function manageInvestments() {
-        $user = $this->user();
-        $active_investments = $user->investments()->where('status_id', status(config('status.active')))->orderBy('created_at','desc')->get();
-        $completed_investments = $user->investments()->where('status_id', status(config('status.completed')))->orderBy('created_at','desc')->get();
-
-        return view('auth.user.investments.manage-investments', compact('user', 'active_investments', 'completed_investments'));
-    }
-
-    public function investmentsCalculateProfit(Request $request) {
-        if($request->amount >= $request->min_amount && $request->amount <= $request->max_amount) {
-            $amount = $request->amount;
-            $percentage = $request->percentage;
-            $profit = ($amount * $percentage/100);
-
-            // Payout
-            $duration = $request->duration;
-            $no_of_payouts = floor($duration / 7);
-            $payout = $amount + ($profit * $no_of_payouts);
-
-            return response([
-                'profit' => $profit,
-                'payout' => $payout,
-            ], Response::HTTP_OK);
-        } else return response([
-            'profit' => 0,
-            'payout' => 0,
-        ], Response::HTTP_OK);
+        $investmentStartDate = new Carbon($investmentDate);
+        $investmentEndDate = $investmentDate->endOfMonth();
+        $duration = $this->investmentDuration($investmentStartDate, $investmentEndDate->day);
+    // dd([
+    //     'currentDate' => now(),
+    //     'investmentStartDate' => $investmentStartDate,
+    //     'investmentEndDate' => $investmentEndDate,
+    //     'duration' => $duration
+    // ]);
+        return view('auth.user.investments.investment-select', compact('user', 'package', 'duration', 'investmentStartDate', 'investmentEndDate'));
     }
 
     public function invest($name, Request $request) {
@@ -71,15 +51,18 @@ class InvestmentController extends Controller
         $this->invest_validator($request, $user->wallet->amount, $package->min_amount, $package->max_amount)->validate();
 
         $percentage = $package->percentage;
-        $currentDay = now()->day;
-        $endOfMonth = now()->daysInMonth;
-        $daysRemaining = $endOfMonth - $currentDay;
-        if ($daysRemaining >= 7)
-            $duration = $daysRemaining;
-        else
-            $duration = 7;
 
-        $duration = $package->duration;
+        if (now()->isWeekend()) {
+            $investmentDate = now()->nextWeekday();
+            if ($investmentDate->day == $investmentDate->endOfMonth()->day) {
+                $investmentDate = $investmentDate->nextWeekday();
+            }
+        } else {
+            $investmentDate = now();
+        }
+        $investmentStartDate = new Carbon($investmentDate);
+        $investmentEndDate = $investmentDate->endOfMonth();
+
         $amount = $request->amount;
         $commission = calculateCommission($amount, $package->commissions_percentage);
         // Add to investments
@@ -89,9 +72,11 @@ class InvestmentController extends Controller
             'commission' => $commission,
             'prev_bal' => $user->wallet->amount,
             'new_bal' => $user->wallet->amount - $amount,
-            'expiry_date' => now()->endOfMonth()->subHours(18)->addMicroseconds(1),
+            'start_at' => $investmentStartDate,
+            'expiry_date' => $investmentEndDate->subHours(18)->addMicroseconds(1),
             'status_id' => status(config('status.active'))
         ]);
+        $duration = $this->investmentDuration($investmentStartDate, $investmentEndDate->day);
         $payout = calculateInvestmentReturn($amount, $percentage, $duration)[1];
 
         $investment->payout()->create([
@@ -132,6 +117,14 @@ class InvestmentController extends Controller
         return redirect()->route('user.investments.manage')->with('success','Congratulations! Your investment is up and running.');
     }
 
+    public function manageInvestments() {
+        $user = $this->user();
+        $active_investments = $user->investments()->where('status_id', status(config('status.active')))->orderBy('created_at','desc')->get();
+        $completed_investments = $user->investments()->where('status_id', status(config('status.completed')))->orderBy('created_at','desc')->get();
+
+        return view('auth.user.investments.manage-investments', compact('user', 'active_investments', 'completed_investments'));
+    }
+
     protected function invest_validator($data, $balance, $min_amount, $max_amount)
     {
     	$validator = Validator::make($data->all(), [
@@ -145,6 +138,36 @@ class InvestmentController extends Controller
 		});
 
 		return $validator;
+    }
+
+    function investmentDuration(Carbon $investmentDate, int $investmentEnd) {
+        $duration = 1;
+        $startDate = new Carbon($investmentDate);
+        while ($startDate->day != $investmentEnd) {
+            $duration++;
+            $startDate = $startDate->nextWeekday();
+        }
+        return $duration;
+    }
+
+    function investmentsCalculateProfit(Request $request) {
+        if($request->amount >= $request->min_amount && $request->amount <= $request->max_amount) {
+            $amount = $request->amount;
+            $percentage = $request->percentage;
+            $profit = ($amount * $percentage/100);
+
+            // Payout
+            $duration = $request->duration;
+            $payout = $amount + ($profit * $duration);
+
+            return response([
+                'profit' => $profit,
+                'payout' => $payout,
+            ], Response::HTTP_OK);
+        } else return response([
+            'profit' => 0,
+            'payout' => 0,
+        ], Response::HTTP_OK);
     }
 
     function user() {

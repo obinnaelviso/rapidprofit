@@ -92,37 +92,39 @@ class WalletController extends Controller
 
     public function withdrawFunds(Request $request) {
         $user = $this->user();
-        if(now()->day == now()->daysInMonth) {
-            $balance = $user->wallet->amount;
-            $general = settings('general');
-            $min_with = array_key_exists('min_with', $general) ?$general->min_with:100;
-            $max_with = array_key_exists('max_with', $general) ?$general->max_with:1000000;
-            $this->validate(request(), [
-                'amount' => 'required|numeric|min:'.$min_with.'|max:'.$max_with,
-                'withdraw_method' => 'required',
-                'bitcoin_address' => 'required'
-            ]);
+        if($user->wallet->commissions <= 0) {
+            if(now()->day == now()->daysInMonth) {
+                $balance = $user->wallet->amount;
+                $general = settings('general');
+                $min_with = array_key_exists('min_with', $general) ?$general->min_with:100;
+                $max_with = array_key_exists('max_with', $general) ?$general->max_with:1000000;
+                $this->validate(request(), [
+                    'amount' => 'required|numeric|min:'.$min_with.'|max:'.$max_with,
+                    'withdraw_method' => 'required',
+                    'bitcoin_address' => 'required'
+                ]);
 
-            if($request->amount > $balance) return back()->with('failed','!! Insufficients funds, please try a smaller amount.');
+                if($request->amount > $balance) return back()->with('failed','!! Insufficients funds, please try a smaller amount.');
 
-            $withdraw = $user->withdrawals()->create([
-                'amount' => $request->amount,
-                'prev_bal'=> $user->wallet->amount,
-                'new_bal' => $user->wallet->amount - $request->amount,
-                'withdraw_method' => $request->withdraw_method,
-                'bitcoin_address' => $request->bitcoin_address,
-                'status_id' => status(config('status.pending'))
-            ]);
-            $user->wallet->amount -= $request->amount;
-            $user->wallet->save();
+                $withdraw = $user->withdrawals()->create([
+                    'amount' => $request->amount,
+                    'prev_bal'=> $user->wallet->amount,
+                    'new_bal' => $user->wallet->amount - $request->amount,
+                    'withdraw_method' => $request->withdraw_method,
+                    'bitcoin_address' => $request->bitcoin_address,
+                    'status_id' => status(config('status.pending'))
+                ]);
+                $user->wallet->amount -= $request->amount;
+                $user->wallet->save();
 
-            $user->notify(new WithdrawRequestUser($withdraw));
-            Notification::route('mail', config('mail.from.address'))
-                        ->notify(new DefaultAdmin("New Withdrawal Request",
-                        "**".ucfirst($user->first_name).' ('.$user->email.")** just made a new withdrawal request for **".config('app.currency').$request->amount."**. Click the button below to process request: "));
+                $user->notify(new WithdrawRequestUser($withdraw));
+                Notification::route('mail', config('mail.from.address'))
+                            ->notify(new DefaultAdmin("New Withdrawal Request",
+                            "**".ucfirst($user->first_name).' ('.$user->email.")** just made a new withdrawal request for **".config('app.currency').$request->amount."**. Click the button below to process request: "));
 
-            return back()->with('warning', 'Please wait while your withdrawal request is being processed...');
-        } else return back()->with('failed', "Sorry but you have to wait till the end of the month to make a withdrawal!");
+                return back()->with('warning', 'Please wait while your withdrawal request is being processed...');
+            } else return back()->with('failed', "Sorry but you have to wait till the end of the month to make a withdrawal!");
+        } else return back()->with('warning', "Sorry you cannot withraw your funds because you have some pending commissions. Thanks!");
     }
 
     public function withdrawCancel(Withdrawal $withdrawal) {

@@ -34,7 +34,7 @@
         <div class="col-lg-6 col-md-6 card-group-row__col">
             <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
                 <div class="flex">
-                    <div class="card-header__title text-muted mb-2">Monthly Balance ({{ now()->monthName }})</div>
+                    <div class="card-header__title text-muted mb-2">Monthly Funds ({{ now()->monthName }})</div>
                     <div class="text-amount">{{ config('app.currency').$user->wallet->amount }}</div>
                 </div>
                 <div><i class="material-icons icon-muted icon-40pt ml-3">monetization_on</i></div>

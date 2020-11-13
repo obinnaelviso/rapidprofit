@@ -127,8 +127,8 @@
                         <div class="col-md-6 mb-3">
                             <label for="input-select">Payment Type</label>
                             <select name="payment_type" class="form-control @error('payment_type') is-invalid @enderror" id="input-select" readonly>
-                                <option value="balance" selected>Main Balance</option>
-                                <option value="commission" >Clear Commissions</option>
+                                <option value="balance">Main Balance</option>
+                                <option value="commission" @if(request('commissions')) selected @endif>Clear Commissions</option>
                             </select>
                             @error('payment_type')
                                 <span class="invalid-feedback" role="alert">

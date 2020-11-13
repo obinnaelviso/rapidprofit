@@ -10,6 +10,7 @@ class Investment extends Model
     protected $guarded = [];
 
     protected $casts = [
+        'start_at' => 'datetime',
         'expiry_date' => 'datetime',
     ];
 

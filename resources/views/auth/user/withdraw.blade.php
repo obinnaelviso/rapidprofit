@@ -28,9 +28,31 @@
         <div class="text-body">
             <i class="fas fa-arrow-right mr-3" aria-hidden="true"></i> You can withdraw a minimum of <b>$100</b>.<br>
             <i class="fas fa-arrow-right mr-3" aria-hidden="true"></i> All withdrawal requests are processed within 0-60 minutes. <br>
-            <i class="fas fa-arrow-right mr-3" aria-hidden="true"></i> No amount is charged per withdrawal.
+            <i class="fas fa-arrow-right mr-3" aria-hidden="true"></i> No amount is charged per withdrawal.<br>
+            <i class="fas fa-arrow-right mr-3" aria-hidden="true"></i> You have to clear your pending commissions before you can withdraw your funds
         </div>
     </div>
+    @if($user->wallet->commissions > 0)
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>
+            <h4 class="text-warning">PENDING COMMISSIONS: {{ config('app.currency').$user->wallet->commissions }} <a href="{{ route('user.deposit', ['commissions' => true]) }}"><< CLEAR COMMISSIONS >></a></h4></strong>
+        </div>
+    @else
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>
+            <h4 class="text-success">YOU HAVE NO PENDING, YOU CAN NOW PROCEED TO WITHDRAW YOUR FUNDS AT THE END OF THE MONTH. GOODLUCK!!!</h4></strong>
+        </div>
+    @endif
+
+    <script>
+      $(".alert").alert();
+    </script>
     @include('layouts.alerts')
     <div class="card card-form">
         <div class="row no-gutters">
@@ -74,6 +96,10 @@
                             <div class="col-md-12">
                                 <button class="btn btn-primary btn-block" id="withdraw_button" disabled type="submit"><i class="fas fa-hand-holding-usd mr-2"></i> Withdraw</button>
                             </div>
+                        </div>
+                    @elseif($user->wallet->commissions > 0)
+                        <div class="alert alert-warning" role="alert">
+                            <strong>Please clear your commissions to commence withdrawal. <a href="{{ route('user.deposit', ['commissions' => true]) }}">Click Here</a> to make a clear your commissions. Thanks!</strong>
                         </div>
                     @else
                         <div class="alert alert-info" role="alert">

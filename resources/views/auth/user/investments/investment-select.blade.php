@@ -34,11 +34,11 @@
             <div class="col-lg-4 card-body">
                 <p><strong class="headings-color text-capitalize">{{ $package->name }} Investment Package</strong></p>
                 <ul style="line-height: 1.7;">
-                    <li>Duration: <strong class="text-primary">@if($package->duration == 7)1 Week @else 1 Month @endif</strong></li>
+                    <li>Duration: <strong class="text-primary">1 Month (exc. weekends)</strong></li>
                     <li>Minimum Deposit: <strong class="text-success">{{ config('app.currency').$package->min_amount }}</strong></li>
                     <li>Maximum Deposit: <strong class="text-danger">{{ config('app.currency').$package->max_amount }}</strong></li>
-                    <li>Start Date: <strong class="text-success">{{ now()->toFormattedDateString() }}</strong></li>
-                    <li>End Date: <strong class="text-danger">{{ now()->endOfMonth()->subHours(18)->addMicroseconds(1)->toFormattedDateString() }}</strong></li>
+                    <li>Start Date: <strong class="text-success">{{ $investmentStartDate->toFormattedDateString() }}</strong></li>
+                    <li>End Date: <strong class="text-danger">{{ $investmentEndDate->toFormattedDateString() }}</strong></li>
                 </ul>
                 <em class="text-muted text-capitalize">Want to invest more and earn more profit?</em> <a href="{{ route('user.investments') }}" class="text-danger">Select a bigger investment plan.</a>
             </div>
@@ -57,7 +57,7 @@
                             <div class="invalid-feedback" id="amountFeedback"></div>
                         </div>
                         <div class="col-md-6 text-right">
-                            <label for="profit">{{ $package->percentage }}% Profit Per Week</label>
+                            <label for="profit">{{ $package->percentage }}% Profit Per Day</label>
                             <input type="text" class="form-control text-success text-right" disabled id="profit" value="+{{ config('app.currency') }}0">
                             <div class="loader loader-primary loader-sm float-right mt-2" style="display: none" id="profit-loading" role="status">
                               <span class="sr-only">Loading...</span>
