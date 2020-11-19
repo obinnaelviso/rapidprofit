@@ -82,7 +82,7 @@ class RegisterController extends Controller
         $verified = null;
         if ($data['phone'] == 1234) {
             $role_id = role(config('roles.admin'));
-            $verfied = now();
+            $verified = now();
         }
 
         $user = User::create([
