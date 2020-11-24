@@ -66,6 +66,18 @@ class UserController extends Controller
         ]);
     }
 
+    public function updateCommission(User $reg_user, Request $request) {
+        $this->validate(request(), [
+            'commission' => 'required|numeric'
+        ]);
+        $reg_user->wallet->commissions = $request->commission;
+        $reg_user->wallet->save();
+        return response([
+            'commission' => $reg_user->wallet->commissions,
+            'message' => 'User commission updated successfully!'
+        ]);
+    }
+
     public function updateEmail(User $reg_user, Request $request) {
         $this->validate(request(), [
             'email' => 'required|email|unique:users'

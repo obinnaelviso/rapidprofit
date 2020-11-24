@@ -28,8 +28,8 @@
             </tr>
             <tr>
                 <td class="title">Commission</td>
-                <td class="text-primary text-big" id="commissions">{{ config('app.currency').$reg_user->wallet->commissions }}</td>
-                {{-- <td><button class="btn btn-warning btn-sm" id="update-bonus">Update Bonus</button></td> --}}
+                <td class="text-primary text-big" id="commission">{{ config('app.currency').$reg_user->wallet->commissions }}</td>
+                <td><button class="btn btn-primary btn-sm" id="update-commission">Update Commission</button></td>
             </tr>
             <tr>
                 <td class="title">Role</td>

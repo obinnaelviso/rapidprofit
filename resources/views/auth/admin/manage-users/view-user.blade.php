@@ -111,6 +111,27 @@ $('#update-bonus').click(function() {
     }
 })
 
+$('#update-commission').click(function() {
+    var commission = prompt('Enter Commission', '')
+    if(commission != null && commission !="") {
+        $.ajax({
+            type: "PUT",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "commission": commission
+            },
+            url: "{{ route('admin.manage.users.update-commission', $reg_user->id) }}",
+            success: function(response){
+                $("#commission").fadeOut(200, function() {
+                        // form.html($response).fadeIn().delay(2000);
+                        $("#commission").hide().html("{{ config('app.currency') }}"+response.commission).fadeIn().delay(200);
+                }).hide()
+            alert(response.message)
+            }
+        });
+    }
+})
+
 
     $('#update-email').click(function() {
         var email = prompt('Enter New Email Address', '')

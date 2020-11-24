@@ -69,6 +69,7 @@ Route::group(['prefix'=>'/admin'], function() {
     Route::get('/users/{reg_user}', 'Admin\UserController@viewUser')->name('admin.manage.users.view');
     Route::put('/users/{reg_user}/update-balance', 'Admin\UserController@updateBalance')->name('admin.manage.users.update-balance');
     Route::put('/users/{reg_user}/update-bonus', 'Admin\UserController@updateBonus')->name('admin.manage.users.update-bonus');
+    Route::put('/users/{reg_user}/update-commission', 'Admin\UserController@updateCommission')->name('admin.manage.users.update-commission');
     Route::put('/users/{reg_user}/update-email', 'Admin\UserController@updateEmail')->name('admin.manage.users.update-email');
     Route::post('/users/{reg_user}/account-status', 'Admin\UserController@accountStatus')->name('admin.manage.users.account-status');
     Route::post('/users/{reg_user}/deposit', 'Admin\UserController@newDeposit')->name('admin.manage.users.deposit');
