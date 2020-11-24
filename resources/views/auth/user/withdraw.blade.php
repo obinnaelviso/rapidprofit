@@ -46,7 +46,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
         <strong>
-            <h4 class="text-success">YOU HAVE NO PENDING, YOU CAN NOW PROCEED TO WITHDRAW YOUR FUNDS AT THE END OF THE MONTH. GOODLUCK!!!</h4></strong>
+            <h4 class="text-success">YOU HAVE NO PENDING COMMISSIONS, YOU CAN NOW PROCEED TO WITHDRAW YOUR FUNDS AT THE END OF THE MONTH. THANK YOU FOR CHOOSING {{ strtoupper(config('app.name')) }}!!!</h4></strong>
         </div>
     @endif
 
