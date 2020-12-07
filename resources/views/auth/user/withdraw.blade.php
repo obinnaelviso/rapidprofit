@@ -32,7 +32,7 @@
             <i class="fas fa-arrow-right mr-3" aria-hidden="true"></i> You have to clear your pending commissions before you can withdraw your funds
         </div>
     </div>
-    @if($user->wallet->commissions > 0)
+    {{-- @if($user->wallet->commissions > 0)
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -48,7 +48,7 @@
         <strong>
             <h4 class="text-success">YOU HAVE NO PENDING COMMISSIONS, YOU CAN NOW PROCEED TO WITHDRAW YOUR FUNDS AT THE END OF THE MONTH. THANK YOU FOR CHOOSING {{ strtoupper(config('app.name')) }}!!!</h4></strong>
         </div>
-    @endif
+    @endif --}}
 
     <script>
       $(".alert").alert();
@@ -105,11 +105,11 @@
                         </div>
                     @else
                         @if($user->wallet->commissions > 0)
-                            @section('alert', 'You have some pending commissions. Please clear your commissions before you can proceed for withdrawal. Thank you!')
+                            @section('alert', 'You have a pending commission of '.config('app.currency').$user->wallet->commissions.'. Please clear your commissions before you can proceed to withdrawal. Thank you!')
                         @else
                             @section('alert', 'Sorry, but you have to wait till the end of the month to perform all your withdrawals. Thank you!')
                         @endif
-                        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#alertWithdraw"><i class="fas fa-hand-holding-usd mr-2"></i> Withdraw</button>
+                        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#alertWithdraw"><i class="fas fa-hand-holding-usd mr-2"></i> Withdraw</button>
                         @push('modals')@include('auth.user.withdraw-alert-modal')@endpush
                     @endif
                 </form>
