@@ -64,8 +64,8 @@
                 <form method="POST" action="{{ route('user.withdraw.funds') }}">
                     @csrf
                     @php
-                        $min_with = array_key_exists('min_with', $general) ?$general->min_with:100;
-                        $max_with = array_key_exists('max_with', $general) ?$general->max_with:1000000;
+                        $min_with = property_exists($general, 'min_with') ?$general->min_with:100;
+                        $max_with = property_exists($general, 'max_with') ?$general->max_with:1000000;
                     @endphp
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
@@ -92,26 +92,26 @@
                         </div>
                     </div>
 
-                    <div class="form-row">
+                    {{-- <div class="form-row">
                         <div class="col-md-12">
                             <button class="btn btn-primary btn-block" id="withdraw_button" disabled type="submit"><i class="fas fa-hand-holding-usd mr-2"></i> Withdraw</button>
                         </div>
-                    </div>
-                    {{-- @if(now()->day == now()->daysInMonth)
+                    </div> --}}
+                    @if(now()->day == now()->daysInMonth)
                         <div class="form-row">
                             <div class="col-md-12">
                                 <button class="btn btn-primary btn-block" id="withdraw_button" disabled type="submit"><i class="fas fa-hand-holding-usd mr-2"></i> Withdraw</button>
                             </div>
                         </div>
-                    @elseif($user->wallet->commissions > 0)
-                        <div class="alert alert-warning" role="alert">
-                            <strong>Please clear your commissions to commence withdrawal. <a href="{{ route('user.deposit', ['commissions' => true]) }}">Click Here</a> to make a clear your commissions. Thanks!</strong>
-                        </div>
                     @else
-                        <div class="alert alert-info" role="alert">
-                            <strong>Please wait till the end of the month to commence withdrawal. Thanks!</strong>
-                        </div>
-                    @endif --}}
+                        @if($user->wallet->commissions > 0)
+                            @section('alert', 'You have some pending commissions. Please clear your commissions before you can proceed for withdrawal. Thank you!')
+                        @else
+                            @section('alert', 'Sorry, but you have to wait till the end of the month to perform all your withdrawals. Thank you!')
+                        @endif
+                        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#alertWithdraw"><i class="fas fa-hand-holding-usd mr-2"></i> Withdraw</button>
+                        @push('modals')@include('auth.user.withdraw-alert-modal')@endpush
+                    @endif
                 </form>
             </div>
         </div>
