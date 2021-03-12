@@ -27,13 +27,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->everyMinute();
         $schedule->call(new CheckInvestments)->everyTwoMinutes();
-
-        $schedule->command('queue:restart')
-                 ->everyFiveMinutes();
-
-        $schedule->command('queue:work --daemon')
-                 ->everyMinute()
-                 ->withoutOverlapping();
+        $schedule->command('queue:work --sansdaemon --tries=3')
+                 ->everyMinute();
     }
 
     /**

@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('index');
+Route::get('/test', function() {
+    return view('auth.passwords.email');
+});
 Route::get('/signin', 'Auth\LoginController@login')->name('login');
 Route::get('/contact-us', 'HomeController@contactUs')->name('contact');
 Route::post('/contact-us', 'HomeController@contact');

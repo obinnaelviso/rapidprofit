@@ -1,102 +1,108 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<!--[if IE 9]>         <html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Reset Password - {{ config('app.name') }}</title>
-    <!-- Bootstrap CSS -->
+        <title>Login - {{ config('app.name') }}</title>
+
+        <meta name="description" content="Welcome to {{ config('app.name') }} investment platform. One of the top World-leading Investment Platform that gives the best offers.">
+        <meta name="author" content="{{ config('app.name') }}">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
+
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="/favicon.png">
+        <!-- END Icons -->
+
+        <!-- Stylesheets -->
+        <!-- Bootstrap is included in its original form, unaltered -->
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/libs/css/style.css">
-    <link rel="stylesheet" href="/vendor/fonts/fontawesome/css/fontawesome-all.css">
-	<link href="/favicon.png" rel="icon" type="image/png"/>
-    <style>
-    html,
-    body {
-        height: 100%;
-    }
 
-    body {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-align: center;
-        align-items: center;
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background-color: black;
-        height: 100%;
-    }
-    </style>
-</head>
+        <!-- Related styles of various icon packs and plugins -->
+        <link rel="stylesheet" href="{{ asset('css/plugins.css') }}">
 
-<body>
-    <!-- ============================================================== -->
-    <!-- reset page  -->
-    <!-- ============================================================== -->
-    <div class="auth-container">
-        <div class="card auth">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6 reset-email">
-                        <form method="POST" action="{{ route('password.update') }}">
-                            @csrf
-                            {{-- Website Title Heading  --}}
-                            <a href="/"><img src="/images/logo.png" class="mb-4 d-md-none" width="200px" alt="{{ config('app.name') }}"></a>
-                            <h2 class="auth-heading">Reset Password</h2>
-                            <p class="auth-subheading mb-5">Type in your email address and new password</p>
+        <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
-                            <input type="hidden" name="token" value="{{ $token }}">
+        <!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
 
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="email" class="col-md-12 col-form-label auth-label text-capitalize">Email Address</label>
-                                    <input class="form-control auth-input @error('email') is-invalid @enderror" type="text" name="email" value="{{ old('email') }}" placeholder="e.g johndoe@example.com" required>
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
+        <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+        <link rel="stylesheet" href="{{ asset('css/themes.css') }}">
+        <!-- END Stylesheets -->
 
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="password" class="col-md-12 col-form-label text-uppercase">New Password</label>
-                                    <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" required autocomplete="new-password">
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
+        <!-- Modernizr (browser feature detection library) -->
+        <script src="{{ asset('js/vendor/modernizr-3.3.1.min.js') }}"></script>
+    </head>
+    <body>
+        <!-- Full Background -->
+        <!-- For best results use an image with a resolution of 1280x1280 pixels (prefer a blurred image for smaller file size) -->
+        <img src="{{ asset('img/placeholders/layout/login2_full_bg.jpg') }}" alt="Full Background" class="full-bg animation-pulseSlow">
+        <!-- END Full Background -->
 
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="password-confirm" class="col-md-12 col-form-label auth-label text-uppercase">Retype Password</label>
-                                    <input class="form-control auth-input" type="password" name="password_confirmation" required autocomplete="new-password">
-                                </div>
-                            </div>
+        <!-- Login Container -->
+        <div id="login-container">
+            <!-- Login Header -->
+            <h1 class="h2 text-light text-center push-top-bottom animation-pullDown">
+                <img src="/images/logo.png" style="width: 80px"> <strong>{{ ucwords(config('app.name')) }}</strong>
+            </h1>
+            <!-- END Login Header -->
 
-                            <button type="submit" class="btn auth-button mt-2 text-capitalize">{{ __('Reset Password') }}</button>
-                        </form>
-                    </div>
-                    <div class="col-md-6 d-none d-sm-flex auth-bg">
-                        <a href="/"><img src="/images/logo.png" alt="{{ config('app.name') }}"></a>
-                    </div>
+            <!-- Login Block -->
+            <div class="block animation-fadeInQuick">
+                <!-- Login Title -->
+                <div class="block-title">
+                    <h2>Reset Password - Type in your email address and new password</h2>
                 </div>
+                <!-- END Login Title -->
+
+                <!-- Login Form -->
+                <form id="form-login" method="POST" action="{{ route('password.update') }}" class="form-horizontal">
+                    @csrf
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input class="form-control @error('email') is-invalid @enderror" type="text" name="email" value="{{ old('email') }}" placeholder="Email Address" required>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input class="form-control @error('password') is-invalid @enderror" placeholder="New Password" type="password" name="password" required autocomplete="new-password">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input class="form-control" type="password" placeholder="Retype Password" name="password_confirmation" required autocomplete="new-password">
+                        </div>
+                    </div>
+                    <div class="form-group form-actions">
+                        <button type="submit" class="btn btn-effect-ripple btn-sm btn-success btn-block">Reset Password</button>
+                    </div>
+                </form>
+                <!-- END Login Form -->
             </div>
+            <!-- END Login Block -->
+
+            <!-- Footer -->
+            <footer class="text-muted text-center animation-pullUp">
+                <small>{{ date('Y') }} &copy; <a href="{{ config('app.url') }}">{{ config('app.name') }}</a></small>
+            </footer>
+            <!-- END Footer -->
         </div>
-    </div>
+        <!-- END Login Container -->
 
-    <!-- ============================================================== -->
-    <!-- end login page  -->
-    <!-- ============================================================== -->
-    <!-- Optional JavaScript -->
-    <script src="/vendor/jquery/jquery-3.3.1.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-</body>
-
+        <!-- jQuery, Bootstrap, jQuery plugins and Custom JS code -->
+        <script src="{{ asset('js/vendor/jquery-2.2.4.min.js') }}"></script>
+        <script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
+    </body>
 </html>

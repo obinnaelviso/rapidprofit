@@ -1,57 +1,44 @@
-@extends('layouts.main')
-@section('title', 'Deposit - '.config('app.name'))
-@section('deposit-active', 'active')
-@section('sidebar')
-@include('layouts.user-sidebar')
-@endsection
+@extends('layouts.dash.main')
+@section('title', 'Deposit')
+@section('header-title', 'Make a Deposit')
 @section('content')
-<div class="row mb-3">
-    <div class="col-md-12">
-        <div class="section-block" id="select">
-            <h3 class="section-title"><img src="/images/icons/deposit-w.svg" alt="Make a Deposit" class="mr-2" width="25"> Make Deposit</h3>
-            <p class="text-muted">Fund your account with your favourite method of payment.</p>
-        </div>
-        <hr>
+<div class="row">
+    @include('layouts.alerts')
+    <div class="col-md-4">
+        <a href="javascript:void(0)" class="widget">
+            <div class="widget-content widget-content-mini text-right clearfix">
+                <div class="widget-icon pull-left themed-background-success">
+                    <i class="gi gi-money text-light-op"></i>
+                </div>
+                <h2 class="widget-heading text-success h3">
+                    <strong>{{ config('app.currency') }}<span data-toggle="counter" data-to="{{ $user->wallet->amount }}"></span></strong>
+                </h2>
+                <span class="text-muted">YOUR BALANCE</span>
+            </div>
+        </a>
     </div>
-    <div class="col-md-12">
-        @include('layouts.alerts')
-        {{-- <div class="alert alert-info">
-            Please make sure to <a class="alert-link" href="#evidenceOfPayment">upload your evidence of payment</a>(e.g a screenshot or receipt document) after making payment!
-        </div> --}}
+    <div class="col-md-8">
+        <div class="block full">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="sr-only" for="amount-to-fund">Amount to Fund</label>
+                    <input type="text" id="amount-to-fund" value="Amount To Fund ({{ config('app.currency') }})" class="form-control input-lg" readonly>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">{{ config('app.currency') }}</span>
+                        <input type="number" name="amount" min="{{ $min_dep }}" max={{ $max_dep }}  value="{{ old('amount') }}" class="form-control input-lg" id="amount" placeholder="{{ $min_dep }}" aria-describedby="currency" required="">
+                    </div>
+                    <div class="invalid-feedback" id="amountFeedback"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-4 bord-right">
-        <div class="card balance-bg">
-            <div class="card-body">
-                <h3 class="balance-heading mb-3"><img src="{{ url('images/icons/balance.svg') }}" style="width: 80px"> Your Balance</h3>
-                <h1 class="balance-heading mb-0" id="wallet-amount">{{ $user->wallet->amount }}</h1>
-            </div>
-        </div>
-    </div>
     <div class="col-md-8">
-        <div class="form-row mb-3">
-            <div class="col-md-6 mb-3 text-right">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text fund-input-icon"><img src="/images/icons/amount-to-fund.svg" alt="Amount To Fund"></span>
-                    </div>
-                    <input type="text" value="Amount To Fund ({{ config('app.currency') }})" class="form-control fund-input" readonly>
-                </div>
-            </div>
-            <div class="col-md-6 mb-3 text-right">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text fund-input-icon"><img src="/images/icons/dollar-sign.svg" alt="Amount To Fund"></span>
-                    </div>
-                    <input type="number" name="amount" min="{{ $min_dep }}" max={{ $max_dep }}  value="{{ old('amount') }}" class="form-control fund-input" id="amount" placeholder="{{ $min_dep }}" aria-describedby="currency" required="">
-                </div>
-                <div class="invalid-feedback" id="amountFeedback"></div>
-            </div>
-        </div>
-        <div class="form-row">
-
+        <div class="row">
             <div class="col-md-12">
                 <h4 class="text-muted">Method of Payment</h4>
             </div>
@@ -106,18 +93,16 @@
 </div>
 <div class="row mb-5">
     <div class="col-md-12">
-        <form action="{{ route('user.deposit.payment-upload') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('user.deposit.payment-upload') }}" method="POST" class="block full" enctype="multipart/form-data">
             @csrf
-            <div class="form-row">
-                <div class="col-md-4 mb-3">
+            <div class="row">
+                <div class="col-md-3">
                     <input type="file" class="fund-input" name="payment_evidence" id="payment_evidence" required>
                 </div>
-                <div class="col-md-3 mb-3">
+                <div class="col-md-3">
                     <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text fund-input-icon"><img src="/images/icons/dollar-sign.svg" alt="Amount To Fund"></span>
-                        </div>
-                        <input type="number" name="amount" min="{{ $min_dep }}" value="{{ old('amount') }}" class="form-control fund-input @error('amount') is-invalid @enderror" placeholder="{{ $min_dep }}" aria-describedby="currency">
+                        <span class="input-group-addon text-lg">{{ config('app.currency') }}</span>
+                        <input type="number" name="amount" min="{{ $min_dep }}" value="{{ old('amount') }}" class="form-control input-lg @error('amount') is-invalid @enderror" placeholder="{{ $min_dep }}" aria-describedby="currency">
                         @error('amount')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -125,8 +110,8 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <select name="payment_method" class="form-control fund-input @error('payment_method') is-invalid @enderror" id="input-select" required>
+                <div class="col-md-3">
+                    <select name="payment_method" class="form-control input-lg @error('payment_method') is-invalid @enderror" id="input-select" required>
                         <option value="coinpayments" selected>CoinPayments</option>
                         <option value="perfect-money">Perfect Money</option>
                     </select>
@@ -136,8 +121,8 @@
                         </span>
                     @enderror
                 </div>
-                <div class="col-md-2">
-                    <button class="btn btn-primary btn-block fund-btn btn-sm" type="submit">Submit</button>
+                <div class="col-md-3">
+                    <button class="btn btn-primary btn-block btn-lg" type="submit">Submit</button>
                 </div>
             </div>
         </form>

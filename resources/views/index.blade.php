@@ -176,10 +176,10 @@
         </div>
     </div>
     @php
-        $active_investors = array_key_exists('active_investors', $homepage) ? $homepage->active_investors: "N/A";
-        $active_invest = array_key_exists('active_invest', $homepage) ? $homepage->active_invest: "N/A";
-        $average_dep = array_key_exists('average_dep', $homepage) ? $homepage->average_dep: "N/A";
-        $average_pay = array_key_exists('average_pay', $homepage) ? $homepage->average_pay: "N/A";
+        $active_investors = isset($homepage->active_investor) ? $homepage->active_investors: "N/A";
+        $active_invest = isset($homepage->active_invest) ? $homepage->active_invest: "N/A";
+        $average_dep = isset($homepage->average_dep) ? $homepage->average_dep: "N/A";
+        $average_pay = isset($homepage->average_pay) ? $homepage->average_pay: "N/A";
     @endphp
     <!-- Testimonial End -->
     <div class="section-padding30 achievements-bg">
@@ -318,24 +318,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                {{-- <!-- Form Start -->
-                <div class="col-xl-4 col-lg-5 col-md-8">
-                    <div class="testimonial-form text-center">
-                        <h3>Always listening, always understanding.</h3>
-                        <input type="text" placeholder="Incoterms">
-                        <button name="submit" class="submit-btn">Request a Quote</button>
-                    </div>
-                </div>
-                <!-- Form End --> --}}
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="owl-carousel owl-theme">
-                        <a href="{{ route('register') }}" target="_blank"><img src="/images/slides/rapidprofit-1.jpg" alt="rapidprofit-1"></a>
-                        <a href="{{ route('register') }}" target="_blank"><img src="/images/slides/rapidprofit-2.jpg" alt="rapidprofit-2"></a>
-                        <a href="{{ route('register') }}" target="_blank"><img src="/images/slides/rapidprofit-3.jpg" alt="rapidprofit-3"></a>
                     </div>
                 </div>
             </div>

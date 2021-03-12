@@ -22,7 +22,7 @@
                             <div class="header-info-left">
                                 <ul>
                                     {{-- <li>Phone: +99 (0) 101 0000 888</li> --}}
-                                    <li>Email: support@rapidprofit.ltd</li>
+                                    <li>Email: {{ config('mail.from.address') }}</li>
                                 </ul>
                             </div>
                             <div class="header-info-right">
@@ -43,7 +43,8 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                                <a href="{{ route('index') }}"><img src="{{ url('/images/logo.png') }}" width="200px" alt="">
+                                <a href="{{ route('index') }}">
+                                    <img src="/images/logo.png" style="width: 50px"><strong>{{ ucwords(config('app.name')) }}</strong>
                                 </a>
                             </div>
                         </div>

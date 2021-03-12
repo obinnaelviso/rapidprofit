@@ -30,7 +30,7 @@ class DashboardController extends Controller
     {
         $user = $this->user();
         $general = settings('general');
-        $referral_limit = array_key_exists('referral_limit', $general) ?$general->referral_limit:100;
+        $referral_limit = isset($general->referral_limit) ? $general->referral_limit:100;
         $active_investments = Investment::where('user_id', $user->id)->where('status_id', status(config('status.active')))->get();
         return view('auth.user.home', compact('user', 'active_investments', 'referral_limit'));
     }
@@ -45,8 +45,8 @@ class DashboardController extends Controller
     public function deposit() {
         $user = $this->user();
         $general = settings('general');
-        $min_dep = array_key_exists('min_dep', $general) ?$general->min_dep:100;
-        $max_dep = array_key_exists('max_dep', $general) ?$general->max_dep:1000000;
+        $min_dep = isset($general->min_dep) ?$general->min_dep:100;
+        $max_dep = isset($general->max_dep) ?$general->max_dep:1000000;
         return view('auth.user.deposit', compact('user', 'min_dep', 'max_dep'));
     }
 

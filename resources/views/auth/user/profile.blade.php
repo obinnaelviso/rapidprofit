@@ -1,89 +1,18 @@
-@extends('layouts.main')
-@section('title', 'Profile - '.config('app.name'))
-@section('profile-active', 'active')
-@section('sidebar')
-@include('layouts.user-sidebar')
-@endsection
+@extends('layouts.dash.main')
+@section('title', 'Profile')
+@section('header-title', 'Make changes to your profile here')
 
 @section('content')
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="card profile-card">
-          <div class="card-body">
-              <div class="row">
-                  <div class="col-md-5">
-                    <img src="/images/icons/logo-white.svg" alt="{{ config('app.name') }}-white" width="150">
-                  </div>
-                  <div class="col-md-7 my-3">
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <div class="card mb-0 statistics statistics-left-bg">
-                                <div class="card-body">
-                                    <div class="active-referrals">
-                                        <p class="profile-stats-heading"><a href="{{ route('user.profile.referrals') }}" class="auth-link">Active<br>Referral</a></p>
-                                        <h2 class="profile-stats-text" id="active-investments">{{ $user->activeReferrals->count() }}</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="card mb-0 statistics statistics-middle-bg">
-                                <div class="card-body">
-                                    <div class="total-referrals">
-                                        <p class="profile-stats-heading"><a href="{{ route('user.profile.referrals') }}" class="auth-link">Total<br>Referral</a></p>
-                                        <h2 class="profile-stats-text" id="active-investments">{{ $user->referrerBonus->count() }}</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="card mb-0 statistics statistics-right-bg">
-                                <div class="card-body">
-                                    <div class="referral-bonus">
-                                        <p class="profile-stats-heading">Referral<br>Bonus</p>
-                                        <h3 class="profile-stats-text" id="active-investments">{{ $user->wallet->bonus }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-              </div>
-          </div>
-        </div>
-        {{-- <div class="alert alert-info">
-            <i class="fa fa-arrow-right" aria-hidden="true"></i> <b>Note:</b> You cannot modify your Email Address.<br>
-        </div> --}}
-    </div>
-</div>
-<div class="row mb-4">
-    <div class="col-md-6 profile-image">
-        <img src="/images/icons/profile-pic-big.svg" alt="profile-picture">
-        <h3>{{ ucfirst($user->first_name.' '.$user->last_name) }}<br>
-            <small class="text-muted">Child Investor</small>
-        </h3>
-    </div>
-    <div class="col-md-6">
-        <div class="form-row">
-            <div class="col-md-4 mb-2"><div class="btn btn-block profile-btn" id="but-d">Referral Code</div></div>
-            <div class="col-md-5 mb-2"><input type="text" value="{{ $user->referral_code }}" class="form-control fund-input profile-ref" readonly></div>
-            <div class="col-md-3 mb-2"><button class="btn btn-block profile-btn" onclick="copyAddress('referral-link')" type="button">Copy Link</button></div>
-            <input id="referral-link" type="text" class="referral-input" value="{{ route('referral', $user->referral_code) }}"></a>
-        </div>
-    </div>
-</div>
-
 <div class="row mb-5">
     <div class="col-md-12">
         @include('layouts.alerts')
-        <form method="POST" action="{{ route('user.profile') }}">
+        <form method="POST" action="{{ route('user.profile') }}" class="block full">
             @csrf @method('put')
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="first_name" class="col-md-12 col-form-label auth-label text-capitalize">First Name</label>
-                        <input class="form-control auth-input @error('first_name') is-invalid @enderror" type="text" name="first_name" value="{{ $user->first_name ?: old('first_name') }}" placeholder="e.g John" required>
+                        <label for="first_name" class="text-capitalize">First Name</label>
+                        <input class="form-control input-lg @error('first_name') is-invalid @enderror" type="text" name="first_name" value="{{ $user->first_name ?: old('first_name') }}" placeholder="e.g John" required>
                         @error('first_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -91,10 +20,10 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="last_name" class="col-md-12 col-form-label auth-label text-capitalize">Last Name</label>
-                        <input class="form-control auth-input @error('last_name') is-invalid @enderror" type="text" name="last_name" value="{{ $user->last_name ?: old('last_name') }}" placeholder="e.g Doe" required>
+                        <label for="last_name" class="text-capitalize">Last Name</label>
+                        <input class="form-control input-lg @error('last_name') is-invalid @enderror" type="text" name="last_name" value="{{ $user->last_name ?: old('last_name') }}" placeholder="e.g Doe" required>
                         @error('last_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -102,10 +31,10 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="address" class="col-md-12 col-form-label auth-label text-capitalize">Address</label>
-                        <input class="form-control auth-input @error('address') is-invalid @enderror" value="{{ $user->address ?: old('address') }}" type="text" name="address" placeholder="e.g 28 Hawthorne Lane
+                        <label for="address" class="text-capitalize">Address</label>
+                        <input class="form-control input-lg @error('address') is-invalid @enderror" value="{{ $user->address ?: old('address') }}" type="text" name="address" placeholder="e.g 28 Hawthorne Lane
                         Great Falls, MT 12345" required>
                         @error('address')
                             <span class="invalid-feedback" role="alert">
@@ -114,12 +43,10 @@
                         @enderror
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="country" class="col-md-12 col-form-label auth-label text-capitalize">Country</label>
-                        <select style="cursor: pointer;" class="form-control auth-select @error('country') is-invalid @enderror mb-2" name="country" required>
+                        <label for="country" class="text-capitalize">Country</label>
+                        <select style="cursor: pointer;" class="form-control input-lg auth-select @error('country') is-invalid @enderror mb-2" name="country" required>
                             <option selected readonly>{{ $user->country }}</option>
                             <option>Afghanistan</option>
                             <option>Åland Islands</option>
@@ -378,10 +305,10 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="phone" class="col-md-12 col-form-label auth-label text-capitalize">Phone Number</label>
-                        <input class="form-control auth-input @error('phone') is-invalid @enderror" type="text" name="phone" value="{{ $user->phone ?: old('phone') }}" placeholder="+1 773 519 8392" required>
+                        <label for="phone" class="text-capitalize">Phone Number</label>
+                        <input class="form-control input-lg @error('phone') is-invalid @enderror" type="text" name="phone" value="{{ $user->phone ?: old('phone') }}" placeholder="+1 773 519 8392" required>
                     </div>
                     @error('phone')
                         <span class="invalid-feedback" role="alert">
@@ -389,10 +316,10 @@
                         </span>
                     @enderror
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="email" class="col-md-12 col-form-label auth-label text-capitalize">Email Address</label>
-                        <input class="form-control auth-input @error('email') is-invalid @enderror" type="email" name="email" value="{{ $user->email ?: old('email') }}" placeholder="e.g johndoe@example.com" readonly>
+                        <label for="email" class="text-capitalize">Email Address</label>
+                        <input class="form-control input-lg @error('email') is-invalid @enderror" type="email" name="email" value="{{ $user->email ?: old('email') }}" placeholder="e.g johndoe@example.com" readonly>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -400,12 +327,10 @@
                         @enderror
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="password" class="col-md-12 col-form-label auth-label text-capitalize">Old Password</label>
-                        <input class="form-control auth-input @error('password') is-invalid @enderror" id="pass1" name="old_password" type="password" placeholder="Type in your old password">
+                        <label for="password" class="text-capitalize">Old Password</label>
+                        <input class="form-control input-lg @error('password') is-invalid @enderror" id="pass1" name="old_password" type="password" placeholder="Type in your old password">
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -413,10 +338,10 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="password" class="col-md-12 col-form-label auth-label text-capitalize">New Password</label>
-                        <input class="form-control auth-input @error('password') is-invalid @enderror" id="pass1" name="password" type="password" placeholder="Please type in any 8-digit alphanumeric characters with uppercase and symbols">
+                        <label for="password" class="text-capitalize">New Password</label>
+                        <input class="form-control input-lg @error('password') is-invalid @enderror" id="pass1" name="password" type="password" placeholder="Please type in any 8-digit alphanumeric characters with uppercase and symbols">
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -424,10 +349,10 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="password-confirmation" class="col-md-12 col-form-label auth-label text-capitalize">Confirm Password</label>
-                        <input class="form-control auth-input @error('password_confirmation') is-invalid @enderror" name="password_confirmation" type="password" placeholder="Retype New Password">
+                        <label for="password-confirmation" class="text-capitalize">Confirm Password</label>
+                        <input class="form-control input-lg @error('password_confirmation') is-invalid @enderror" name="password_confirmation" type="password" placeholder="Retype New Password">
                         @error('password_confirmation')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -436,7 +361,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn auth-button mt-2" type="submit">Update Profile</button>
+            <button class="btn btn-primary btn-lg mt-2" type="submit">Update Profile</button>
         </form>
     </div>
 </div>

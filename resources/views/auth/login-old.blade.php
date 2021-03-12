@@ -1,73 +1,99 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="en">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login - {{ config('app.name') }}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/libs/css/style.css">
+    <link rel="stylesheet" href="/vendor/fonts/fontawesome/css/fontawesome-all.css">
+	<link href="/favicon.png" rel="icon" type="image/png"/>
+    <style>
+    html,
+    body {
+        height: 100%;
+    }
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        height: 100%;
+        background-color: black;
+    }
+    </style>
+</head>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+<body>
+    <!-- ============================================================== -->
+    <!-- login page  -->
+    <!-- ============================================================== -->
+    <div class="auth-container">
+        <div class="card auth">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 login">
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                            {{-- Website Title Heading  --}}
+                            <a href="/"><img src="/images/logo.png" class="mb-4 d-md-none" width="200px" alt="{{ config('app.name') }}"></a>
+                            <h2 class="auth-heading">Sign in into your account!</h2>
+                            <p class="auth-subheading mb-5">Sign in with your data used in registration</p>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
+                            @include('layouts.alerts')
+                            <div class="form-group">
+                                <label for="email" class="col-md-12 col-form-label auth-label text-capitalize @error('email') is-invalid @enderror">Email Address</label>
+                                <input class="form-control auth-input form-control-lg" id="email" value="{{ old('email') }}" type="text" autocomplete="off" name="email">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
+                            <div class="form-group">
+                                <label for="password" class="col-md-12 col-form-label auth-label text-capitalize @error('password') is-invalid @enderror">Password</label>
+                                <input class="form-control auth-input form-control-lg" id="password" type="password" name="password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
+                            <div class="form-group">
+                                <label class="auth-label auth-radio-container">
+                                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <span class="auth-radio"></span> Remember me
+                                </label>
+                                <label class="auth-label float-md-right">
+                                    <a href="{{ route('password.request') }}">Forget Password?</a>
+                                </label>
                             </div>
-                        </div>
+                            <button type="submit" class="btn auth-button mt-2">Sign in to Your Account</button>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+                            <div class="auth-label">Don't have an account? <a href="{{ route('register') }}">Sign Up!</a></div>
+                        </form>
+                    </div>
+                    <div class="col-md-6 d-none d-sm-flex auth-bg">
+                        <a href="/"><img src="/images/logo.png" alt="{{ config('app.name') }}"></a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+
+    <!-- ============================================================== -->
+    <!-- end login page  -->
+    <!-- ============================================================== -->
+    <!-- Optional JavaScript -->
+    <script src="/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>
