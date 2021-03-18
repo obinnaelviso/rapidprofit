@@ -1,0 +1,113 @@
+@extends('layouts.dash.main')
+@section('title', 'General Settings')
+@section('content')
+<div class="row mb-3">
+    <div class="col-md-12">
+        <div class="block full manage-investments">
+          <div class="card-body">
+              @include('layouts.alerts')
+            <form action="{{ route('admin.settings.general', $gen_settings->id) }}" method="POST">
+                @csrf @method('put')
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="text-uppercase">Deposit Settings</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name" class="col-md-12 auth-label text-uppercase">Minimum Deposit</label>
+                            <input class="form-control auth-input @error('min_dep') is-invalid @enderror" min=0 type="number" name="min_dep" value="{{ isset($general->min_depl) ?$general->min_dep:'' }}" placeholder="0.0" required>
+                            @error('min_dep')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name" class="col-md-12 auth-label text-uppercase">Maximum Deposit</label>
+                            <input class="form-control auth-input @error('max_dep') is-invalid @enderror" min=0 type="number" name="max_dep" value="{{ isset($general->max_dep) ?$general->max_dep:'' }}" placeholder="0.0" required>
+                            @error('max_dep')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="text-uppercase">Withdraw Settings</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name" class="col-md-12 auth-label text-uppercase">Minimum Withdraw</label>
+                            <input class="form-control auth-input @error('min_with') is-invalid @enderror" min=0 type="number" name="min_with" value="{{ isset($general->min_with) ?$general->min_with:'' }}" placeholder="0.0" required>
+                            @error('min_with')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name" class="col-md-12 auth-label text-uppercase">Maximum Withdraw</label>
+                            <input class="form-control auth-input @error('max_with') is-invalid @enderror" min=0 type="number" name="max_with" value="{{ isset($general->max_with) ?$general->max_with:'' }}" placeholder="0.0" required>
+                            @error('max_with')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="text-uppercase">Referral Settings</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name" class="col-md-12 auth-label text-uppercase">Referrer Bonus</label>
+                            <input class="form-control auth-input @error('referrer_bon') is-invalid @enderror" min=0 type="number" name="referrer_bon" value="{{ isset($general->referrer_bon) ?$general->referrer_bon:'' }}" placeholder="0.0" required>
+                            @error('referrer_bon')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name" class="col-md-12 auth-label text-uppercase">Referred Bonus</label>
+                            <input class="form-control auth-input @error('referred_bon') is-invalid @enderror" min=0 type="number" name="referred_bon" value="{{ isset($general->referred_bon) ?$general->referred_bon:'' }}" placeholder="0.0" required>
+                            @error('referred_bon')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name" class="col-md-12 auth-label text-uppercase">Referral Withdraw Limit</label>
+                            <input class="form-control auth-input @error('referral_limit') is-invalid @enderror" min=0 type="number" name="referral_limit" value="{{ isset($general->referral_limit) ?$general->referral_limit:'' }}" placeholder="0.0" required>
+                            @error('referral_limit')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group pt-2">
+                    <button class="btn btn-primary" type="submit">Save Settings</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+</div>
+@endsection
