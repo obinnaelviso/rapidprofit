@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="package" class="col-md-12 col-form-label text-capitalize">Select Investment Package</label>
+                                <label for="package" class="col-md-12 text-capitalize">Select Investment Package</label>
                                 <select class="form-control" name="package" id="package">
                                     @foreach ($packages as $package)
                                         <option value="{{ $package->id }}">{{ ucfirst($package->name).' ($'.$package->min_amount.' - $'.$package->max_amount.', '.$package->percentage.'% Profit for '.$package->duration.' days.)' }}</option>
@@ -29,9 +29,9 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="start_date" class="col-md-12 col-form-label text-uppercase">Start Date</label>
-                                <input class="form-control @error('start_date') is-invalid @enderror" type="text" name="start_date" value="{{ old('start_date') }}" id="startdate" required>
+                            <div class="form-group" style="position: relative">
+                                <label for="start_date" class="col-md-12 text-uppercase">Start Date</label>
+                                <input class="form-control input-datepicker @error('start_date') is-invalid @enderror" type="text" autocomplete="off" name="start_date" value="{{ old('start_date') }}" id="startdate" required>
                                 @error('start_date')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -40,23 +40,10 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="end_date" class="col-md-12 col-form-label text-uppercase">End Date</label>
-                                <input class="form-control @error('end_date') is-invalid @enderror" type="text" name="end_date" id="enddate" value="{{ old('end_date') }}" required>
-                                @error('end_date')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div> --}}
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="amount" class="col-md-12 col-form-label text-uppercase">Amount</label>
+                                <label for="amount" class="col-md-12 text-uppercase">Amount</label>
                                 <input class="form-control @error('amount') is-invalid @enderror" type="number" min="100" name="amount" value="{{ old('amount') }}" placeholder="100" required>
                                 @error('amount')
                                     <span class="invalid-feedback" role="alert">
@@ -67,7 +54,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="amount" class="col-md-12 col-form-label text-uppercase">Status</label>
+                                <label for="amount" class="col-md-12 text-uppercase">Status</label>
                                 <select name="status" id="status" class="form-control">
                                     @foreach ($statuses as $status)
                                         <option value="{{ $status->id }}">{{ ucfirst($status->title) }}</option>
@@ -87,7 +74,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                <a href="#" class="btn btn-danger" data-dismiss="modal">Close</a>
             </div>
         </div>
     </div>

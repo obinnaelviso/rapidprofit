@@ -2245,9 +2245,6 @@ http://www.apache.org/licenses/LICENSE-2.0
     border-bottom: 0;
     border-top: 6px solid #ffffff;
 }
-.datepicker > div {
-    display: none;
-}
 .datepicker.days div.datepicker-days {
     display: block;
 }

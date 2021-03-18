@@ -1,28 +1,18 @@
-@extends('layouts.main')
-@section('title', 'My Dashboard - '.' Admin '.config('app.name'))
-@section('deposits-active', 'active')
-@section('sidebar')
-@include('layouts.admin-sidebar')
-@endsection
+@extends('layouts.dash.main')
+@section('title', 'Deposits')
+@section('header-title', 'Manage User Deposit Requests')
 
 @section('content')
 <div class="row mb-3">
-    <div class="col-md-12">
-        <h2>Manage Deposits</h2>
-    </div>
-</div>
-
-<div class="row mb-3">
     <div class="col-md-12 mb-3" id="deposit-table">
         @if($payment_receipts->count())
-            <div class="card manage-investments">
+            <div class="block full manage-investments">
                     <h4 class="card-header">New Payment Receipts</h4>
                 <div class="card-body">
                     <div>
-                        <table class="table table-borderless">
+                        <table class="table table-vcenter table-hover table-borderless">
                             <thead class="thead-inverse">
                                 <tr>
-                                    @php $i = 1; @endphp
                                     <th scope="col">#</th>
                                     <th scope="col">User</th>
                                     <th scope="col">Payment Method</th>
@@ -38,7 +28,7 @@
                                 <tbody>
                                     @foreach($payment_receipts->get() as $receipt)
                                     <tr>
-                                        <th scope="row">{{ $i++ }}</th>
+                                        <th scope="row">{{ $loop->iteration }}</th>
                                         <td class="text-capitalize">{{ $receipt->user->first_name.' '.$receipt->user->last_name }}</td>
                                         <td class="text-uppercase">{{ $receipt->payment_method }}</td>
                                         <td>
@@ -55,7 +45,7 @@
                                         <td class="text-success">+{{ config('app.currency').$receipt->amount }}</td>
                                         <td>
                                             @if($receipt->status_id == status(config('status.completed')))
-                                                <div class="badge badge-success">{{ $receipt->status->title }}</div>
+                                                <div class="label label-success">{{ $receipt->status->title }}</div>
                                             @else
                                                 <button class="btn btn-success btn-sm" onclick="newDeposit('{{ $receipt->id }}', {{ $receipt->user->id }});">Confirm Deposit</button>
                                             @endif
@@ -68,7 +58,7 @@
                 </div>
             </div>
         @else
-            <div class="card text-left">
+            <div class="block full text-left">
               <div class="card-body">
                 <h4 class="card-text text-success">No Payment Receipts Available</h4>
               </div>
@@ -78,7 +68,7 @@
 </div>
 
 @endsection
-@section('input-js')
+@push('more-js')
 <script>
 
     function newDeposit(receipt_id = 0, user_id) {
@@ -105,4 +95,4 @@
     }
 
 </script>
-@endsection
+@endpush

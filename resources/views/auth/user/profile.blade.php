@@ -361,7 +361,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary btn-lg mt-2" type="submit">Update Profile</button>
+            <button class="btn btn-primary btn-effect-ripple btn-lg mt-2" type="submit">Update Profile</button>
         </form>
     </div>
 </div>

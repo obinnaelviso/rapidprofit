@@ -5,7 +5,7 @@
 <img src="https://laravel.com/img/notification-logo.png" class="logo" alt="Laravel Logo">
 @else
 {{-- {{ $slot }} --}}
-<img src="{{ url('/images/logo.png') }}" width="200px" alt="{{ config('app.name') }}">
+<img src="{{ url('/images/logo.png') }}" width="80px" alt="{{ config('app.name') }}"> <h1>Trusted Crypto</h2>
 @endif
 </a>
 </td>

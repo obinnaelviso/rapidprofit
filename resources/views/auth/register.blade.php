@@ -382,6 +382,16 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input class="form-control @error('referral_code') is-invalid @enderror" type="text" name="referral_code" value="{{ old('referral_code') ?: request('ref') }}" placeholder="Referral Code (if any)">
+                            @error('referral_code')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="form-group form-actions row">
                         <div class="col-md-12">
                             <label class="csscheckbox csscheckbox-primary" data-toggle="tooltip" title="Please agree to the terms and conditions to continue">

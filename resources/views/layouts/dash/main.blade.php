@@ -95,6 +95,7 @@
                                     <li class="dropdown-header">
                                         <strong>WELCOME {{ strtoupper(auth()->user()->first_name,) }}</strong>
                                     </li>
+                                    @if(auth()->user()->isUser())
                                     <li>
                                         <a href="{{ route('user.investments.manage') }}">
                                             <i class="gi gi-pie_chart fa-fw pull-right"></i>
@@ -107,6 +108,7 @@
                                             Profile
                                         </a>
                                     </li>
+                                    @endif
                                     <li>
                                         <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             <i class="fa fa-power-off fa-fw pull-right"></i>
@@ -150,13 +152,14 @@
         <!-- END Page Wrapper -->
 
         <!-- jQuery, Bootstrap, jQuery plugins and Custom JS code -->
-        <script src="{{ asset('js/vendor/jquery-2.2.4.min.js') }}"></script>
+        <script src="{{ asset('vendor/jquery/jquery-3.3.1.min.js') }}"></script>
         <script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
         <script src="{{ asset('js/plugins.js') }}"></script>
         <script src="{{ asset('js/app.js') }}"></script>
         <!-- Load and execute javascript code used only in this page -->
         <script src="{{ asset('js/pages/readyDashboard.js') }}"></script>
         <script>$(function(){ ReadyDashboard.init(); });</script>
+        @include('layouts.tawk')
         @stack('more-js')
         @stack('modal')
     </body>

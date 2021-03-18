@@ -1,28 +1,18 @@
-@extends('layouts.main')
-@section('title', 'Manage Investments - '.config('app.name'))
-@section('investments-active', 'active')
-@section('sidebar')
-@include('layouts.admin-sidebar')
-@endsection
+@extends('layouts.dash.main')
+@section('title', 'Manage Investments')
+@section('header-title', 'Manage Investment Plans')
 
 @section('content')
-<div class="row mb-3">
-    <div class="col-md-12">
-        <h1>Manage Investments</h1>
-        <hr>
-    </div>
-</div>
 <div class="row">
     <div class="col-md-12">
         @include('layouts.alerts')
-        <div class="card manage-investments">
+        <div class="block full manage-investments">
             <h3 class="card-header">Active Investments</h3>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-borderless">
+                    <table class="table table-vcenter table-hover table-borderless">
                         <thead>
                             <tr>
-                                @php $i = 1; @endphp
                                 <th scope="col">#</th>
                                 <th scope="col">User</th>
                                 <th scope="col">Package Name</th>
@@ -43,7 +33,7 @@
                                         @php
                                             $investment_return = calculateInvestmentReturn($investment->amount, $investment->package->percentage, $investment->package->duration);
                                         @endphp
-                                        <th scope="row">{{ $i++ }}</th>
+                                        <th scope="row">{{ $loop->iteration }}</th>
                                         <td class="text-capitalize">{{ $investment->user->first_name.' '.$investment->user->last_name }}</td>
                                         <td class="text-capitalize">{{ $investment->package->name }}</td>
                                         <td class="text-danger">{{ config('app.currency').$investment->amount }}</td>
@@ -85,14 +75,13 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="card manage-investments">
+        <div class="block full manage-investments">
             <h3 class="card-header">Completed Investments</h3>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-borderless">
+                    <table class="table table-vcenter table-hover table-borderless">
                         <thead>
                             <tr>
-                                @php $i = 1; @endphp
                                 <th scope="col">#</th>
                                 <th scope="col">User</th>
                                 <th scope="col">Package Name</th>
@@ -113,7 +102,7 @@
                                         @php
                                             $investment_return = calculateInvestmentReturn($investment->amount, $investment->package->percentage, $investment->package->duration);
                                         @endphp
-                                        <th scope="row">{{ $i++ }}</th>
+                                        <th scope="row">{{ $loop->iteration }}</th>
                                         <td class="text-capitalize">{{ $investment->user->first_name.' '.$investment->user->last_name }}</td>
                                         <td class="text-capitalize">{{ $investment->package->name }}</td>
                                         <td class="text-danger">{{ config('app.currency').$investment->amount }}</td>
@@ -144,7 +133,7 @@
 </div>
 
 @endsection
-@section('input-js')
+@push('more-js')
 <script>
     function completeInvestment(investment_id = 0) {
         var complete_investment = confirm('Are you sure you want to mark this investment as complete?')
@@ -165,4 +154,4 @@
         }
     }
 </script>
-@endsection
+@endpush

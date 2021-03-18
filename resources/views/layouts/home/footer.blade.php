@@ -64,12 +64,12 @@
                         <div class="single-footer-caption mb-50">
                             <!-- logo -->
                             <div class="footer-logo">
-                                <a href="{{ route('index') }}"><img src="{{ url('/images/logo.png') }}" width="200px" alt="">
+                                <a href="{{ route('index') }}"><img src="{{ url('/images/logo.png') }}" width="80px" alt="">
                                 </a>
                             </div>
                             <div class="footer-tittle">
-                                <div class="footer-pera">
-                                    <p class="info1">Invest today and start earning from our No.1 fast growing investment platform. Rapidprofit is the best because you see what you invest grow live.</p>
+                                <div class="footer-pera text-muted mb-3">
+                                    <i class="fab fa-whatsapp" aria-hidden="true"></i> Whatsapp Us at: +14235239123, +447451243042
                                 </div>
                             </div>
                             <!-- Footer Social -->

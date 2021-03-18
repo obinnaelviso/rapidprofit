@@ -32,4 +32,5 @@
 
         <!-- Modernizr (browser feature detection library) -->
         <script src="{{ asset('js/vendor/modernizr-3.3.1.min.js') }}"></script>
+        @stack('more-css')
     </head>

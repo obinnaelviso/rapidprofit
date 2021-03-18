@@ -68,6 +68,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Investment::class);
     }
 
+    public function isAdmin() {
+        return ($this->role_id == role(config('roles.admin')));
+    }
+
+    public function isUser() {
+        return ($this->role_id == role(config('roles.user')));
+    }
+
     public function paymentReceipts() {
         return $this->hasMany(PaymentReceipt::class)->orderBy('status_id', 'asc');
     }

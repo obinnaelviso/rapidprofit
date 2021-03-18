@@ -1,77 +1,43 @@
-@extends('layouts.main')
-@section('title', ucfirst($reg_user->first_name.' '.$reg_user->last_name)."'s investments - ".' Admin '.config('app.name'))
-@section('users-active', 'active')
-@section('sidebar')
-@include('layouts.admin-sidebar')
-@endsection
-
+@extends('layouts.dash.main')
+@section('title', "User Profile")
+@section('header-title', ucfirst($reg_user->first_name.' '.$reg_user->last_name)."'s Profile")
 @section('content')
-<div class="row mb-3">
-    <div class="col-md-12">
-        <h1>{{ ucfirst($reg_user->first_name.' '.$reg_user->last_name)."'s Profile" }}</h1>
-        <hr>
-    </div>
-</div>
-
 <div class="row">
     <div class="col-md-12">
         @include('layouts.alerts')
-        <div class="pills-vertical">
-            <div class="row">
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-12">
-                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link user-tabs active show" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Profile</a>
-                        <a class="nav-link user-tabs" id="v-pills-deposits-tab" data-toggle="pill" href="#v-pills-deposits" role="tab" aria-controls="v-pills-deposits" aria-selected="false">Deposit Receipts</a>
-                        <a class="nav-link user-tabs" id="v-pills-investments-tab" data-toggle="pill" href="#v-pills-investments" role="tab" aria-controls="v-pills-investments" aria-selected="false">Investments</a>
-                        <a class="nav-link user-tabs" id="v-pills-withdrawals-tab" data-toggle="pill" href="#v-pills-withdrawals" role="tab" aria-controls="v-pills-withdrawals" aria-selected="false">Withdrawal Requests</a>
-                    </div>
+        <div class="block full">
+            <!-- Block Tabs Title -->
+            <div class="block-title">
+                <ul class="nav nav-tabs" data-toggle="tabs">
+                    <li><a href="#profile">Profile</a></li>
+                    <li><a href="#deposits">Deposit Receipts</a></li>
+                    <li class="active"><a href="#investments">Investments</a></li>
+                    <li><a href="#withdrawals">Withdrawal Requests</a></li>
+                </ul>
+            </div>
+            <!-- END Block Tabs Title -->
+
+            <!-- Tabs Content -->
+            <div class="tab-content">
+                <div class="tab-pane" id="profile">
+                    @include('auth.admin.manage-users.user-info')
                 </div>
-                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-8 col-12 ">
-                    <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade active show" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                            @include('auth.admin.manage-users.user-info')
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-deposits" role="tabpanel" aria-labelledby="v-pills-deposits-tab">
-                            @include('auth.admin.manage-users.user-deposits')
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-investments" role="tabpanel" aria-labelledby="v-pills-investments-tab">
-                            @include('auth.admin.manage-users.user-investments')
-                        </div>
-                        {{-- User Withdrawals --}}
-                        <div class="tab-pane fade" id="v-pills-withdrawals" role="tabpanel" aria-labelledby="v-pills-withdrawals-tab">
-                            @include('auth.admin.manage-users.user-withdrawals')
-                        </div>
-                    </div>
+                <div class="tab-pane" id="deposits">
+                    @include('auth.admin.manage-users.user-deposits')
+                </div>
+                <div class="tab-pane active" id="investments">
+                    @include('auth.admin.manage-users.user-investments')
+                </div>
+                <div class="tab-pane" id="withdrawals">
+                    @include('auth.admin.manage-users.user-withdrawals')
                 </div>
             </div>
+            <!-- END Tabs Content -->
         </div>
     </div>
 </div>
 @endsection
-@section('input-js')
-    <script src="/vendor/moment/moment-with-locales.min.js"></script>
-    <script src="/vendor/datetimepicker/bootstrap-datetimepicker.min.js"></script>
-    <script>
-        $(function () {
-            $('#startdate').datetimepicker({
-                icons: {
-                    time: 'fa fa-clock'
-                }
-            });
-            // $('#enddate').datetimepicker({
-            //     useCurrent: false, //Important! See issue #1075
-            //     icons: {
-            //         time: 'fa fa-clock'
-            //     }
-            // });
-            // $("#startdate").on("dp.change", function (e) {
-            //     $('#enddate').data("DateTimePicker").minDate(e.date);
-            // });
-            // $("#enddate").on("dp.change", function (e) {
-            //     $('#startdate').data("DateTimePicker").maxDate(e.date);
-            // });
-        });
-    </script>
+@push('more-js')
     <script>
         $('#update-balance').click(function() {
             var amount = prompt('Enter New Balance', '')
@@ -176,7 +142,4 @@
             });
         }
     </script>
-@endsection
-@section('input-css')
-<link rel="stylesheet" href="/vendor/datetimepicker/bootstrap-datetimepicker.min.css">
-@endsection
+@endpush

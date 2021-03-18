@@ -1,6 +1,6 @@
 <h3>Profile Information</h3>
 <div class="table-responsive">
-    <table class="table table-borderless">
+    <table class="table table-bordered table-hover">
         <tbody>
             <tr>
                 <td class="title">First Name</td>
@@ -68,7 +68,7 @@
         </tbody>
     </table>
 </div>
-{{-- Block User --}}
+@push('modal')
 <div class="modal fade" id="blockUser" tabindex="-1" role="dialog" aria-labelledby="blockUserLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -103,3 +103,4 @@
         </div>
     </div>
 </div>
+@endpush

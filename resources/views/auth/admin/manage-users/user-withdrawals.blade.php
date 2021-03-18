@@ -2,12 +2,11 @@
     $active_withdrawals = $withdrawals->where('status_id', status(config('status.pending')));
     $completed_withdrawals = $withdrawals->where('status_id', status(config('status.completed')));
 @endphp
-<h3>Withdrawal Requests</h3>
+<h4>Withdrawal Requests</h4>
 <div class="table-responsive mb-5">
     <table class="table table-borderless" id="withdrawal-table">
         <thead>
             <tr>
-                @php $i = 1; @endphp
                 <th scope="col">#</th>
                 <th scope="col">Method</th>
                 <th scope="col">Amount</th>
@@ -19,7 +18,7 @@
         <tbody>
             @foreach($active_withdrawals as $withdrawal)
                 <tr>
-                    <th scope="row">{{ $i++ }}</th>
+                    <th scope="row">{{ $loop->iteration }}</th>
                     <td class="text-capitalize">{{ $withdrawal->withdraw_method }}</td>
                     <td>{{ config('app.currency').$withdrawal->amount }}</td>
                     <td>{{ $withdrawal->bitcoin_address }}</td>
@@ -33,12 +32,11 @@
     </table>
 </div>
 
-<h3>Completed Withdrawal Requests</h3>
+<h4>Completed Withdrawal Requests</h4>
 <div class="table-responsive">
     <table class="table table-borderless" id="withdrawal-comp-table">
         <thead>
             <tr>
-                @php $i = 1; @endphp
                 <th scope="col">#</th>
                 <th scope="col">Method</th>
                 <th scope="col">Amount</th>
@@ -51,7 +49,7 @@
         <tbody>
             @foreach($withdrawals as $withdrawal)
                 <tr>
-                    <th scope="row">{{ $i++ }}</th>
+                    <th scope="row">{{ $loop->iteration }}</th>
                     <td class="text-capitalize">{{ $withdrawal->withdraw_method }}</td>
                     <td>{{ config('app.currency').$withdrawal->amount }}</td>
                     <td>{{ $withdrawal->bitcoin_address }}</td>

@@ -40,7 +40,7 @@
                     <!-- about-img -->
                     <div class="about-img ">
                         <div class="about-font-img">
-                            <img src="/home/assets/img/hero/our-staffs.jpg" alt="">
+                            <img src="/home/assets/img/hero/our-staffs.jpg" class="img-fluid">
                         </div>
                         {{-- <div class="about-back-img d-none d-lg-block">
                             <img src="assets/img/gallery/about1.png" alt="">
@@ -71,7 +71,7 @@
             <!-- Free Tier -->
             @foreach($packages as $package)
                 <div class="col-md-4 mb-5">
-                    <div class="card mb-lg-0" title="jdkajdkl">
+                    <div class="card mb-lg-0">
                         <div class="card-body">
                         <h5 class="card-title text-muted text-uppercase text-center">{{ $package->name }}</h5>
                         <h6 class="card-price text-center">{{ $package->percentage }}%<span class="period">/week</span></h6>

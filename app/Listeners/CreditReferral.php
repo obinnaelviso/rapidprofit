@@ -30,8 +30,8 @@ class CreditReferral
     {
 
         $general = settings('general');
-        $referrer_bon = array_key_exists('referrer_bon', $general) ?$general->referrer_bon:100;
-        $referred_bon = array_key_exists('referred_bon', $general) ?$general->referred_bon:1000000;
+        $referrer_bon = isset($general->referrer_bon) ?$general->referrer_bon:100;
+        $referred_bon = isset($general->referred_bon) ?$general->referred_bon:1000000;
 
         $ref_code = $event->user->referral_code;
         $event->user->referral_code = generateRandom(6);

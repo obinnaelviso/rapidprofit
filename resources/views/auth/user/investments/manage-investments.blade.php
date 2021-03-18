@@ -16,7 +16,6 @@
             <table id="general-table" class="table table-vcenter table-hover table-borderless">
                 <thead>
                     <tr>
-                        @php $i = 1; @endphp
                         <th scope="col">#</th>
                         <th scope="col">Package Name</th>
                         <th scope="col">Amount</th>
@@ -34,7 +33,7 @@
                             @php
                                 $investment_return = calculateInvestmentReturn($investment->amount, $investment->package->percentage, $investment->package->duration);
                             @endphp
-                            <th scope="row">{{ $i++ }}</th>
+                            <th scope="row">{{ $loop->iteration }}</th>
                             <td class="text-capitalize">{{ $investment->package->name }}</td>
                             <td class="text-danger">{{ config('app.currency').$investment->amount }}</td>
                             <td>@if($investment->package->duration == 7) 1 week @else 1 month @endif</td>
@@ -78,7 +77,7 @@
                                 @php
                                     $investment_return = calculateInvestmentReturn($investment->amount, $investment->package->percentage, $investment->package->duration);
                                 @endphp
-                                <th scope="row">{{ $i++ }}</th>
+                                <th scope="row">{{ $loop->iteration }}</th>
                                 <td class="text-capitalize">{{ $investment->package->name }}</td>
                                 <td class="text-danger">{{ config('app.currency').$investment->amount }}</td>
                                 <td>@if($investment->package->duration == 7) 1 week @else 1 month @endif</td>

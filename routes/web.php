@@ -87,7 +87,7 @@ Route::group(['prefix'=>'/admin'], function() {
     Route::put('/packages/{package}/status', 'Admin\DashboardController@statusPackages')->name('admin.packages.status');
 
     // -----------------------> Settings
-    Route::get('/settings', 'Admin\DashboardController@settings')->name('admin.settings');
+    Route::get('/settings/general', 'Admin\DashboardController@settings')->name('admin.settings');
     Route::put('/settings/{general}/general', 'Admin\SettingsController@editGeneral')->name('admin.settings.general');
     Route::get('/settings/homepage', 'Admin\DashboardController@homepageSettings')->name('admin.settings.homepage');
     Route::put('/settings/{homepage}/homepage', 'Admin\SettingsController@editHomepage')->name('admin.settings.homepage.update');

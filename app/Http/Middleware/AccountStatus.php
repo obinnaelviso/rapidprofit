@@ -16,7 +16,9 @@ class AccountStatus
      */
     public function handle($request, Closure $next)
     {
-
+        if(!auth()->user()->wallet) {
+            auth()->user()->createWallet();
+        }
         // Check account Status
         if($this->checkAccountInactive())
             return redirect()->route('login')->with('failed',

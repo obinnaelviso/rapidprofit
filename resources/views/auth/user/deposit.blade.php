@@ -37,49 +37,54 @@
 </div>
 
 <div class="row">
-    <div class="col-md-8">
-        <div class="row">
-            <div class="col-md-12">
-                <h4 class="text-muted">Method of Payment</h4>
-            </div>
-            <div class="col-md-12">
-                <form action="https://www.coinpayments.net/index.php" method="post" style="display: inline" class="mr-4 bord-right pr-4">
-                    <input type="hidden" name="cmd" value="_pay">
-                    <input type="hidden" name="reset" value="1">
-                    <input type="hidden" name="merchant" value="{{ config('payments.coinpayments') }}">
-                    <input type="hidden" name="item_name" value="{{ ucfirst(config('app.name')) }} Account Deposit">
-                    <input type="hidden" name="currency" value="USD">
-                    <input type="hidden" id="cp_amount" name="amountf" value="{{ $min_dep }}">
-                    <input type="hidden" name="quantity" value="1">
-                    <input type="hidden" name="allow_quantity" value="0">
-                    <input type="hidden" name="want_shipping" value="0">
-                    <input type="hidden" name="allow_currencies" value="BTC">
-                    <input type="hidden" name="first_name" value="{{ $user->first_name }}">
-                    <input type="hidden" name="last_name" value="{{ $user->last_name }}">
-                    <input type="hidden" name="email" value="{{ $user->email }}">
-                    <input type="image" id="cp_button" class="payment-button" src="https://www.coinpayments.net/images/pub/buynow-grey.png" disabled title="Pay directly with CoinPayments" alt="Buy Now with CoinPayments.net">
-                </form>
-
-                <form action="https://perfectmoney.is/api/step1.asp" method="post" style="display: inline">
-                    <input type="hidden" name="PAYEE_ACCOUNT" value="{{ config('payments.perfect_money') }}">
-                    <input type="hidden" name="PAYEE_NAME" value="{{ config('app.name') }}">
-                    <input type="hidden" id="pm_amount" name="PAYMENT_AMOUNT" value="{{ $min_dep }}">
-                    <input type="hidden" name="PAYMENT_UNITS" value="USD">
-                    <input type="hidden" name="STATUS_URL"
-                        value="{{ route('user.deposit.payment-status', 'success') }}">
-                    <input type="hidden" name="PAYMENT_URL"
-                        value="{{ route('user.deposit.payment-status', 'success') }}">
-                    <input type="hidden" name="NOPAYMENT_URL"
-                        value="{{ route('user.deposit.payment-status', 'failure') }}">
-                    <input type="hidden" name="BAGGAGE_FIELDS"
-                        value="method">
-                    <input type="hidden" name="method" value="pm">
-                    <input type="image" name="PAYMENT_METHOD" id="pm_button" class="payment-button" src="/images/payments/perfect-money.png" disabled title="Pay with Perfect Money" width="150px" alt="Buy Now with Perfect Money">
-                </form>
-
-            </div>
-        </div>
+    <div class="col-md-12">
+        <h4 class="text-muted">Method of Payment</h4>
     </div>
+    <div class="col-md-3 col-xs-6">
+        <button disabled data-toggle="modal" data-target="#modal-fade" data-wallet-type="blockchain" onclick="passDataToModal(this);" class="btn btn-info btn-effect-ripple btn-block shadow btn-lg payment-button"><img src="{{ asset('images/payments/blockchain.png') }}" class="ml-3" style="width: 25px"/> Pay with Blockchain</button>
+    </div>
+    <div class="col-md-3 col-xs-6">
+        <button disabled data-toggle="modal" data-target="#modal-fade" data-wallet-type="trust wallet" onclick="passDataToModal(this);" class="btn btn-style btn-effect-ripple btn-block shadow btn-lg payment-button"><img src="{{ asset('images/payments/trust-wallet.png') }}" style="width: 40px"/> Pay with Trust Wallet</button>
+    </div>
+    <div class="col-md-3 col-xs-6">
+        <button disabled data-toggle="modal" data-target="#modal-fade" data-wallet-type="other crypto wallet" onclick="passDataToModal(this);" class="btn btn-warning btn-effect-ripple btn-block shadow btn-lg payment-button"><img src="{{ asset('images/payments/bitcoin.png') }}" class="ml-3" style="width: 30px"/>Other Payment Method</button>
+    </div>
+    {{-- <div class="col-md-12">
+        <form action="https://www.coinpayments.net/index.php" method="post" style="display: inline" class="mr-4 bord-right pr-4">
+            <input type="hidden" name="cmd" value="_pay">
+            <input type="hidden" name="reset" value="1">
+            <input type="hidden" name="merchant" value="{{ config('payments.coinpayments') }}">
+            <input type="hidden" name="item_name" value="{{ ucfirst(config('app.name')) }} Account Deposit">
+            <input type="hidden" name="currency" value="USD">
+            <input type="hidden" id="cp_amount" name="amountf" value="{{ $min_dep }}">
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="allow_quantity" value="0">
+            <input type="hidden" name="want_shipping" value="0">
+            <input type="hidden" name="allow_currencies" value="BTC">
+            <input type="hidden" name="first_name" value="{{ $user->first_name }}">
+            <input type="hidden" name="last_name" value="{{ $user->last_name }}">
+            <input type="hidden" name="email" value="{{ $user->email }}">
+            <input type="image" id="cp_button" class="payment-button" src="https://www.coinpayments.net/images/pub/buynow-grey.png" disabled title="Pay directly with CoinPayments" alt="Buy Now with CoinPayments.net">
+        </form>
+
+        <form action="https://perfectmoney.is/api/step1.asp" method="post" style="display: inline">
+            <input type="hidden" name="PAYEE_ACCOUNT" value="{{ config('payments.perfect_money') }}">
+            <input type="hidden" name="PAYEE_NAME" value="{{ config('app.name') }}">
+            <input type="hidden" id="pm_amount" name="PAYMENT_AMOUNT" value="{{ $min_dep }}">
+            <input type="hidden" name="PAYMENT_UNITS" value="USD">
+            <input type="hidden" name="STATUS_URL"
+                value="{{ route('user.deposit.payment-status', 'success') }}">
+            <input type="hidden" name="PAYMENT_URL"
+                value="{{ route('user.deposit.payment-status', 'success') }}">
+            <input type="hidden" name="NOPAYMENT_URL"
+                value="{{ route('user.deposit.payment-status', 'failure') }}">
+            <input type="hidden" name="BAGGAGE_FIELDS"
+                value="method">
+            <input type="hidden" name="method" value="pm">
+            <input type="image" name="PAYMENT_METHOD" id="pm_button" class="payment-button" src="/images/payments/perfect-money.png" disabled title="Pay with Perfect Money" width="150px" alt="Buy Now with Perfect Money">
+        </form>
+
+    </div> --}}
 </div><hr>
 
 <div id="evidenceOfPayment"></div>
@@ -112,8 +117,9 @@
                 </div>
                 <div class="col-md-3">
                     <select name="payment_method" class="form-control input-lg @error('payment_method') is-invalid @enderror" id="input-select" required>
-                        <option value="coinpayments" selected>CoinPayments</option>
-                        <option value="perfect-money">Perfect Money</option>
+                        <option value="blockchain" selected>Blockchain</option>
+                        <option value="trust-wallet">Trust Wallet</option>
+                        <option value="others">Others</option>
                     </select>
                     @error('payment_method')
                         <span class="invalid-feedback" role="alert">
@@ -129,14 +135,48 @@
     </div>
 </div>
 @endsection
-@section('input-js')
+@push('modal')
+<div id="modal-fade" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title text-capitalize"><strong>How to Pay With <span class="wallet-type"></span></strong></h3>
+            </div>
+            <div class="modal-body">
+                <h4>Follow these steps to pay with <span class="wallet-type"></span></h4>
+                <ol>
+                    <li>Open your <span class="wallet-type"> app on your mobile phone.</li>
+                    <li>Select BTC as your wallet type/cryptocurrency</li>
+                    <li>Make sure you have enough BTC on your app and click to send BTC.</li>
+                    <li>Type in the amount you want to send equivalent to dollar ({{ config('app.currency') }}).</li>
+                    <li>
+                        Type in the address below or scan the QR Code: <br><br>
+                        <div class="text-center"><img src="{{ asset('images/my-wallet.jpeg') }}" style="width: 200px"/><div>
+                        <h3>14ifSbBhn6UvaxHuQwS9eSzzHbwwwsGAi9</h3>
+                    </li>
+                    <li>Once payment is successful. Take a screenshot of your payment and upload it below.</li>
+                    <li>Your account will be creditted instantly once payment has being confirmed.</li>
+                    <div class="alert alert-info" role="alert">
+                      <h4 class="alert-heading">Any issue? Please Contact Us:</h4>
+                      <p>Incase you run into issue making payment. Don't hesitate to contact us on our live chat or send us a message at <a href="mailto: {{ config('mail.from.address') }}" class="text-dark" target="_blank">{{ config('mail.from.address') }}</a></p>
+                      <p class="mb-0"></p>
+                    </div>
+                </ol>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" style="overflow: hidden; position: relative;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endpush
+@push('more-js')
 <script>
-    var wallet_amount = "{{ config('app.currency') }}" + numberWithCommas($('#wallet-amount').html())
-
-    $('#wallet-amount').html(wallet_amount)
-
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    function passDataToModal(element) {
+        var walletType = $(element).data('wallet-type');
+        console.log(walletType)
+         $('#modal-fade .wallet-type').text(walletType);
     }
 </script>
 <script>
@@ -151,12 +191,10 @@
         $('#cp_amount').val(amount)
         $('#pm_amount').val(amount)
         if(amount >= min_amount && amount <= max_amount) {
-            $('#cp_button').prop('disabled', false)
-            $('#pm_button').prop('disabled', false)
+            $('.payment-button').prop('disabled', false)
             $('#amountFeedback').hide()
         } else {
-            $('#cp_button').prop('disabled', true)
-            $('#pm_button').prop('disabled', true)
+            $('.payment-button').prop('disabled', true)
             if ( amount < min_amount)
                 $('#amountFeedback').html('!! Amount must be greater than $'+min_amount)
             else
@@ -165,4 +203,4 @@
         }
     }
 </script>
-@endsection
+@endpush

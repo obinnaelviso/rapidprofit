@@ -1,28 +1,19 @@
-@extends('layouts.main')
-@section('title', 'My Dashboard - '.' Admin '.config('app.name'))
-@section('withdrawals-active', 'active')
-@section('sidebar')
-@include('layouts.admin-sidebar')
-@endsection
+@extends('layouts.dash.main')
+@section('title', 'Withdrawals - '.' Admin '.config('app.name'))
+@section('header-active', 'Manage Withdrawals')
 
 @section('content')
+@include('layouts.alerts')
 <div class="row mb-3">
-    <div class="col-md-12">
-        <h2>Manage Withdrawals</h2>
-    </div>
-</div>
-    @include('layouts.alerts')
-<div class="row mb-3">
-    <div class="col-md-12 mb-3" id="withdrawal-table">
+    <div class="col-md-12 mb-3 withdrawal-table">
         @if($pending_requests->count())
-            <div class="card manage-investments">
+            <div class="block full manage-investments">
                 <h4 class="card-header">Pending Withdrawal Requests</h4>
                 <div class="card-body">
                     <div>
-                        <table class="table table-borderless">
+                        <table class="table table-vcenter table-hover table-borderless">
                             <thead class="thead-inverse">
                                 <tr>
-                                    @php $i = 1; @endphp
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Method</th>
@@ -35,14 +26,14 @@
                             <tbody>
                                 @foreach($pending_requests->get() as $withdrawal)
                                     <tr>
-                                        <th scope="row">{{ $i++ }}</th>
+                                        <th scope="row">{{ $loop->iteration }}</th>
                                         <td class="text-capitalize"><a href="{{ route('admin.manage.users.view', $withdrawal->user->id) }}" target="_blank">{{ $withdrawal->user->first_name.' '.$withdrawal->user->last_name }}</td></td>
                                         <td class="text-capitalize">{{ $withdrawal->withdraw_method }}</td>
                                         <td>{{ config('app.currency').$withdrawal->amount }}</td>
                                         <td>{{ $withdrawal->bitcoin_address }}</td>
                                         <td>{{ $withdrawal->created_at }}</td>
                                         <td>
-                                            <button class="btn btn-success btn-sm btn-block" onclick="newWithdrawal('{{ $withdrawal->id }}', {{ $withdrawal->user->id }})">Complete Withdrawal</button>
+                                            <button class="btn btn-success btn-sm" onclick="newWithdrawal('{{ $withdrawal->id }}', {{ $withdrawal->user->id }})">Complete Withdrawal</button>
                                             {{-- Cancel Withdrawal --}}
                                             <a class="btn btn-danger btn-sm d-block mt-2" href="javascript::void(0)" onclick="event.preventDefault();
                                             document.getElementById('cancel-withdrawal-form').submit();">Cancel</a>
@@ -58,7 +49,7 @@
                 </div>
             </div>
         @else
-            <div class="card manage-investments">
+            <div class="block full manage-investments">
               <div class="card-body">
                 <h4 class="card-text text-success">No Pending Withdrawal Requests Available</h4>
               </div>
@@ -67,16 +58,15 @@
     </div>
 </div>
 <div class="row mb-3">
-    <div class="col-md-12 mb-3" id="withdrawal-table">
+    <div class="col-md-12 mb-3 withdrawal-table">
         @if($completed_requests->count())
-            <div class="card manage-investments">
+            <div class="block full manage-investments">
                 <div class="card-body">
                     <h4 class="card-title">Completed Withdrawal Requests</h4>
                     <div>
-                        <table class="table table-borderless">
+                        <table class="table table-vcenter table-hover table-borderless">
                             <thead class="thead-inverse">
                                 <tr>
-                                    @php $i = 1; @endphp
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Method</th>
@@ -90,14 +80,14 @@
                             <tbody>
                                 @foreach($completed_requests as $withdrawal)
                                     <tr>
-                                        <th scope="row">{{ $i++ }}</th>
+                                        <th scope="row">{{ $loop->iteration }}</th>
                                         <td class="text-capitalize"><a href="{{ route('admin.manage.users.view', $withdrawal->user->id) }}" target="_blank">{{ $withdrawal->user->first_name.' '.$withdrawal->user->last_name }}</a></td>
                                         <td class="text-capitalize">{{ $withdrawal->withdraw_method }}</td>
                                         <td>{{ config('app.currency').$withdrawal->amount }}</td>
                                         <td>{{ $withdrawal->bitcoin_address }}</td>
                                         <td>{{ $withdrawal->created_at }}</td>
                                         <td>{{ $withdrawal->updated_at }}</td>
-                                        <td><div class="badge badge-success">{{ $withdrawal->status->title }}</div></td>
+                                        <td><div class="label label-success">{{ $withdrawal->status->title }}</div></td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -107,7 +97,7 @@
                 </div>
             </div>
         @else
-            <div class="card manage-investments">
+            <div class="block full manage-investments">
               <div class="card-body">
                 <h4 class="card-text text-success">No Withdrawal Requests Available</h4>
               </div>
@@ -116,7 +106,7 @@
     </div>
 </div>
 @endsection
-@section('input-js')
+@push('more-js')
 <script>
     function newWithdrawal(withdraw_id, user_id) {
         $.ajax({
@@ -130,11 +120,11 @@
             success: function(response){
                 $("#withdrawal-table").fadeOut(200, function() {
                         // form.html($response).fadeIn().delay(2000);
-                        $("#withdrawal-table").hide().load(location.href + " #withdraw-table").fadeIn().delay(200);
+                        $(".withdrawal-table").hide().load(location.href + " .withdraw-table").fadeIn().delay(200);
                 }).hide()
             alert(response.message)
             }
         });
     }
 </script>
-@endsection
+@endpush

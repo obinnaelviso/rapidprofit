@@ -1,21 +1,9 @@
-@extends('layouts.main')
-@section('title', 'General Settings - '.' Admin '.config('app.name'))
-@section('settings-active', 'active')
-@section('general-active', 'active')
-@section('sidebar')
-@include('layouts.admin-sidebar')
-@endsection
-
+@extends('layouts.dash.main')
+@section('title', 'General Settings')
 @section('content')
 <div class="row mb-3">
     <div class="col-md-12">
-        <h2>General Settings</h2>
-        <hr>
-    </div>
-</div>
-<div class="row mb-3">
-    <div class="col-md-12">
-        <div class="card manage-investments">
+        <div class="block full manage-investments">
           <div class="card-body">
               @include('layouts.alerts')
             <form action="{{ route('admin.settings.general', $gen_settings->id) }}" method="POST">
@@ -27,7 +15,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name" class="col-md-12 auth-label text-uppercase">Minimum Deposit</label>
-                            <input class="form-control auth-input @error('min_dep') is-invalid @enderror" min=0 type="number" name="min_dep" value="{{ array_key_exists('min_dep', $general) ?$general->min_dep:'' }}" placeholder="0.0" required>
+                            <input class="form-control auth-input @error('min_dep') is-invalid @enderror" min=0 type="number" name="min_dep" value="{{ isset($general->min_depl) ?$general->min_dep:'' }}" placeholder="0.0" required>
                             @error('min_dep')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -38,7 +26,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name" class="col-md-12 auth-label text-uppercase">Maximum Deposit</label>
-                            <input class="form-control auth-input @error('max_dep') is-invalid @enderror" min=0 type="number" name="max_dep" value="{{ array_key_exists('max_dep', $general) ?$general->max_dep:'' }}" placeholder="0.0" required>
+                            <input class="form-control auth-input @error('max_dep') is-invalid @enderror" min=0 type="number" name="max_dep" value="{{ isset($general->max_dep) ?$general->max_dep:'' }}" placeholder="0.0" required>
                             @error('max_dep')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -55,7 +43,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name" class="col-md-12 auth-label text-uppercase">Minimum Withdraw</label>
-                            <input class="form-control auth-input @error('min_with') is-invalid @enderror" min=0 type="number" name="min_with" value="{{ array_key_exists('min_with', $general) ?$general->min_with:'' }}" placeholder="0.0" required>
+                            <input class="form-control auth-input @error('min_with') is-invalid @enderror" min=0 type="number" name="min_with" value="{{ isset($general->min_with) ?$general->min_with:'' }}" placeholder="0.0" required>
                             @error('min_with')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -66,7 +54,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name" class="col-md-12 auth-label text-uppercase">Maximum Withdraw</label>
-                            <input class="form-control auth-input @error('max_with') is-invalid @enderror" min=0 type="number" name="max_with" value="{{ array_key_exists('max_with', $general) ?$general->max_with:'' }}" placeholder="0.0" required>
+                            <input class="form-control auth-input @error('max_with') is-invalid @enderror" min=0 type="number" name="max_with" value="{{ isset($general->max_with) ?$general->max_with:'' }}" placeholder="0.0" required>
                             @error('max_with')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -83,7 +71,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name" class="col-md-12 auth-label text-uppercase">Referrer Bonus</label>
-                            <input class="form-control auth-input @error('referrer_bon') is-invalid @enderror" min=0 type="number" name="referrer_bon" value="{{ array_key_exists('referrer_bon', $general) ?$general->referrer_bon:'' }}" placeholder="0.0" required>
+                            <input class="form-control auth-input @error('referrer_bon') is-invalid @enderror" min=0 type="number" name="referrer_bon" value="{{ isset($general->referrer_bon) ?$general->referrer_bon:'' }}" placeholder="0.0" required>
                             @error('referrer_bon')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -94,7 +82,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name" class="col-md-12 auth-label text-uppercase">Referred Bonus</label>
-                            <input class="form-control auth-input @error('referred_bon') is-invalid @enderror" min=0 type="number" name="referred_bon" value="{{ array_key_exists('referred_bon', $general) ?$general->referred_bon:'' }}" placeholder="0.0" required>
+                            <input class="form-control auth-input @error('referred_bon') is-invalid @enderror" min=0 type="number" name="referred_bon" value="{{ isset($general->referred_bon) ?$general->referred_bon:'' }}" placeholder="0.0" required>
                             @error('referred_bon')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -105,7 +93,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name" class="col-md-12 auth-label text-uppercase">Referral Withdraw Limit</label>
-                            <input class="form-control auth-input @error('referral_limit') is-invalid @enderror" min=0 type="number" name="referral_limit" value="{{ array_key_exists('referral_limit', $general) ?$general->referral_limit:'' }}" placeholder="0.0" required>
+                            <input class="form-control auth-input @error('referral_limit') is-invalid @enderror" min=0 type="number" name="referral_limit" value="{{ isset($general->referral_limit) ?$general->referral_limit:'' }}" placeholder="0.0" required>
                             @error('referral_limit')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -115,7 +103,7 @@
                     </div>
                 </div>
                 <div class="form-group pt-2">
-                    <button class="btn btn-secondary" type="submit" style="color: white">Save Settings</button>
+                    <button class="btn btn-primary" type="submit">Save Settings</button>
                 </div>
             </form>
           </div>
