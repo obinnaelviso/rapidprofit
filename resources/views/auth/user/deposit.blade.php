@@ -85,54 +85,6 @@
         </form>
 
     </div> --}}
-</div><hr>
-
-<div id="evidenceOfPayment"></div>
-<div class="row mb-3">
-    <div class="col-md-12">
-        <div class="section-block" id="select">
-            <h3 class="section-title">Already made a deposit? Upload Evidence of Payment</h3>
-            <p class="text-muted">If you've already made a deposit, please upload your evidence of payment such as a screenshot or receipt of successful payment.</p>
-        </div>
-    </div>
-</div>
-<div class="row mb-5">
-    <div class="col-md-12">
-        <form action="{{ route('user.deposit.payment-upload') }}" method="POST" class="block full" enctype="multipart/form-data">
-            @csrf
-            <div class="row">
-                <div class="col-md-3">
-                    <input type="file" class="fund-input" name="payment_evidence" id="payment_evidence" required>
-                </div>
-                <div class="col-md-3">
-                    <div class="input-group">
-                        <span class="input-group-addon text-lg">{{ config('app.currency') }}</span>
-                        <input type="number" name="amount" min="{{ $min_dep }}" value="{{ old('amount') }}" class="form-control input-lg @error('amount') is-invalid @enderror" placeholder="{{ $min_dep }}" aria-describedby="currency">
-                        @error('amount')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <select name="payment_method" class="form-control input-lg @error('payment_method') is-invalid @enderror" id="input-select" required>
-                        <option value="blockchain" selected>Blockchain</option>
-                        <option value="trust-wallet">Trust Wallet</option>
-                        <option value="others">Others</option>
-                    </select>
-                    @error('payment_method')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="col-md-3">
-                    <button class="btn btn-primary btn-block btn-lg" type="submit">Submit</button>
-                </div>
-            </div>
-        </form>
-    </div>
 </div>
 @endsection
 @push('modal')
