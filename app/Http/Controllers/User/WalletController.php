@@ -23,7 +23,7 @@ class WalletController extends Controller
     public function transferBonus() {
         $user = $this->user();
         $general = settings('general');
-        $referral_limit = array_key_exists('referral_limit', $general) ?$general->referral_limit:100;
+        $referral_limit = isset($general->referral_limit) ?$general->referral_limit:100;
         if($user->wallet->bonus >= $referral_limit) {
             $bonus = $user->wallet->bonus;
             // Create payment receipt
@@ -53,31 +53,23 @@ class WalletController extends Controller
         $user = $this->user();
 
         $general = settings('general');
-        $min_dep = array_key_exists('min_dep', $general) ?$general->min_dep:100;
-        $max_dep = array_key_exists('max_dep', $general) ?$general->max_dep:1000000;
+        $min_dep = isset($general->min_dep) ?$general->min_dep:100;
+        $max_dep = isset($general->max_dep) ?$general->max_dep:1000000;
 
         $this->validate(request(), [
             'payment_method' => 'required',
             'amount' => 'required|numeric|min:'.$min_dep.'|max:'.$max_dep
         ]);
-
-    	if($request->hasFile('payment_evidence')) {
-            $extension = $request->file('payment_evidence')->extension();
-            $file_name = $request->payment_method.'-'.strtolower($user->first_name).'-'.str_replace([' ', ':'],'-', now()).'.'.$extension;
-    		$file_url = $request->file('payment_evidence')->storeAs('payment-receipts', $file_name);
-            $user->paymentReceipts()->create([
-                'url' => $file_url,
-                'payment_method'=> $request->payment_method,
-                'amount' => $request->amount,
-                'status_id' => status(config('status.pending'))
-            ]);
-            $user->notify(new DepositReceiptUser);
-            Notification::route('mail', config('mail.from.address'))
-                        ->notify(new DefaultAdmin("Receipt for Deposit",
-                        "**".ucfirst($user->first_name).' ('.$user->email.")** deposit payment receipt has just being uploaded for confirmation. Click the button below to process request: "));
-            session()->flash('success', 'Payment receipt uploaded successfully!');
-        } else
-            session()->flash('failed', 'Something went wrong, please try again!');
+        $user->paymentReceipts()->create([
+            'payment_method'=> $request->payment_method,
+            'amount' => $request->amount,
+            'status_id' => status(config('status.pending'))
+        ]);
+        $user->notify(new DepositReceiptUser);
+        Notification::route('mail', config('mail.from.address'))
+                    ->notify(new DefaultAdmin("New Deposit Request",
+                    "**".ucfirst($user->first_name).' ('.$user->email.")** payment request of ".config('app.currency').$request->amount." has just being received for confirmation. Click the button below to process request: "));
+        session()->flash('warning', 'Your account will be creditted once payment has been confirmed. Thank you!');
         return back();
     }
 
@@ -93,8 +85,8 @@ class WalletController extends Controller
         $user = $this->user();
         $balance = $user->wallet->amount;
         $general = settings('general');
-        $min_with = array_key_exists('min_with', $general) ?$general->min_with:100;
-        $max_with = array_key_exists('max_with', $general) ?$general->max_with:1000000;
+        $min_with = isset($general->min_with) ?$general->min_with:100;
+        $max_with = isset($general->max_with) ?$general->max_with:1000000;
         $this->validate(request(), [
             'amount' => 'required|numeric|min:'.$min_with.'|max:'.$max_with,
             'withdraw_method' => 'required',

@@ -42,7 +42,7 @@ class DepositReceiptUser extends Notification implements ShouldQueue
     {
         return (new MailMessage)->subject(config('app.name').': Deposit Receipt Sent')
                     ->greeting('Hi '.$notifiable->first_name.', ')
-                    ->line('Your deposit receipt has been uploaded and it will soon be confirmed shortly!')
+                    ->line("We've received your deposit request. Your account will be creditted once payment has been confirmed!")
                     ->action('Go to Dashboard >>', url(route('user.home')))
                     ->line('Thank you for choosing '.config('app.name').'.');
     }

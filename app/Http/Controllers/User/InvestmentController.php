@@ -91,8 +91,8 @@ class InvestmentController extends Controller
         $referral = ReferralBonus::where('ref_id', $user->id)->where('status_id', status(config('status.pending')))->first();
         if($referral) {
             $general = settings('general');
-            $referrer_bon = array_key_exists('referrer_bon', $general) ?$general->referrer_bon:10;
-            $referred_bon = array_key_exists('referred_bon', $general) ?$general->referred_bon:5;
+            $referrer_bon = isset($general->referrer_bon) ?$general->referrer_bon:10;
+            $referred_bon = isset($general->referred_bon) ?$general->referred_bon:5;
             $referral->user->wallet->bonus += $referrer_bon;
             $user->wallet->bonus += $referred_bon;
             $referral->status_id = status(config('status.active'));
