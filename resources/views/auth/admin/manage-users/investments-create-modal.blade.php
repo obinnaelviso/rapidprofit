@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="form-group pt-2">
-                        <button class="btn btn-block btn-dark" type="submit" style="color: white">Submit</button>
+                        <button class="btn btn-block btn-primary" type="submit">Submit</button>
                     </div>
                 </form>
             </div>
