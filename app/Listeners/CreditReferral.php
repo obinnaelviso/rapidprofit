@@ -41,7 +41,7 @@ class CreditReferral
         $referred_bonus = $referred_bon;
 
         $ref_user = User::where('referral_code', $ref_code)->first();
-        if($ref_user) {
+        if($ref_user && ($ref_code !== null)) {
             $ref_user->referrerBonus()->create([
                 'ref_id' => $event->user->id,
                 'referral_code' => $ref_code,
