@@ -40,14 +40,14 @@
     <div class="col-md-12">
         <h4 class="text-muted">Method of Payment</h4>
     </div>
-    <div class="col-md-3 col-xs-6">
-        <button disabled data-toggle="modal" data-target="#modal-fade" data-wallet-type="blockchain" onclick="passDataToModal(this);" class="btn btn-info btn-effect-ripple btn-block shadow btn-lg payment-button"><img src="{{ asset('images/payments/blockchain.png') }}" class="ml-3" style="width: 25px"/> Pay with Blockchain</button>
+    <div class="col-md-3 col-sm-4 col-xs-6">
+        <button disabled data-toggle="modal" data-target="#modal-fade" data-wallet-type="blockchain" onclick="passDataToModal(this);" class="btn btn-info btn-effect-ripple btn-block shadow btn-lg payment-button"><img src="{{ asset('images/payments/blockchain.png') }}" class="ml-3 hidden-xs" style="width: 25px"/> Pay with Blockchain</button>
     </div>
-    <div class="col-md-3 col-xs-6">
-        <button disabled data-toggle="modal" data-target="#modal-fade" data-wallet-type="trust wallet" onclick="passDataToModal(this);" class="btn btn-style btn-effect-ripple btn-block shadow btn-lg payment-button"><img src="{{ asset('images/payments/trust-wallet.png') }}" style="width: 40px"/> Pay with Trust Wallet</button>
+    <div class="col-md-3 col-sm-4 col-xs-6">
+        <button disabled data-toggle="modal" data-target="#modal-fade" data-wallet-type="trust wallet" onclick="passDataToModal(this);" class="btn btn-style btn-effect-ripple btn-block shadow btn-lg payment-button"><img src="{{ asset('images/payments/trust-wallet.png') }}" class="hidden-xs" style="width: 40px"/> Pay with Trust Wallet</button>
     </div>
-    <div class="col-md-3 col-xs-6">
-        <button disabled data-toggle="modal" data-target="#modal-fade" data-wallet-type="other crypto wallet" onclick="passDataToModal(this);" class="btn btn-warning btn-effect-ripple btn-block shadow btn-lg payment-button"><img src="{{ asset('images/payments/bitcoin.png') }}" class="ml-3" style="width: 30px"/>Other Payment Method</button>
+    <div class="col-md-3 col-sm-4 col-xs-6">
+        <button disabled data-toggle="modal" data-target="#modal-fade" data-wallet-type="other crypto wallet" onclick="passDataToModal(this);" class="btn btn-warning btn-effect-ripple btn-block shadow btn-lg payment-button"><img src="{{ asset('images/payments/bitcoin.png') }}" class="ml-3 hidden-xs" style="width: 30px"/>Other Payment Method</button>
     </div>
     {{-- <div class="col-md-12">
         <form action="https://www.coinpayments.net/index.php" method="post" style="display: inline" class="mr-4 bord-right pr-4">
@@ -153,7 +153,8 @@
                     <li>
                         Type in the address below or scan the QR Code: <br><br>
                         <div class="text-center"><img src="{{ asset('images/my-wallet.jpeg') }}" style="width: 200px"/><div>
-                        <h3>14ifSbBhn6UvaxHuQwS9eSzzHbwwwsGAi9</h3>
+                        <h3 class="visible-lg visible-xl">14ifSbBhn6UvaxHuQwS9eSzzHbwwwsGAi9</h3>
+                        <h4 class="hidden-lg hidden-xl">14ifSbBhn6UvaxHuQwS9eSzzHbwwwsGAi9</h4>
                     </li>
                     <li>Once payment is successful. Take a screenshot of your payment and upload it below.</li>
                     <li>Your account will be creditted instantly once payment has being confirmed.</li>
