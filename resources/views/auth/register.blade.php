@@ -348,7 +348,7 @@
                     </div>
                     <div class="form-group">
                       <div class="col-md-12">
-                        <label for="validation">Please upload a means of identification (ID/Passport/Driver's License)</label>
+                        <label for="validation">Please upload a means of identification (ID/Passport/Driver's Licenseb)</label>
                         <input type="file" class="form-control-file" name="" id="" placeholder="" aria-describedby="fileHelpId">
                         <small id="fileHelpId" class="form-text text-muted">(File size should be less than 2048kb)</small>
                       </div>
