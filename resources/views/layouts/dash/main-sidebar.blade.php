@@ -2,7 +2,7 @@
 <div id="sidebar">
     <!-- Sidebar Brand -->
     <div id="sidebar-brand" class="themed-background">
-        <a href="index.html" class="sidebar-title">
+        <a href="/" class="sidebar-title">
             <img style="width: 20px" src="{{ asset('images/logo.png') }}"> <span class="sidebar-nav-mini-hide"><strong class="text-uppercase">{{config('app.name') }}</strong></span>
         </a>
     </div>

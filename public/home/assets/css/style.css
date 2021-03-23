@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700,800|Teko:300,400,500,600,700&display=swap");
-
 .white-bg {
     background: #ffffff
 }
@@ -573,7 +572,6 @@ hero-btn {
 }
 
 @media (max-width: 575px) {
-
     #scrollUp,
     #back-top {
         right: 16px
@@ -1912,12 +1910,10 @@ hero-btn {
         -webkit-transform: translateY(-20px);
         transform: translateY(-20px)
     }
-
     50% {
         -webkit-transform: translateY(-10px);
         transform: translateY(-10px)
     }
-
     100% {
         -webkit-transform: translateY(-20px);
         transform: translateY(-20px)
@@ -1951,7 +1947,6 @@ hero-btn {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg)
     }
-
     to {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg)
@@ -1962,7 +1957,6 @@ hero-btn {
     from {
         -webkit-transform: rotate(0deg)
     }
-
     to {
         -webkit-transform: rotate(360deg)
     }
@@ -2046,7 +2040,6 @@ hero-btn {
         -o-transition: .6s;
         transition: .6s
     }
-
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
@@ -2064,7 +2057,6 @@ hero-btn {
         -o-transition: .6s;
         transition: .6s
     }
-
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
@@ -4203,7 +4195,6 @@ hero-btn {
     .single-blog .tag {
         margin-right: 8px
     }
-
     .single-blog .tag:after {
         display: none
     }
@@ -4256,7 +4247,6 @@ hero-btn {
         padding-bottom: 14px;
         margin-bottom: 12px
     }
-
     .single-blog h4 a {
         font-size: 18px
     }
@@ -5187,11 +5177,9 @@ hero-btn {
     .comments-area .comment-list .single-comment h5 {
         font-size: 12px
     }
-
     .comments-area .comment-list .single-comment .date {
         font-size: 11px
     }
-
     .comments-area .comment-list .single-comment .comment {
         font-size: 10px
     }
@@ -6364,6 +6352,10 @@ del {
     transition: all 0.2s
 }
 
+.logo {
+    font-size: 20px;
+}
+
 .primary-switch input+label:after {
     content: "";
     position: absolute;
@@ -6831,44 +6823,44 @@ del {
 
 section.pricing {
     background: linear-gradient(to right, #010b18, #00263f);
-  }
+}
 
-  .pricing .card {
+.pricing .card {
     border: none;
     border-radius: 1rem;
     transition: all 0.2s;
     box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
-  }
+}
 
-  .pricing hr {
+.pricing hr {
     margin: 1.5rem 0;
-  }
+}
 
-  .pricing .card-title {
+.pricing .card-title {
     margin: 0.5rem 0;
     font-size: 0.9rem;
     letter-spacing: .1rem;
     font-weight: bold;
-  }
+}
 
-  .pricing .card-price {
+.pricing .card-price {
     font-size: 3rem;
     margin: 0;
-  }
+}
 
-  .pricing .card-price .period {
+.pricing .card-price .period {
     font-size: 0.8rem;
-  }
+}
 
-  .pricing ul li {
+.pricing ul li {
     margin-bottom: 1rem;
-  }
+}
 
-  .pricing .text-muted {
+.pricing .text-muted {
     opacity: 0.7;
-  }
+}
 
-  .pricing .btn {
+.pricing .btn {
     font-size: 80%;
     border-radius: 5rem;
     letter-spacing: .1rem;
@@ -6876,44 +6868,46 @@ section.pricing {
     padding: 1rem;
     opacity: 0.7;
     transition: all 0.2s;
-  }
+}
 
-  /* Hover Effects on Card */
 
-  @media (min-width: 992px) {
+/* Hover Effects on Card */
+
+@media (min-width: 992px) {
     .pricing .card:hover {
-      margin-top: -.25rem;
-      margin-bottom: .25rem;
-      box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.3);
+        margin-top: -.25rem;
+        margin-bottom: .25rem;
+        box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.3);
     }
     .pricing .card:hover .btn {
-      opacity: 1;
+        opacity: 1;
     }
-  }
+}
 
-  .services-bg {
+.services-bg {
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(../img/hero/services.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-  }
+}
 
-  .achievements-bg {
+.achievements-bg {
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 100%), url(../img/hero/achievements.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-  }
+}
 
-  .shadow-5 {
-      text-shadow: black 1px 1px 5px;
-  }
+.shadow-5 {
+    text-shadow: black 1px 1px 5px;
+}
 
-
-  .transactions-bg {
+.transactions-bg {
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(../img/hero/latest-transactions.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-  }
+}
+
+20px

@@ -41,14 +41,14 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <!-- Logo -->
-                        <div class="col-xl-2 col-lg-2">
-                            <div class="logo">
+                        <div class="col-xl-4 col-lg-4">
+                            <div class="logo text-uppercase">
                                 <a href="{{ route('index') }}">
-                                    <img src="/images/logo.png" style="width: 50px"><strong>{{ ucwords(config('app.name')) }}</strong>
+                                   <strong>{{ ucwords(config('app.name')) }}</strong>
                                 </a>
                             </div>
                         </div>
-                        <div class="col-xl-10 col-lg-10">
+                        <div class="col-xl-8 col-lg-8">
                             <div class="menu-wrapper  d-flex align-items-center justify-content-end">
                                 <!-- Main-menu -->
                                 <div class="main-menu d-none d-lg-block">

@@ -66,6 +66,18 @@
         </form>
     </div>
 </div><hr>
+<div class="row block full">
+    <div class="col-md-12 block-header">
+        <h4>Other Withdrawal Methods</h4><hr>
+    </div>
+    <div class="col-md-3 col-xs-6">
+        <a href="#" data-target="#other-payment" onclick="otherPaymentMethod(this);" data-toggle="modal" data-payment-type="paypal"><img src="{{ asset('images/payments/paypal.png') }}" class="img-responsive" alt="paypal"></a>
+    </div>
+    <div class="col-md-3 col-xs-6">
+        <a href="#" data-target="#other-payment" onclick="otherPaymentMethod(this);" data-toggle="modal" data-payment-type="skrill"><img src="{{ asset('images/payments/skrill.png') }}" class="img-responsive" alt="skrill"></a>
+    </div>
+</div>
+</div>
 
 @if($withdrawals->count() > 0)
 <div class="row">
@@ -119,14 +131,43 @@
 </div>
 @endif
 @endsection
+@push('modal')
+{{-- Edit investment --}}
+<div class="modal fade" id="other-payment" tabindex="-1" role="dialog" aria-labelledby="other-payment" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                Pay with <span class="payment-type text-capitalize"></span>
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+            <div class="modal-body text-center">
+                <h4>
+                <strong class="text-uppercase">To pay with <span class="payment-type"></span></strong> <br><br>
+                Please contact our support through our live chat <br>
+                or email us at <strong>{{ config('mail.from.address') }}</strong> <br><br>
+                You can also send us a message on Whatsapp <i class="fa fa-whatsapp" aria-hidden="true"></i><br>
+                <strong>+14235239123, +447451243042</strong>
+                <br><br>
+                Thank you for choosing <strong class="text-uppercase">{{ config('app.name') }}</strong>.
+                </h4>
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-danger" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endpush
 @push('more-js')
 <script>
-    var wallet_amount = "{{ config('app.currency') }}" + numberWithCommas($('#wallet-amount').html())
-
-    $('#wallet-amount').html(wallet_amount)
-
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    function otherPaymentMethod(element) {
+        var paymentMethod = $(element).data('payment-type');
+        // console.log(paymentMethod);
+        $('.modal-content span.payment-type').html(paymentMethod);
     }
 </script>
 <script>
