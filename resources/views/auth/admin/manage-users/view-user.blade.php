@@ -9,9 +9,9 @@
             <!-- Block Tabs Title -->
             <div class="block-title">
                 <ul class="nav nav-tabs" data-toggle="tabs">
-                    <li><a href="#profile">Profile</a></li>
+                    <li class="active"><a href="#profile">Profile</a></li>
                     <li><a href="#deposits">Deposit Receipts</a></li>
-                    <li class="active"><a href="#investments">Investments</a></li>
+                    <li><a href="#investments">Investments</a></li>
                     <li><a href="#withdrawals">Withdrawal Requests</a></li>
                 </ul>
             </div>
@@ -19,13 +19,13 @@
 
             <!-- Tabs Content -->
             <div class="tab-content">
-                <div class="tab-pane" id="profile">
+                <div class="tab-pane active" id="profile">
                     @include('auth.admin.manage-users.user-info')
                 </div>
                 <div class="tab-pane" id="deposits">
                     @include('auth.admin.manage-users.user-deposits')
                 </div>
-                <div class="tab-pane active" id="investments">
+                <div class="tab-pane" id="investments">
                     @include('auth.admin.manage-users.user-investments')
                 </div>
                 <div class="tab-pane" id="withdrawals">

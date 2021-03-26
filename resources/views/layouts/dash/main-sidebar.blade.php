@@ -18,7 +18,7 @@
                     <a href="{{ auth()->user()->isAdmin() ? route('admin.home') :route('user.home') }}"><i class="gi gi-compass sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Dashboard</span></a>
                 </li>
                 @if(auth()->user()->isAdmin())
-                    <li {!! (Request::is('*users') ? 'class="active"' : '') !!}>
+                    <li {!! (Request::is('*users*') ? 'class="active"' : '') !!}>
                         <a href="{{ route('admin.manage.users') }}"><i class="fa fa-users sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Manage Users</span></a>
                     </li>
                     <li {!! (Request::is('*packages') ? 'class="active"' : '') !!}>

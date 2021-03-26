@@ -95,12 +95,12 @@
                         </div>
                     </div>
                     <div class="form-group pt-2">
-                        <button class="btn btn-block btn-dark" type="submit" style="color: white">Submit</button>
+                        <button class="btn btn-block btn-primary" type="submit" style="color: white">Submit</button>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                <a href="#" class="btn btn-warning" data-dismiss="modal">Close</a>
             </div>
         </div>
     </div>
